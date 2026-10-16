@@ -1,0 +1,26 @@
+source_file,source_field,retained,analysis_table,analysis_field,transformation,missing_or_code_handling,source_definition
+DEMO,PRIMARYID,yes,report_version,primaryid,"string; one row per PRIMARYID after FAQ 29 rule (later extract kept)",rows with null PRIMARYID would be dropped and counted (none occurred),"ASC_NTS: unique report identifier; concatenation of CASEID and CASEVERSION"
+DEMO,CASEID,yes,case_latest,caseid,string; grouping key for the case unit,"never null in the window (checked)","ASC_NTS: number identifying a FAERS case"
+DEMO,CASEVERSION,yes,report_version,caseversion_num,"integer; if non-numeric, suffix of PRIMARYID after CASEID; else ranked lowest","source of each value recorded in version_source; all 3,253,358 came from the field","ASC_NTS: 1 = initial, follow-ups incremented"
+DEMO,I_F_CODE,yes,report_version,i_f_code,as delivered,descriptive only,"ASC_NTS: I initial, F follow-up as reported by manufacturer"
+DEMO,INIT_FDA_DT,yes,unit_flags,init_in_window,"complete YYYYMMDD between 20240701 and 20260630",partial or missing dates are not in the S2 cohort (none occurred among retained cases),"ASC_NTS: date FDA received first version of case"
+DEMO,FDA_DT,yes,case_latest,fda_dt,string YYYYMMDD; second ordering key for latest version,nulls ordered last,"ASC_NTS: date FDA received case (latest version)"
+DEMO,REPT_COD,yes,report_version,rept_cod,as delivered,post hoc profile only,"EXP, PER, DIR, 5DAY, 30DAY"
+DEMO,LIT_REF,yes,report_version,lit_ref,non-null flag only,post hoc profile only (amendment 3),"Literature reference, when available"
+DEMO,OCCP_COD,yes,report_version,occp_cod,as delivered,post hoc profile only,"MD, PH, OT, LW, CN (HP observed)"
+DEMO,"AGE, AGE_COD, SEX, REPORTER_COUNTRY, OCCR_COUNTRY, EVENT_DT, MFR_DT, MFR_SNDR, REPT_DT",yes,report_version,same names,as delivered,not used in any estimate,ASC_NTS section D
+DEMO,"AUTH_NUM, MFR_NUM, AGE_GRP, E_SUB, WT, WT_COD, TO_MFR",no,,,dropped at ingestion,not needed,ASC_NTS section D
+DRUG,PRIMARYID,yes,drug_rv,primaryid,joined to report_version on PRIMARYID and extract quarter,orphans counted (0),
+DRUG,DRUG_SEQ,yes,drug_rv,drug_seq,integer,used only for the FAQ 30 primary-suspect designation,"ASC_NTS: order of the drug within the case"
+DRUG,ROLE_COD,yes,drug_rv,role_cod,"upper-case, trimmed","PS and SS can qualify; C, I, DN and missing never qualify; DN rows are never designated PS","PS primary suspect, SS secondary suspect, C concomitant, I interacting; DN drug not administered (documented from the 2024Q4 extract)"
+DRUG,DRUGNAME,yes,drug_match,drugname,"normalized copy (upper-case, non-alphanumeric to space) used for whole-word matching in the expanded rule",unmatched strings remain unmapped and are listed,"Valid trade name when available, else verbatim name"
+DRUG,PROD_AI,yes,drug_match,prod_ai,"split on backslash into components; exact component comparison",missing PROD_AI cannot match the strict rule,"ASC_NTS: product active ingredient, when available"
+DRUG,"ROUTE, NDA_NUM",yes,,,retained for audit,not used,
+DRUG,"VAL_VBM, DOSE_VBM, CUM_DOSE_CHR, CUM_DOSE_UNIT, DECHAL, RECHAL, LOT_NUM, EXP_DT, DOSE_AMT, DOSE_UNIT, DOSE_FORM, DOSE_FREQ",no,,,dropped at ingestion,not needed,
+REAC,PT,yes,reac_rv,pt,"trimmed, case-folded, exact match to prespecified strings",a unit without a matching PT is coded as no event,"MedDRA preferred term"
+REAC,DRUG_REC_ACT,no,,,dropped at ingestion,not needed,
+OUTC,OUTC_COD,yes,(parquet only),outc_cod,as delivered,descriptive only; not used in estimates,"DE, LT, HO, DS, CA, RI, OT"
+DELETE file,CASEID (single column),yes,deleted_case,caseid,numeric strings only,a CASEID on any acquired list is removed from principal analyses,"FDA FAQ 44: deleted cases listed from 2019Q1"
+derived,,,unit_flags,"<class>_<role>_<mapping>",unit-level boolean: any drug row meets role and mapping rule,false when no row qualifies,
+derived,,,unit_flags,ev_<association>,unit-level boolean: any PT row matches the association's string list,false when no row matches,
+derived,,,unit_flags,"<class>_any_expanded, <class>_stem_unverified",unit-level booleans for background diagnostics and S3/S4,,

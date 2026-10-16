@@ -1,0 +1,580 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity: full report</title>
+<meta name="description" content="Version-aware medication identity from DailyMed labels to FHIR R4: attribute-level round-trip fidelity and the cost of common shortcuts"><link rel="stylesheet" href="assets/style.css">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head><body class="report portfolio-page portfolio-report">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<a class="skip" href="#content">Skip to content</a>
+<main id="content"><h1 id="version-aware-medication-identity-from-dailymed-labels-to-fhir-r4-attribute-level-round-trip-fidelity-and-the-cost-of-common-shortcuts">Version-aware medication identity from DailyMed labels to FHIR R4: attribute-level round-trip fidelity and the cost of common shortcuts</h1>
+<p>Animesh Bose</p>
+<p>Norlowe Research</p>
+<nav class="toc" aria-label="Contents"><a href="#abstract">Abstract</a> | <a href="#materials-and-methods">Methods</a> | <a href="#results">Results</a> | <a href="#discussion">Discussion</a> | <a href="#references">References</a> | <a href="#supplements">Appendices</a></nav><h2 id="abstract">Abstract</h2>
+<p><strong>Objectives:</strong> To measure which identity and strength attributes of US prescription drug labels are preserved when the labels are converted to Fast Healthcare Interoperability Resources Release 4 (FHIR R4) Medication resources or handled with common shortcuts, how name-based matching agrees with a National Drug Code (NDC) crosswalk to RxNorm, and how often label versions change product identity.</p>
+<p><strong>Materials and Methods:</strong> All 1,475 current DailyMed prescription labels containing metformin, empagliflozin, dapagliflozin, semaglutide, liraglutide, one of seven insulins, atorvastatin or lisinopril were retrieved with the preceding version of 218 labels (2,803 product-version records). Labels were parsed into a lossless PostgreSQL layer, written as FHIR R4 resources with a schema-validated companion record, validated, and read back against a separate parse of the source XML on 1,036 held-out labels.</p>
+<p><strong>Results:</strong> FHIR plus the companion record preserved every applicable critical attribute for 1,965 of 1,965 held-out records. Read from FHIR core elements alone, 670 of 2,392 active ingredients (28.0%) took the wrong basis-of-strength substance. Padding NDCs without their segment pattern changed 91.2% of codes. DailyMed's packaging service gave the wrong ingredient count for 51.5% of products. Approximate name matching disagreed with the crosswalk for 15.4% of its answers, and 15.1% of 218 sampled label version pairs changed product identity.</p>
+<p><strong>Discussion:</strong> R4 Medication has no element for a label's set identifier, version number or basis of strength, and common shortcuts lose NDC segment patterns, label versions and per-product strengths.</p>
+<p><strong>Conclusion:</strong> A reversible R4 representation of drug labels needs a documented companion record for these attributes.</p>
+<h2 id="lay-summary">Lay summary</h2>
+<p>Drug labels published by the US government describe each medicine's ingredients, strengths, forms and package codes. Research databases and drug dictionaries copy these details into other formats, often through shortcuts such as reformatting package codes or keeping only the newest label. This study took every current prescription label for a set of diabetes, cholesterol and blood-pressure medicines, converted them into a widely used health-data format (FHIR), converted them back, and checked each detail against the original label. When the conversion included a small companion record, every critical detail came back intact. Without it, the standard format could not say whether a stated strength refers to the salt form of a drug or to the active part of the molecule, which affected more than a quarter of active ingredients. Simple package-code padding changed nine in ten codes. Treating a label-level web service as a source of product-specific ingredients gave the wrong ingredient count for about half the products. About one in seven of the 218 labels checked changed product details between versions. These findings concern how the data are handled. They say nothing about the safety or effectiveness of any medicine, and no patient information was used.</p>
+<h2 id="background-and-significance">Background and significance</h2>
+<p>Research data managers and maintainers of medication dictionaries build product tables from the US Food and Drug Administration (FDA) Structured Product Labeling (SPL) documents, which the National Library of Medicine (NLM) publishes through DailyMed, and from RxNorm, NLM's normalized naming system for clinical drugs [1,2]. These tables feed analysis databases and Health Level Seven (HL7) Fast Healthcare Interoperability Resources (FHIR). Each step invites shortcuts: an 11-digit National Drug Code (NDC) built by stripping hyphens and padding with zeros, a product collapsed to one RxNorm concept, a label read only in its latest version, strengths parsed as binary floating-point numbers, or attributes dropped because the FHIR Release 4 (R4) Medication resource has no element for them [3].</p>
+<p>Earlier work established high identifier linkage, but also showed that coverage and attribute agreement depend on how the lookup is done. Zhu, Jiang and Chute linked 97.0% of 36,568 DailyMed labels to RxNorm, mostly at the ingredient level [4]. Schadow found that SPL and RxNorm agreed on ingredient moieties for 91% of 7,083 SPL NDCs after converting NDCs to 11 digits [5]. Peters and Bodenreider built a dated NDC history from monthly RxNorm releases and showed that, in two historical medication datasets, current-release lookups left 22% and 33% of NDCs unknown, against 2.4% and 3.3% with the history. The work informed the design of RxNorm's NDC status function [6]. </p>
+<p>NLM's terminology status services map obsolete codes to current concepts [7], and RxNorm concept unique identifier (RxCUI) remapping, splits and NDC reuse are documented [8,9]. In e-prescribing, strength agreed exactly with RxNorm attributes reached through NDCs in 51.23% of pairs [10], and NDC and RxCUI disagreement has been measured [11,12]. Tools that map medication names to RxNorm have been compared [13], and normalization pipelines continue to appear [14,15]. </p>
+<p>For FHIR representation, HL7 maintains an unpublished SPL-to-FHIR R5 mapping guide with transforms in both directions [16], and a natural language processing pipeline into FHIR reported F scores for Medication elements and assigned a default strength denominator of 1 [17]. In the Observational Health Data Sciences and Informatics (OHDSI) Standardized Vocabularies, 68% of drug-domain mappings from source codes to standard concepts are many-to-one [18].</p>
+<p>The studies reviewed did not report, attribute by attribute, which identity and strength attributes are preserved when a specific label version is carried into FHIR R4 and back, or what each common shortcut loses on the same records.</p>
+<h2 id="objective">Objective</h2>
+<p>This study measured which identity and strength attributes survive a round trip through FHIR R4 Medication resources, with and without a companion record. It included all current US prescription labels containing selected ingredients in six cardiometabolic groups. On the same records, it measured losses from common shortcuts, compared three matching approaches with an NDC-based RxNorm crosswalk, and assessed product-identity changes between label versions. It updates the SPL-to-RxNorm linkage literature on a 2026 snapshot and adds label versions, a measured FHIR R4 round trip and a reusable dictionary export.</p>
+<h2 id="materials-and-methods">Materials and methods</h2>
+<h3 id="study-design-and-analysis-plan">Study design and analysis plan</h3>
+<p>This was a secondary analysis of publicly available drug-labeling and terminology records. It used no patient or personal data and recruited no participants, so no ethics approval was required, and none was sought. The analysis plan, eligibility rules and outcome definitions were committed to the project's version history before the corpus was retrieved (docs/analysis_plan.md). The plan was not publicly registered. Label set IDs were assigned to development (30%) and held-out (70%) splits by a salted SHA-256 rule before any tuning. Matching rules were tuned on development products only and frozen before the held-out evaluation. Later changes to comparison code, FHIR display text, the version comparison and one parser rule are listed as amendments in the plan. None changed a matching rule, and the affected stages were rerun.</p>
+<h3 id="sources-and-scope">Sources and scope</h3>
+<p>DailyMed web services were queried on October 7, 2026 [2]. The seed ingredients were metformin; the sodium-glucose cotransporter 2 (SGLT2) inhibitors empagliflozin and dapagliflozin; the glucagon-like peptide-1 (GLP-1) receptor agonists semaglutide and liraglutide; insulin glargine, lispro, aspart, degludec and detemir and regular and isophane human insulin; atorvastatin; and lisinopril. Candidate labels came from DailyMed's filter on active-moiety Unique Ingredient Identifiers (UNIIs) and from name searches, restricted to human prescription drug labels. The 20 UNIIs were taken from RxNorm for each seed ingredient and its precise forms and frozen before labels were read. A label was eligible when its own XML had document type 34391-3 and a product or kit part had an active ingredient whose substance or moiety UNII was in the frozen set. Combination products were kept whole. Of 1,482 candidates, 1,475 were eligible; 7 legacy-format labels from 2006 to 2008 had no product data section and could not meet the rule. Human regular, isophane and 70/30 insulins sold without a prescription are over-the-counter (OTC) labels, outside this scope.</p>
+<p>For up to 40 labels per ingredient group, chosen by a salted hash among the 964 eligible labels listing two or more versions (from all 19 such GLP-1 labels to 40 of 343 metformin labels), the immediately preceding available version was downloaded from DailyMed's archive and checked for set ID and version number. Shares from this equal-allocation sample are unweighted. All 218 were retrieved; 180 were exactly one version older. RxNorm was queried through its public application programming interface (API; release of October 5, 2026) [19] at no more than 8 requests per second, under the limit of 20 in the RxNav terms of service [20]; every response was cached with its retrieval time and SHA-256.</p>
+<h3 id="canonical-layer-and-ndc-handling">Canonical layer and NDC handling</h3>
+<p>The product data section of each label was parsed with every identity value kept as written: product and package NDCs with their hyphenation, ingredient UNIIs, the ingredient class code that states the basis of strength (ACTIB, the ingredient itself; ACTIM, its active moiety; ACTIR, a reference substance), strength numerator and denominator as decimal text with their units, dosage form, routes, the package tree with each level's quantity, marketing data and kit parts [21]. The layer was loaded into PostgreSQL 17 with checks on row counts, join cardinality and source file hashes; 13 of 13 checks passed. An NDC was converted to 11 digits only through its own segment pattern (4-4-2, 5-3-2 or 5-4-1) [22].</p>
+<h3 id="matching-approaches">Matching approaches</h3>
+<p>Approach A, the reference, looked up each package NDC with RxNorm's NDC status service and assigned the product the single RxCUI its ACTIVE packages shared. Approach A2 checked agreement with DailyMed's set-level SPL-to-RxNorm mapping file, which lists RxCUIs per label but not per product. Approach B compared the label's basis-of-strength substance names, normalized by fixed rules, and its strength, dose form, fill volume and brand with the structure RxNorm gives for each candidate concept. Approach C scored the label's name, strength and form text against all 28,724 current RxNorm clinical and branded drug and pack names with a token-sort ratio and abstained below a threshold of 74, chosen by a prespecified grid search on the development split. Agreement with approach A is agreement between terminologies. It says nothing about clinical interchangeability.</p>
+<h3 id="fhir-representation">FHIR representation</h3>
+<p>Each label version became one FHIR R4 (4.0.1) Bundle holding a product-level Medication per in-scope product, a package-level Medication per package NDC, and a Provenance resource naming the source document by its SPL document ID. Package NDCs went into Medication.code exactly as labeled, with an RxNorm coding added when approach A gave a single RxCUI. Product NDCs went into Medication.identifier, the dosage form into Medication.form with its NCI Thesaurus code, ingredients with their UNIIs and isActive flags, strengths as Ratios written with the label's exact decimal text, package contents (multiplied exactly through the package tree) into Medication.amount, and kit parts as contained Medications. </p>
+<p>Medication.manufacturer and Medication.status were left empty because the SPL labeler can be a repackager and SPL marketing status is not dictionary use status. Attributes with no R4 Medication element (set ID, version, basis-of-strength code and substance, routes, package hierarchy, marketing and application data) went into a companion record per Bundle (the "sidecar" in Table 2 and Figure 1), keyed by Medication.id and validated against a JSON Schema. The HL7 validator 7.0.0 [23] checked all Bundles with terminology checks off and a fixed sample of 60 against the public terminology server.</p>
+<h3 id="round-trip-and-comparison-representations">Round trip and comparison representations</h3>
+<p>A reverse transform read the stored Bundles and companion records and reconstructed the critical attributes: set ID, document ID, version, product NDC, package NDCs, dosage form, number of active ingredients, and for each active ingredient its UNII, basis-of-strength code and substance and the strength numerator and denominator with units, plus kit part NDCs. The comparison target was a second, separately written reader of the source XML. Each field was classed as preserved, preserved after a documented normalization (the JSON number grammar and lowercase FHIR UUIDs), equal only after a documented conversion, held only in the companion record, unresolved, discordant, or inapplicable when the label does not state it. The same comparison was run for FHIR core elements alone, read the only way R4 Medication allows (a strength refers to the listed ingredient); for an RxCUI-only record re-derived from current RxNorm; for a flat export holding the set ID, package NDCs stripped of hyphens and left-padded to 11 digits, the dosage form as text and float strengths of the first active ingredient only; for DailyMed's packaging service; and, for preceding versions, for the latest version of the same label. Shares of identity and strength fields cover the critical attributes other than set ID, document ID and version.</p>
+<h3 id="outcomes-and-statistics">Outcomes and statistics</h3>
+<p>The primary outcome was the proportion of held-out product-version records for which every applicable critical attribute was preserved from FHIR plus the companion record. Results describe this finite corpus at the retrieval date. As an exploratory measure, 95% intervals came from a cluster bootstrap over set IDs (2,000 replicates). Prespecified sensitivity analyses repeated the primary outcome on the full corpus and without repackaged products, evaluated package-level attributes (package NDC, containing product NDC, package form, quantity, and marketing status and start date) at package-version grain, and moved approach C's threshold 5 points down and up. Results are also reported for version, kit and combination subgroups.</p>
+<h3 id="verification">Verification</h3>
+<p>Software checks comprised 60 automated tests on constructed edge cases, 13 database reconciliation checks, JSON Schema validation of every companion record, the HL7 validator, and a repeat of every deterministic stage from the cached inputs, which reproduced 3,430 of 3,430 output files exactly. I then checked the work by hand, separately from the software checks. For a stratified random sample of 30 held-out product records from 28 labels (five per ingredient group, drawn by a salted hash), I compared the recorded product and package NDCs, active ingredients, strengths, stated basis of strength and dosage form with the corresponding DailyMed label pages, recomputed the primary outcome, the FHIR-core basis-of-strength misreads and the NDC padding changes from the supplementary tables, checked the figures quoted from the cited sources, and reviewed the figures, tables and text. No discrepancies were found. A separately written script downloaded the 28 sampled labels again on October 7, 2026 and found none changed since retrieval.</p>
+<h2 id="results">Results</h2>
+<h3 id="corpus">Corpus</h3>
+<p>The 1,475 eligible labels held 2,386 in-scope products in their current versions and 417 in the 218 preceding versions (Table 1). Of the 2,386 current products, 2,017 were marketed under abbreviated new drug applications (ANDAs), 205 under new drug applications (NDAs), 113 under biologics license applications (BLAs) and 46 as NDA authorized generics; 4 were marketed as unapproved drugs and 1 was listed as export only. Of 2,803 product records, 1,589 (56.7%) declared a source product, which marks repackaged or relabeled products, and 483 current products had two or more active ingredients. Of 3,384 active-ingredient records, 964 (28.5%) stated strength for the active moiety; none used a reference substance.</p>
+<p><strong>Table 1.</strong> Eligible labels and in-scope products in current versions, by primary ingredient group (a combination product is counted once, in the first of: insulin, GLP-1, SGLT2, atorvastatin, lisinopril, metformin).</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Table 1"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th scope="col">Primary ingredient group</th>
+<th scope="col" style="text-align: right;">Current labels</th>
+<th scope="col" style="text-align: right;">In-scope products (current)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Metformin</td>
+<td style="text-align: right;">541</td>
+<td style="text-align: right;">808</td>
+</tr>
+<tr>
+<td>Atorvastatin</td>
+<td style="text-align: right;">405</td>
+<td style="text-align: right;">668</td>
+</tr>
+<tr>
+<td>Lisinopril</td>
+<td style="text-align: right;">376</td>
+<td style="text-align: right;">606</td>
+</tr>
+<tr>
+<td>Insulins (seven seed insulins)</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">129</td>
+</tr>
+<tr>
+<td>SGLT2 inhibitors (empagliflozin, dapagliflozin)</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">115</td>
+</tr>
+<tr>
+<td>GLP-1 receptor agonists (semaglutide, liraglutide)</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr>
+<td>Total</td>
+<td style="text-align: right;">1,475</td>
+<td style="text-align: right;">2,386</td>
+</tr>
+</tbody>
+</table></div></div>
+<p><em>Abbreviations:</em> GLP-1, glucagon-like peptide-1; SGLT2, sodium-glucose cotransporter 2.</p>
+<p>Insulin strengths stated in units of activity were coded in three different Unified Code for Units of Measure (UCUM) units across labels: 161 ingredient records used international units ([iU]), 35 used U, which UCUM defines as the unit of catalytic activity (1 µmol/min) [24], and 24 used arbitrary units ([arb'U]).</p>
+<h3 id="validation">Validation</h3>
+<p>The HL7 validator reported no errors in any of the 1,693 Bundles with terminology checks off. Its warnings concerned code systems it could not check offline and missing narrative text. Against the public terminology server, the 60 sampled Bundles produced 164 errors, all for NDCs absent from the server's NDC content, which is dated November 1, 2021, and 157 warnings for NDCs it lists as inactive; none of the 300 RxNorm, 4,401 UNII, 750 NCI Thesaurus or 1,507 UCUM codings was rejected. The sampled UCUM codings included [iU] and U but no [arb'U]. Passing validation shows structural conformance. It does not show that a code means what the label means.</p>
+<h3 id="round-trip">Round trip</h3>
+<p>FHIR plus the companion record reconstructed every applicable critical attribute for 1,965 of 1,965 held-out product-version records from 1,036 labels (100%; bootstrap interval degenerate at 100%), and for 2,803 of 2,803 across the whole corpus. One strength value needed the documented normalization because the label's XML attribute contained stray whitespace. The held-out result was the same for current and preceding versions, 11 kit records, 417 combination-product records and the 860 records that were not repackaged. At package-version grain, FHIR plus the companion record preserved every applicable package attribute for 5,130 of 5,130 held-out package records. FHIR core kept the package and product NDCs but not the package form, quantity or marketing data. Development-split runs and a constructed test document found faults in the reverse transform and the comparison code, all fixed before the held-out run. Two faults found after it were corrected, and the affected stages rerun, before results were reported: the FHIR writer put label substance names in UNII display text (found by the terminology-enabled validator), and both readers left the basis-of-strength substance empty for 10 atorvastatin ingredient records (6 held-out) whose labels list the same active moiety twice.</p>
+<p>Without the companion record, FHIR core elements kept 87.6% of applicable identity and strength fields (Figure 1, Table 2). NDCs, dosage form, UNIIs and exact strength text all survived, and the Provenance resource carried the SPL document ID for every record. Every loss counted in Figure 1 concerned basis of strength. R4 Medication has no element for the basis-of-strength code, and reading a strength as referring to the listed ingredient gave the wrong substance for 670 of 2,392 held-out active ingredients (28.0%), all of them moiety-basis strengths such as atorvastatin calcium tablets labeled by their atorvastatin content. The set ID and version number, which these shares exclude, were also absent from FHIR core.</p>
+<p><picture><source media="(max-width: 640px)" srcset="assets/fig1_representations-narrow.svg"><img src="assets/fig1_representations.svg" alt="Dot chart of fields preserved: FHIR R4 + sidecar 100.0%; FHIR R4 core only 87.6%; RxCUI only (current RxNorm) 20.9% exact, 50.3% with conversion; DailyMed packaging service 37.2%; Flat export shortcut 24.2% exact, 32.2% with conversion; Latest label version only 98.6%." width="760" loading="lazy"></picture></p>
+<p><strong>Figure 1.</strong> Share of applicable identity and strength fields (the critical attributes other than set ID, document ID and version) preserved by each representation, held-out records: 1,965 product-version records from 1,036 labels for FHIR with the sidecar, FHIR core and the flat export, the 1,662 current-version records for RxCUI only and the DailyMed packaging service, and the 303 preceding-version records for the latest version. Filled dots, preserved exactly; rings, preserved exactly or after a documented conversion. Abbreviations: FHIR, Fast Healthcare Interoperability Resources; RxCUI, RxNorm concept unique identifier.</p>
+<p><strong>Table 2.</strong> Share of applicable fields preserved exactly (or after the documented normalization), held-out product-version records, by representation. "conv." is the additional share equal only after a documented conversion; "sidecar" marks attributes that only the companion record holds. For the flat export, package NDCs are compared in 11-digit form.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Table 2"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th scope="col">Attribute</th>
+<th scope="col" style="text-align: right;">FHIR + sidecar</th>
+<th scope="col" style="text-align: right;">FHIR core</th>
+<th scope="col" style="text-align: right;">RxCUI only</th>
+<th scope="col" style="text-align: right;">DailyMed packaging service</th>
+<th scope="col" style="text-align: right;">Flat export</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPL set ID</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0% (sidecar)</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+<tr>
+<td>SPL document ID</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>SPL version number</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0% (sidecar)</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Product NDC as written</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">99.9%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Package NDCs as written</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">99.7%</td>
+<td style="text-align: right;">14.2%</td>
+</tr>
+<tr>
+<td>Dosage form code</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0% (+100.0% conv.)</td>
+</tr>
+<tr>
+<td>Number of active ingredients</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">76.5%</td>
+<td style="text-align: right;">48.4%</td>
+<td style="text-align: right;">78.8%</td>
+</tr>
+<tr>
+<td>Ingredient UNII</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Basis-of-strength code</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">0.0% (sidecar)</td>
+<td style="text-align: right;">0.0% (+73.4% conv.)</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Basis-of-strength substance</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">0.0% (+75.3% conv.)</td>
+<td style="text-align: right;">0.0%</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Strength numerator value</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">76.0% (+0.8% conv.)</td>
+<td style="text-align: right;">67.1%</td>
+<td style="text-align: right;">7.3%</td>
+</tr>
+<tr>
+<td>Strength denominator value</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">76.6% (+0.7% conv.)</td>
+<td style="text-align: right;">5.7%</td>
+<td style="text-align: right;">0.8%</td>
+</tr>
+</tbody>
+</table></div></div>
+<p><em>Abbreviations:</em> FHIR, Fast Healthcare Interoperability Resources; NDC, National Drug Code; RxCUI, RxNorm concept unique identifier; SPL, Structured Product Labeling; UNII, Unique Ingredient Identifier; n/a, not applicable.</p>
+<p>An RxCUI-only record kept 20.9% of fields exactly and 50.3% after documented conversion. Of 1,662 held-out current products, 377 had no unique RxCUI to start from. The record carried no package NDCs, dosage form codes or UNIIs, because a concept cannot say which of its NDCs belong to one label's product and UNIIs were not re-derived here. RxNorm named the same basis-of-strength substance as the label for 1,518 active ingredients and a different one for 41. An SPL class code derived from RxNorm's structure agreed with the label's for 1,479 and differed for 80, although the basis substance agreed in all 80. RxNorm and the label differ in whether the salt or the moiety is the active ingredient. Strength differed for 12: 11 premixed insulins that labels describe as one ingredient at 100 units/mL and RxNorm as two (for example 70 and 30 units/mL), and a semaglutide pen whose 1.7 mg per 0.75 mL RxNorm states as 2.27 mg/mL, a rounded value from which the label's ratio cannot be recovered.</p>
+<p>The flat export kept 24.2% of fields exactly. Padding NDCs without their segment pattern changed 5,759 of 6,316 distinct package NDCs in current labels of both splits (91.2%), comprising every 5-3-2 and 5-4-1 code and no 4-4-2 code; none of the changed codes coincided with another NDC in the corpus. Keeping the first ingredient truncated 417 combination-product records. Float parsing kept every value it carried but rewrote the text of 1,790 of those 1,965 numerators (91.1%; 500 became 500.0); only 3 strengths in the corpus stated precision with trailing zeros, so lost precision was rare here.</p>
+<p>DailyMed's packaging service kept 37.2% of fields. It attaches every strength in a label to every product of that label, so 856 of 1,662 held-out products (51.5%) had the wrong number of active ingredients and 661 of 2,015 active ingredients (32.8%) received another product's strength when read in the order given.</p>
+<p>For preceding-version records, the latest version of the same label kept 98.6% of identity and strength fields, and all of them for 280 of 303 held-out records.</p>
+<h3 id="matching">Matching</h3>
+<p>Approach A found a unique RxCUI for 1,285 of 1,662 held-out current products (77.3%); for the other 377, RxNorm listed none of the product's package NDCs as active (Table 3). Repackaged products made up most of these misses: 306 of 1,002 held-out repackaged products had no active NDC, against 71 of 660 other products. In all, 707 package NDCs that their current label marks as actively marketed were obsolete in RxNorm. DailyMed's set-level file listed approach A's RxCUI for 1,269 of 1,270 checkable products and did not list the analyzed version of 10 held-out labels (26 products).</p>
+<p><strong>Table 3.</strong> Matching approaches on current-version products, by split.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Table 3"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th scope="col">Measure</th>
+<th scope="col" style="text-align: right;">Development</th>
+<th scope="col" style="text-align: right;">Held-out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Current-version products</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">1,662</td>
+</tr>
+<tr>
+<td>A: unique RxCUI from package NDCs</td>
+<td style="text-align: right;">576</td>
+<td style="text-align: right;">1,285</td>
+</tr>
+<tr>
+<td>A: no package NDC active in RxNorm</td>
+<td style="text-align: right;">148</td>
+<td style="text-align: right;">377</td>
+</tr>
+<tr>
+<td>A2: DailyMed set-level file agrees with A</td>
+<td style="text-align: right;">572 of 572</td>
+<td style="text-align: right;">1,269 of 1,270</td>
+</tr>
+<tr>
+<td>B: answered (of A unique)</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">1,104</td>
+</tr>
+<tr>
+<td>B: same RxCUI as A</td>
+<td style="text-align: right;">484</td>
+<td style="text-align: right;">1,095</td>
+</tr>
+<tr>
+<td>B: different RxCUI</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr>
+<td>B: several candidates / none</td>
+<td style="text-align: right;">68 / 16</td>
+<td style="text-align: right;">115 / 66</td>
+</tr>
+<tr>
+<td>C: answered (score 74 or more)</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">565</td>
+</tr>
+<tr>
+<td>C: same RxCUI as A</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">478</td>
+</tr>
+<tr>
+<td>C: different RxCUI</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">87</td>
+</tr>
+<tr>
+<td>C top candidate without abstention, same as A</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">570</td>
+</tr>
+</tbody>
+</table></div></div>
+<p><em>Notes:</em> A, package-NDC crosswalk through RxNorm's NDC status service; A2, DailyMed's set-level SPL-to-RxNorm mapping file; B, normalized basis-of-strength substance names with strength, dose form, fill volume and brand; C, approximate name matching (token-sort ratio). <em>Abbreviations:</em> NDC, National Drug Code; RxCUI, RxNorm concept unique identifier.</p>
+<p>Among products with a unique approach-A RxCUI, approach B answered 1,104 of 1,285 (85.9%) and agreed for 1,095 of its answers (99.2%); 115 were ambiguous and 66 had no match (Figure 2). Most ambiguity came from attributes that labels do not state in structured form: 87 of the 115 ambiguous products were extended-release metformin, whose RxNorm concepts differ only in release mechanism, and insulin pens differ in dose increment or sensor connectivity. Approach B's dose-form rules also admitted vial concepts for some pen packages. Of the 66 products without a candidate, 37 were insulins and 7 were kits. Approach C answered 565 and disagreed with approach A for 87 (15.4%); taking its top candidate without abstention matched approach A for 570 of 1,285 (44.4%). Moving approach C's threshold 5 points down (69) or up (79) gave 799 answers with 263 disagreements (32.9%) or 214 answers with 27 (12.6%).</p>
+<p><picture><source media="(max-width: 640px)" srcset="assets/fig2_matching-narrow.svg"><img src="assets/fig2_matching.svg" alt="Stacked bars of matching outcomes: B: names + attributes: 1,095 same RxCUI, 9 different, 115 several candidates, 66 no match or abstained; C: approximate names: 478 same RxCUI, 87 different, 0 several candidates, 720 no match or abstained." width="760" loading="lazy"></picture></p>
+<p><strong>Figure 2.</strong> Name-based matching against the package-NDC crosswalk, the 1,285 held-out current products with a unique crosswalk RxCUI. Abbreviations: NDC, National Drug Code; RxCUI, RxNorm concept unique identifier.</p>
+<h3 id="label-versions">Label versions</h3>
+<p>Between the preceding and the latest version, 33 of 218 sampled label pairs (15.1%) changed at least one identity attribute (Table 4): 23 added package NDCs, 3 removed package NDCs from retained products, 5 added and 4 removed product NDCs, and 1 changed an active ingredient substance or its basis. No strength or dosage form changed. Weighted by each group's number of labels listing two or more versions, the share was 18.6%. Labeler names changed in 11 labels, 2 of them only in letter case or punctuation. Of the 13 package NDCs that disappeared from 6 labels (7 within retained products and the rest with removed products), RxNorm now lists 8 as obsolete, 4 as active and 1 as alien (held only in a source vocabulary other than RxNorm).</p>
+<p><strong>Table 4.</strong> Product-identity changes between the immediately preceding available version and the latest version, sampled labels.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Table 4"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th scope="col">Change between preceding and latest version</th>
+<th scope="col" style="text-align: right;">Labels</th>
+<th scope="col" style="text-align: right;">Share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Any product-identity change</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">15.1%</td>
+</tr>
+<tr>
+<td>Package NDCs added</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">10.6%</td>
+</tr>
+<tr>
+<td>Package NDCs removed</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.4%</td>
+</tr>
+<tr>
+<td>Product NDCs added</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2.3%</td>
+</tr>
+<tr>
+<td>Product NDCs removed</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.8%</td>
+</tr>
+<tr>
+<td>Active ingredient or basis of strength changed</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5%</td>
+</tr>
+<tr>
+<td>Strength changed</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Dosage form changed</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Labeler name changed</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">5.0%</td>
+</tr>
+<tr>
+<td>Label pairs compared</td>
+<td style="text-align: right;">218</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table></div></div>
+<p><em>Notes:</em> Package NDCs removed counts removals within products present in both versions. <em>Abbreviation:</em> NDC, National Drug Code.</p>
+<h2 id="discussion">Discussion</h2>
+<h3 id="principal-findings">Principal findings</h3>
+<p>A FHIR R4 representation of drug labels was fully reversible for these attributes when a companion record held what R4 Medication cannot express. An extension-based design was not tested. The two attributes with the largest consequences are label provenance and basis of strength. R4 Medication has no element for the SPL set ID or version number. The Provenance resource carried the SPL document ID, which identifies one label version, but linking and ordering the versions of a label needs the set ID and version number, which only the companion record held. A dictionary that cannot say which label version it came from cannot be audited when labels change, and about one in seven sampled labels changed product identity between consecutive versions. R4 Medication also has no element for basis of strength. More than a quarter of active ingredients in this corpus state strength for the active moiety, and a consumer reading the R4 resource as written would take the strength to refer to the salt. FHIR's regulated-product resources can state the basis: R4's MedicinalProductIngredient, at maturity level 0, has a strength expressed in terms of a reference substance [25], and FHIR R5's Ingredient resource has a strength basis "based on the ingredient substance as stated or on the substance base (when the ingredient is a salt)" [26]. The HL7 SPL mapping guide targets R5 [16]; US Core, the national US profile set, is built on R4 [27].</p>
+<h3 id="comparison-with-earlier-work">Comparison with earlier work</h3>
+<p>The identifier crosswalk and DailyMed's own set-level mapping agreed almost completely where both applied (1,269 of 1,270), consistent with high SPL-to-RxNorm linkage reported earlier [4,5]. Coverage remained incomplete. About a fifth of current products, mostly repackaged ones, had no NDC that RxNorm considers active, although many of their labels mark the package as marketed. This mirrors Peters and Bodenreider's finding that current-only NDC lookups fail for a large share of codes [6]. Attribute matching that respects basis of strength agreed with the crosswalk for 99.2% of its answers, against 84.6% for approximate names. On a local medication terminology, RxNorm's approximate match reached a drug-name F1 score of 90% [13]. Approach B's ambiguous answers mostly involve attributes that SPL product data does not carry in structured form, such as release mechanism and pen dose increment. Its unmatched products, mostly insulins, reflect its rules or how RxNorm models them. Lester and colleagues found strength and dose form disagreement between prescription text and RxNorm [10]; this study shows that some disagreement arises before any text is written, in how labels and RxNorm structure the same product (premixed insulins, rounded per-mL strengths, unit codes).</p>
+<h3 id="implications-for-dictionary-maintainers">Implications for dictionary maintainers</h3>
+<p>The nine-in-ten error rate from naive padding supports keeping NDCs hyphenated and deriving the 11-digit form from the segment pattern. Segment-aware handling will also be needed for FDA's move to a uniform 12-digit NDC from 2033 [28]. A product row needs its label set ID and version, and each strength needs its basis code and substance. For labels containing multiple products, DailyMed's packaging service does not provide reliable per-product strengths. Insulin unit codes also need semantic checks: a syntactically valid UCUM unit can carry the wrong meaning.</p>
+<h3 id="limitations">Limitations</h3>
+<p>The corpus is a census of labels for selected ingredients in six cardiometabolic groups at one retrieval date, and its findings may not carry over to other classes, OTC labels or biologics outside insulin. Only the latest and one preceding version were compared, for 218 labels sampled with equal allocation across groups, so the version change share is not a corpus rate, and 511 eligible labels list a single version. RxNorm was available only as its current release plus its dated NDC history. License-free monthly RxNorm archives would allow fuller historical checks. </p>
+<p>Approach A is a terminology reference with its own errors, and approaches B and C were tuned against it. I wrote both the second reader and the reverse transform. No external party has repeated this software cross-check, and a rule both readers share can hide an error, as the repeated moiety showed. The companion record was designed to hold the attributes the round trip measures, so its complete preservation is partly by construction. The informative results are the losses measured without it. </p>
+<p>The study treats the label's structured product data as the source of truth, while narrative and structured sections of a label can disagree, as in excipient inconsistencies reported for 39% of 100 audited formulations [29]. Nothing here bears on the clinical correctness of any label or mapping.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>For these labels, FHIR R4 Medication resources kept NDCs, dosage forms, ingredients and exact strengths, and the Provenance resource kept the SPL document ID, but neither kept the set ID, version number or basis of strength. A small, schema-validated companion record closed these gaps in every held-out record. Padding NDCs without their segment pattern, keeping only the latest label version or the first ingredient, and taking strengths from DailyMed's packaging service each changed or dropped identity attributes. The accompanying pipeline, companion schema and medication dictionary record provenance and reasons for review.</p>
+<h2 id="acknowledgments">Acknowledgments</h2>
+<p>This product uses publicly available data from the U.S. National Library of Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or recommend this or any other product.</p>
+<h2 id="conflicts-of-interest">Conflicts of interest</h2>
+<p>I own Norlowe Research and have no other conflicts of interest to declare.</p>
+<h2 id="funding">Funding</h2>
+<p>This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors. I used internal resources from Norlowe Research, which I own.</p>
+<h2 id="author-contributions">Author contributions</h2>
+<p>Animesh Bose (sole author): conceptualization, methodology, software, validation, formal analysis, investigation, data curation, resources, visualization, project administration, writing (original draft), and writing (review and editing).</p>
+<h2 id="data-availability">Data availability</h2>
+<p>The data underlying this article are publicly available from the US National Library of Medicine: DailyMed Structured Product Labeling documents and the DailyMed SPL-to-RxNorm mapping file (<a href="https://dailymed.nlm.nih.gov/dailymed/">https://dailymed.nlm.nih.gov/dailymed/</a>, retrieved October 7, 2026) and the RxNorm API (<a href="https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html">https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html</a>, release of October 5, 2026). The supplementary source archive contains the code that retrieves and processes these data, a manifest of every retrieved file with its URL, retrieval time and SHA-256 checksum, the derived analysis tables, the FHIR outputs, and the medication dictionary export. Because DailyMed and RxNorm serve current content, rerunning the retrieval reproduces the workflow on the content current at that time. The manifest identifies the exact files analyzed here.</p>
+<h2 id="software-availability">Software availability</h2>
+<p>The source code (Python 3.13 and PostgreSQL 17; MIT license), configuration, SQL, schemas, tests and an offline demonstration are provided as Supplementary Material S1 (medication-identity-source.zip).</p>
+<h2 id="supplementary-material">Supplementary material</h2>
+<p>Supplementary Material S1, source archive (medication-identity-source.zip); S2, results workbook with definitions (medication_identity_results.xlsx); S3, medication dictionary export (medication_dictionary.zip); S4, example FHIR Bundles and companion records (fhir_examples.zip).</p>
+
+<h2 id="references">References</h2>
+<ol>
+<li>Nelson SJ, Zeng K, Kilbourne J, et al. Normalized names for clinical drugs: RxNorm at 6 years. J Am Med Inform Assoc. 2011;18(4):441-448. doi:10.1136/amiajnl-2011-000116</li>
+<li>US National Library of Medicine. DailyMed web services. <a href="https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm">https://dailymed.nlm.nih.gov/dailymed/app-support-web-services.cfm</a>. Accessed October 7, 2026.</li>
+<li>HL7 International. FHIR Release 4 (v4.0.1): Medication. <a href="https://hl7.org/fhir/R4/medication.html">https://hl7.org/fhir/R4/medication.html</a>. Accessed October 7, 2026.</li>
+<li>Zhu Q, Jiang G, Chute CG. Profiling structured product labeling with NDF-RT and RxNorm. J Biomed Semantics. 2012;3(1):16. doi:10.1186/2041-1480-3-16</li>
+<li>Schadow G. Assessing the impact of HL7/FDA Structured Product Label (SPL) content for medication knowledge management. AMIA Annu Symp Proc. 2007;2007:646-650. PMID: 18693916</li>
+<li>Peters LB, Bodenreider O. Approaches to supporting the analysis of historical medication datasets with RxNorm. AMIA Annu Symp Proc. 2015;2015:1034-1041. PMID: 26958241</li>
+<li>Peters L, Nguyen T, Bodenreider O. Terminology status APIs: mapping obsolete codes to current RxNorm, SNOMED CT, and LOINC concepts. Stud Health Technol Inform. 2017;245:1333. doi:10.3233/978-1-61499-830-3-1333</li>
+<li>Bona JP, Brochhausen M, Hogan WR. Enhancing the drug ontology with semantically-rich representations of National Drug Codes and RxNorm unique concept identifiers. BMC Bioinformatics. 2019;20(Suppl 21):708. doi:10.1186/s12859-019-3192-8</li>
+<li>Podchiyska T, Hernandez P, Ferris T, et al. Managing medical vocabulary updates in a clinical data warehouse: an RxNorm case study. AMIA Annu Symp Proc. 2010;2010:477-481. PMID: 21347024</li>
+<li>Lester CA, Flynn AJ, Marshall VD, et al. Comparing the variability of ingredient, strength, and dose form information from electronic prescriptions with RxNorm drug product descriptions. J Am Med Inform Assoc. 2022;29(9):1471-1479. doi:10.1093/jamia/ocac096</li>
+<li>Dhavle AA, Ward-Charlerie S, Rupp MT, et al. Analysis of National Drug Code identifiers in ambulatory e-prescribing. J Manag Care Spec Pharm. 2015;21(11):1025-1031. doi:10.18553/jmcp.2015.21.11.1025</li>
+<li>Dhavle AA, Ward-Charlerie S, Rupp MT, et al. Evaluating the implementation of RxNorm in ambulatory electronic prescriptions. J Am Med Inform Assoc. 2016;23(e1):e99-e107. doi:10.1093/jamia/ocv131</li>
+<li>Davidson L, Boland MR. Comparative analysis and evaluation of state-of-the-art medication mapping tools to transform a local medication terminology to RxNorm. AMIA Jt Summits Transl Sci Proc. 2020;2020:126-135. PMID: 32477631</li>
+<li>Waters R, Malecki S, Lail S, et al. Automated identification of unstandardized medication data: a scalable and flexible data standardization pipeline using RxNorm on GEMINI multicenter hospital data. JAMIA Open. 2023;6(3):ooad062. doi:10.1093/jamiaopen/ooad062</li>
+<li>Korpela E, Rubin LH, Dastgheyb RM, et al. RxMap: an LLM-assisted tool for medication normalization. JAMIA Open. 2026;9(3):ooag085. doi:10.1093/jamiaopen/ooag085</li>
+<li>HL7 International, Biomedical Research and Regulation Work Group. SPL Mapping FHIR R5 Implementation Guide, continuous-integration build 0.2.8. <a href="https://build.fhir.org/ig/HL7/fhir-spl/">https://build.fhir.org/ig/HL7/fhir-spl/</a>. Accessed October 7, 2026.</li>
+<li>Hong N, Wen A, Shen F, et al. Developing a scalable FHIR-based clinical data normalization pipeline for standardizing and integrating unstructured and structured electronic health record data. JAMIA Open. 2019;2(4):570-579. doi:10.1093/jamiaopen/ooz056</li>
+<li>Reich C, Ostropolets A, Ryan P, et al. OHDSI Standardized Vocabularies: a large-scale centralized reference ontology for international data harmonization. J Am Med Inform Assoc. 2024;31(3):583-590. doi:10.1093/jamia/ocad247</li>
+<li>US National Library of Medicine. RxNorm API. <a href="https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html">https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html</a>. Accessed October 7, 2026.</li>
+<li>US National Library of Medicine. RxNav terms of service. <a href="https://lhncbc.nlm.nih.gov/RxNav/TermsofService.html">https://lhncbc.nlm.nih.gov/RxNav/TermsofService.html</a>. Accessed October 7, 2026.</li>
+<li>US Food and Drug Administration. Structured Product Labeling (SPL) Implementation Guide with Validation Procedures. Version 1, revision 202312080859; December 2023. <a href="https://www.fda.gov/media/84201/download">https://www.fda.gov/media/84201/download</a>. Accessed October 7, 2026.</li>
+<li>US Food and Drug Administration. National Drug Code database background information. <a href="https://www.fda.gov/drugs/development-approval-process-drugs/national-drug-code-database-background-information">https://www.fda.gov/drugs/development-approval-process-drugs/national-drug-code-database-background-information</a>. Accessed October 7, 2026.</li>
+<li>HL7 International and contributors. FHIR validator (validator_cli.jar), release 7.0.0. <a href="https://github.com/hapifhir/org.hl7.fhir.core/releases/tag/7.0.0">https://github.com/hapifhir/org.hl7.fhir.core/releases/tag/7.0.0</a>. Accessed October 7, 2026.</li>
+<li>Schadow G, McDonald CJ. The Unified Code for Units of Measure. Version 2.2. Regenstrief Institute and the UCUM Organization; 2024. <a href="https://ucum.org/ucum">https://ucum.org/ucum</a>. Accessed October 7, 2026.</li>
+<li>HL7 International. FHIR Release 4 (v4.0.1): MedicinalProductIngredient. <a href="https://hl7.org/fhir/R4/medicinalproductingredient.html">https://hl7.org/fhir/R4/medicinalproductingredient.html</a>. Accessed October 7, 2026.</li>
+<li>HL7 International. FHIR Release 5 (v5.0.0): Ingredient. <a href="https://hl7.org/fhir/R5/ingredient.html">https://hl7.org/fhir/R5/ingredient.html</a>. Accessed October 7, 2026.</li>
+<li>HL7 International. US Core Implementation Guide 9.0.0 (STU9): US Core Medication profile. <a href="https://hl7.org/fhir/us/core/STU9/StructureDefinition-us-core-medication.html">https://hl7.org/fhir/us/core/STU9/StructureDefinition-us-core-medication.html</a>. Accessed October 7, 2026.</li>
+<li>US Food and Drug Administration. National Drug Code format. <a href="https://www.fda.gov/drugs/electronic-drug-registration-and-listing-system-edrls/national-drug-code-format">https://www.fda.gov/drugs/electronic-drug-registration-and-listing-system-edrls/national-drug-code-format</a>. Accessed October 7, 2026.</li>
+<li>Kinsella L, Brook J, Briest M, et al. Inconsistent excipient listings in DailyMed: implications for drug safety. Naunyn Schmiedebergs Arch Pharmacol. 2024;397(9):6851-6854. doi:10.1007/s00210-024-03067-x</li>
+</ol><h2 id="supplements">Appendices</h2>
+<h3 id="s1">Appendix 1. Development phase, freeze record and amendments</h3>
+<h4>Development phase and freeze record</h4>
+<p>Work on the development split (439 set IDs) between 10:24 and 10:46 UTC on 2026-10-07, before any held-out result was computed:</p>
+<ul>
+<li>Approach B normalization rules went from v0 to v2 (<code>config/normalization.toml</code>, change log at the end of that file). Development agreement with approach A moved from 464 to 481 of 576 products with a unique A RxCUI; the remaining misses are kept as findings (release mechanism not stated in SPL product data, weight-management liraglutide, premixed insulins, kits).</li>
+<li>Approach C: τ = 74, δ = 0 from the prespecified grid (<code>outputs/matching/approach_c_tuning_development.csv</code>).</li>
+<li>Faults found by the development round trip and fixed: the reverse transform compared a product index read as text with an integer; document IDs written lowercase in FHIR <code>urn:uuid</code> values were compared case-sensitively (now a documented normalization); DailyMed packaging strengths without a denominator were not parsed; ingredients from two different documents were aligned by position instead of by UNII; one build check treated an inner package NDC listed under two outer packages as an error.</li>
+<li>Seven candidate labels in the legacy SPL format of 2006 to 2008 have no product data elements section and were excluded under the eligibility rule (section 2).</li>
+</ul>
+<p>Frozen at 10:46 UTC with code fingerprint <code>95031b6a3dfc</code> (SHA-256 over <code>src/medid/*.py</code>, <code>config/*.toml</code>, <code>sql/*.sql</code>, <code>schemas/*.json</code>). The held-out evaluation runs once from this state.</p>
+<h4>Amendments</h4>
+<ol>
+<li>2026-10-07, after the held-out run, before any result was reported: in the S-rx comparison the SPL class code reconstructed from RxNorm's basis-of-strength concepts had been labelled "preserved" when equal. RxNorm does not carry the SPL class code, so equality is now labelled "converted_equivalent", and a basis RxNorm cannot classify (reference-substance basis) is "unresolved". Comparison labelling only; no frozen matching or mapping rule changed.</li>
+<li>2026-10-07, after the terminology-enabled validator sample: the label's substance name had been written as the UNII <code>coding.display</code>, which the validator flagged (30 errors) where the UNII preferred term differs. The name now goes only in <code>CodeableConcept.text</code>. FHIR export, validation, round trip and analysis were rerun; no round-trip attribute uses the display, and no matching rule changed.</li>
+<li>2026-10-07, while checking the draft against the data: in the S-rx comparison, RxNorm components that share an ingredient name (the 4-unit and 8-unit cartridges of an inhaled-insulin pack) were aligned with the label's kit parts by name only, which could swap them. Components are now aligned by name, then by strength, then by numerator value. Comparison code only; rerun of the round trip and analysis.</li>
+<li>2026-10-07, during the final review, before any result was reported: in the comparison, a product for which a representation reconstructed nothing had been scored with one row per critical attribute. It is now scored at each attribute's own grain, as for every other record: record-level attributes once, ingredient-level attributes once per source active ingredient, and kit part NDCs only for kits (inapplicable otherwise). This changes denominators for the shortcut representations only (RxCUI only, DailyMed packaging service, latest version); the primary outcome is unaffected. Comparison code only.</li>
+<li>2026-10-07, during the final review: ten active-ingredient records (six held-out), all atorvastatin calcium trihydrate, list the same active moiety twice. Both the parser and the second reader treated this as two moieties and left the basis-of-strength substance empty, so the round trip classed that field as inapplicable for them. A repeated moiety is now kept once in both readers (the parser records that it was repeated). This is a correctness fix to the parser under section 4; the canonical layer, matching, FHIR export, validation, round trip and analysis were rerun. No matching rule changed.</li>
+<li>2026-10-07, during the final review: the version comparison (section 9) compared ordered ingredient lists, so a label that only reordered its ingredients counted as an ingredient and strength change. Ingredients are now compared as unordered sets, and a strength is compared as a quantity of its basis-of-strength substance, so a salt-form change with the same moiety amount counts as an ingredient change only. Analysis code only.</li>
+<li>2026-10-07, clarification of section 2 to match the frozen rule: eligibility as implemented (config/scope_frozen.json, frozen before acquisition) matches a label ingredient's substance UNII or active-moiety UNII against 20 UNIIs taken from RxNorm ingredient and precise-ingredient concepts for the seed ingredients. The plan text had said active-moiety UNIIs "taken from the labels and RxNorm". No code changed.</li>
+</ol>
+<p>Sensitivity analyses 3 and 4 (section 11) were computed in the final analysis run: <code>outputs/tables/roundtrip_sa3_package_grain.csv</code> and <code>outputs/tables/matching_sa4_approach_c_threshold.csv</code>. The approach C grid search that set τ and δ is reproduced by <code>scripts/tune_approach_c.py</code>.</p>
+<h3 id="s2">Appendix 2. Field-level round-trip statuses, all representations and splits</h3>
+<p class="small muted">Counts of fields by status. "applicable" excludes inapplicable and not-evaluated fields.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Appendix 2 field-level round-trip statuses"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">representation</th><th scope="col">attribute</th><th scope="col">split</th><th scope="col">preserved</th><th scope="col">preserved_normalized</th><th scope="col">converted_equivalent</th><th scope="col">omitted_in_sidecar</th><th scope="col">unresolved</th><th scope="col">discordant</th><th scope="col">inapplicable</th><th scope="col">not_evaluated</th><th scope="col">applicable</th></tr></thead><tbody><tr><td>R1_full</td><td>K1_set_id</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K1_set_id</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K2_document_id</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K2_document_id</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K3_version</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K3_version</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K4_product_ndc</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K4_product_ndc</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K5_package_ndcs</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K5_package_ndcs</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K6_form_code</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K6_form_code</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K7_active_count</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R1_full</td><td>K7_active_count</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R1_full</td><td>K8_unii</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K8_unii</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K9_class_code</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K9_class_code</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K10_boss_unii</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K10_boss_unii</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K11_num_value</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K11_num_value</td><td>held_out</td><td>2391</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K11_num_unit</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K11_num_unit</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K12_den_value</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K12_den_value</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K12_den_unit</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R1_full</td><td>K12_den_unit</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R1_full</td><td>K13_part_ndcs</td><td>development</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>836</td><td>0</td><td>2</td></tr><tr><td>R1_full</td><td>K13_part_ndcs</td><td>held_out</td><td>11</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1954</td><td>0</td><td>11</td></tr><tr><td>R_core</td><td>K1_set_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K1_set_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K2_document_id</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K2_document_id</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K3_version</td><td>development</td><td>0</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K3_version</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K4_product_ndc</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K4_product_ndc</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K5_package_ndcs</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K5_package_ndcs</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K6_form_code</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K6_form_code</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K7_active_count</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>R_core</td><td>K7_active_count</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>R_core</td><td>K8_unii</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K8_unii</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K9_class_code</td><td>development</td><td>0</td><td>0</td><td>0</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K9_class_code</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K10_boss_unii</td><td>development</td><td>698</td><td>0</td><td>0</td><td>0</td><td>0</td><td>294</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K10_boss_unii</td><td>held_out</td><td>1722</td><td>0</td><td>0</td><td>0</td><td>0</td><td>670</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K11_num_value</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K11_num_value</td><td>held_out</td><td>2391</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K11_num_unit</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K11_num_unit</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K12_den_value</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K12_den_value</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K12_den_unit</td><td>development</td><td>992</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>R_core</td><td>K12_den_unit</td><td>held_out</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>R_core</td><td>K13_part_ndcs</td><td>development</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>836</td><td>0</td><td>2</td></tr><tr><td>R_core</td><td>K13_part_ndcs</td><td>held_out</td><td>11</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1954</td><td>0</td><td>11</td></tr><tr><td>S_rx</td><td>K1_set_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K1_set_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K2_document_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K2_document_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K3_version</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K3_version</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K4_product_ndc</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K4_product_ndc</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K5_package_ndcs</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K5_package_ndcs</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K6_form_code</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K6_form_code</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K7_active_count</td><td>development</td><td>572</td><td>0</td><td>0</td><td>0</td><td>148</td><td>4</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_rx</td><td>K7_active_count</td><td>held_out</td><td>1271</td><td>0</td><td>0</td><td>0</td><td>377</td><td>14</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_rx</td><td>K8_unii</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>859</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K8_unii</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2015</td><td>0</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K9_class_code</td><td>development</td><td>0</td><td>0</td><td>657</td><td>0</td><td>168</td><td>34</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K9_class_code</td><td>held_out</td><td>0</td><td>0</td><td>1479</td><td>0</td><td>456</td><td>80</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K10_boss_unii</td><td>development</td><td>0</td><td>0</td><td>675</td><td>0</td><td>168</td><td>16</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K10_boss_unii</td><td>held_out</td><td>0</td><td>0</td><td>1518</td><td>0</td><td>456</td><td>41</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K11_num_value</td><td>development</td><td>683</td><td>0</td><td>5</td><td>0</td><td>168</td><td>3</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K11_num_value</td><td>held_out</td><td>1530</td><td>1</td><td>16</td><td>0</td><td>456</td><td>12</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K11_num_unit</td><td>development</td><td>0</td><td>0</td><td>688</td><td>0</td><td>168</td><td>3</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K11_num_unit</td><td>held_out</td><td>0</td><td>0</td><td>1535</td><td>0</td><td>456</td><td>24</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K12_den_value</td><td>development</td><td>687</td><td>0</td><td>4</td><td>0</td><td>168</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K12_den_value</td><td>held_out</td><td>1543</td><td>0</td><td>15</td><td>0</td><td>456</td><td>1</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K12_den_unit</td><td>development</td><td>0</td><td>0</td><td>688</td><td>0</td><td>168</td><td>3</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_rx</td><td>K12_den_unit</td><td>held_out</td><td>0</td><td>0</td><td>1535</td><td>0</td><td>456</td><td>24</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_rx</td><td>K13_part_ndcs</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>723</td><td>0</td><td>1</td></tr><tr><td>S_rx</td><td>K13_part_ndcs</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>7</td><td>0</td><td>1655</td><td>0</td><td>7</td></tr><tr><td>S_flat</td><td>K1_set_id</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K1_set_id</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K2_document_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K2_document_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K3_version</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K3_version</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K4_product_ndc</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K4_product_ndc</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K5_package_ndcs</td><td>development</td><td>79</td><td>0</td><td>0</td><td>0</td><td>0</td><td>759</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K5_package_ndcs</td><td>held_out</td><td>279</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1686</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K6_form_code</td><td>development</td><td>0</td><td>0</td><td>838</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K6_form_code</td><td>held_out</td><td>0</td><td>0</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K7_active_count</td><td>development</td><td>684</td><td>0</td><td>0</td><td>0</td><td>0</td><td>154</td><td>0</td><td>0</td><td>838</td></tr><tr><td>S_flat</td><td>K7_active_count</td><td>held_out</td><td>1548</td><td>0</td><td>0</td><td>0</td><td>0</td><td>417</td><td>0</td><td>0</td><td>1965</td></tr><tr><td>S_flat</td><td>K8_unii</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K8_unii</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K9_class_code</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K9_class_code</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K10_boss_unii</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>992</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K10_boss_unii</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2392</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K11_num_value</td><td>development</td><td>80</td><td>0</td><td>0</td><td>0</td><td>154</td><td>758</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K11_num_value</td><td>held_out</td><td>175</td><td>0</td><td>0</td><td>0</td><td>427</td><td>1790</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K11_num_unit</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>154</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K11_num_unit</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>427</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K12_den_value</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>154</td><td>838</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K12_den_value</td><td>held_out</td><td>20</td><td>0</td><td>0</td><td>0</td><td>427</td><td>1945</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K12_den_unit</td><td>development</td><td>838</td><td>0</td><td>0</td><td>0</td><td>154</td><td>0</td><td>0</td><td>0</td><td>992</td></tr><tr><td>S_flat</td><td>K12_den_unit</td><td>held_out</td><td>1965</td><td>0</td><td>0</td><td>0</td><td>427</td><td>0</td><td>0</td><td>0</td><td>2392</td></tr><tr><td>S_flat</td><td>K13_part_ndcs</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>836</td><td>0</td><td>2</td></tr><tr><td>S_flat</td><td>K13_part_ndcs</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>11</td><td>0</td><td>1954</td><td>0</td><td>11</td></tr><tr><td>S_api</td><td>K1_set_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K1_set_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K2_document_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K2_document_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K3_version</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K3_version</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K4_product_ndc</td><td>development</td><td>724</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K4_product_ndc</td><td>held_out</td><td>1661</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K5_package_ndcs</td><td>development</td><td>722</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K5_package_ndcs</td><td>held_out</td><td>1657</td><td>0</td><td>0</td><td>0</td><td>1</td><td>4</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K6_form_code</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>724</td><td>0</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K6_form_code</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1662</td><td>0</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K7_active_count</td><td>development</td><td>333</td><td>0</td><td>0</td><td>0</td><td>0</td><td>391</td><td>0</td><td>0</td><td>724</td></tr><tr><td>S_api</td><td>K7_active_count</td><td>held_out</td><td>805</td><td>0</td><td>0</td><td>0</td><td>1</td><td>856</td><td>0</td><td>0</td><td>1662</td></tr><tr><td>S_api</td><td>K8_unii</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>859</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K8_unii</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2015</td><td>0</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K9_class_code</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>859</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K9_class_code</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2015</td><td>0</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K10_boss_unii</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>859</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K10_boss_unii</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2015</td><td>0</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K11_num_value</td><td>development</td><td>561</td><td>0</td><td>0</td><td>0</td><td>0</td><td>298</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K11_num_value</td><td>held_out</td><td>1352</td><td>1</td><td>0</td><td>0</td><td>1</td><td>661</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K11_num_unit</td><td>development</td><td>859</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K11_num_unit</td><td>held_out</td><td>2014</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K12_den_value</td><td>development</td><td>53</td><td>0</td><td>0</td><td>0</td><td>806</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K12_den_value</td><td>held_out</td><td>114</td><td>0</td><td>0</td><td>0</td><td>1883</td><td>18</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K12_den_unit</td><td>development</td><td>53</td><td>0</td><td>0</td><td>0</td><td>806</td><td>0</td><td>0</td><td>0</td><td>859</td></tr><tr><td>S_api</td><td>K12_den_unit</td><td>held_out</td><td>128</td><td>0</td><td>0</td><td>0</td><td>1883</td><td>4</td><td>0</td><td>0</td><td>2015</td></tr><tr><td>S_api</td><td>K13_part_ndcs</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>723</td><td>0</td><td>1</td></tr><tr><td>S_api</td><td>K13_part_ndcs</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>7</td><td>0</td><td>1655</td><td>0</td><td>7</td></tr><tr><td>S_latest</td><td>K1_set_id</td><td>development</td><td>114</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K1_set_id</td><td>held_out</td><td>303</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K2_document_id</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>114</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K2_document_id</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>303</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K3_version</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>114</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K3_version</td><td>held_out</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>303</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K4_product_ndc</td><td>development</td><td>113</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K4_product_ndc</td><td>held_out</td><td>300</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K5_package_ndcs</td><td>development</td><td>103</td><td>0</td><td>0</td><td>0</td><td>1</td><td>10</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K5_package_ndcs</td><td>held_out</td><td>281</td><td>0</td><td>0</td><td>0</td><td>3</td><td>19</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K6_form_code</td><td>development</td><td>113</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K6_form_code</td><td>held_out</td><td>300</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K7_active_count</td><td>development</td><td>113</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>114</td></tr><tr><td>S_latest</td><td>K7_active_count</td><td>held_out</td><td>300</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>303</td></tr><tr><td>S_latest</td><td>K8_unii</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K8_unii</td><td>held_out</td><td>373</td><td>0</td><td>0</td><td>0</td><td>3</td><td>1</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K9_class_code</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K9_class_code</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K10_boss_unii</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K10_boss_unii</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K11_num_value</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K11_num_value</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K11_num_unit</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K11_num_unit</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K12_den_value</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K12_den_value</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K12_den_unit</td><td>development</td><td>132</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>133</td></tr><tr><td>S_latest</td><td>K12_den_unit</td><td>held_out</td><td>374</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td>377</td></tr><tr><td>S_latest</td><td>K13_part_ndcs</td><td>development</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>113</td><td>0</td><td>1</td></tr><tr><td>S_latest</td><td>K13_part_ndcs</td><td>held_out</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>299</td><td>0</td><td>4</td></tr></tbody></table></div></div>
+<h3 id="s3">Appendix 3. Matching outcomes by split</h3>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Appendix 3 matching outcomes"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">split</th><th scope="col">approach</th><th scope="col">outcome</th><th scope="col">products</th><th scope="col">of</th></tr></thead><tbody><tr><td>development</td><td>A</td><td>not_found</td><td>148</td><td>724</td></tr><tr><td>development</td><td>A</td><td>unique</td><td>576</td><td>724</td></tr><tr><td>development</td><td>A2</td><td>a_not_unique</td><td>147</td><td>724</td></tr><tr><td>development</td><td>A2</td><td>agree</td><td>572</td><td>724</td></tr><tr><td>development</td><td>A2</td><td>not_in_mapping_file</td><td>5</td><td>724</td></tr><tr><td>development</td><td>B</td><td>ambiguous</td><td>72</td><td>724</td></tr><tr><td>development</td><td>B</td><td>none</td><td>25</td><td>724</td></tr><tr><td>development</td><td>B</td><td>unique</td><td>627</td><td>724</td></tr><tr><td>development</td><td>C</td><td>abstain</td><td>431</td><td>724</td></tr><tr><td>development</td><td>C</td><td>unique</td><td>293</td><td>724</td></tr><tr><td>held_out</td><td>A</td><td>not_found</td><td>377</td><td>1662</td></tr><tr><td>held_out</td><td>A</td><td>unique</td><td>1285</td><td>1662</td></tr><tr><td>held_out</td><td>A2</td><td>a_not_unique</td><td>366</td><td>1662</td></tr><tr><td>held_out</td><td>A2</td><td>agree</td><td>1269</td><td>1662</td></tr><tr><td>held_out</td><td>A2</td><td>disagree</td><td>1</td><td>1662</td></tr><tr><td>held_out</td><td>A2</td><td>not_in_mapping_file</td><td>26</td><td>1662</td></tr><tr><td>held_out</td><td>B</td><td>ambiguous</td><td>136</td><td>1662</td></tr><tr><td>held_out</td><td>B</td><td>none</td><td>107</td><td>1662</td></tr><tr><td>held_out</td><td>B</td><td>unique</td><td>1419</td><td>1662</td></tr><tr><td>held_out</td><td>C</td><td>abstain</td><td>905</td><td>1662</td></tr><tr><td>held_out</td><td>C</td><td>unique</td><td>757</td><td>1662</td></tr><tr><td>all</td><td>A</td><td>not_found</td><td>525</td><td>2386</td></tr><tr><td>all</td><td>A</td><td>unique</td><td>1861</td><td>2386</td></tr><tr><td>all</td><td>A2</td><td>a_not_unique</td><td>513</td><td>2386</td></tr><tr><td>all</td><td>A2</td><td>agree</td><td>1841</td><td>2386</td></tr><tr><td>all</td><td>A2</td><td>disagree</td><td>1</td><td>2386</td></tr><tr><td>all</td><td>A2</td><td>not_in_mapping_file</td><td>31</td><td>2386</td></tr><tr><td>all</td><td>B</td><td>ambiguous</td><td>208</td><td>2386</td></tr><tr><td>all</td><td>B</td><td>none</td><td>132</td><td>2386</td></tr><tr><td>all</td><td>B</td><td>unique</td><td>2046</td><td>2386</td></tr><tr><td>all</td><td>C</td><td>abstain</td><td>1336</td><td>2386</td></tr><tr><td>all</td><td>C</td><td>unique</td><td>1050</td><td>2386</td></tr></tbody></table></div></div>
+<h3 id="s4">Appendix 4. Package NDC padding by segment pattern</h3>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Appendix 4 NDC padding"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">configuration</th><th scope="col">package_ndcs</th><th scope="col">naive_equals_correct</th></tr></thead><tbody><tr><td>4-4-2</td><td>557</td><td>557</td></tr><tr><td>5-3-2</td><td>3499</td><td>0</td></tr><tr><td>5-4-1</td><td>2260</td><td>0</td></tr></tbody></table></div></div>
+<h3 id="s5">Appendix 5. Package NDCs removed between versions and their current RxNorm status</h3>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Appendix 5 removed package NDCs"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">set_id</th><th scope="col">ndc_original</th><th scope="col">ndc11</th><th scope="col">status</th><th scope="col">rxcui</th><th scope="col">history</th></tr></thead><tbody><tr><td>73691c6c-8841-4c5d-b4a5-c3ed3b5effa1</td><td>52817-822-50</td><td>52817082250</td><td>OBSOLETE</td><td>861025</td><td>202203-202501</td></tr><tr><td>787c1115-61fa-41d1-a0b2-32318f1e20f5</td><td>0143-1268-10</td><td>143126810</td><td>OBSOLETE</td><td>314077</td><td>200706-202006</td></tr><tr><td>8c50753c-f31b-486c-854c-4eaf6ac11119</td><td>61919-909-30</td><td>61919090930</td><td>ACTIVE</td><td>311354</td><td>201710-202610</td></tr><tr><td>b34cd3ff-d0af-4852-b4ef-2a8b4a93aeae</td><td>0002-7512-01</td><td>2751201</td><td>ACTIVE</td><td>731281</td><td>200801-202610;200801-200901;200706-200710</td></tr><tr><td>b34cd3ff-d0af-4852-b4ef-2a8b4a93aeae</td><td>0002-7512-99</td><td>2751299</td><td>OBSOLETE</td><td>731281</td><td>200801-202605;200801-200901;200706-200710</td></tr><tr><td>c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f</td><td>0002-7510-99</td><td>2751099</td><td>ACTIVE</td><td>865098</td><td>200910-202610;200709-200908;200801-200901</td></tr><tr><td>c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f</td><td>0002-8208-01</td><td>2820801</td><td>OBSOLETE</td><td>1652242</td><td>202507-202605</td></tr><tr><td>c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f</td><td>0002-8208-27</td><td>2820827</td><td>ALIEN</td><td>1652242</td><td></td></tr><tr><td>c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f</td><td>0002-8799-61</td><td>2879961</td><td>ACTIVE</td><td>1652640</td><td>201707-202610</td></tr><tr><td>df61d56e-18ff-404c-b671-42b39aa23574</td><td>71656-017-16</td><td>71656001716</td><td>OBSOLETE</td><td>861025</td><td>202410-202412</td></tr><tr><td>df61d56e-18ff-404c-b671-42b39aa23574</td><td>71656-017-50</td><td>71656001750</td><td>OBSOLETE</td><td>861025</td><td>202410-202412</td></tr><tr><td>df61d56e-18ff-404c-b671-42b39aa23574</td><td>71656-017-51</td><td>71656001751</td><td>OBSOLETE</td><td>861025</td><td>202410-202412</td></tr><tr><td>df61d56e-18ff-404c-b671-42b39aa23574</td><td>71656-017-52</td><td>71656001752</td><td>OBSOLETE</td><td>861025</td><td>202410-202412</td></tr></tbody></table></div></div>
+<h3 id="s6">Appendix 6. Validation summary</h3>
+<p>Validator 7.0.0 (SHA-256 <code>0ec7285b0f23999c25979533c6e9105f5f01087889fcc113ac1dfc65560bcc69</code>) on openjdk version "21.0.12.1" 2026-08-18 LTS. Offline run: 1,693 Bundles, 0 errors, 152,171 warnings. Terminology sample: 60 Bundles, 164 errors (all NDC codes unknown to the server's 2021-11-01 NDC content).</p>
+<h3 id="s7">Appendix 7. Approach B normalization rules (frozen)</h3>
+<pre tabindex="0" role="region" aria-label="Approach B normalization rules"><code># Normalization rules for matching approach B (and unit conversion in the
+# S-rx comparison). Version 0: written from the RxNorm technical
+# documentation before any matching output was seen. Changes made while
+# tuning on the development split are listed at the bottom with dates.
+# Frozen before the held-out evaluation.
+
+[names]
+# exact substring replacements applied after lowercasing and whitespace collapse
+# v2: hydrate and anhydrous qualifiers on basis-of-strength names (labels state &quot;lisinopril anhydrous&quot;,
+#     RxNorm states &quot;lisinopril&quot;)
+replace = [[&quot; anhydrous&quot;, &quot;&quot;], [&quot; monohydrate&quot;, &quot;&quot;], [&quot; dihydrate&quot;, &quot;&quot;], [&quot; trihydrate&quot;, &quot;&quot;], [&quot; hemihydrate&quot;, &quot;&quot;], [&quot; sesquihydrate&quot;, &quot;&quot;]]
+# v2: FDA biosimilar names add a four-letter suffix that labels carry only in the generic name
+biosimilar_suffix_from_generic_name = true
+# proprietary names that are really generic names (labels that put the generic in &lt;name&gt;)
+generic_proprietary_names = []
+# words a generic label may add to its ingredient names in the proprietary-name field (v1)
+generic_stopwords = [&quot;and&quot;, &quot;tablet&quot;, &quot;tablets&quot;, &quot;usp&quot;, &quot;extended&quot;, &quot;release&quot;, &quot;er&quot;, &quot;xr&quot;, &quot;oral&quot;, &quot;solution&quot;,
+                     &quot;injection&quot;, &quot;for&quot;, &quot;film&quot;, &quot;coated&quot;, &quot;delayed&quot;, &quot;dr&quot;, &quot;mg&quot;, &quot;ml&quot;, &quot;hcl&quot;, &quot;hydrochloride&quot;,
+                     &quot;chewable&quot;, &quot;capsule&quot;, &quot;capsules&quot;, &quot;suspension&quot;, &quot;pen&quot;, &quot;prefilled&quot;, &quot;syringe&quot;, &quot;vial&quot;,
+                     &quot;kwikpen&quot;, &quot;flexpen&quot;, &quot;the&quot;, &quot;of&quot;, &quot;with&quot;, &quot;in&quot;, &quot;rx&quot;, &quot;only&quot;, &quot;calcium&quot;, &quot;sodium&quot;, &quot;potassium&quot;,
+                     &quot;anhydrous&quot;, &quot;dihydrate&quot;, &quot;trihydrate&quot;, &quot;propanediol&quot;, &quot;phosphate&quot;, &quot;monohydrate&quot;]
+# name suffixes that mark a device presentation rather than a different brand
+device_suffixes = [&quot;kwikpen&quot;, &quot;flextouch&quot;, &quot;solostar&quot;, &quot;flexpen&quot;, &quot;pen&quot;, &quot;tempo pen&quot;, &quot;junior kwikpen&quot;, &quot;max solostar&quot;]
+
+[units]
+# SPL UCUM unit -&gt; [RxNorm unit, factor as a fraction string]
+&quot;mg&quot; = [&quot;MG&quot;, &quot;1&quot;]
+&quot;g&quot; = [&quot;MG&quot;, &quot;1000&quot;]
+&quot;ug&quot; = [&quot;MG&quot;, &quot;1/1000&quot;]
+&quot;mL&quot; = [&quot;ML&quot;, &quot;1&quot;]
+&quot;L&quot; = [&quot;ML&quot;, &quot;1000&quot;]
+&quot;[iU]&quot; = [&quot;UNT&quot;, &quot;1&quot;]
+&quot;[IU]&quot; = [&quot;UNT&quot;, &quot;1&quot;]
+&quot;[USP&#x27;U]&quot; = [&quot;UNT&quot;, &quot;1&quot;]
+&quot;meq&quot; = [&quot;MEQ&quot;, &quot;1&quot;]
+# v1: some labels code insulin units as UCUM &quot;U&quot; (enzyme unit) instead of &quot;[iU]&quot;
+&quot;U&quot; = [&quot;UNT&quot;, &quot;1&quot;]
+&quot;mEq&quot; = [&quot;MEQ&quot;, &quot;1&quot;]
+
+[dose_forms.by_form]
+&quot;TABLET&quot; = [&quot;Oral Tablet&quot;]
+&quot;TABLET, FILM COATED&quot; = [&quot;Oral Tablet&quot;]
+&quot;TABLET, COATED&quot; = [&quot;Oral Tablet&quot;]
+&quot;TABLET, EXTENDED RELEASE&quot; = [&quot;Extended Release Oral Tablet&quot;]
+&quot;TABLET, FILM COATED, EXTENDED RELEASE&quot; = [&quot;Extended Release Oral Tablet&quot;]
+&quot;TABLET, DELAYED RELEASE&quot; = [&quot;Delayed Release Oral Tablet&quot;]
+&quot;CAPSULE&quot; = [&quot;Oral Capsule&quot;]
+&quot;SOLUTION&quot; = [&quot;Oral Solution&quot;]
+&quot;SUSPENSION, EXTENDED RELEASE&quot; = [&quot;Extended Release Suspension&quot;]
+&quot;INJECTION, SOLUTION&quot; = [&quot;Injectable Solution&quot;]
+&quot;INJECTION, SUSPENSION&quot; = [&quot;Injectable Suspension&quot;]
+&quot;INJECTION&quot; = [&quot;Injectable Solution&quot;]
+
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION, SOLUTION&quot;
+package_forms = [&quot;SYRINGE&quot;, &quot;SYRINGE, PLASTIC&quot;, &quot;SYRINGE, GLASS&quot;]
+rxnorm = [&quot;Pen Injector&quot;, &quot;Prefilled Syringe&quot;]
+
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION, SOLUTION&quot;
+package_forms = [&quot;CARTRIDGE&quot;]
+rxnorm = [&quot;Cartridge&quot;]
+
+# v1: products coded only &quot;INJECTION&quot; are pens or syringes or vials depending on the container
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION&quot;
+package_forms = [&quot;SYRINGE&quot;, &quot;SYRINGE, PLASTIC&quot;, &quot;SYRINGE, GLASS&quot;]
+rxnorm = [&quot;Pen Injector&quot;, &quot;Prefilled Syringe&quot;]
+
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION&quot;
+package_forms = [&quot;CARTRIDGE&quot;]
+rxnorm = [&quot;Cartridge&quot;]
+
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION, SUSPENSION&quot;
+package_forms = [&quot;SYRINGE&quot;, &quot;SYRINGE, PLASTIC&quot;, &quot;SYRINGE, GLASS&quot;]
+rxnorm = [&quot;Pen Injector&quot;, &quot;Prefilled Syringe&quot;]
+
+[[dose_forms.by_form_and_package]]
+form = &quot;INJECTION, SUSPENSION&quot;
+package_forms = [&quot;CARTRIDGE&quot;]
+rxnorm = [&quot;Cartridge&quot;]
+
+[[dose_forms.by_form_and_route]]
+form = &quot;SOLUTION&quot;
+routes = [&quot;SUBCUTANEOUS&quot;]
+rxnorm = [&quot;Injectable Solution&quot;]
+
+[quantity_factor]
+# RxNorm dose forms whose concepts carry the fill volume as a quantity factor
+device_dose_forms = [&quot;Pen Injector&quot;, &quot;Prefilled Syringe&quot;, &quot;Cartridge&quot;, &quot;Auto-Injector&quot;, &quot;Injector&quot;]
+# v1: only fill-volume quantity factors can be derived from SPL packaging; release durations
+# (&quot;24 HR&quot;) are not stated in SPL product data and are not compared
+comparable_units = [&quot;ML&quot;]
+
+[approx]
+# approach C, chosen on the development split (analysis plan section 6):
+# grid tau 60..100 step 2, delta {0,1,2,3,5,8}, objective agreements minus disagreements with A.
+# Development: 222 of 576 answered, 190 agree, 32 disagree (outputs/matching/approach_c_tuning_development.csv)
+tau = 74
+delta = 0
+
+# Change log
+# v0 2026-10-07: initial rules.
+# v1 2026-10-07 (development split only): generic-label detection by tokens of the generic and
+#    ingredient names plus dose-form words; UCUM &quot;U&quot; read as RxNorm UNT; INJECTION with syringe or
+#    cartridge packages mapped to device dose forms; quantity factor compared for fill volume only;
+#    RxNorm name used to state the basis-of-strength substance when historystatus does not separate
+#    candidates; biosimilar suffixes taken from the SPL generic name as a tie-break.
+# v2 2026-10-07 (development split only): hydrate/anhydrous qualifiers dropped from basis-of-strength
+#    names; a biosimilar suffix in the SPL generic name (&quot;insulin glargine-yfgn&quot;) is applied to the
+#    matching ingredient&#x27;s basis-of-strength name.
+# FROZEN 2026-10-07 before the held-out evaluation.
+</code></pre>
+<h3 id="s8">Appendix 8. Literature search and original planning comparison</h3>
+<p>Forty-five recorded searches in PubMed and Europe PMC on 2026-10-07; the five closest items and the reasons for each inclusion are in <code>docs/prior_art.csv</code> and <code>docs/literature_search.md</code> of the source archive.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Appendix 8 closest prior work"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">rank</th><th scope="col">verified_citation</th><th scope="col">overlap_with_this_project</th><th scope="col">what_this_project_adds</th></tr></thead><tbody><tr><td>1</td><td>Zhu Q, Jiang G, Chute CG. Profiling structured product labeling with NDF-RT and RxNorm. J Biomed Semantics. 2012;3(1):16. doi:10.1186/2041-1480-3-16. PMID: 23256517; PMCID: PMC3570438. Metadata checked against Crossref (https://api.crossref.org/works/10.1186/2041-1480-3-16, 2026-10-07T09:38:07Z), PubMed esummary and the PMC XML.</td><td>This is the direct prior SPL-to-RxNorm mapping study. It uses the same sources (DailyMed SPL, RxNorm RRF), the same identifier (setId) and the same RxNorm TTY granularity framing.</td><td>Version-pinned SPL (setId plus version) and RxNorm (release) inputs; matching at the NDC/package level; attribute-by-attribute comparison of strength, form and package; a FHIR R4 Medication leg with a round-trip check; an updated 2026 data snapshot for a defined ingredient set; quantified effects of shortcuts (ingredient-only matching versus SCD/SBD matching).</td></tr><tr><td>2</td><td>Schadow G. Assessing the impact of HL7/FDA Structured Product Label (SPL) content for medication knowledge management. AMIA Annu Symp Proc. 2007;2007:646-650. PMID: 18693916; PMCID: PMC2655908 (no DOI in the PubMed record).</td><td>Attribute-level SPL-versus-RxNorm agreement keyed on NDC, with 11-digit NDC normalization. This is the closest precedent for this project&#x27;s attribute comparison.</td><td>A current SPL corpus; comparison of strength (numerator and denominator units), dose form, package and labeler, not ingredient only; label-version and RxNorm-release awareness; a FHIR serialization with a round-trip test; quantified shortcut errors.</td></tr><tr><td>3</td><td>Peters LB, Bodenreider O. Approaches to Supporting the Analysis of Historical Medication Datasets with RxNorm. AMIA Annu Symp Proc. 2015;2015:1034-1041. PMID: 26958241; PMCID: PMC4765580.</td><td>This is the established version-aware NDC-to-RxNorm method, and it directly quantifies one matching shortcut: current-release-only lookups. The project will rely on the getNDCStatus history it produced.</td><td>Applying release-dated NDC history to SPL versions. Checking whether the time-correct RxCUI preserves the SPL&#x27;s strength, form and package attributes. Carrying those attributes into FHIR R4 and measuring round-trip loss. A current 2026 replication of the current-only versus history-aware gap for the seed ingredients.</td></tr><tr><td>4</td><td>Lester CA, Flynn AJ, Marshall VD, Rochowiak S, Rowell B, Bagian JP. Comparing the variability of ingredient, strength, and dose form information from electronic prescriptions with RxNorm drug product descriptions. J Am Med Inform Assoc. 2022;29(9):1471-1479. doi:10.1093/jamia/ocac096. PMID: 35773948; PMCID: PMC9382370.</td><td>Attribute-level (ingredient, strength, dose form) comparison anchored on NDC to RxCUI through getNDCStatus. It is the closest measured study of attribute preservation through an RxNorm crosswalk.</td><td>Structured SPL attributes as the source of truth instead of free text. Unit-normalized semantic equality for strength. Package and labeler attributes. Version and release pinning. Round trip through FHIR R4 Medication.ingredient.strength (Ratio) and Medication.form.</td></tr><tr><td>5</td><td>HL7 International / Biomedical Research and Regulation Work Group. SPL Mapping FHIR R5 Implementation Guide (package hl7.fhir.us.spl), version 0.2.8, continuous-integration build (marked &#x27;not an authorized publication&#x27;), based on FHIR 5.0.0, generated 2025-07-25. https://build.fhir.org/ig/HL7/fhir-spl/ ; source repository https://github.com/HL7/fhir-spl</td><td>Specifies SPL-to-FHIR and FHIR-to-SPL mappings, including the inverse direction. The project should therefore not claim to be the first SPL-to-FHIR mapping.</td><td>An R4 clinical Medication target (code from RxNorm/NDC, form, ingredient.strength) reached through RxNorm, with version pinning and a measured attribute-level round trip. The project could also test or reuse the HL7 mapping semantics.</td></tr></tbody></table></div></div>
+<h3 id="s9">Appendix 9. Data and run provenance</h3>
+<p>Labels retrieved 2026-10-07 10:04 to 2026-10-07 10:23 UTC (1,475 files); preceding versions 2026-10-07 10:23 to 2026-10-07 10:24 UTC; RxNorm API 2026-10-07 10:25 to 2026-10-07 10:39 UTC (6,822 responses, release 05-Oct-2026, API 3.1.356). DailyMed SPL-to-RxNorm mapping file: 7,128,999 bytes, SHA-256 <code>14e7cac873dac7cfe6b0dd8e76d571ba146d412fae4f5a8bcea1938ea272738a</code>. Every file is listed with its URL, time, size and SHA-256 in <code>outputs/source_manifest.json</code> of the source archive.</p>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) to help with coding, analysis and manuscript preparation. I take responsibility for the work. I recall using Opus models in Claude Code and models from the GPT-5 and GPT-6 families in ChatGPT and Codex. Exact model version records are unavailable.</p></section></main><footer><div class="inner">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+Medicine (DailyMed, RxNorm API), retrieved 2026-10-07; no patient records. This product uses publicly available data from the U.S. National Library of
+Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
+recommend this or any other product.</div></footer></body></html>

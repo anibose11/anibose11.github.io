@@ -1,0 +1,2442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diabetes priorities supplement</title>
+<meta name="description" content="Supplementary methods and tables for the county diabetes outreach priorities study.">
+<style>
+:root{--bg:#fbfbf9;--ink:#1b1b1a;--ink2:#45443f;--muted:#64635d;--rule:#dcdad3;--accent:#1f5fa8;--plate:#f2f1ec;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+main.wide{max-width:1100px}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.2;margin:8px 0 12px;text-wrap:balance}
+h2{font-size:22px;line-height:1.3;margin:40px 0 8px;padding-top:12px;border-top:1px solid var(--rule);text-wrap:balance}
+h3{font-size:18px;margin:28px 0 6px}
+p,li{text-wrap:pretty}
+li,p,figcaption{overflow-wrap:anywhere}
+.table-wrap table.wide{min-width:600px}
+p.tcap{margin:20px 0 0;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate);border:1px solid var(--rule);border-bottom:0}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:#123f73}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.meta{color:var(--muted);font-size:14px}
+.table-wrap{overflow-x:auto;margin:12px 0 20px;border:1px solid var(--rule);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+th{color:var(--ink2);font-weight:600;background:var(--plate)}
+td[style*="right"],th[style*="right"]{text-align:right}
+caption.tcap{caption-side:top;text-align:left;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate)}
+figure{margin:24px 0;max-width:100%}
+figure img{width:100%;height:auto;background:#fcfcfb;border:1px solid var(--rule)}
+figcaption{font-size:14px;color:var(--ink2);margin-top:6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--plate);padding:1px 4px;overflow-wrap:anywhere}
+pre{background:var(--plate);padding:12px;overflow-x:auto;font-size:14px}
+pre code{background:none;padding:0}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:2}
+nav.crumbs{font-size:14px;color:var(--muted);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.stat{border:1px solid var(--rule);background:#fff;padding:12px}
+.stat b{display:block;font-size:26px;line-height:1.2}
+.stat span{font-size:14px;color:var(--ink2)}
+ul.files{padding-left:20px}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<nav class="crumbs"><a href="./index.html">Project overview</a> / Supplementary material</nav>
+<h1>Additional file 1: Supplementary methods and tables</h1>
+<p>Stability of county diabetes outreach priorities under alternative need definitions and published uncertainty</p>
+<p>Run identifier a944852459ca. All tables are generated from the files named under each table.</p>
+<h2>S1. Analysis plan, exposure log and amendments</h2>
+<p>The plan below was written before any county value was ranked. It is reproduced from docs/analysis_plan.md.</p>
+<p>Written 2026-10-07 09:39 UTC (05:39 EDT), before any county prevalence, burden or poverty value was ranked, sorted or compared. This is an internal, timestamped plan kept with the project files. It is not a formal preregistration in a public registry. Any later change is recorded in the amendments section at the end with its own timestamp and reason.</p>
+<h3>Prior exposure</h3>
+<p>Before writing this plan I had general background knowledge that diagnosed diabetes prevalence in the United States is highest in parts of the Southeast and Appalachia, and that counts of affected adults are dominated by populous counties. I inspected the structure of the acquired files only: column names, measure and value-type labels, row counts by measure and state, geography codes (Connecticut planning regions, Alaska Chugach and Copper River, the national row with LocationID 59), suppression footnotes, ACS replicate-table line titles, and which ACS cells are population-controlled. That inspection showed that the PLACES 2025 county release contains no diagnosed-diabetes estimates for Kentucky (120 counties) or Pennsylvania (67 counties) and that Loving County, Texas is suppressed. I did not look at any county's prevalence, burden or poverty value, any ranking, or any association between variables.</p>
+<h3>Question</h3>
+<p>Which U.S. counties would a community-program analyst shortlist for further investigation of diabetes outreach need under three common definitions of need, and how much of each shortlist is stable when the published uncertainty of the inputs is made explicit?</p>
+<p>The output supports a decision about where to look more closely. It does not allocate services, evaluate programs, or describe any individual's risk.</p>
+<h3>Unit, frame and sources</h3>
+<ul>
+<li>Unit: county or county equivalent in the 50 states and the District of Columbia, using the 2023 geography of the PLACES 2025 county release (Connecticut's nine planning regions, Alaska's Chugach and Copper River census areas).</li>
+<li>Prevalence: CDC PLACES County Data, 2025 release (Socrata dataset swc5-untb), measure DIABETES ("Diagnosed diabetes among adults"), value type CrdPrv ("Crude prevalence"), BRFSS 2023, with its published 95% confidence limits. Age-adjusted prevalence is carried for display only and is never multiplied by a population.</li>
+<li>Adult population (primary): TotalPop18plus in the PLACES 2025 file, documented as the Census 2023 county population estimate for ages 18 and over. It is checked against the Census Bureau Vintage 2023 county characteristics file (CC-EST2023-AGESEX, YEAR = 5, AGE18PLUS_TOT).</li>
+<li>Adult population (comparison and scenario range): ACS 2020-2024 five-year table B05003, male 18 years and over (line 8) plus female 18 years and over (line 19), with a margin of error computed from the 80 published variance replicates.</li>
+<li>Socioeconomic criterion: ACS 2020-2024 five-year table B17001, people below the poverty level (line 2) divided by the population for whom poverty status is determined (line 1), times 100, with a replicate-based margin of error.</li>
+<li>The Census Data API now requires a key, which this project does not use. ACS values therefore come from the Census Bureau's public variance replicate files, which contain the published estimates and margins of error for these lines.</li>
+</ul>
+<p>Common analysis frame: counties with a non-suppressed crude prevalence and both confidence limits, a positive PLACES adult population, an ACS adult estimate, and an ACS poverty estimate. All three rules are evaluated on this same frame so that selected sets are comparable. Every location absent from the frame is listed with a reason code.</p>
+<h3>Planning perspectives (rules)</h3>
+<p>All rankings are descending. Ties use competition ranking: a county's rank is 1 plus the number of frame counties with a strictly larger value. A county is selected at capacity K when its rank is at most K, so ties at the cutoff are all included and the selected set can exceed K. The set size is always reported.</p>
+<ol>
+<li>Prevalence rule (PREV): rank by crude prevalence.</li>
+<li>Estimated burden rule (BURDEN): rank by estimated adults with diagnosed diabetes, defined as crude prevalence / 100 times the PLACES adult population. This is a model-based estimate, not a count of identified patients.</li>
+<li>Equity-sensitive rule (EQUITY): restrict to counties with ACS poverty of at least 20.0 percent (the high-poverty county threshold used by USDA Economic Research Service), then rank by crude prevalence. Estimated burden is displayed alongside but does not enter the ranking. The 20 percent threshold is a declared planning criterion, not an empirically optimal weight.</li>
+</ol>
+<p>No composite need score is constructed. No regression of prevalence on socioeconomic variables is fitted, because the PLACES model may already use related covariates and any such association would not be an independent finding.</p>
+<h3>Capacities</h3>
+<ul>
+<li>National capacities: 10, 25 and 50 counties. The primary capacity is 25; 10 and 50 form the alternate-capacity robustness check. These are illustrative, not organizational budgets.</li>
+<li>Within-state capacity: 5 counties per state. Where a state or DC has 5 or fewer frame counties, all of its units are shown and labelled "all units, no selection" and the state is excluded from within-state stability summaries. Where fewer than 5 counties in a state meet the poverty criterion, all eligible counties are selected under EQUITY and the shortfall is reported.</li>
+</ul>
+<h3>Uncertainty: deterministic envelopes, not probabilities</h3>
+<p>PLACES publishes marginal 95% intervals per county. There is no joint distribution, and county estimates share model structure and covariates. No independent draws are simulated, and no county is assigned a probability of belonging to a top group.</p>
+<p>For a rule with value v and scenario bounds [L, U] for each county i in the ranking set:</p>
+<ul>
+<li>Best-case rank b_i = 1 + #{j : L_j &gt; U_i}.</li>
+<li>Worst-case rank w_i = 1 + #{j != i : U_j &gt; L_i}.</li>
+<li>At capacity K: core if w_i &lt;= K (selected wherever every county falls inside its bounds); boundary if b_i &lt;= K &lt; w_i; outside if b_i &gt; K.</li>
+</ul>
+<p>The worst case places every other county at its upper bound and county i at its lower bound at the same time. Such combinations are not jointly attainable confidence statements, so the envelope is labelled a sensitivity envelope.</p>
+<p>Bounds per rule:</p>
+<ul>
+<li>PREV: PLACES 95% lower and upper limits.</li>
+<li>BURDEN: lower = prevalence lower limit / 100 times the smaller of the PLACES adult population and the ACS 95% lower adult bound; upper = prevalence upper limit / 100 times the larger of the PLACES adult population and the ACS 95% upper adult bound. ACS 90% margins are rescaled to 95% (factor 1.959964 / 1.645). This product of bounds is a scenario range. It is not a confidence interval, because the covariance between the model-based prevalence and the population estimates is unknown.</li>
+<li>EQUITY: prevalence bounds as in PREV. Poverty eligibility is classified as certain (95% lower poverty bound at or above 20), point (estimate at or above 20) or possible (95% upper bound at or above 20). Best-case rank counts only certainly eligible competitors with L_j &gt; U_i; worst-case rank counts all possibly eligible competitors with U_j &gt; L_i. A county is core only if it is certainly eligible and w_i &lt;= K, boundary if it is possibly eligible with b_i &lt;= K and not core, and outside otherwise.</li>
+</ul>
+<p>Scenario rankings, also reported as selected sets: point estimates; all counties at lower bounds; all counties at upper bounds; and for EQUITY, the certain-eligibility and possible-eligibility frames ranked by point prevalence.</p>
+<h3>Primary outputs</h3>
+<ol>
+<li>Pairwise Jaccard overlap (|A and B| / |A or B|) of the point-estimate selected sets for PREV, BURDEN and EQUITY at K = 25, plus intersection counts.</li>
+<li>For each rule at K = 25: numbers of core, boundary and point-selected counties.</li>
+<li>Rule dependence for each county selected under any rule at K = 25: rule-robust if selected under all three rules, rule-dependent if selected under exactly one, and strongly rule-dependent if core under one rule and outside under another.</li>
+</ol>
+<p>The stable core is reported per rule. A cross-rule core (core under all three rules) is reported even if it is empty.</p>
+<h3>Robustness checks (fixed set of three)</h3>
+<ol>
+<li>Alternate capacity: repeat all primary outputs at K = 10 and K = 50.</li>
+<li>Point estimates versus interval-bound scenarios: Jaccard overlap between the point-estimate set and the lower-bound and upper-bound scenario sets within each rule, alongside the envelope classification.</li>
+<li>Strictly aligned geography and reference period: restrict to counties whose 5-digit FIPS codes appear in PLACES 2025, the Vintage 2023 estimates and both ACS vintages, excluding Connecticut, whose county equivalents changed after the 2020 Census tabulation geography. Use ACS 2019-2023 (the ACS vintage named in the PLACES 2025 documentation) for poverty and the ACS adult range. Report Jaccard overlap with the primary sets.</li>
+</ol>
+<p>Optional descriptive comparison: the PLACES 2024 county release (BRFSS 2022), which includes Kentucky and Pennsylvania, ranked by the same PREV and BURDEN rules. Report (a) overlap with the 2025 selected sets among counties present in both releases, and (b) how many Kentucky and Pennsylvania counties the 2024 release would place in the national top K. This describes the consequence of the 2025 coverage gap. It is not validation against outcomes, and the two releases differ in survey year and model inputs.</p>
+<h3>Validation and checks</h3>
+<ul>
+<li>Software tests on small synthetic fixtures (ranking with ties, envelopes, eligibility logic, acquisition guards, build checks). Fixtures are labelled synthetic and never mixed with study data.</li>
+<li>Source reconciliation: PLACES adult population against the Census Vintage 2023 file (expected to match exactly); ACS adult estimate against the PLACES adult population (expected close but not identical because of reference period and sampling).</li>
+<li>Build checks that fail loudly: one row per county, measure and value type; DIABETES rows from a single year; crude and age-adjusted labels mapped one to one; confidence limits bracket the estimate; 5-digit string FIPS with leading zeros; one ACS row per county and line; no Puerto Rico or other territories in the frame.</li>
+<li>Invariants: core is a subset of the point-selected set, which is a subset of core plus boundary.</li>
+<li>A second implementation in base R recomputes burden, ranks, selections and envelope ranks from the analysis frame. Agreement is a software cross-check, not independent scientific validation.</li>
+<li>Deterministic stages are rerun from cached inputs and compared with relative tolerance 1e-12 and absolute tolerance 1e-9.</li>
+</ul>
+<h3>Missing data and status vocabulary</h3>
+<p>No values are imputed. Status codes: observed; suppressed (PLACES footnote, population under 50); measure_not_released_for_state (Kentucky and Pennsylvania in the 2025 release); national_aggregate (LocationID 59); not_in_source; territory; controlled (ACS estimate with no sampling error); moe_zero_not_controlled (flagged and reported if it occurs). A zero value is never used to stand for a missing one.</p>
+<h3>What would count as a useful negative result</h3>
+<p>If the stable core at K = 25 is empty or very small for every rule, or the three rules share almost no counties, that is a reportable finding: published uncertainty and the choice of need definition would then dominate any single ranked list, and a planner should treat the boundary set, not a top-25 list, as the unit of further investigation.</p>
+<h3>Exposure log (not amendments)</h3>
+<ul>
+<li>2026-10-07, after the plan above was written and before any ranking was run: while the file formats were being documented, a few individual values were displayed (PLACES crude prevalence for Kusilvak Census Area, AK, and Kalawao County, HI; ACS B17001 counts for Montgomery and Prince George's counties, MD; Census Vintage 2023 adult totals for Montgomery and Prince George's counties and the Capitol Planning Region, CT). No rule, threshold, capacity or scenario was changed as a result.</li>
+</ul>
+<h3>Amendments</h3>
+<ol>
+<li>2026-10-07, after the primary results were produced: added a descriptive table (outputs/tables/selection_profile.csv) that summarizes each point-estimate selected set by its total estimated burden, share of the frame's total estimated burden, adult population range, prevalence range, number of high-poverty counties and number of states. It was added because the overlap results raised the question of how much estimated burden each rule's selection contains. It does not change any rule, capacity, scenario or classification, and it is reported as descriptive context rather than as a prespecified outcome.</li>
+<li>2026-10-07, after the primary results were produced: the optional comparison with the PLACES 2024 release was extended from the prevalence and burden rules to the high-poverty rule, using the same ACS 2020-2024 poverty criterion as the primary analysis so that the comparison reflects only the change of PLACES release. It is reported as descriptive and does not change any primary result.</li>
+<li>2026-10-07, after the primary results were produced (a correction of wording, not of the analysis): the structure inspection described under Prior exposure was carried out with a script that listed column names, labels, row counts, geography codes, footnotes and line titles, and this plan was fixed at the timestamp given at the top. No rule, threshold, capacity, scenario or classification changed.</li>
+</ol>
+<p>Rule codes used in the plan and in the result files: PREV = prevalence, BURDEN = estimated burden and EQUITY = high-poverty prevalence.</p>
+<h2>S2. Exclusions from the analysis frame</h2>
+<p class="tcap" id="table-s1"><strong>Table S1. PLACES 2025 locations not in the analysis frame, by reason.</strong> Source: data/processed/county_all.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s1"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s1">
+<thead>
+<tr>
+<th>Status</th>
+<th>State</th>
+<th style="text-align: right;">Locations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>measure_not_released_for_state</td>
+<td>KY</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr>
+<td>measure_not_released_for_state</td>
+<td>PA</td>
+<td style="text-align: right;">67</td>
+</tr>
+<tr>
+<td>national_aggregate</td>
+<td>US</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>suppressed</td>
+<td>TX</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div></div>
+<p class="tcap" id="table-s2"><strong>Table S2. Census locations without a matching PLACES county.</strong> All are Puerto Rico municipios, which PLACES does not cover. Source: data/processed/geography_reconciliation.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s2"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s2">
+<thead>
+<tr>
+<th>Census source</th>
+<th style="text-align: right;">Locations without a PLACES match</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>acs_2019_2023</td>
+<td style="text-align: right;">78</td>
+<td>Adjuntas Municipio, Puerto Rico</td>
+</tr>
+<tr>
+<td>acs_2020_2024</td>
+<td style="text-align: right;">78</td>
+<td>Adjuntas Municipio, Puerto Rico</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S3. Source reconciliation</h2>
+<p>The PLACES adult population equaled the Census Vintage 2023 adult estimate (CC-EST2023-AGESEX, YEAR 5, AGE18PLUS_TOT) for 2,956 of 2,956 frame counties. The ACS 2020-2024 adult estimate differed from it by a median absolute 0.8% (90th percentile 2.8%, maximum 56.7%), and the Vintage 2023 value lay outside the ACS 95% range for 2,268 counties, which reflects the different reference periods of a July 2023 estimate and a 2020-2024 period estimate. In the frame, 237 ACS adult totals were population-controlled and carry no sampling error.</p>
+<p class="tcap" id="table-s3"><strong>Table S3. Reproduction of published ACS margins of error from the variance replicates.</strong> Source: data/processed/build_checks.json.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s3"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s3">
+<thead>
+<tr>
+<th>ACS vintage</th>
+<th>Table and line</th>
+<th style="text-align: right;">Uncontrolled cells</th>
+<th style="text-align: right;">Replicate margin of error within 1 of published</th>
+<th style="text-align: right;">Largest difference</th>
+<th style="text-align: right;">Controlled cells</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020-2024</td>
+<td>B05003 line 8</td>
+<td style="text-align: right;">2,897</td>
+<td style="text-align: right;">2,897</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">325</td>
+</tr>
+<tr>
+<td>2020-2024</td>
+<td>B05003 line 19</td>
+<td style="text-align: right;">2,888</td>
+<td style="text-align: right;">2,888</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">334</td>
+</tr>
+<tr>
+<td>2020-2024</td>
+<td>B17001 line 1</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">3,212</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>2020-2024</td>
+<td>B17001 line 2</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>2019-2023</td>
+<td>B05003 line 8</td>
+<td style="text-align: right;">2,912</td>
+<td style="text-align: right;">2,912</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">310</td>
+</tr>
+<tr>
+<td>2019-2023</td>
+<td>B05003 line 19</td>
+<td style="text-align: right;">2,903</td>
+<td style="text-align: right;">2,903</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">319</td>
+</tr>
+<tr>
+<td>2019-2023</td>
+<td>B17001 line 1</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">3,213</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>2019-2023</td>
+<td>B17001 line 2</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">3,222</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Some cells did not reproduce. In ACS 2020-2024 B17001 line 1, 10 cells differed. In all 10, all 80 replicate estimates equaled the published estimate (replicate margin 0), while the published margins were 10 to 22 persons. In ACS 2019-2023 B17001 line 1, 9 cells differed. In all 9, all 80 replicate estimates equaled the published estimate (replicate margin 0), while the published margins were 10 to 21 persons. The Census Bureau's documentation notes that user-derived margins occasionally differ from published ones. These cells are poverty denominators, whose uncertainty has a negligible effect on the poverty-rate bounds.</p>
+<h2>S4. Point estimates compared with bound scenarios</h2>
+<p class="tcap" id="table-s4"><strong>Table S4. Overlap between each rule's point-estimate selection and its scenario selections.</strong> Source: outputs/tables/scenario_overlap.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s4"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s4">
+<thead>
+<tr>
+<th>Rule</th>
+<th style="text-align: right;">Capacity</th>
+<th>Scenario compared with point estimates</th>
+<th style="text-align: right;">Point set</th>
+<th style="text-align: right;">Scenario set</th>
+<th style="text-align: right;">Both</th>
+<th style="text-align: right;">Jaccard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">10</td>
+<td>lower bounds</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.75</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">10</td>
+<td>upper bounds</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">10</td>
+<td>lower bounds</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">10</td>
+<td>upper bounds</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td>lower bounds</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.82</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td>upper bounds</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td>certain eligibility frame</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.67</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td>possible eligibility frame</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.91</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">25</td>
+<td>lower bounds</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.89</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">25</td>
+<td>upper bounds</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.96</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">25</td>
+<td>lower bounds</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">25</td>
+<td>upper bounds</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td>lower bounds</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.89</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td>upper bounds</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.89</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td>certain eligibility frame</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.56</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td>possible eligibility frame</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.96</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">50</td>
+<td>lower bounds</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0.94</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">50</td>
+<td>upper bounds</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.93</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">50</td>
+<td>lower bounds</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0.96</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">50</td>
+<td>upper bounds</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td>lower bounds</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.94</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td>upper bounds</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">0.94</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td>certain eligibility frame</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.55</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td>possible eligibility frame</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S5. Strictly aligned geography and reference period</h2>
+<p>The aligned subset contains 2,947 counties (Connecticut's planning regions excluded) and uses ACS 2019-2023 for poverty and the adult range.</p>
+<p class="tcap" id="table-s5"><strong>Table S5. Primary and aligned-subset selections.</strong> Source: outputs/tables/robustness_aligned.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s5"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s5">
+<thead>
+<tr>
+<th>Rule</th>
+<th style="text-align: right;">Capacity</th>
+<th style="text-align: right;">Primary set</th>
+<th style="text-align: right;">Aligned set</th>
+<th style="text-align: right;">Both</th>
+<th style="text-align: right;">Jaccard</th>
+<th style="text-align: right;">Core, primary</th>
+<th style="text-align: right;">Core, aligned</th>
+<th style="text-align: right;">Boundary, primary</th>
+<th style="text-align: right;">Boundary, aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">180</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">205</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">346</td>
+<td style="text-align: right;">346</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">366</td>
+<td style="text-align: right;">393</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">563</td>
+<td style="text-align: right;">563</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">547</td>
+<td style="text-align: right;">556</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S6. Descriptive comparison with the PLACES 2024 release</h2>
+<p>The 2024 release uses BRFSS 2022 and includes Kentucky and Pennsylvania. The comparison is descriptive and is not a validation. The high-poverty rule uses the same ACS 2020-2024 poverty criterion as the primary analysis. Applying it to the 2024 release was added after the primary results (plan amendment 2).</p>
+<p class="tcap" id="table-s6"><strong>Table S6. Overlap of 2025 and 2024 selections among counties in both releases, and Kentucky and Pennsylvania counties selected in the full 2024 frame.</strong> Source: outputs/tables/prior_release_comparison.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s6"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s6">
+<thead>
+<tr>
+<th>Rule</th>
+<th style="text-align: right;">Capacity</th>
+<th style="text-align: right;">2025 set</th>
+<th style="text-align: right;">2024 set (common counties)</th>
+<th style="text-align: right;">Both</th>
+<th style="text-align: right;">Jaccard</th>
+<th style="text-align: right;">Kentucky and Pennsylvania counties in the 2024 full-frame selection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.38</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S7. Within-state results at capacity 5</h2>
+<p class="tcap" id="table-s7"><strong>Table S7. Within-state selections.</strong> States with five or fewer frame counties show all units and are excluded from summaries. High-poverty counties are those with poverty of at least 20% at the point estimate. High-poverty boundary counties can include any county whose ACS 95% upper poverty bound reaches 20%, so the boundary count can exceed the number of high-poverty counties. Source: outputs/tables/within_state_summary.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s7"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s7">
+<thead>
+<tr>
+<th>State</th>
+<th style="text-align: right;">Frame counties</th>
+<th style="text-align: right;">All units shown</th>
+<th style="text-align: right;">Prevalence core</th>
+<th style="text-align: right;">Prevalence boundary</th>
+<th style="text-align: right;">Burden core</th>
+<th style="text-align: right;">Burden boundary</th>
+<th style="text-align: right;">High-poverty counties (point estimate)</th>
+<th style="text-align: right;">High-poverty core</th>
+<th style="text-align: right;">High-poverty boundary</th>
+<th style="text-align: right;">Jaccard prevalence and burden</th>
+<th style="text-align: right;">Jaccard prevalence and high-poverty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AK</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.14</td>
+</tr>
+<tr>
+<td>AL</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>AR</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>AZ</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.60</td>
+</tr>
+<tr>
+<td>CA</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>CO</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+<tr>
+<td>CT</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>DC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">yes</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>DE</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">yes</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>FL</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+<tr>
+<td>GA</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.67</td>
+</tr>
+<tr>
+<td>HI</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">yes</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>IA</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>ID</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>IL</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr>
+<td>IN</td>
+<td style="text-align: right;">92</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>KS</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">94</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>LA</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>MA</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>MD</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>ME</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>MI</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr>
+<td>MN</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>MO</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+<tr>
+<td>MS</td>
+<td style="text-align: right;">82</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>MT</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+<tr>
+<td>NC</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.67</td>
+</tr>
+<tr>
+<td>ND</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.60</td>
+</tr>
+<tr>
+<td>NE</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>NH</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>NJ</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>NM</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+<tr>
+<td>NV</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>NY</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>OH</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>OK</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>OR</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>RI</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">yes</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>SC</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.43</td>
+</tr>
+<tr>
+<td>SD</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>TN</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>TX</td>
+<td style="text-align: right;">253</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td>UT</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>VA</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">37</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr>
+<td>VT</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>WA</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr>
+<td>WI</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+<tr>
+<td>WV</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.83</td>
+</tr>
+<tr>
+<td>WY</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">no</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S8. Selected counties at capacity 25</h2>
+<p class="tcap" id="table-s8a"><strong>Table S8a. Counties selected at capacity 25 under the prevalence rule.</strong> Source: outputs/tables/county_priority_table.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s8a"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s8a">
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>County</th>
+<th>FIPS</th>
+<th style="text-align: right;">Crude prevalence, % (95% interval)</th>
+<th style="text-align: right;">Adults</th>
+<th style="text-align: right;">Poverty, %</th>
+<th style="text-align: right;">Best to worst rank</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Greene County, AL</td>
+<td>01063</td>
+<td style="text-align: right;">27.1 (23.9 to 30.2)</td>
+<td style="text-align: right;">5,755</td>
+<td style="text-align: right;">40.1</td>
+<td style="text-align: right;">1 to 39</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Sharkey County, MS</td>
+<td>28125</td>
+<td style="text-align: right;">25.2 (23.0 to 27.4)</td>
+<td style="text-align: right;">2,528</td>
+<td style="text-align: right;">30.9</td>
+<td style="text-align: right;">1 to 65</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Tensas Parish, LA</td>
+<td>22107</td>
+<td style="text-align: right;">25.1 (22.2 to 28.2)</td>
+<td style="text-align: right;">2,991</td>
+<td style="text-align: right;">34.4</td>
+<td style="text-align: right;">1 to 93</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Randolph County, GA</td>
+<td>13243</td>
+<td style="text-align: right;">24.9 (21.9 to 27.8)</td>
+<td style="text-align: right;">4,809</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">1 to 107</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Humphreys County, MS</td>
+<td>28053</td>
+<td style="text-align: right;">24.7 (21.7 to 27.8)</td>
+<td style="text-align: right;">5,419</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">1 to 115</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Bullock County, AL</td>
+<td>01011</td>
+<td style="text-align: right;">24.6 (21.9 to 27.6)</td>
+<td style="text-align: right;">7,878</td>
+<td style="text-align: right;">33.3</td>
+<td style="text-align: right;">1 to 107</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Perry County, AL</td>
+<td>01105</td>
+<td style="text-align: right;">24.6 (21.8 to 27.5)</td>
+<td style="text-align: right;">6,081</td>
+<td style="text-align: right;">31.4</td>
+<td style="text-align: right;">1 to 112</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>Lowndes County, AL</td>
+<td>01085</td>
+<td style="text-align: right;">24.1 (21.1 to 26.8)</td>
+<td style="text-align: right;">7,570</td>
+<td style="text-align: right;">29.9</td>
+<td style="text-align: right;">1 to 153</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Wilcox County, AL</td>
+<td>01131</td>
+<td style="text-align: right;">23.8 (20.9 to 26.7)</td>
+<td style="text-align: right;">7,755</td>
+<td style="text-align: right;">28.2</td>
+<td style="text-align: right;">1 to 171</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Quitman County, GA</td>
+<td>13239</td>
+<td style="text-align: right;">23.6 (20.7 to 26.7)</td>
+<td style="text-align: right;">1,849</td>
+<td style="text-align: right;">15.7</td>
+<td style="text-align: right;">1 to 188</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Jefferson County, MS</td>
+<td>28063</td>
+<td style="text-align: right;">23.6 (20.5 to 26.7)</td>
+<td style="text-align: right;">5,423</td>
+<td style="text-align: right;">32.5</td>
+<td style="text-align: right;">1 to 207</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Dimmit County, TX</td>
+<td>48127</td>
+<td style="text-align: right;">23.4 (20.7 to 26.2)</td>
+<td style="text-align: right;">5,890</td>
+<td style="text-align: right;">41.1</td>
+<td style="text-align: right;">1 to 188</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>Holmes County, MS</td>
+<td>28051</td>
+<td style="text-align: right;">23.3 (20.3 to 26.1)</td>
+<td style="text-align: right;">11,936</td>
+<td style="text-align: right;">36.4</td>
+<td style="text-align: right;">1 to 223</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Baker County, GA</td>
+<td>13007</td>
+<td style="text-align: right;">22.9 (20.0 to 25.8)</td>
+<td style="text-align: right;">2,242</td>
+<td style="text-align: right;">26.3</td>
+<td style="text-align: right;">1 to 259</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>Hancock County, GA</td>
+<td>13141</td>
+<td style="text-align: right;">22.8 (19.9 to 25.5)</td>
+<td style="text-align: right;">7,419</td>
+<td style="text-align: right;">30.6</td>
+<td style="text-align: right;">1 to 270</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>Claiborne Parish, LA</td>
+<td>22027</td>
+<td style="text-align: right;">22.8 (20.2 to 26.0)</td>
+<td style="text-align: right;">11,034</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">1 to 233</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>Quitman County, MS</td>
+<td>28119</td>
+<td style="text-align: right;">22.8 (19.9 to 25.7)</td>
+<td style="text-align: right;">4,262</td>
+<td style="text-align: right;">29.6</td>
+<td style="text-align: right;">1 to 270</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>Jim Hogg County, TX</td>
+<td>48247</td>
+<td style="text-align: right;">22.8 (20.9 to 24.9)</td>
+<td style="text-align: right;">3,365</td>
+<td style="text-align: right;">31.4</td>
+<td style="text-align: right;">1 to 171</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>Madison Parish, LA</td>
+<td>22065</td>
+<td style="text-align: right;">22.6 (20.0 to 25.5)</td>
+<td style="text-align: right;">6,887</td>
+<td style="text-align: right;">34.5</td>
+<td style="text-align: right;">1 to 259</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>Zavala County, TX</td>
+<td>48507</td>
+<td style="text-align: right;">22.6 (20.8 to 24.3)</td>
+<td style="text-align: right;">6,563</td>
+<td style="text-align: right;">33.9</td>
+<td style="text-align: right;">1 to 180</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>Dallas County, AL</td>
+<td>01047</td>
+<td style="text-align: right;">22.4 (19.7 to 25.3)</td>
+<td style="text-align: right;">27,736</td>
+<td style="text-align: right;">31.0</td>
+<td style="text-align: right;">1 to 284</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Presidio County, TX</td>
+<td>48377</td>
+<td style="text-align: right;">22.2 (19.4 to 24.9)</td>
+<td style="text-align: right;">4,219</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">1 to 334</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Conecuh County, AL</td>
+<td>01035</td>
+<td style="text-align: right;">22.1 (19.4 to 25.0)</td>
+<td style="text-align: right;">8,894</td>
+<td style="text-align: right;">27.8</td>
+<td style="text-align: right;">1 to 334</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Talbot County, GA</td>
+<td>13263</td>
+<td style="text-align: right;">22.1 (19.4 to 25.1)</td>
+<td style="text-align: right;">4,784</td>
+<td style="text-align: right;">25.2</td>
+<td style="text-align: right;">1 to 334</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Kalawao County, HI</td>
+<td>15005</td>
+<td style="text-align: right;">22.1 (19.0 to 25.5)</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">1 to 395</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Bienville Parish, LA</td>
+<td>22013</td>
+<td style="text-align: right;">22.1 (19.5 to 24.9)</td>
+<td style="text-align: right;">9,519</td>
+<td style="text-align: right;">29.2</td>
+<td style="text-align: right;">1 to 316</td>
+<td>boundary</td>
+</tr>
+</tbody>
+</table></div></div>
+<p class="tcap" id="table-s8b"><strong>Table S8b. Counties selected at capacity 25 under the estimated burden rule.</strong> Source: outputs/tables/county_priority_table.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s8b"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s8b">
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>County</th>
+<th>FIPS</th>
+<th style="text-align: right;">Estimated adults with diagnosed diabetes (scenario bounds)</th>
+<th style="text-align: right;">Adults</th>
+<th style="text-align: right;">Poverty, %</th>
+<th style="text-align: right;">Best to worst rank</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Los Angeles County, CA</td>
+<td>06037</td>
+<td style="text-align: right;">971,532 (871,295 to 1,082,744)</td>
+<td style="text-align: right;">7,710,575</td>
+<td style="text-align: right;">13.7</td>
+<td style="text-align: right;">1 to 1</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Cook County, IL</td>
+<td>17031</td>
+<td style="text-align: right;">475,726 (423,316 to 535,776)</td>
+<td style="text-align: right;">4,031,580</td>
+<td style="text-align: right;">13.5</td>
+<td style="text-align: right;">2 to 3</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Harris County, TX</td>
+<td>48201</td>
+<td style="text-align: right;">474,661 (415,887 to 539,387)</td>
+<td style="text-align: right;">3,595,915</td>
+<td style="text-align: right;">16.3</td>
+<td style="text-align: right;">2 to 4</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Maricopa County, AZ</td>
+<td>04013</td>
+<td style="text-align: right;">378,672 (332,336 to 421,540)</td>
+<td style="text-align: right;">3,572,375</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">3 to 5</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Miami-Dade County, FL</td>
+<td>12086</td>
+<td style="text-align: right;">331,758 (288,672 to 383,310)</td>
+<td style="text-align: right;">2,154,272</td>
+<td style="text-align: right;">14.7</td>
+<td style="text-align: right;">4 to 8</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Orange County, CA</td>
+<td>06059</td>
+<td style="text-align: right;">286,336 (248,988 to 327,590)</td>
+<td style="text-align: right;">2,489,875</td>
+<td style="text-align: right;">9.5</td>
+<td style="text-align: right;">5 to 12</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>Queens County, NY</td>
+<td>36081</td>
+<td style="text-align: right;">260,476 (231,331 to 297,231)</td>
+<td style="text-align: right;">1,821,507</td>
+<td style="text-align: right;">12.9</td>
+<td style="text-align: right;">5 to 14</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>San Diego County, CA</td>
+<td>06073</td>
+<td style="text-align: right;">259,485 (230,941 to 293,965)</td>
+<td style="text-align: right;">2,594,848</td>
+<td style="text-align: right;">10.3</td>
+<td style="text-align: right;">5 to 14</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Dallas County, TX</td>
+<td>48113</td>
+<td style="text-align: right;">245,090 (213,718 to 274,772)</td>
+<td style="text-align: right;">1,960,720</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">6 to 17</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Kings County, NY</td>
+<td>36047</td>
+<td style="text-align: right;">240,472 (210,413 to 274,313)</td>
+<td style="text-align: right;">2,003,937</td>
+<td style="text-align: right;">19.1</td>
+<td style="text-align: right;">6 to 17</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>Riverside County, CA</td>
+<td>06065</td>
+<td style="text-align: right;">235,498 (205,054 to 265,885)</td>
+<td style="text-align: right;">1,899,181</td>
+<td style="text-align: right;">10.6</td>
+<td style="text-align: right;">6 to 17</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Clark County, NV</td>
+<td>32003</td>
+<td style="text-align: right;">226,258 (193,919 to 257,277)</td>
+<td style="text-align: right;">1,824,661</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">6 to 17</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>Bexar County, TX</td>
+<td>48029</td>
+<td style="text-align: right;">219,209 (189,990 to 246,018)</td>
+<td style="text-align: right;">1,577,040</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">7 to 19</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Broward County, FL</td>
+<td>12011</td>
+<td style="text-align: right;">210,504 (182,437 to 242,855)</td>
+<td style="text-align: right;">1,559,291</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: right;">7 to 19</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>San Bernardino County, CA</td>
+<td>06071</td>
+<td style="text-align: right;">198,658 (173,493 to 224,927)</td>
+<td style="text-align: right;">1,641,803</td>
+<td style="text-align: right;">13.3</td>
+<td style="text-align: right;">9 to 20</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td>Wayne County, MI</td>
+<td>26163</td>
+<td style="text-align: right;">191,576 (170,141 to 215,225)</td>
+<td style="text-align: right;">1,339,690</td>
+<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">9 to 20</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">17</td>
+<td>Tarrant County, TX</td>
+<td>48439</td>
+<td style="text-align: right;">191,336 (164,972 to 217,502)</td>
+<td style="text-align: right;">1,635,353</td>
+<td style="text-align: right;">11.1</td>
+<td style="text-align: right;">9 to 22</td>
+<td>core</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>Palm Beach County, FL</td>
+<td>12099</td>
+<td style="text-align: right;">170,944 (148,117 to 193,404)</td>
+<td style="text-align: right;">1,247,769</td>
+<td style="text-align: right;">11.3</td>
+<td style="text-align: right;">13 to 26</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>Bronx County, NY</td>
+<td>36005</td>
+<td style="text-align: right;">166,104 (148,565 to 191,398)</td>
+<td style="text-align: right;">1,031,703</td>
+<td style="text-align: right;">27.8</td>
+<td style="text-align: right;">13 to 26</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td>Santa Clara County, CA</td>
+<td>06085</td>
+<td style="text-align: right;">157,838 (138,296 to 179,925)</td>
+<td style="text-align: right;">1,503,217</td>
+<td style="text-align: right;">7.1</td>
+<td style="text-align: right;">15 to 27</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>Hillsborough County, FL</td>
+<td>12057</td>
+<td style="text-align: right;">150,751 (128,904 to 170,047)</td>
+<td style="text-align: right;">1,206,004</td>
+<td style="text-align: right;">12.7</td>
+<td style="text-align: right;">17 to 29</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Alameda County, CA</td>
+<td>06001</td>
+<td style="text-align: right;">143,688 (125,400 to 165,400)</td>
+<td style="text-align: right;">1,306,255</td>
+<td style="text-align: right;">9.2</td>
+<td style="text-align: right;">17 to 32</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td>Sacramento County, CA</td>
+<td>06067</td>
+<td style="text-align: right;">137,372 (118,974 to 157,374)</td>
+<td style="text-align: right;">1,226,535</td>
+<td style="text-align: right;">12.5</td>
+<td style="text-align: right;">18 to 35</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td>Orange County, FL</td>
+<td>12095</td>
+<td style="text-align: right;">135,779 (119,201 to 154,347)</td>
+<td style="text-align: right;">1,160,505</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">18 to 35</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td>King County, WA</td>
+<td>53033</td>
+<td style="text-align: right;">134,067 (121,211 to 151,009)</td>
+<td style="text-align: right;">1,836,529</td>
+<td style="text-align: right;">8.6</td>
+<td style="text-align: right;">18 to 35</td>
+<td>boundary</td>
+</tr>
+</tbody>
+</table></div></div>
+<p class="tcap" id="table-s8c"><strong>Table S8c. Counties selected at capacity 25 under the high-poverty prevalence rule.</strong> Source: outputs/tables/county_priority_table.csv.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s8c"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s8c">
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>County</th>
+<th>FIPS</th>
+<th style="text-align: right;">Crude prevalence, % (95% interval)</th>
+<th style="text-align: right;">Adults</th>
+<th style="text-align: right;">Poverty, %</th>
+<th style="text-align: right;">Best to worst rank</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Greene County, AL</td>
+<td>01063</td>
+<td style="text-align: right;">27.1 (23.9 to 30.2)</td>
+<td style="text-align: right;">5,755</td>
+<td style="text-align: right;">40.1</td>
+<td style="text-align: right;">1 to 39</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Sharkey County, MS</td>
+<td>28125</td>
+<td style="text-align: right;">25.2 (23.0 to 27.4)</td>
+<td style="text-align: right;">2,528</td>
+<td style="text-align: right;">30.9</td>
+<td style="text-align: right;">1 to 64</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Tensas Parish, LA</td>
+<td>22107</td>
+<td style="text-align: right;">25.1 (22.2 to 28.2)</td>
+<td style="text-align: right;">2,991</td>
+<td style="text-align: right;">34.4</td>
+<td style="text-align: right;">1 to 91</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Randolph County, GA</td>
+<td>13243</td>
+<td style="text-align: right;">24.9 (21.9 to 27.8)</td>
+<td style="text-align: right;">4,809</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">1 to 104</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Humphreys County, MS</td>
+<td>28053</td>
+<td style="text-align: right;">24.7 (21.7 to 27.8)</td>
+<td style="text-align: right;">5,419</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">1 to 111</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Bullock County, AL</td>
+<td>01011</td>
+<td style="text-align: right;">24.6 (21.9 to 27.6)</td>
+<td style="text-align: right;">7,878</td>
+<td style="text-align: right;">33.3</td>
+<td style="text-align: right;">1 to 104</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Perry County, AL</td>
+<td>01105</td>
+<td style="text-align: right;">24.6 (21.8 to 27.5)</td>
+<td style="text-align: right;">6,081</td>
+<td style="text-align: right;">31.4</td>
+<td style="text-align: right;">1 to 108</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>Lowndes County, AL</td>
+<td>01085</td>
+<td style="text-align: right;">24.1 (21.1 to 26.8)</td>
+<td style="text-align: right;">7,570</td>
+<td style="text-align: right;">29.9</td>
+<td style="text-align: right;">1 to 148</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Wilcox County, AL</td>
+<td>01131</td>
+<td style="text-align: right;">23.8 (20.9 to 26.7)</td>
+<td style="text-align: right;">7,755</td>
+<td style="text-align: right;">28.2</td>
+<td style="text-align: right;">1 to 164</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Jefferson County, MS</td>
+<td>28063</td>
+<td style="text-align: right;">23.6 (20.5 to 26.7)</td>
+<td style="text-align: right;">5,423</td>
+<td style="text-align: right;">32.5</td>
+<td style="text-align: right;">1 to 191</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>Dimmit County, TX</td>
+<td>48127</td>
+<td style="text-align: right;">23.4 (20.7 to 26.2)</td>
+<td style="text-align: right;">5,890</td>
+<td style="text-align: right;">41.1</td>
+<td style="text-align: right;">1 to 177</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Holmes County, MS</td>
+<td>28051</td>
+<td style="text-align: right;">23.3 (20.3 to 26.1)</td>
+<td style="text-align: right;">11,936</td>
+<td style="text-align: right;">36.4</td>
+<td style="text-align: right;">1 to 205</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>Baker County, GA</td>
+<td>13007</td>
+<td style="text-align: right;">22.9 (20.0 to 25.8)</td>
+<td style="text-align: right;">2,242</td>
+<td style="text-align: right;">26.3</td>
+<td style="text-align: right;">1 to 240</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Hancock County, GA</td>
+<td>13141</td>
+<td style="text-align: right;">22.8 (19.9 to 25.5)</td>
+<td style="text-align: right;">7,419</td>
+<td style="text-align: right;">30.6</td>
+<td style="text-align: right;">1 to 251</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Claiborne Parish, LA</td>
+<td>22027</td>
+<td style="text-align: right;">22.8 (20.2 to 26.0)</td>
+<td style="text-align: right;">11,034</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">1 to 215</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Quitman County, MS</td>
+<td>28119</td>
+<td style="text-align: right;">22.8 (19.9 to 25.7)</td>
+<td style="text-align: right;">4,262</td>
+<td style="text-align: right;">29.6</td>
+<td style="text-align: right;">1 to 251</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>Jim Hogg County, TX</td>
+<td>48247</td>
+<td style="text-align: right;">22.8 (20.9 to 24.9)</td>
+<td style="text-align: right;">3,365</td>
+<td style="text-align: right;">31.4</td>
+<td style="text-align: right;">1 to 164</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>Madison Parish, LA</td>
+<td>22065</td>
+<td style="text-align: right;">22.6 (20.0 to 25.5)</td>
+<td style="text-align: right;">6,887</td>
+<td style="text-align: right;">34.5</td>
+<td style="text-align: right;">1 to 240</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>Zavala County, TX</td>
+<td>48507</td>
+<td style="text-align: right;">22.6 (20.8 to 24.3)</td>
+<td style="text-align: right;">6,563</td>
+<td style="text-align: right;">33.9</td>
+<td style="text-align: right;">1 to 171</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td>Dallas County, AL</td>
+<td>01047</td>
+<td style="text-align: right;">22.4 (19.7 to 25.3)</td>
+<td style="text-align: right;">27,736</td>
+<td style="text-align: right;">31.0</td>
+<td style="text-align: right;">1 to 261</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>Presidio County, TX</td>
+<td>48377</td>
+<td style="text-align: right;">22.2 (19.4 to 24.9)</td>
+<td style="text-align: right;">4,219</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">1 to 301</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Conecuh County, AL</td>
+<td>01035</td>
+<td style="text-align: right;">22.1 (19.4 to 25.0)</td>
+<td style="text-align: right;">8,894</td>
+<td style="text-align: right;">27.8</td>
+<td style="text-align: right;">1 to 301</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Talbot County, GA</td>
+<td>13263</td>
+<td style="text-align: right;">22.1 (19.4 to 25.1)</td>
+<td style="text-align: right;">4,784</td>
+<td style="text-align: right;">25.2</td>
+<td style="text-align: right;">1 to 301</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Kalawao County, HI</td>
+<td>15005</td>
+<td style="text-align: right;">22.1 (19.0 to 25.5)</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">1 to 341</td>
+<td>boundary</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td>Bienville Parish, LA</td>
+<td>22013</td>
+<td style="text-align: right;">22.1 (19.5 to 24.9)</td>
+<td style="text-align: right;">9,519</td>
+<td style="text-align: right;">29.2</td>
+<td style="text-align: right;">1 to 287</td>
+<td>boundary</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2>S9. Checks</h2>
+<p>Software checks test the code. Source checks compare derived values with published source values. Report entries are recorded without a pass criterion. None of these is external scientific validation of the model-based estimates, which was not possible with public data.</p>
+<p class="tcap" id="table-s9"><strong>Table S9. Automated checks for the reported run.</strong> Source: outputs/validation/validation_report.json.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-s9"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-s9">
+<thead>
+<tr>
+<th>Kind</th>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>software</td>
+<td>Rerun of the build and analysis stages from cached inputs reproduces the processed and result tables</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (BURDEN, capacity 10): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (BURDEN, capacity 25): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (BURDEN, capacity 50): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (EQUITY, capacity 10): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (EQUITY, capacity 25): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (EQUITY, capacity 50): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (PREV, capacity 10): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (PREV, capacity 25): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Ordering invariants hold (PREV, capacity 50): core within selected within core or boundary, and best &lt;= point &lt;= worst rank</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Analysis frame equals the locations with status in_frame</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>County FIPS codes are five-character strings with leading zeros</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>No territory is in the analysis frame</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Estimated burden equals crude prevalence / 100 x adult population</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Base R reimplementation reproduces burden, bounds, ranks, selections and envelope labels</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>software</td>
+<td>Base R reimplementation reproduces ACS 2020-2024 adult and poverty estimates and replicate standard errors</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>PLACES adult population equals the Census Vintage 2023 adult estimate for every frame county</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2020-2024 B05003 line 8 (2,897 of 2,897 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2020-2024 B05003 line 19 (2,888 of 2,888 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2020-2024 B17001 line 1 (3,212 of 3,222 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2020-2024 B17001 line 2 (3,222 of 3,222 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2019-2023 B05003 line 8 (2,912 of 2,912 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2019-2023 B05003 line 19 (2,903 of 2,903 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2019-2023 B17001 line 1 (3,213 of 3,222 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Replicate standard errors reproduce published margins of error, ACS 2019-2023 B17001 line 2 (3,222 of 3,222 uncontrolled cells within 1, criterion at least 99%)</td>
+<td>passed</td>
+</tr>
+<tr>
+<td>report</td>
+<td>ACS 2020-2024 adult estimate compared with the Vintage 2023 adult estimate (reported, no pass criterion)</td>
+<td>recorded</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Four further checks were run outside the pipeline with the scripts in the source archive (results in outputs/validation/):</p>
+<ul>
+<li>ACS adult counts and poverty numerators and denominators derived from the replicate tables equaled the Census Bureau's table-based summary files for all 3,222 counties in the 2020-2024 and 2019-2023 releases.</li>
+<li>The estimate, 95% limits and adult population of all 2,956 frame counties equaled the live PLACES 2025 release on data.cdc.gov (2026-10-07). Estimated burden recalculated from the live values equaled the table for the 12 randomly sampled counties, and a sort of the live file returned the same top-ranked counties.</li>
+<li>All 35 references passed a scripted check: 21 journal articles against Crossref or PubMed (first author, year, volume, first page and title), the Federal Register notice against the Federal Register record, 4 cdc.gov pages opened in a browser (title, and the displayed update date for the web pages), 1 Census table against the Census Bureau's API metadata (table and title), and the remaining 8 web and dataset addresses by their response.</li>
+<li>A pairwise recomputation, written without the analysis package, reproduced every cell of Tables 2 and 3 and all 26,604 county classifications.</li>
+</ul>
+<h2>S10. Planning brief</h2>
+<p>This brief is for an analyst deciding which counties to examine first for diabetes outreach. The tables rank counties from public estimates. They do not say where to place services, and they contain no information about local programs, staff or community priorities.</p>
+<h3>What the tables contain</h3>
+<p>For 2,956 counties in 48 states and the District of Columbia, the tables show three ways of ranking need, all built from the CDC PLACES 2025 county release (diagnosed diabetes among adults, BRFSS 2023) and Census Bureau population and poverty estimates:</p>
+<ul>
+<li><strong>Prevalence</strong>: the share of adults reporting diagnosed diabetes.</li>
+<li><strong>Estimated burden</strong>: prevalence times the adult population, an estimate of how many adults have diagnosed diabetes.</li>
+<li><strong>High-poverty prevalence</strong>: prevalence ranked only among counties where at least 20% of people are below the poverty level.</li>
+</ul>
+<p>Each county is labeled at capacities of 10, 25 and 50 counties nationally and 5 within its state as <strong>core</strong> (selected wherever every county's value falls within the bounds used for the rule: the published PLACES 95% limits and, for estimated burden, scenario bounds that also span the adult population range), <strong>boundary</strong> (selected under some values within the bounds) or <strong>outside</strong>. For high-poverty prevalence, eligibility also spans the ACS 95% poverty bounds. A county whose upper bound reaches 20% can be boundary, and only a county whose lower bound reaches 20% can be core. These labels describe the published estimates. They are not probabilities.</p>
+<h3>What the results mean for a shortlist</h3>
+<ul>
+<li>The choice of rule decided which counties were listed, and the published uncertainty decided how firm each list is. At 25 counties, the prevalence and burden lists share none of their 51 counties. Choose the rule that matches the program's aim and say so.</li>
+<li>A prevalence top 25 cannot be identified from these estimates. No county is core, and 346 counties could be in the top 25. Treat the boundary set as the pool for further review.</li>
+<li>A burden list is more stable: 17 of 25 counties are core.</li>
+<li>Kentucky and Pennsylvania have no diagnosed-diabetes estimates in this release and are not ranked. Users in those states need another source.</li>
+</ul>
+<h3>Local information needed before acting</h3>
+<p>None of the following is in these tables, and none was collected for this project. Each would need to come from local partners or other sources:</p>
+<ol>
+<li>Existing diabetes self-management education and support programs, National Diabetes Prevention Program sites and lifestyle programs, with their current capacity and waiting lists.</li>
+<li>Primary care, endocrinology, pharmacy and community health worker capacity, including federally qualified health centers and tribal health programs.</li>
+<li>Health insurance coverage and payer support for diabetes education and prevention programs.</li>
+<li>Transportation, broadband and language access that affect who can reach a program.</li>
+<li>More recent local data, such as electronic health record or hospital discharge summaries, that could confirm or contradict the 2023 model-based estimates.</li>
+<li>Community priorities, trusted organizations and existing coalitions, gathered with the communities concerned.</li>
+<li>Current county and state program plans, so that outreach adds to existing work rather than duplicating it.</li>
+</ol>
+<h3>How to read a county row</h3>
+<p>The priority tables and the county CSV name the release, the measure and the population and poverty sources. Each row gives the crude prevalence with its 95% interval, the adult population and estimated burden with scenario bounds, the ACS 2020-2024 poverty estimate with its 95% bounds, and for each rule the point rank, best-case and worst-case rank, and core, boundary or outside label. Very small counties have wide intervals. Kalawao County, Hawaii, with 75 adults, ranks 23 by prevalence but could rank as low as 395.</p>
+</main>
+</body>
+</html>

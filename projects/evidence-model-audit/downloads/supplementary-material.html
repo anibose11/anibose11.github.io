@@ -1,0 +1,1977 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supplement</title><style>body{margin:0;background:#fbfbfa;color:#1d1d1b;font:17px/1.6 Georgia,'Times New Roman',serif}
+main{max-width:760px;margin:0 auto;padding:32px 16px 80px}h1{font-size:1.6rem;line-height:1.3}h2{font-size:1.25rem;margin-top:2em}h3{font-size:1.05rem}
+table{border-collapse:collapse;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:1em 0;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid #d9d8d3;padding:4px 8px;text-align:left;vertical-align:top}td{font-variant-numeric:tabular-nums}
+img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0 3px}a{color:#1f5fae}</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../../index.html">Portfolio</a><div class="portfolio-links"><a href="../index.html">Project</a><a href="../report.html">Full report</a></div></nav>
+<main><h1 id="supplementary-material-supplementary-file-1">Supplementary material (Supplementary File 1)</h1>
+<p>Verbatim evidence quotes and answer correctness: an evaluation of small local language models extracting clinical trial results. Supplementary File 2 is the analysis archive (code, configuration, model responses, item-level scores, and result tables).</p>
+<h2 id="s1-data-reconciliation">S1. Data reconciliation</h2>
+<p>The corpus was used at commit a661e8c14f973398380c8865cf2f27a535aaaf6d of github.com/jayded/evidence-inference and reconciled against the tarball linked from the project site (v2.0.tar.gz, Last-Modified 12 May 2020, SHA-256 6abe0d4e...1586). Prompts and split files were byte-identical. Annotation rows (24,686) matched in order and in user, prompt, article, validity flags, label code, and "In Abstract" values. The tarball writes the label "significantly increase" in 693 rows whose label code is 1. Of its 4,454 text files, 3,525 are identical to the repository texts once line endings are converted; the other 929 use a different rendering without the title line and with plain section headers, and all 4,666 annotation rows whose offsets differ between the releases belong to 915 of those articles. The posted test answers file (2,408 rows) matched the repository's test rows in order and in user, prompt, article, validity flags, label code, and "In Abstract" values; like the tarball, it uses the "significantly increase" spelling and the tarball's offsets. Two links in the project site's JavaScript returned the site's HTML page instead of CSV and were rejected.</p>
+<p>Offsets were tested on a seeded sample of 3,000 training rows. Exclusive ends reproduced the annotation string for 2,759 rows with the repository text and 2,705 rows with the tarball text after newline normalization; inclusive ends reproduced 0 and 0. Location status of accepted evidence spans across all splits: exact 21,473; exact after whitespace normalization 934; exact at the recorded offsets after unescaping HTML entities 685; found at a different position by unique string match 108 (plus 75 after unescaping); missing offsets recovered by string match 25 (plus 1 after unescaping); ambiguous match, nearest used 1; offsets given but string not found 29; missing offsets and string not found 882; article without text 29. Spans in the last three groups are not used as evidence (analysis plan amendment A3).</p>
+<p>The repository's abstracts folder holds 3,285 files, of which 2,334 contain body sections. The abstract condition instead used the title-plus-abstract region of the plain-text rendering, which was delimitable for 319 of the 334 test articles with prompts. For the 818 abstract-only files whose article also had a delimitable region, 745 matched that region exactly after header lines were removed and whitespace collapsed. No article appears in two splits, no two texts are identical, and no pair of articles reached TF-IDF cosine 0.9 over their opening 4,000 characters.</p>
+<p>The 332 test articles with eligible prompts were published between 1993 and 2018 (median 2014; Europe PMC metadata). Test prompts by label status: unanimous accepted label 1,221, accepted labels disagree 3, no accepted annotation 4, no annotation 24. Six test prompts are on the corpus authors' "Incorrect" list; none are on the "Questionable" or "Somewhat malformed" lists. One test article (PMC2206488) has an empty plain-text file in the repository and in the tarball; its 6 eligible prompts were run with an empty retrieved context and then excluded under amendment A2. Fourteen other articles have texts shorter than 500 characters (twelve training, one validation, one test); none has a prompt in the corpus, so none enters any analysis.</p>
+<h2 id="s2-prompt-and-answer-schema">S2. Prompt and answer schema</h2>
+<p>Each request was a single user message containing, in order: a one-sentence task statement ("You are reading passages from a report of a clinical trial and answering one question about it."); the question, built from the template "With respect to {outcome}, characterize the reported difference between patients receiving {intervention} and those receiving {comparator}."; the passages, one per line as "[P<em>n</em>] text"; the label guide; and the format guide.</p>
+<p>Label guide: Label meanings. "significantly increased": the report says the outcome was statistically significantly higher with the intervention than with the comparator. "significantly decreased": statistically significantly lower. "no significant difference": the report says the difference was not statistically significant. "cannot determine": the passages do not report this comparison. Increased and decreased describe the value of the outcome measure, not whether the result is good or bad for patients.</p>
+<p>Format guide: Answer with one JSON object and nothing else, using exactly these keys: {"label": "significantly increased" | "significantly decreased" | "no significant difference" | "cannot determine", "evidence_quote": "&lt;text copied character for character from one passage&gt;", "passage_id": "&lt;the passage ID the quote comes from, for example P2&gt;"} If the label is "cannot determine", use "" for evidence_quote and null for passage_id. Copy the quote exactly; do not paraphrase, shorten words, or join text from different passages.</p>
+<p>Variant v2 (evaluated on development data only) added this invented example before the format guide: Example. Question: With respect to pain score at 24 hours, characterize the reported difference between patients receiving drug A and those receiving placebo. [P1] Pain scores at 24 hours were lower with drug A than with placebo (2.1 versus 3.4, P = 0.01). [P2] Nausea occurred in 12% and 10% of patients, respectively (P = 0.62). Answer: {"label": "significantly decreased", "evidence_quote": "Pain scores at 24 hours were lower with drug A than with placebo (2.1 versus 3.4, P = 0.01).", "passage_id": "P1"}</p>
+<p>The answer schema required exactly three keys: <code>label</code> (one of the three benchmark labels or "cannot determine"), <code>evidence_quote</code> (string), and <code>passage_id</code> (string or null); additional keys were not allowed.</p>
+<h2 id="s3-models-and-inference-settings">S3. Models and inference settings</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Repository</th>
+<th>Pinned revision</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-1.7B</td>
+<td>Qwen/Qwen3-1.7B</td>
+<td><code>70d244cc86ccca08cf5af4e1e306ecf908b1ad5e</code></td>
+<td>primary</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B</td>
+<td>Qwen/Qwen3-0.6B</td>
+<td><code>c1899de289a04d12100db370d81485cdf75e47ca</code></td>
+<td>lower-capacity comparison</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>Qwen/Qwen3-4B-Instruct-2507</td>
+<td><code>cdbee75f17c01a7cc42f958dc650907174af0554</code></td>
+<td>larger extension</td>
+</tr>
+</tbody>
+</table></div>
+<p>All models were loaded from local snapshots at these revisions with Hugging Face Transformers 5.19.0 and PyTorch 2.14.1, in float32, on an Apple M5 Pro (Metal Performance Shaders). Chat templates came from each repository; the two hybrid models received <code>enable_thinking=False</code>. Decoding was greedy with at most 256 new tokens and no repetition penalty. Prompts were not batched. Development parity between the GPU and CPU paths: same label for 40 of 40 prompts, identical responses for 40 of 40.</p>
+<p>Runs on the frozen test sample: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
+<h2 id="s4-baseline-training">S4. Baseline training</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: right;">Training prompts</th>
+<th style="text-align: right;">Validation prompts</th>
+<th style="text-align: right;">C</th>
+<th>Class weight</th>
+<th style="text-align: right;">Validation macro-F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td style="text-align: right;">10,030</td>
+<td style="text-align: right;">1,231</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.550</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td style="text-align: right;">9,701</td>
+<td style="text-align: right;">1,174</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.517</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td style="text-align: right;">9,829</td>
+<td style="text-align: right;">1,201</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.780</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s5-parse-status-by-model-and-context">S5. Parse status by model and context</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th style="text-align: right;">Valid</th>
+<th style="text-align: right;">Schema error</th>
+<th style="text-align: right;">Invalid JSON</th>
+<th style="text-align: right;">No JSON object</th>
+<th style="text-align: right;">Empty</th>
+<th style="text-align: right;">Runtime error</th>
+<th style="text-align: right;">Not run</th>
+<th style="text-align: right;">Stopped at length limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,205</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,179</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td style="text-align: right;">1,206</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,156</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,195</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,187</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s6-per-class-results">S6. Per-class results</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>System</th>
+<th>Benchmark class</th>
+<th style="text-align: right;">Support</th>
+<th style="text-align: right;">Precision</th>
+<th style="text-align: right;">Recall</th>
+<th style="text-align: right;">Quote-valid wrong, by benchmark class</th>
+<th style="text-align: right;">Quote-valid wrong, by predicted class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.488</td>
+<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">19 of 310</td>
+<td style="text-align: right;">309 of 600</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.918</td>
+<td style="text-align: right;">0.219</td>
+<td style="text-align: right;">295 of 385</td>
+<td style="text-align: right;">6 of 96</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.536</td>
+<td style="text-align: right;">0.557</td>
+<td style="text-align: right;">109 of 233</td>
+<td style="text-align: right;">108 of 232</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.485</td>
+<td style="text-align: right;">0.742</td>
+<td style="text-align: right;">59 of 259</td>
+<td style="text-align: right;">218 of 418</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.674</td>
+<td style="text-align: right;">0.659</td>
+<td style="text-align: right;">107 of 326</td>
+<td style="text-align: right;">101 of 320</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.640</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">165 of 188</td>
+<td style="text-align: right;">12 of 35</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.809</td>
+<td style="text-align: right;">0.740</td>
+<td style="text-align: right;">89 of 358</td>
+<td style="text-align: right;">64 of 333</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.910</td>
+<td style="text-align: right;">0.716</td>
+<td style="text-align: right;">92 of 426</td>
+<td style="text-align: right;">33 of 367</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.655</td>
+<td style="text-align: right;">0.869</td>
+<td style="text-align: right;">32 of 255</td>
+<td style="text-align: right;">116 of 339</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.574</td>
+<td style="text-align: right;">0.541</td>
+<td style="text-align: right;">187 of 407</td>
+<td style="text-align: right;">163 of 383</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.620</td>
+<td style="text-align: right;">0.628</td>
+<td style="text-align: right;">190 of 511</td>
+<td style="text-align: right;">197 of 518</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">137 of 291</td>
+<td style="text-align: right;">154 of 308</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">407 of 407</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.423</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 511</td>
+<td style="text-align: right;">698 of 1209</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">291 of 291</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.478</td>
+<td style="text-align: right;">0.843</td>
+<td style="text-align: right;">52 of 348</td>
+<td style="text-align: right;">328 of 624</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.828</td>
+<td style="text-align: right;">0.205</td>
+<td style="text-align: right;">343 of 437</td>
+<td style="text-align: right;">19 of 113</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.466</td>
+<td style="text-align: right;">0.545</td>
+<td style="text-align: right;">109 of 241</td>
+<td style="text-align: right;">157 of 289</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.463</td>
+<td style="text-align: right;">0.558</td>
+<td style="text-align: right;">66 of 241</td>
+<td style="text-align: right;">212 of 387</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.562</td>
+<td style="text-align: right;">0.478</td>
+<td style="text-align: right;">119 of 297</td>
+<td style="text-align: right;">115 of 293</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.481</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">167 of 187</td>
+<td style="text-align: right;">25 of 45</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">0.508</td>
+<td style="text-align: right;">194 of 394</td>
+<td style="text-align: right;">179 of 379</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.584</td>
+<td style="text-align: right;">0.563</td>
+<td style="text-align: right;">214 of 491</td>
+<td style="text-align: right;">197 of 474</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.457</td>
+<td style="text-align: right;">0.513</td>
+<td style="text-align: right;">135 of 276</td>
+<td style="text-align: right;">167 of 308</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">394 of 394</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.422</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 491</td>
+<td style="text-align: right;">670 of 1161</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">276 of 276</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.617</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">22 of 332</td>
+<td style="text-align: right;">200 of 510</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.992</td>
+<td style="text-align: right;">0.518</td>
+<td style="text-align: right;">170 of 404</td>
+<td style="text-align: right;">1 of 235</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.646</td>
+<td style="text-align: right;">0.610</td>
+<td style="text-align: right;">94 of 244</td>
+<td style="text-align: right;">85 of 235</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.680</td>
+<td style="text-align: right;">0.579</td>
+<td style="text-align: right;">16 of 195</td>
+<td style="text-align: right;">86 of 265</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.600</td>
+<td style="text-align: right;">0.474</td>
+<td style="text-align: right;">14 of 79</td>
+<td style="text-align: right;">26 of 91</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.812</td>
+<td style="text-align: right;">0.193</td>
+<td style="text-align: right;">90 of 132</td>
+<td style="text-align: right;">8 of 50</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.706</td>
+<td style="text-align: right;">0.733</td>
+<td style="text-align: right;">108 of 404</td>
+<td style="text-align: right;">123 of 419</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.876</td>
+<td style="text-align: right;">0.805</td>
+<td style="text-align: right;">99 of 508</td>
+<td style="text-align: right;">58 of 467</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.649</td>
+<td style="text-align: right;">0.707</td>
+<td style="text-align: right;">85 of 290</td>
+<td style="text-align: right;">111 of 316</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">404 of 404</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.423</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 508</td>
+<td style="text-align: right;">694 of 1202</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">290 of 290</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s7-sensitivity-analyses">S7. Sensitivity analyses</h2>
+<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately as "quote exists (strict, any length)".</p>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th>Analysis</th>
+<th style="text-align: right;">Wrong of quote-valid</th>
+<th style="text-align: right;">Rate (95% CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">422 of 926</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">423 of 931</td>
+<td style="text-align: right;">45.4%, 95% CI 41.6% to 49.1%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">288 of 698</td>
+<td style="text-align: right;">41.3%, 95% CI 37.1% to 45.4%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">331 of 776</td>
+<td style="text-align: right;">42.7%, 95% CI 38.4% to 47.1%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">341 of 793</td>
+<td style="text-align: right;">43.0%, 95% CI 38.7% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">244 of 584</td>
+<td style="text-align: right;">41.8%, 95% CI 36.9% to 46.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">213 of 1,038</td>
+<td style="text-align: right;">20.5%, 95% CI 17.5% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">213 of 1,042</td>
+<td style="text-align: right;">20.4%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">142 of 808</td>
+<td style="text-align: right;">17.6%, 95% CI 14.5% to 20.9%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">504 of 1,029</td>
+<td style="text-align: right;">49.0%, 95% CI 45.0% to 53.0%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">352 of 727</td>
+<td style="text-align: right;">48.4%, 95% CI 43.7% to 53.1%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">361 of 740</td>
+<td style="text-align: right;">48.8%, 95% CI 44.1% to 53.4%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">286 of 983</td>
+<td style="text-align: right;">29.1%, 95% CI 25.6% to 32.7%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">289 of 991</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.8%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">120 of 409</td>
+<td style="text-align: right;">29.3%, 95% CI 24.9% to 34.0%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">123 of 412</td>
+<td style="text-align: right;">29.9%, 95% CI 25.4% to 34.5%</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s8-paired-comparisons">S8. Paired comparisons</h2>
+<p>Differences are on the prompts both systems had, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>System A</th>
+<th>System B</th>
+<th>Quantity</th>
+<th style="text-align: right;">Shared prompts</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">A minus B, points (95% CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">21.5%</td>
+<td style="text-align: right;">+17.6 (+13.8 to +21.5)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;">-1.7 (-6.1 to +2.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">37.6%</td>
+<td style="text-align: right;">+34.5 (+30.1 to +39.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">57.5%</td>
+<td style="text-align: right;">-18.4 (-22.7 to -14.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">57.5%</td>
+<td style="text-align: right;">-3.6 (-8.1 to +0.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">-28.0 (-30.9 to -25.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">14.9%</td>
+<td style="text-align: right;">+28.4 (+24.1 to +32.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;">+8.9 (+4.0 to +13.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">+54.8 (+49.3 to +60.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">53.0%</td>
+<td style="text-align: right;">-9.7 (-14.6 to -4.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">53.2%</td>
+<td style="text-align: right;">-2.9 (-7.7 to +1.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">99.7%</td>
+<td style="text-align: right;">-14.1 (-17.0 to -11.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">23.0%</td>
+<td style="text-align: right;">+34.6 (+30.9 to +38.2)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">44.2%</td>
+<td style="text-align: right;">+23.7 (+19.6 to +27.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">32.7%</td>
+<td style="text-align: right;">+48.7 (+45.0 to +52.2)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">75.7%</td>
+<td style="text-align: right;">-18.1 (-22.0 to -14.4)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">75.7%</td>
+<td style="text-align: right;">-7.8 (-11.4 to -4.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">-18.6 (-21.2 to -16.2)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">67.7%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">+28.5 (+24.6 to +32.4)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">76.1%</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">+22.2 (+18.5 to +26.0)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">85.1%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">+13.1 (+9.5 to +16.5)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">39.2%</td>
+<td style="text-align: right;">+4.1 (+0.4 to +7.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">54.1%</td>
+<td style="text-align: right;">-3.8 (-6.9 to -0.6)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">71.8%</td>
+<td style="text-align: right;">+13.7 (+9.5 to +17.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">+18.5 (+14.6 to +22.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">+14.0 (+10.4 to +17.4)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">+9.3 (+5.9 to +12.8)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">14.9%</td>
+<td style="text-align: right;">21.6%</td>
+<td style="text-align: right;">-6.7 (-10.4 to -2.9)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;">56.1%</td>
+<td style="text-align: right;">-14.7 (-18.7 to -10.7)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">37.1%</td>
+<td style="text-align: right;">-6.4 (-12.0 to -0.6)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">23.0%</td>
+<td style="text-align: right;">21.4%</td>
+<td style="text-align: right;">+1.6 (-1.9 to +5.1)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">44.2%</td>
+<td style="text-align: right;">55.4%</td>
+<td style="text-align: right;">-11.2 (-15.2 to -7.3)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">32.7%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">-4.8 (-9.5 to -0.2)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s9-evidence-available-in-the-supplied-passages">S9. Evidence available in the supplied passages</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: right;">Prompts with located evidence</th>
+<th style="text-align: right;">Passages overlap evidence (95% CI)</th>
+<th style="text-align: right;">Passages contain a full span (95% CI)</th>
+<th style="text-align: right;">Median context tokens</th>
+<th style="text-align: right;">Truncated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">76.2%, 95% CI 72.4% to 79.9%</td>
+<td style="text-align: right;">70.0%, 95% CI 66.2% to 73.7%</td>
+<td style="text-align: right;">1021</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td style="text-align: right;">1,158</td>
+<td style="text-align: right;">50.2%, 95% CI 45.8% to 54.5%</td>
+<td style="text-align: right;">50.1%, 95% CI 45.7% to 54.4%</td>
+<td style="text-align: right;">429</td>
+<td style="text-align: right;">2.1%</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s10-automated-error-categories-for-quote-valid-wrong-answers">S10. Automated error categories for quote-valid wrong answers</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th>Error type</th>
+<th>Quote relation to benchmark evidence</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">105</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">84</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">288</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">88</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">170</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">115</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">218</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">76</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s11-reproducibility-and-software-checks">S11. Reproducibility and software checks</h2>
+<ul>
+<li>Software tests: synthetic fixtures for parsing, quote location across line breaks, locators, the label contract, offsets, chunking, abstract delimiting, the bootstrap, macro-F1, and the rejection arithmetic.</li>
+<li>Deterministic rerun: data, contexts, scores, and analysis rebuilt from cached inputs; 4,809 reported numbers compared with the stored results at a relative tolerance of 1e-9.</li>
+<li>Separate recount: the headline numerators and denominators and task success counts recomputed from the item-level files in base R.</li>
+<li>Model rerun: a sample of test calls regenerated with the frozen configuration on the same device; 40 of 40 responses were identical and 40 of 40 had the same label.</li>
+<li>Clean installation: the analysis archive (Supplementary File 2) was extracted into an empty directory and installed into a new virtual environment from requirements.lock.txt; all 34 tests passed and the cached demonstration reproduced the saved outputs for the bundled examples.</li>
+<li>Author check against source articles: 20 quote-valid wrong answers from Qwen3-1.7B with retrieved passages, drawn with seed 20261007 (prompt IDs 572, 770, 1461, 2826, 3950, 4353, 4458, 5216, 5362, 7727, 7931, 9354, 11214, 11896, 12175, 12355, 13005, 13492, 13837, 13876), were compared with the articles in PubMed Central, and the label codes of five of them were checked against the raw annotation file.</li>
+<li>Claims: every headline number in evidence/claims.json is mapped to its file, key, numerator, denominator, scope, configuration, source hashes, and run identifier, and re-read from the results file.</li>
+</ul>
+<p>These checks test the software and its consistency. They are not external scientific validation.</p>
+<h2 id="s12-tripod-llm-checklist">S12. TRIPOD-LLM checklist</h2>
+<p>Items are paraphrased from the TRIPOD-LLM reporting guideline (Gallifant et al., Nature Medicine 2025;31:60-69, doi:10.1038/s41591-024-03425-5), main checklist (Table 2) and abstract checklist (Table 3). This study is an LLM evaluation without patient data.</p>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Section</th>
+<th>What is reported (paraphrased)</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Title</td>
+<td>Title should state whether the LLM is developed, fine-tuned or evaluated, plus the task, target population and outcome.</td>
+<td>Title</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Abstract</td>
+<td>Abstract should follow the separate TRIPOD-LLM for Abstracts checklist (items 2a-2l).</td>
+<td>Abstract (structured; see items 2a to 2l)</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>Introduction</td>
+<td>Explain the healthcare use case and why the LLM is developed or evaluated, citing existing approaches and models.</td>
+<td>Background and Significance, paragraphs 1 to 2</td>
+</tr>
+<tr>
+<td>3b</td>
+<td>Introduction</td>
+<td>Describe the target population, the LLM's intended use within the care pathway, and its intended users.</td>
+<td>Background and Significance, paragraphs 1 and 5 (evidence reviewers; local deployment); not a care-pathway tool</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Introduction</td>
+<td>State study objectives, including whether it covers initial development, fine-tuning, validation, or several stages.</td>
+<td>Objective</td>
+</tr>
+<tr>
+<td>5a</td>
+<td>Methods</td>
+<td>Give data sources separately for training, tuning and evaluation, with the rationale for choosing them.</td>
+<td>Methods, Data and labels; Context conditions; Models and inference; Baselines (training split for BM25 statistics and baselines; validation for development decisions; test for evaluation)</td>
+</tr>
+<tr>
+<td>5b</td>
+<td>Methods</td>
+<td>Describe the data points and characterize dataset distribution and descriptors (e.g., source, language, country) quantitatively and qualitatively.</td>
+<td>Methods, Data and labels; Results, Output validity; Supplementary S1</td>
+</tr>
+<tr>
+<td>5c</td>
+<td>Methods</td>
+<td>State the earliest and latest dates of text in development data and in evaluation datasets.</td>
+<td>Supplementary S1: test articles published 1993 to 2018; model training cutoffs are not stated on the model cards</td>
+</tr>
+<tr>
+<td>5d</td>
+<td>Methods</td>
+<td>Describe preprocessing and quality checks, and whether they were consistent across corpora, sites and sociodemographic groups.</td>
+<td>Methods, Data and labels; Supplementary S1 (offset convention, abstract delimiting, reconciliation)</td>
+</tr>
+<tr>
+<td>5e</td>
+<td>Methods</td>
+<td>Explain how missing and imbalanced data were handled and justify any data exclusions.</td>
+<td>Methods, Data and labels (eligibility, disagreement, unlocatable spans); Supplementary S1</td>
+</tr>
+<tr>
+<td>6a</td>
+<td>Methods</td>
+<td>Report the LLM's name, version and last training date.</td>
+<td>Methods, Models and inference; Supplementary S3 (revisions; training cutoff not stated by the developer)</td>
+</tr>
+<tr>
+<td>6b</td>
+<td>Methods</td>
+<td>Describe how the LLM was built: architecture, training, fine-tuning, alignment approach and alignment goals.</td>
+<td>Not applicable (evaluation of existing models; no training or fine-tuning)</td>
+</tr>
+<tr>
+<td>6c</td>
+<td>Methods</td>
+<td>Describe how text was generated: prompt engineering, output consistency, and inference settings such as seed and temperature.</td>
+<td>Methods, Models and inference; Supplementary S2 and S3 (prompt, greedy decoding, output limit)</td>
+</tr>
+<tr>
+<td>6d</td>
+<td>Methods</td>
+<td>Specify the raw and post-processed LLM outputs (e.g., probabilities, labels, free text).</td>
+<td>Methods, Separated validity checks (raw JSON responses and parsed fields; raw responses released)</td>
+</tr>
+<tr>
+<td>6e</td>
+<td>Methods</td>
+<td>Justify any classification approach and explain how probabilities and decision thresholds were derived.</td>
+<td>Methods, Baselines (logistic regression, settings chosen on validation macro-F1); no thresholds on model outputs</td>
+</tr>
+<tr>
+<td>7a</td>
+<td>Methods</td>
+<td>Report metrics of generative output quality (consistency, relevance, accuracy, error types) against gold standards.</td>
+<td>Methods, Separated validity checks; Results; Table 1</td>
+</tr>
+<tr>
+<td>7b</td>
+<td>Methods</td>
+<td>Explain how outcome metrics relate to the downstream deployment task and, where possible, to human judgments.</td>
+<td>Discussion, paragraphs 6 and 7</td>
+</tr>
+<tr>
+<td>7c</td>
+<td>Methods</td>
+<td>Define the outcome, how predictions were computed, inference date for closed-source models, and evaluation metrics.</td>
+<td>Methods, Estimand and statistical analysis</td>
+</tr>
+<tr>
+<td>7d</td>
+<td>Methods</td>
+<td>For subjective outcome assessment, describe assessor qualifications, instructions, demographics and inter-assessor agreement.</td>
+<td>Not applicable (no subjective assessment; labels from the published benchmark)</td>
+</tr>
+<tr>
+<td>7e</td>
+<td>Methods</td>
+<td>Describe how performance was benchmarked against other LLMs, humans, or other standards.</td>
+<td>Methods, Baselines; Results, Contexts, models, and baselines; Table 1</td>
+</tr>
+<tr>
+<td>8a</td>
+<td>Methods</td>
+<td>If annotation occurred, explain the labeling process and share annotation guidelines with examples.</td>
+<td>Not applicable (no new annotation); benchmark annotation process summarized in Methods, Data and labels</td>
+</tr>
+<tr>
+<td>8b</td>
+<td>Methods</td>
+<td>If annotation occurred, report annotator count, share of data multiply annotated, and inter-annotator agreement.</td>
+<td>Not applicable (no new annotation); label contract and disagreement handling in Methods, Data and labels</td>
+</tr>
+<tr>
+<td>8c</td>
+<td>Methods</td>
+<td>If annotation occurred, describe annotators' background and experience, or characteristics of any labeling models.</td>
+<td>Not applicable (no new annotation)</td>
+</tr>
+<tr>
+<td>9a</td>
+<td>Methods</td>
+<td>If prompting was used, describe how prompts were designed, curated and selected.</td>
+<td>Methods, Models and inference (two variants written in advance; selected on development data by a fixed rule)</td>
+</tr>
+<tr>
+<td>9b</td>
+<td>Methods</td>
+<td>If prompting was used, state which data informed prompt development.</td>
+<td>Methods, Models and inference (100 validation articles; no test data)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Methods</td>
+<td>Describe any data preprocessing performed before summarization.</td>
+<td>Not applicable (no summarization)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Methods</td>
+<td>If instruction tuning/alignment was used, report instructions, data, evaluation interface and evaluator population characteristics.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Methods</td>
+<td>Report compute resources or proxies (hardware, time, cost, inference time, FLOPs) needed for the methods.</td>
+<td>Results, Output validity; Supplementary S3 (Apple M5 Pro GPU, float32, run times)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Methods</td>
+<td>Name the approving ethics board and describe participant consent or the consent waiver.</td>
+<td>Ethics statement (no human participants or individual-level data)</td>
+</tr>
+<tr>
+<td>14a</td>
+<td>Methods</td>
+<td>State funding sources and the funders' role in the study.</td>
+<td>Funding statement</td>
+</tr>
+<tr>
+<td>14b</td>
+<td>Methods</td>
+<td>Declare all authors' conflicts of interest and financial disclosures.</td>
+<td>Conflict of interest statement</td>
+</tr>
+<tr>
+<td>14c</td>
+<td>Methods</td>
+<td>Say where the study protocol is available, or that none was prepared.</td>
+<td>Internal timestamped analysis plan released in the project archive (docs/analysis_plan.md); not a registered protocol</td>
+</tr>
+<tr>
+<td>14d</td>
+<td>Methods</td>
+<td>Give registry name and registration number, or state the study was not registered.</td>
+<td>Not registered</td>
+</tr>
+<tr>
+<td>14e</td>
+<td>Methods</td>
+<td>Describe availability of the study data.</td>
+<td>Data availability statement</td>
+</tr>
+<tr>
+<td>14f</td>
+<td>Methods</td>
+<td>Describe availability of code needed to reproduce the results.</td>
+<td>Data availability statement (code, configuration, responses, scores)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Methods</td>
+<td>Describe patient/public involvement across study stages, or state there was none.</td>
+<td>Not applicable (no patient or public involvement)</td>
+</tr>
+<tr>
+<td>16a</td>
+<td>Results</td>
+<td>With patient/EHR data, describe data flow through the study, including counts with/without outcome and follow-up.</td>
+<td>Not applicable (no patient or EHR data); prompt flow in Results and Supplementary S1</td>
+</tr>
+<tr>
+<td>16b</td>
+<td>Results</td>
+<td>With patient/EHR data, report characteristics overall, per source/setting and per split, including dates and sample size.</td>
+<td>Not applicable (no patient or EHR data); test split size in Results (Output validity and evidence availability) and Supplementary S1; training and validation prompt counts in Supplementary S4</td>
+</tr>
+<tr>
+<td>16c</td>
+<td>Results</td>
+<td>For evaluations with clinical outcomes, compare distributions of outcome-related clinical variables between development and evaluation data.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>16d</td>
+<td>Results</td>
+<td>With patient/EHR data, give participant and outcome-event counts for each analysis.</td>
+<td>Not applicable (no patient or EHR data)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Results</td>
+<td>Report performance on prespecified metrics (item 7a) and/or human evaluation (item 7d).</td>
+<td>Results; Tables 1 and 2; Figures 1 to 4; Supplementary S5 to S10</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Results</td>
+<td>If the LLM was updated, report the updated model and its subsequent performance.</td>
+<td>Not applicable (models not updated)</td>
+</tr>
+<tr>
+<td>19a</td>
+<td>Discussion</td>
+<td>Interpret the main results overall, including fairness, relative to objectives and prior studies.</td>
+<td>Discussion, paragraphs 1 to 3</td>
+</tr>
+<tr>
+<td>19b</td>
+<td>Discussion</td>
+<td>Discuss limitations and their effects on bias, statistical uncertainty and generalizability.</td>
+<td>Discussion, Limitations</td>
+</tr>
+<tr>
+<td>19c</td>
+<td>Discussion</td>
+<td>Describe known data challenges for the task/domain: representation, missingness, harmonization and bias.</td>
+<td>Discussion, Limitations (label noise, partial evidence annotation, possible pretraining exposure)</td>
+</tr>
+<tr>
+<td>19d</td>
+<td>Discussion</td>
+<td>Define intended use: inputs, end users, and level of autonomy or human oversight.</td>
+<td>Discussion, paragraphs 6 and 7 (evaluation harness for tool developers; outputs need semantic checks or human review)</td>
+</tr>
+<tr>
+<td>19e</td>
+<td>Discussion</td>
+<td>Where relevant, explain how poor or missing input data should be assessed and handled in clinical implementation.</td>
+<td>Not applicable (no clinical implementation)</td>
+</tr>
+<tr>
+<td>19f</td>
+<td>Discussion</td>
+<td>Where relevant, state whether users must interact with inputs or the LLM, and the expertise required.</td>
+<td>Discussion, paragraphs 6 and 7 (users are tool developers and reviewers; outputs need human review); Lay summary</td>
+</tr>
+<tr>
+<td>19g</td>
+<td>Discussion</td>
+<td>Discuss next research steps, focusing on the LLM's applicability and generalizability.</td>
+<td>Discussion, paragraph 6; Limitations</td>
+</tr>
+<tr>
+<td>2a</td>
+<td>Abstract</td>
+<td>Identify the study as LLM development, fine-tuning and/or evaluation, with task, target population and outcome.</td>
+<td>Abstract, title</td>
+</tr>
+<tr>
+<td>2b</td>
+<td>Abstract</td>
+<td>Briefly explain the healthcare context, use case and rationale for developing or evaluating the LLM.</td>
+<td>Abstract, Objectives</td>
+</tr>
+<tr>
+<td>2c</td>
+<td>Abstract</td>
+<td>State objectives, including whether the study involves LLM development, tuning and/or evaluation.</td>
+<td>Abstract, Objectives</td>
+</tr>
+<tr>
+<td>2d</td>
+<td>Abstract</td>
+<td>Summarize key elements of the study setting.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2e</td>
+<td>Abstract</td>
+<td>Describe all data used, the data splits, and any selective data use.</td>
+<td>Abstract, Materials and Methods (official test split)</td>
+</tr>
+<tr>
+<td>2f</td>
+<td>Abstract</td>
+<td>Name the LLM(s) and version(s) used.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2g</td>
+<td>Abstract</td>
+<td>Briefly summarize LLM-building steps such as fine-tuning, reward modeling and RLHF.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>2h</td>
+<td>Abstract</td>
+<td>Describe the tasks the LLM performs and the key inputs/outputs of the final model.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2i</td>
+<td>Abstract</td>
+<td>Specify evaluation datasets/populations, endpoints, whether held out from training/tuning, and performance measures.</td>
+<td>Abstract, Materials and Methods and Results</td>
+</tr>
+<tr>
+<td>2j</td>
+<td>Abstract</td>
+<td>Give an overall summary and interpretation of the main results.</td>
+<td>Abstract, Results</td>
+</tr>
+<tr>
+<td>2k</td>
+<td>Abstract</td>
+<td>State broader implications or concerns arising from the results.</td>
+<td>Abstract, Discussion and Conclusion</td>
+</tr>
+<tr>
+<td>2l</td>
+<td>Abstract</td>
+<td>Give registry/repository name and registration number, if relevant.</td>
+<td>Not applicable</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s13-development-fitted-scoring-rule">S13. Development-fitted scoring rule</h2>
+<p>Logistic regression (scikit-learn, C = 1.0) predicting a correct label from six features of each answer, fitted on the answered prompts among the 347 development prompts, using Qwen3-1.7B with retrieved passages, and applied unchanged to test answers. Positive coefficients favor a correct label. The scores are used only to order answers for the risk-coverage curve (Figure 4); they are not calibrated probabilities, and the coefficients are not estimates of feature importance.</p>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th style="text-align: right;">Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intercept</td>
+<td style="text-align: right;">-1.740</td>
+</tr>
+<tr>
+<td>Quote exists (0 or 1)</td>
+<td style="text-align: right;">+0.795</td>
+</tr>
+<tr>
+<td>Passage identifier valid (0 or 1)</td>
+<td style="text-align: right;">-0.336</td>
+</tr>
+<tr>
+<td>Quote length, log(1 + words)</td>
+<td style="text-align: right;">+0.176</td>
+</tr>
+<tr>
+<td>Quote contains significance wording (0 or 1)</td>
+<td style="text-align: right;">-0.303</td>
+</tr>
+<tr>
+<td>Label agrees with the quote's significance wording (0 or 1)</td>
+<td style="text-align: right;">+0.822</td>
+</tr>
+<tr>
+<td>Share of outcome words that appear in the quote</td>
+<td style="text-align: right;">+1.301</td>
+</tr>
+</tbody>
+</table></div></main></body></html>

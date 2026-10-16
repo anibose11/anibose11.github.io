@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="416.16pt" height="358.128pt" viewBox="0 0 416.16 358.128" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-07T17:22:28.541240</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 358.128 
+L 416.16 358.128 
+L 416.16 0 
+L 0 0 
+z
+" style="fill: #fcfcfb"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 18.44928 56.696832 
+L 237.00672 56.696832 
+Q 241.82784 56.696832 241.82784 52.572096 
+L 241.82784 16.824384 
+Q 241.82784 12.699648 237.00672 12.699648 
+L 18.44928 12.699648 
+Q 13.62816 12.699648 13.62816 16.824384 
+L 13.62816 52.572096 
+Q 13.62816 56.696832 18.44928 56.696832 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 18.44928 118.567872 
+L 237.00672 118.567872 
+Q 241.82784 118.567872 241.82784 114.443136 
+L 241.82784 78.695424 
+Q 241.82784 74.570688 237.00672 74.570688 
+L 18.44928 74.570688 
+Q 13.62816 74.570688 13.62816 78.695424 
+L 13.62816 114.443136 
+Q 13.62816 118.567872 18.44928 118.567872 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 18.44928 180.438912 
+L 237.00672 180.438912 
+Q 241.82784 180.438912 241.82784 176.314176 
+L 241.82784 140.566464 
+Q 241.82784 136.441728 237.00672 136.441728 
+L 18.44928 136.441728 
+Q 13.62816 136.441728 13.62816 140.566464 
+L 13.62816 176.314176 
+Q 13.62816 180.438912 18.44928 180.438912 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 18.44928 242.309952 
+L 237.00672 242.309952 
+Q 241.82784 242.309952 241.82784 238.185216 
+L 241.82784 202.437504 
+Q 241.82784 198.312768 237.00672 198.312768 
+L 18.44928 198.312768 
+Q 13.62816 198.312768 13.62816 202.437504 
+L 13.62816 238.185216 
+Q 13.62816 242.309952 18.44928 242.309952 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #eef4fc; stroke: #2a78d6; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 263.52288 180.438912 
+L 397.71072 180.438912 
+Q 402.53184 180.438912 402.53184 176.314176 
+L 402.53184 140.566464 
+Q 402.53184 136.441728 397.71072 136.441728 
+L 263.52288 136.441728 
+Q 258.70176 136.441728 258.70176 140.566464 
+L 258.70176 176.314176 
+Q 258.70176 180.438912 263.52288 180.438912 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 263.52288 242.309952 
+L 397.71072 242.309952 
+Q 402.53184 242.309952 402.53184 238.185216 
+L 402.53184 202.437504 
+Q 402.53184 198.312768 397.71072 198.312768 
+L 263.52288 198.312768 
+Q 258.70176 198.312768 258.70176 202.437504 
+L 258.70176 238.185216 
+Q 258.70176 242.309952 263.52288 242.309952 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 18.44928 331.679232 
+L 192.81312 331.679232 
+Q 197.63424 331.679232 197.63424 327.554496 
+L 197.63424 271.183104 
+Q 197.63424 267.058368 192.81312 267.058368 
+L 18.44928 267.058368 
+Q 13.62816 267.058368 13.62816 271.183104 
+L 13.62816 327.554496 
+Q 13.62816 331.679232 18.44928 331.679232 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 219.32928 331.679232 
+L 397.71072 331.679232 
+Q 402.53184 331.679232 402.53184 327.554496 
+L 402.53184 271.183104 
+Q 402.53184 267.058368 397.71072 267.058368 
+L 219.32928 267.058368 
+Q 214.50816 267.058368 214.50816 271.183104 
+L 214.50816 327.554496 
+Q 214.50816 331.679232 219.32928 331.679232 
+z
+" clip-path="url(#p0c0b0de10a)" style="fill: #ffffff; stroke: #c9c8c2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="21.2616" y="27.6064" transform="rotate(-0 21.2616 27.6064)">3,253,489 report rows (DEMO)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 43.543868)">8 quarterly ASCII extracts, 2024Q3 to 2026Q2</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 53.168481)">all row counts equal FDA-printed totals</text>
+   </g>
+   <g id="patch_10">
+    <path d="M 127.728 57.320343 
+Q 127.728 64.600978 127.728 70.763579 
+" style="fill: none; stroke: #8a8984; stroke-linecap: round"/>
+    <path d="M 129.428 67.363579 
+L 127.728 70.763579 
+L 126.028 67.363579 
+z
+" style="fill: #8a8984; stroke: #8a8984; stroke-linecap: round"/>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="21.2616" y="89.47744" transform="rotate(-0 21.2616 89.47744)">3,253,358 report versions</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 106.129189)">131 PRIMARYIDs in two extracts:</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 115.085834)">record from the later extract kept</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 127.728 119.191383 
+Q 127.728 126.472018 127.728 132.634619 
+" style="fill: none; stroke: #8a8984; stroke-linecap: round"/>
+    <path d="M 129.428 129.234619 
+L 127.728 132.634619 
+L 126.028 129.234619 
+z
+" style="fill: #8a8984; stroke: #8a8984; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="21.2616" y="151.34848" transform="rotate(-0 21.2616 151.34848)">2,870,985 cases (CASEID)</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 167.293073)">latest available version per case; 314,495 cases</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 177.62128)">had more than one version in the window</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 127.728 181.062423 
+Q 127.728 188.343058 127.728 194.505659 
+" style="fill: none; stroke: #8a8984; stroke-linecap: round"/>
+    <path d="M 129.428 191.105659 
+L 127.728 194.505659 
+L 126.028 191.105659 
+z
+" style="fill: #8a8984; stroke: #8a8984; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="21.2616" y="213.21952" transform="rotate(-0 21.2616 213.21952)">2,858,073 cases retained</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 229.381425)">12,912 cases on FDA deletion lists removed</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 238.783382)">primary unit and background for every table</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="266.3352" y="151.34848" transform="rotate(-0 266.3352 151.34848)">Diagnostic unit</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(266.3352 167.293073)">3,238,049 report versions</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(266.3352 176.912342)">after deletions (V5 to V8)</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="266.3352" y="213.21952" transform="rotate(-0 266.3352 213.21952)">Receipt-date cohort (S2)</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(266.3352 229.416457)">2,638,448 cases first</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(266.3352 239.500039)">received 2024-07-01 to 2026-06-30</text>
+   </g>
+   <g id="patch_13">
+    <path d="M 127.728 242.933463 
+Q 127.728 250.214098 127.728 256.376699 
+" style="fill: none; stroke: #8a8984; stroke-linecap: round"/>
+    <path d="M 129.428 252.976699 
+L 127.728 256.376699 
+L 126.028 252.976699 
+z
+" style="fill: #8a8984; stroke: #8a8984; stroke-linecap: round"/>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #0b0b0b" transform="translate(21.2616 282.57972)">Exposed under V1 (any suspect,</text>
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #0b0b0b" transform="translate(21.2616 291.504587)">expanded mapping)</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 295.933713)"/>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 307.790826)">SGLT2 inhibitors: 26,199 cases</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 317.384564)">DPP-4 inhibitors: 3,919 cases</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(21.2616 326.831053)">events: 5 prespecified PT sets</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="222.1416" y="281.96512" transform="rotate(-0 222.1416 281.96512)">Two-by-two table per association</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 297.898432)">a: exposed with event   b: exposed without</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 307.48267)">c: background with event   d: background without</text>
+    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 317.111439)">every retained case in exactly one cell</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0c0b0de10a">
+   <rect x="7.2" y="7.2" width="401.76" height="343.728"/>
+  </clipPath>
+ </defs>
+</svg>

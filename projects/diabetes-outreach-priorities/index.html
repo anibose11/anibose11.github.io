@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diabetes outreach priorities</title>
+<meta name="description" content="How county shortlists for diabetes outreach change with the definition of need and the published uncertainty of CDC PLACES estimates.">
+<style>
+:root{--bg:#fbfbf9;--ink:#1b1b1a;--ink2:#45443f;--muted:#64635d;--rule:#dcdad3;--accent:#1f5fa8;--plate:#f2f1ec;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+main.wide{max-width:1100px}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.2;margin:8px 0 12px;text-wrap:balance}
+h2{font-size:22px;line-height:1.3;margin:40px 0 8px;padding-top:12px;border-top:1px solid var(--rule);text-wrap:balance}
+h3{font-size:18px;margin:28px 0 6px}
+p,li{text-wrap:pretty}
+li,p,figcaption{overflow-wrap:anywhere}
+.table-wrap table.wide{min-width:600px}
+p.tcap{margin:20px 0 0;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate);border:1px solid var(--rule);border-bottom:0}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:#123f73}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.meta{color:var(--muted);font-size:14px}
+.table-wrap{overflow-x:auto;margin:12px 0 20px;border:1px solid var(--rule);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+th{color:var(--ink2);font-weight:600;background:var(--plate)}
+td[style*="right"],th[style*="right"]{text-align:right}
+caption.tcap{caption-side:top;text-align:left;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate)}
+figure{margin:24px 0;max-width:100%}
+figure img{width:100%;height:auto;background:#fcfcfb;border:1px solid var(--rule)}
+figcaption{font-size:14px;color:var(--ink2);margin-top:6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--plate);padding:1px 4px;overflow-wrap:anywhere}
+pre{background:var(--plate);padding:12px;overflow-x:auto;font-size:14px}
+pre code{background:none;padding:0}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:2}
+nav.crumbs{font-size:14px;color:var(--muted);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.stat{border:1px solid var(--rule);background:#fff;padding:12px}
+.stat b{display:block;font-size:26px;line-height:1.2}
+.stat span{font-size:14px;color:var(--ink2)}
+ul.files{padding-left:20px}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+
+<h1>How outreach priorities change which counties are selected</h1>
+<p class="meta">Animesh Bose. County planning study using CDC PLACES 2025 estimates and Census Bureau data, October 2026.</p>
+
+<p><strong>Research question.</strong> A program can prioritize places where diabetes is most common or places where the most affected adults live. I compared those choices, a poverty-based rule, and the uncertainty around each resulting county list.</p>
+<figure>
+<a href="assets/fig2_capacity_envelope.png"><img src="assets/fig2_capacity_envelope.svg" alt="Horizontal bars for three rules at capacities 10, 25 and 50. Under prevalence, 0, 0 and 1 counties are core and 180, 346 and 563 are boundary. Under estimated burden, 5, 17 and 29 are core and 12, 18 and 50 boundary. Under high-poverty prevalence, 0, 0 and 1 are core and 200, 366 and 547 boundary." width="2288" height="1280"></a>
+<figcaption>Counties that stay selected wherever every value falls within the bounds used for the rule (core) and counties whose selection depends on where values fall (boundary), by rule and capacity. Bounds are the published PLACES 95% limits and, for estimated burden, scenario bounds that also span the adult population range. For high-poverty prevalence, eligibility also spans the ACS 95% poverty bounds. A county whose upper bound reaches 20% can be boundary, and only a county whose lower bound reaches 20% can be core. The same numbers are in <a href="report.html#table-2">Table 2</a> and <a href="report.html#figure-2">Figure 2</a> of the report.</figcaption>
+</figure>
+
+<div class="stats">
+<div class="stat"><b>0 of 51</b><span>counties shared by the prevalence and burden selections at a capacity of 25; the prevalence cutoff tie adds one county</span></div>
+<div class="stat"><b>346</b><span>counties that could be in a prevalence top 25 within the published limits, and none is core</span></div>
+<div class="stat"><b>17 of 25</b><span>burden-selected counties that are core</span></div>
+<div class="stat"><b>0.13% vs 22.0%</b><span>share of estimated adults with diagnosed diabetes inside the prevalence and burden top 25</span></div>
+</div>
+
+<h2>Data sources and coverage</h2>
+<ul>
+<li><strong>Prevalence:</strong> CDC PLACES County Data, 2025 release, "Diagnosed diabetes among adults", crude prevalence with 95% intervals. PLACES estimates come from a multilevel model of Behavioral Risk Factor Surveillance System 2023 responses and are model-based estimates rather than counts of diagnosed patients.</li>
+<li><strong>Adults:</strong> Census Bureau Vintage 2023 estimates of people aged 18 and older, as distributed with PLACES. They matched the Census file exactly for 2,956 of 2,956 counties.</li>
+<li><strong>Poverty:</strong> American Community Survey 2020-2024 five-year estimates, with standard errors computed from the Census Bureau's 80 published replicate estimates.</li>
+<li><strong>Coverage:</strong> 2,956 counties in 48 states and the District of Columbia. Kentucky (120 counties) and Pennsylvania (67) have no diabetes estimates in the 2025 release because their BRFSS 2023 data did not meet the inclusion requirements.</li>
+</ul>
+<h2>Three definitions of need, fixed before any county was ranked</h2>
+<ol>
+<li><strong>Prevalence:</strong> the share of adults with diagnosed diabetes.</li>
+<li><strong>Estimated burden:</strong> prevalence times the adult population, an estimate of how many adults have diagnosed diabetes.</li>
+<li><strong>High-poverty prevalence:</strong> prevalence ranked only among counties where at least 20% of people are below the poverty level.</li>
+</ol>
+<p>Each rule selects 10, 25 or 50 counties nationally and 5 within each state. The rules, capacities and uncertainty scenarios were written into a timestamped analysis plan before results.</p>
+<h2>How the uncertainty bounds were used</h2>
+<p><strong>Using published bounds without simulation.</strong> PLACES publishes one interval per county, and its estimates share a model, so their errors are not independent. Simulating independent draws would produce selection probabilities that look precise but are not calibrated. I used only interval bounds, the published PLACES limits and, for burden, scenario bounds built from them: a county is core if it stays in the top K when every county's value sits anywhere within its bounds, and boundary if it is in the top K for some of those values. The worst case is extreme by design, so these labels form a sensitivity envelope and carry no confidence level.</p>
+<p><strong>A matched adult denominator.</strong> Burden multiplies crude prevalence, not age-adjusted prevalence, by the adult population that PLACES itself used, and checks it against the Census file. Because population estimates have no published sampling error, the burden bounds widen the denominator to cover the ACS 2020-2024 range as well, and are labeled as scenario bounds.</p>
+<h2>Which counties were selected and how stable were the lists</h2>
+<ul>
+<li>At 25 counties, the prevalence and burden lists shared no county. Prevalence picked 26 small counties (a tie at the cutoff added one) in Alabama (7), Georgia (5), Mississippi (5), Louisiana (4), Texas (4) and Hawaii (1), with a median of 5,823 adults. Burden picked large metropolitan counties with a median of 1.82 million adults.</li>
+<li>The high-poverty rule picked 25 of the same 26 counties as prevalence, because almost every highest-prevalence county is also high-poverty. PLACES uses poverty in its model, so this overlap is partly built in.</li>
+<li>No prevalence-selected county was core at 25. The top-ranked county, Greene County, Alabama (27.1%, interval 23.9 to 30.2), could fall to rank 39.</li>
+<li>The burden list was more stable: 17 of 25 counties were core.</li>
+<li>Within states, prevalence and burden shared no county in 39 of 45 states.</li>
+<li>National selections under all three rules at capacities 10, 25 and 50 were unchanged in a strictly aligned subset of 2,947 counties.</li>
+<li>In the 2024 release, which includes Kentucky and Pennsylvania, those states held 0 of the top 25 places by prevalence and 1 by burden.</li>
+</ul>
+<h2>Limitations</h2>
+<p>The estimates are model-based and validated only moderately for diabetes at the county level, which suggests that true rankings carry more error than the published intervals show. The envelopes are not joint confidence sets. Only diagnosed diabetes is measured. The 20% poverty threshold is a declared planning choice. Kentucky and Pennsylvania have no diagnosed-diabetes estimates in this release. The shortlists say where to look. Acting on them needs local information on programs, capacity and community priorities that these data do not contain.</p>
+<h2>Reproduce</h2>
+<p>The reported run used Python 3.13.5 and R 4.5.1. The package needs Python 3.12 or later, and <code>dop validate</code> also needs R (base packages only). From the source archive:</p>
+<pre><code>python3 -m venv .venv && . .venv/bin/activate
+pip install -r requirements.lock
+pip install -e ".[test]"
+pytest
+dop acquire && dop build && dop analyze && dop validate && dop render</code></pre>
+
+<p><code>dop demo</code> runs the same code on a small synthetic fixture in under a second, and <code>scripts/run_all.sh</code> runs every step in order. Every run is identified by a hash of the configuration, the analysis code and the source files. The run reported here is a944852459ca.</p>
+<h2>Files</h2>
+<ul class="files">
+<li><a href="report.html">Full report</a> and <a href="supplement.html">supplementary methods and tables</a></li>
+<li><a href="dashboard.html">County priority tables</a>: filter by rule, capacity, state and status</li>
+<li><a href="downloads/diabetes-outreach-priorities-workbook.xlsx">Analysis workbook</a> (XLSX, with a definitions sheet)</li>
+<li><a href="downloads/county_priority_table.csv">County priority table</a> (CSV, one row per county, with source and measure columns)</li>
+<li><a href="downloads/summary_tables.zip">Summary tables</a> (ZIP of CSV files with a data dictionary)</li>
+<li><a href="downloads/planning-brief.html">One-page planning brief</a></li>
+<li><a href="downloads/diabetes-outreach-priorities-source.zip">Source archive</a> (code, configuration, tests, source manifest and derived tables)</li>
+</ul>
+</main>
+</body>
+</html>

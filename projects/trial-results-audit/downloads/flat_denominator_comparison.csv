@@ -1,0 +1,7 @@
+unit,scope,category,n,pct_of_measurements
+measurement,"heldout portion, confirmed cohort",A: flat count equals the reference denominator,62363,63.79
+measurement,"heldout portion, confirmed cohort","B1: flat attaches the outcome-level count, row-specific count differs",22505,23.02
+measurement,"heldout portion, confirmed cohort","B1: flat attaches the outcome-level count, row-specific count is the same value",12074,12.35
+measurement,"heldout portion, confirmed cohort",B2: flat attaches a participant count to values in another unit,799,0.82
+measurement,"heldout portion, confirmed cohort",C: reference not resolvable; flat attaches a value,5,0.01
+measurement,"heldout portion, confirmed cohort",flat row not identifiable,10,0.01

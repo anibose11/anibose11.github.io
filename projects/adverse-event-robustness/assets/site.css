@@ -1,0 +1,62 @@
+:root{color-scheme:light;--bg:#fcfcfb;--panel:#ffffff;--ink:#16161a;--ink2:#4a4945;--muted:#6b6a65;--rule:#e2e1dc;
+--accent:#1c5cab;--accent-soft:#eef4fc;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--measure:44rem;--wide:64rem}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--panel);padding:.5rem 1rem}
+.skip:focus{left:1rem;z-index:10}
+header.site,main,footer{padding:0 16px}
+header.site .inner,main>section,main>article,footer .inner{max-width:var(--wide);margin:0 auto}
+header.site{border-bottom:1px solid var(--rule);background:var(--panel)}
+header.site .inner{display:flex;gap:1rem;justify-content:space-between;align-items:center;padding:.75rem 0;flex-wrap:wrap}
+header.site nav a{margin-right:1rem;font-size:.95rem}
+.eyebrow{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2rem 0 .25rem}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:.2rem 0 1rem;max-width:var(--measure)}
+h2{font-size:1.35rem;margin:2.5rem 0 .75rem;padding-top:.5rem;border-top:1px solid var(--rule)}
+h3{font-size:1.05rem;margin:1.5rem 0 .5rem}
+p,li{max-width:var(--measure)}
+.lede{font-size:1.15rem;color:var(--ink2)}
+.question{background:var(--accent-soft);border-left:4px solid var(--accent);padding:1rem 1.25rem;max-width:var(--measure);margin:1rem 0 1.5rem}
+figure{margin:1.5rem 0;max-width:var(--wide)}
+figure img{width:100%;height:auto;border:1px solid var(--rule);background:#fcfcfb}
+figcaption{font-size:.9rem;color:var(--ink2);margin-top:.5rem;max-width:var(--measure)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem;margin:1rem 0;max-width:var(--wide)}
+.fact{background:var(--panel);border:1px solid var(--rule);padding:.75rem 1rem}
+.fact b{display:block;font-size:1.25rem}
+.fact span{font-size:.88rem;color:var(--ink2)}
+.tablewrap{overflow-x:auto;max-width:var(--wide);border:1px solid var(--rule);background:var(--panel);margin:.75rem 0 1.5rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:.6rem .75rem;font-weight:600;color:var(--ink)}
+th,td{padding:.4rem .6rem;border-top:1px solid var(--rule);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{background:#f6f5f2;font-weight:600}
+tr.primary td{font-weight:600}
+tr.diag td{color:var(--ink2);background:#faf9f6}
+.controls{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin:.5rem 0}
+select{font:inherit;padding:.35rem .5rem;border:1px solid #b9b8b2;border-radius:4px;background:var(--panel);color:var(--ink)}
+code,kbd,pre{font-family:var(--mono);font-size:.88em}
+pre{background:#f3f2ef;border:1px solid var(--rule);padding:.75rem 1rem;overflow-x:auto;max-width:var(--wide)}
+.note{font-size:.9rem;color:var(--ink2)}
+ul.files{list-style:none;padding:0}
+ul.files li{padding:.35rem 0;border-bottom:1px solid var(--rule)}
+ul.files .meta{color:var(--muted);font-size:.85rem;margin-left:.5rem}
+footer{border-top:1px solid var(--rule);margin-top:3rem;background:var(--panel)}
+footer .inner{padding:1.25rem 0;font-size:.9rem;color:var(--ink2)}
+article.report{max-width:var(--wide)}
+article.report h1{max-width:var(--wide)}
+article.report table{font-size:.85rem;display:block;overflow-x:auto;max-width:100%}
+article.report .table-wrap,article.report div.sourceCode{overflow-x:auto}
+article.report figure img{max-width:100%}
+article.report ol.refs li{margin-bottom:.4rem;font-size:.92rem}
+@media (max-width:640px){body{font-size:15px}th,td{padding:.35rem .45rem}}
+@media print{header.site,.skip,.controls{display:none}}
+
+/* Keep report prose within the viewport; wide tables and code scroll locally. */
+main{min-width:0;max-width:100%}
+main>article,main>section,article.report section{min-width:0}
+article.report p,article.report li,article.report a,article.report code{overflow-wrap:anywhere}
+article.report table,article.report .table-wrap,article.report div.sourceCode,article.report pre{max-width:100%;overflow-x:auto}
+article.report figure,article.report img{max-width:100%}

@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diabetes priorities report</title>
+<meta name="description" content="Full report: stability of county diabetes outreach priorities under alternative need definitions and published uncertainty.">
+<style>
+:root{--bg:#fbfbf9;--ink:#1b1b1a;--ink2:#45443f;--muted:#64635d;--rule:#dcdad3;--accent:#1f5fa8;--plate:#f2f1ec;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+main.wide{max-width:1100px}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.2;margin:8px 0 12px;text-wrap:balance}
+h2{font-size:22px;line-height:1.3;margin:40px 0 8px;padding-top:12px;border-top:1px solid var(--rule);text-wrap:balance}
+h3{font-size:18px;margin:28px 0 6px}
+p,li{text-wrap:pretty}
+li,p,figcaption{overflow-wrap:anywhere}
+.table-wrap table.wide{min-width:600px}
+p.tcap{margin:20px 0 0;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate);border:1px solid var(--rule);border-bottom:0}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:#123f73}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.meta{color:var(--muted);font-size:14px}
+.table-wrap{overflow-x:auto;margin:12px 0 20px;border:1px solid var(--rule);background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+th{color:var(--ink2);font-weight:600;background:var(--plate)}
+td[style*="right"],th[style*="right"]{text-align:right}
+caption.tcap{caption-side:top;text-align:left;padding:8px;font-size:14px;color:var(--ink2);background:var(--plate)}
+figure{margin:24px 0;max-width:100%}
+figure img{width:100%;height:auto;background:#fcfcfb;border:1px solid var(--rule)}
+figcaption{font-size:14px;color:var(--ink2);margin-top:6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--plate);padding:1px 4px;overflow-wrap:anywhere}
+pre{background:var(--plate);padding:12px;overflow-x:auto;font-size:14px}
+pre code{background:none;padding:0}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:2}
+nav.crumbs{font-size:14px;color:var(--muted);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.stat{border:1px solid var(--rule);background:#fff;padding:12px}
+.stat b{display:block;font-size:26px;line-height:1.2}
+.stat span{font-size:14px;color:var(--ink2)}
+ul.files{padding-left:20px}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page portfolio-report">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<nav class="crumbs"><a href="./index.html">Project overview</a> / Full report</nav>
+<h1 id="stability-of-county-diabetes-outreach-priorities-under-alternative-need-definitions-and-published-uncertainty-a-cross-sectional-analysis-of-us-small-area-estimates">Stability of county diabetes outreach priorities under alternative need definitions and published uncertainty: a cross-sectional analysis of U.S. small-area estimates</h1>
+<p>Animesh Bose</p>
+<p>Norlowe Research</p>
+<h2 id="abstract">Abstract</h2>
+<p><strong>Background:</strong> Programs that plan diabetes outreach often shortlist counties from model-based small-area estimates. The shortlist depends on how need is defined and on the uncertainty of the estimates. This study measured how much each choice changes a county shortlist.</p>
+<p><strong>Methods:</strong> This cross-sectional analysis of 2,956 counties in 48 states and the District of Columbia used Centers for Disease Control and Prevention PLACES 2025 estimates of crude diagnosed diabetes prevalence among adults, Census Bureau Vintage 2023 adult populations and American Community Survey (ACS) 2020-2024 poverty estimates with replicate-based errors. Three prespecified rules ranked counties by prevalence, by estimated number of adults with diagnosed diabetes (burden), and by prevalence among counties with at least 20% of residents in poverty. Selections at capacities of 10, 25 and 50 counties were compared by Jaccard overlap. Deterministic envelopes from the published 95% limits (scenario bounds for burden) classified counties as core (selected wherever every value falls within its bounds), boundary or outside. Kentucky and Pennsylvania had no diagnosed-diabetes estimates in the 2025 release.</p>
+<p><strong>Results:</strong> At a capacity of 25, the prevalence and burden rules shared none of the 51 counties they selected, while the high-poverty rule shared 25 of 26 counties with the prevalence rule. No county was core under the prevalence rule, and 346 counties could be in its top 25 under some combination of values within the published limits. Under the burden rule, 17 counties were core and 18 were boundary. Counties selected by prevalence held 0.13% of the estimated 29.9 million adults with diagnosed diabetes in the frame, against 22.0% for counties selected by burden. ACS 2019-2023 poverty estimates did not change the high-poverty selection. Within states, the prevalence and burden rules shared no county in 39 of 45 states.</p>
+<p><strong>Conclusions:</strong> The definition of need decided which counties were selected. Under the prevalence definition, the published intervals could not separate a top 25 from several hundred plausible candidates, whereas the burden selection was largely stable. Small-area shortlists should state the need definition, report the boundary set with any ranked list, and serve as a starting point for local assessment.</p>
+<p><strong>Keywords:</strong> Diabetes mellitus; Small-area estimation; Health planning; Ranking; Uncertainty; Poverty; Counties; Decision support</p>
+<h2 id="background">Background</h2>
+<p>County health departments, community organizations and diabetes prevention and self-management programs often have to decide where to look first. Diabetes self-management education and the National Diabetes Prevention Program are unevenly available across U.S. counties, and the gaps are largest in some places where diabetes is most common or most often newly diagnosed [1-3]. Choosing where to investigate unmet need is therefore a recurring planning task.</p>
+<p>Most counties have no direct survey estimate of diabetes prevalence large enough to support that choice. The Centers for Disease Control and Prevention (CDC) PLACES (Population Level Analysis and Community Estimates) project fills the gap with model-based estimates for every county, produced by multilevel regression and poststratification of Behavioral Risk Factor Surveillance System (BRFSS) data [4-6]. In a validation against direct estimates from the 2011 Missouri County-Level Study, multilevel model estimates of diagnosed diabetes for 115 counties correlated with the direct estimates at r = 0.51 [6]. Analysts use these estimates to identify high-need counties, usually by ranking point estimates or applying a fixed cutoff. Recent PLACES examples include the top national quartile of diabetes prevalence [3] and quartiles of chronic obstructive pulmonary disease (COPD) prevalence crossed with the Social Vulnerability Index together with estimated counts of affected adults [7]. An earlier analysis of CDC county estimates defined a "diabetes belt" with a prevalence threshold of 11.0% [8].</p>
+<p>Two choices sit inside any such list and are rarely examined together. The first is the definition of need. Ranking by prevalence finds places where a large share of adults is affected. Ranking by the estimated number of affected adults finds places where many affected people live. A socioeconomic criterion directs attention to places with fewer resources. Rose's observation that many cases arise among large numbers of people at modest risk rather than among the few at highest risk has a geographic counterpart in this choice [9]. In nonmetropolitan counties, those with a self-management program had more people with diagnosed diabetes but lower diabetes prevalence than counties without one [1]. </p><p>The second choice is how to treat uncertainty. Rankings of estimates with sampling or model error are unstable [10-14], maps of estimates mislead in predictable ways [15], and CDC advises users of PLACES to consider confidence intervals rather than compare point estimates alone [16]. Formal methods give joint confidence regions for ranks [17] or confidence sets for the top-ranked units [18], and empirical Bayes procedures rank and select units under a model for the estimates [19]. These need simultaneous intervals, standard errors or a joint distribution of the estimates, whereas PLACES publishes only a marginal 95% percentile interval for each county.</p>
+<p>I did not identify a study that measured, for diagnosed diabetes, how much a county shortlist changes across need definitions and within the published intervals of the estimates. This study asked which counties a planner would shortlist under three common definitions of need, at fixed capacities nationally and within states, and how much of each shortlist holds when the published uncertainty of the inputs is respected.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="design">Design</h3>
+<p>This was a cross-sectional decision-sensitivity analysis of published county estimates. The analysis plan, including all rules, capacities, scenarios and robustness checks, was written and timestamped before any county value was ranked (Additional file 1). It is an internal plan and was not registered. Two additions made after the primary results, a descriptive summary of estimated burden and one comparison noted under Robustness checks, are identified as such below.</p>
+<h3 id="data-sources">Data sources</h3>
+<p>Table 1 lists the sources, reference periods and identifiers. All files were downloaded on 7 October 2026, and their file hashes are recorded in the source manifest.</p>
+<p>Prevalence came from the PLACES county file, 2025 release (data.cdc.gov dataset swc5-untb, rows last updated 4 December 2025) [20]. The measure "Diagnosed diabetes among adults" is the share of adults aged 18 years or older who report having been told by a doctor or other health professional that they have diabetes, other than during pregnancy, from BRFSS 2023. PLACES fits a multilevel logistic model for each measure using some or all of individual age, sex, race and ethnicity, and education, the county percentage of adults below 150% of the federal poverty level from the five-year American Community Survey (ACS), and state and county random effects. It then poststratifies to Census Bureau county population estimates for 2023. The published value is the mean of the county estimates from 1,000 Monte Carlo simulations based on draws of the model parameters, and the 95% interval is the 2.5th and 97.5th percentiles of those estimates [21]. This study used crude prevalence because it applies to the actual adult population of each county. Age-adjusted prevalence was carried for display only and was never multiplied by a population.</p>
+<p>The adult population was the TotalPop18plus field distributed with the PLACES estimates, documented as the Census Bureau's 2023 county estimate for ages 18 and older. It was checked against the Census Bureau's Vintage 2023 county characteristics file (CC-EST2023-AGESEX, July 1, 2023, AGE18PLUS_TOT) [22].</p>
+<p>ACS values came from the Census Bureau's variance replicate tables for the 2020-2024 and 2019-2023 five-year estimates [23]. These tables contain the published estimates and margins of error together with 80 replicate estimates, which allow standard errors to be computed for derived sums and ratios [24]. Adults aged 18 and older were the sum of table B05003 lines 8 (male) and 19 (female). The poverty rate was table B17001 line 2 (income below the poverty level) divided by line 1 (population for whom poverty status is determined), times 100. Standard errors used the successive differences replication formula, variance = (4/80) times the sum over replicates of (replicate minus estimate) squared [24]. Published ACS margins of error are at 90% confidence [25], so 95% bounds were the estimate plus or minus 1.96 standard errors. Adult totals whose component cells were population-controlled were assigned no sampling error, following Census guidance [24]. The implementation reproduced the published integer margin of error for 2,897 of 2,897 uncontrolled male and 2,888 of 2,888 uncontrolled female adult cells, 3,222 of 3,222 below-poverty cells, and 3,212 of 3,222 poverty-universe cells in the 2020-2024 files. In all 10 remaining poverty-universe cells, the replicate estimates equaled the published estimate while the published margin was 10 to 22 persons, a negligible difference for the poverty-rate bounds.</p>
+<h3 id="analysis-frame">Analysis frame</h3>
+<p>The PLACES 2025 county file covers 3,144 county equivalents in current Census Bureau geography, which includes Connecticut's nine planning regions. These replaced the state's eight counties as county equivalents in 2022 [26]. The file contains no diagnosed-diabetes estimates for Kentucky (120 counties) or Pennsylvania (67 counties), because BRFSS 2023 data from those states did not meet the requirements for the public data set [27, 28]. One county (Loving County, Texas, with 30 adults and 43 residents) had its estimates suppressed by CDC, which does not publish estimates for areas with a population below 50 [16], and a national summary row was removed. The frame therefore had 2,956 counties in 48 states and the District of Columbia. Every frame county matched exactly one Census Vintage 2023 record and one record in each ACS vintage on its five-digit Federal Information Processing Standards (FIPS) code, stored as text with leading zeros. The only ACS records without a PLACES match were 78 Puerto Rico municipios, which PLACES does not cover.</p>
+<h3 id="planning-rules">Planning rules</h3>
+<p>Three rules were fixed before results:</p>
+<ol>
+<li>Prevalence: rank counties by crude prevalence.</li>
+<li>Estimated burden: rank counties by the estimated number of adults with diagnosed diabetes, crude prevalence divided by 100 times the adult population. CDC describes the same calculation for converting PLACES prevalence into counts [16]. The product of a model-based prevalence and a population estimate is an estimate, not a count of identified patients.</li>
+<li>High-poverty prevalence: restrict to counties where at least 20.0% of people are below the poverty level, the threshold the U.S. Department of Agriculture (USDA) Economic Research Service uses for high-poverty counties [29], and rank those counties by crude prevalence. Estimated burden is displayed alongside but does not enter the ranking. The threshold is a declared planning criterion, not an estimated optimal weight, and no composite need score was built.</li>
+</ol>
+<p>No regression of prevalence on socioeconomic variables was fitted. CDC states that the PLACES approach incorporates poverty along with age, sex, race and ethnicity, and education [16], so such an association would partly reproduce the model's own inputs [30].</p>
+<p>Rankings were descending with competition ties: a county's rank was 1 plus the number of counties with a strictly larger value. A county was selected at capacity K if its rank was K or better, so all counties tied at the cutoff were selected and set sizes are reported.</p>
+<h3 id="capacities">Capacities</h3>
+<p>National capacities were 10, 25 (primary) and 50 counties. These are illustrative sizes for a shortlist, not program budgets. Within each state the capacity was 5 counties. The District of Columbia, Delaware, Hawaii and Rhode Island have 5 or fewer frame counties. All their units are shown, and they were excluded from within-state stability summaries.</p>
+<h3 id="uncertainty-envelopes">Uncertainty envelopes</h3>
+<p>PLACES intervals are marginal: they describe each county separately, and the estimates share a model and covariates, so their errors are not independent. This study therefore did not simulate independent draws or report probabilities of selection. Instead, for a rule with lower and upper bounds L and U, each county's best-case rank was 1 plus the number of other counties whose lower bound exceeds its upper bound, and its worst-case rank was 1 plus the number of other counties whose upper bound exceeds its lower bound. This is the interval-counting logic used by Klein, Wright and Wieczorek for rankings of ACS estimates [17], applied here to unadjusted marginal 95% intervals rather than simultaneous intervals. At capacity K, a county was core if its worst-case rank was K or better, boundary if only its best-case rank was K or better, and outside otherwise. A core county stays selected wherever every county's value falls within its bounds. A boundary county is selected under some combinations of values within the bounds and not others. The worst case places every competitor at its upper bound at once, which is not a jointly attainable confidence statement, so the result is described as a sensitivity envelope.</p>
+<p>For the prevalence rule the bounds were the PLACES 95% limits. For the burden rule, the lower bound was the prevalence lower limit times the smaller of the Vintage 2023 adult estimate and the ACS 95% lower bound for adults, and the upper bound was the prevalence upper limit times the larger of the Vintage 2023 estimate and the ACS 95% upper bound. Population estimates carry no published sampling error, so this range combines the two published adult figures with the ACS sampling range. It is not a confidence interval, because the covariance between the prevalence and population inputs is unknown. For the high-poverty rule, a county was certainly eligible if its 95% lower poverty bound was at least 20%, eligible at the point estimate if its estimate was at least 20%, and possibly eligible if its upper bound was at least 20%. Best-case ranks counted only certainly eligible competitors, worst-case ranks counted all possibly eligible competitors, and only certainly eligible counties could be core.</p>
+<p>Each rule was also ranked with every county at its lower bound and with every county at its upper bound, and for the high-poverty rule within the certainly and possibly eligible groups. These scenario sets were compared with the point-estimate set.</p>
+<h3 id="outcomes">Outcomes</h3>
+<p>The primary outcomes at capacity 25 were the pairwise Jaccard overlap (intersection divided by union) between the three point-estimate selected sets, and the numbers of core and boundary counties for each rule. Rule dependence was summarized for every county selected under any rule. County-level ranks, bounds and labels for every rule and capacity are tabulated in Additional file 2. After the primary results were produced, a descriptive summary of each selected set's total estimated burden and its share of the frame total was added (Table 2, last column). It did not change any rule or classification.</p>
+<h3 id="robustness-checks">Robustness checks</h3>
+<p>Three checks were prespecified: (1) capacities of 10 and 50, (2) point-estimate selections compared with lower-bound and upper-bound scenario selections, and (3) a strictly aligned subset of 2,947 counties. The aligned subset excluded Connecticut's nine planning regions, whose geography changed after the 2020 Census, and used ACS 2019-2023, the vintage named in the PLACES 2025 documentation, for poverty and the adult range. An optional descriptive comparison applied the prevalence and burden rules to the PLACES 2024 county release (BRFSS 2022), which includes Kentucky and Pennsylvania [31]. The high-poverty rule was also applied to that release, with the same ACS 2020-2024 poverty criterion as the primary analysis. This extension was added after the primary results and was not in the plan. The comparison describes the consequence of the 2025 coverage gap. It is not a validation, because the releases differ in survey year and model inputs.</p>
+<h3 id="software-checks-and-reproducibility">Software, checks and reproducibility</h3>
+<p>The analysis was written in Python 3.13.5 (pandas 3.0.6, NumPy 2.5.3), with joins and integrity checks in DuckDB 1.5.6, an embedded database, and a second implementation in base R 4.5.1. It runs as six commands (acquire, build, analyze, validate, render, package). The build stage stops if a downloaded file differs from its recorded hash, or on any of these conditions: mixed release years, value types that are not exactly crude or age-adjusted prevalence, duplicate county-measure-type keys, intervals that do not bracket their estimates, adult populations above totals, unparseable numbers, or a join that changes the number of counties.</p>
+<p>Software checks included 43 unit tests on small synthetic fixtures, a rerun of the build and analysis stages from cached inputs, ordering invariants and the base R implementation. The rerun reproduced the analysis frame and every result table (relative tolerance 10^-12, absolute tolerance 10^-9). The invariants were that every core county is selected and that every selected county is core or boundary. The base R implementation recomputed the ACS 2020-2024 replicate standard errors from the raw Census archives and reproduced all 26,604 rule, capacity and county results exactly. A third implementation, written without the analysis package, rebuilt every rank and envelope by direct pairwise comparison and reproduced every cell of Tables 2 and 3. </p><p>Source reconciliation showed that the PLACES adult population equaled the Census Vintage 2023 adult estimate for 2,956 of 2,956 counties. It also showed that the ACS adult counts and poverty numerators and denominators derived from the replicate tables equaled the Census Bureau's separately published table-based summary files [32] for all 3,222 counties in both vintages, and that the estimate, 95% limits and adult population of all 2,956 frame counties equaled the live PLACES 2025 release [20] on 7 October 2026. </p><p>I also checked the analysis by hand, separately from the code. I looked up a random sample of 12 frame counties, drawn with a fixed seed, in the PLACES 2025 county release [20] and in ACS table S1701 [33], recalculated their estimated burden by hand in a spreadsheet, sorted the public PLACES file to confirm the 11 counties ranked in the top 10 by crude prevalence (including ties), compared every number in the tables and figures with the result files, and checked each reference against its publisher or PubMed record. No external validation of the prevalence estimates against observed outcomes was possible or attempted.</p>
+<p>All code, configuration, the analysis plan, the source manifest with file hashes, and the result tables are provided in Additional file 3. The run reported here has identifier a944852459ca, a hash of the configuration, the analysis code and the source files.</p>
+<h2 id="results">Results</h2>
+<h3 id="frame-and-inputs">Frame and inputs</h3>
+<p>Across the 2,956 counties, the median crude prevalence of diagnosed diabetes was 13.3% (interquartile range 11.8 to 15.2, range 4.9 to 27.1). The median width of a county's 95% interval was 3.9 percentage points (interquartile range 3.5 to 4.4). The frame contained 248.2 million adults and an estimated 29.9 million adults with diagnosed diabetes. At the point estimate, 425 counties met the poverty criterion, while 138 met it with certainty and 829 possibly met it. ACS 2020-2024 adult estimates differed from the Vintage 2023 estimates by a median of 0.8% (90th percentile 2.8%).</p>
+<h3 id="the-need-definition-determined-the-selection">The need definition determined the selection</h3>
+<p>Table 2 and <a href="#figure-1">Figure 1</a> show the selected sets. The prevalence and burden rules shared no county at any capacity (Table 3). At capacity 25, the prevalence rule selected 26 counties, one more than the capacity because of a tie at the cutoff. They were in Alabama (7), Georgia (5), Mississippi (5), Louisiana (4), Texas (4) and Hawaii (1), and they were small (median 5,823 adults, range 75 to 27,736). The burden rule selected 25 large counties in 9 states (median 1.82 million adults, smallest 1.03 million), with prevalence from 7.3% to 16.1%. The high-poverty rule shared 25 of its counties with the prevalence rule (Jaccard 0.96), because 25 of the 26 prevalence-selected counties met the poverty criterion at the point estimate (18 with certainty). Of the 51 counties selected under any rule at capacity 25, 26 were selected by one rule and 25 by two. No county was selected, or core, under all three rules at any capacity.</p>
+<p>The selections differed sharply in how many affected adults they covered. At capacity 25, the prevalence selection contained an estimated 40,255 adults with diagnosed diabetes (0.13% of the frame total), the high-poverty selection 39,818 (0.13%), and the burden selection 6.59 million (22.0%). At capacity 50 the shares were 0.30%, 0.30% and 30.7%.</p>
+<h3 id="published-uncertainty-left-the-prevalence-top-25-undetermined">Published uncertainty left the prevalence top 25 undetermined</h3>
+<p>No county was core under the prevalence rule at capacities 10 or 25, and one county (Greene County, Alabama) was core at capacity 50 (<a href="#figure-2">Figure 2</a>). The number of boundary counties was 180, 346 and 563 at capacities 10, 25 and 50. The highest-ranked county, Greene County, Alabama (27.1%, 95% interval 23.9 to 30.2), had a worst-case rank of 39, and the worst-case ranks of the 26 selected counties ranged from 39 to 395 (median 198, <a href="#figure-3">Figure 3</a>). Kalawao County, Hawaii, with 75 adults (22.1%, interval 19.0 to 25.5), ranked 23 by point estimate with a worst-case rank of 395. The 346 boundary counties at capacity 25 were spread over 25 states, led by Georgia (46), Mississippi (46), Texas (33), West Virginia (31) and Virginia (26), and had point estimates from 16.7% to 27.1%. A county was in the boundary set exactly when its upper limit reached 19.4%, the 25th-highest lower limit, so some counties with point estimates above the lowest boundary estimate of 16.7%, up to 17.1%, were outside because their upper limits were 19.3% or less. The high-poverty rule behaved the same way, with 0 core and 366 boundary counties at capacity 25.</p>
+<p>The burden selection was much more stable. At capacities 10, 25 and 50 it had 5, 17 and 29 core counties and 12, 18 and 50 boundary counties. All 17 burden-core counties at capacity 25 were outside the envelope of the prevalence rule, so their inclusion depended on the choice of rule rather than on uncertainty.</p>
+<p>Ranking every county at its lower bound, or every county at its upper bound, changed the point-estimate sets only slightly. At capacity 25, the Jaccard overlap between the point-estimate set and the all-lower-bound set was 0.89 for prevalence, 1.00 for burden and 0.89 for high-poverty prevalence. Restricting the high-poverty rule to certainly eligible counties gave an overlap of 0.56.</p>
+<h3 id="within-state-views">Within-state views</h3>
+<p>In the 45 states with more than 5 frame counties, at least one prevalence-selected county was core in 4 states, compared with 45 states for the burden rule (median 4 of 5 selected counties core). The prevalence and burden selections shared no county in 39 states. The overlap between the prevalence and high-poverty selections depended on how many counties met the poverty criterion. Fewer than 5 did so in 26 states, 11 of which had none, and in the 19 states with at least 5 the median Jaccard index was 0.83.</p>
+<h3 id="robustness">Robustness</h3>
+<p>In the strictly aligned subset of 2,947 counties, the prevalence and burden point selections could change only through the removal of Connecticut, none of whose planning regions was in a national selection, and they were identical. With ACS 2019-2023 poverty estimates, 435 of these counties met the poverty criterion at the point estimate, compared with 425 with ACS 2020-2024. The high-poverty selections were unchanged (minimum Jaccard 1.00), and the high-poverty boundary set at capacity 25 grew from 366 to 393 counties. With the ACS 2019-2023 adult range, the burden core was unchanged, while the burden boundary set at capacity 25 changed from 18 to 20 counties (Additional file 1, Table S5). In the PLACES 2024 release (BRFSS 2022), among counties in both releases, overlap with the 2025 top 25 was 0.50 for prevalence (17 of 34 counties), 1.00 for burden and 0.56 for high-poverty prevalence. In the full 2024 frame of 3,144 counties, Kentucky and Pennsylvania counties held 0 of the top 25 places by prevalence, 1 by burden and 0 by high-poverty prevalence. At capacity 50 they held 1, 2 and 1.</p>
+<h2 id="discussion">Discussion</h2>
+<h3 id="principal-findings">Principal findings</h3>
+<p>The choice of need definition decided which counties were selected. A prevalence ranking and a burden ranking of the same estimates shared no county nationally and none in most states. Under prevalence, the selection consisted of small, mostly Southern counties where 22.1% to 27.1% of adults report diagnosed diabetes. Under burden, it consisted of large metropolitan counties (median 1.82 million adults). The two selections differed more than a hundredfold in the estimated number of affected adults they contained. </p><p>The high-poverty rule nearly reproduced the prevalence ranking nationally, because the highest-prevalence counties were almost all high-poverty counties.</p>
+<p>Uncertainty affected the two kinds of ranking very differently. The point estimates of the 26 prevalence-selected counties spanned only 22.1% to 27.1%, while a typical county interval was about four percentage points wide, so each selected county's interval overlapped those of many counties ranked below it. A prevalence top 25 therefore could not be separated from several hundred plausible candidates. The burden ranking was largely stable, because adult populations differ by orders of magnitude and dominate the prevalence uncertainty.</p>
+<h3 id="comparison-with-previous-work">Comparison with previous work</h3>
+<p>The instability of the prevalence ranking is consistent with earlier work on league tables and county rankings [10-14]. Arndt and colleagues found that a county in a state's top 10% on a County Health Rankings measure stayed there in about two thirds of simulated redraws, with wide variation by measure [12]. Courtemanche and colleagues recommended attention to counties that stay among the least healthy across weightings and uncertainty [14]. The present analysis reaches a similar conclusion without simulating independent draws, which would be inappropriate for model-based estimates that share structure, and it adds the comparison across need definitions. The envelope is a marginal-interval version of the rank bounds of Klein and colleagues [17]. Their joint region, which needs intervals at a multiplicity-adjusted level, and the confidence sets of Mogstad and colleagues for the best-ranked units [18], which need a covariance matrix, would be the right tools if PLACES published standard errors or simulation draws.</p>
+<p>Earlier PLACES planning studies classified counties with cutoffs on point estimates [3, 7], and one stated that measures of error were not included [7]. Their comparisons concern broad groups such as quartiles, which are less sensitive to interval width than a shortlist. The present results suggest that classifications near any cutoff, and any shortlist, should be reported with the number of counties within interval distance of the cutoff. Holt and colleagues aggregated counts derived from small-area prevalence without confidence intervals [34]. The burden envelope here is one practical way to bound such counts.</p>
+<p>The rule comparison is a geographic form of the contrast Rose described [9]. Neither definition is correct in general. A program that wants to reach many people would start from burden, and one that wants to reach communities where diabetes is most common, which here were also poorer communities, would start from prevalence or the high-poverty rule. The finding that program presence followed the number of people with diabetes rather than prevalence [1] fits this pattern.</p>
+<h3 id="implications-for-planning">Implications for planning</h3>
+<p>A county shortlist should state its definition of need and show the core and boundary sets alongside the ranking. For a prevalence objective, the boundary set is the realistic pool for further assessment. If several definitions matter, one transparent option is to consider the union of their core and boundary sets and retain the reason each county appears. This study did not evaluate whether that approach performs better than a composite score. In every case the list is a starting point. Acting on it requires local information that these data do not contain, such as existing programs, clinical and community capacity, and the views of the communities concerned (Additional file 1).</p>
+<h3 id="limitations">Limitations</h3>
+<p>PLACES estimates are model-based and are not counts of diagnosed patients. Their intervals come from simulating the model's parameters [4, 21], so they do not reflect model misspecification or self-report error, and the moderate validation correlation for diabetes [6] suggests that point-estimate rankings carry error beyond the published intervals. Model smoothing may also compress the highest values. </p><p>The envelopes can err in both directions. Placing every competitor at its bound at the same time makes the core set small and the boundary set large compared with an analysis of the joint distribution of the estimates, which PLACES does not publish. In the other direction, the 95% intervals are marginal, carry no multiplicity adjustment and omit model error, so some true values lie outside them. A core county is therefore not guaranteed to stay selected, and an outside county could enter. Neither label is a probability. </p><p>The measure covers diagnosed diabetes only, and undiagnosed diabetes varies across counties [35]. Kentucky and Pennsylvania have no diagnosed-diabetes estimates in the 2025 release. The 2024 release suggests that this gap changes few national selections, but no within-state view is possible for those states. </p><p>The population estimate used for burden has no published sampling error, so the burden bounds use the ACS range as a proxy. </p><p>The 20% poverty threshold is a declared choice, and PLACES uses a related poverty measure in estimation, so the overlap between the prevalence and high-poverty rules is partly built into the estimates and is not independent evidence about poverty and diabetes [30]. The BRFSS 2023 data are the most recent in the newest PLACES county release available in October 2026. The capacities are illustrative, the within-state capacity does not scale with state size, and this ecological analysis cannot support conclusions about individuals.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>Which counties a planner shortlists for diabetes outreach depends mainly on how need is defined. In these estimates, a prevalence-based shortlist could not be separated from a much larger set of plausible candidates, while a burden-based shortlist was largely stable. Reporting the need definition and the boundary set with every shortlist would make small-area estimates more useful for planning and less likely to be read as more precise than they are.</p>
+<h2 id="list-of-abbreviations">List of abbreviations</h2>
+<p>ACS: American Community Survey; BRFSS: Behavioral Risk Factor Surveillance System; CDC: Centers for Disease Control and Prevention; COPD: chronic obstructive pulmonary disease; FIPS: Federal Information Processing Standards; PLACES: Population Level Analysis and Community Estimates; USDA: U.S. Department of Agriculture.</p>
+<h2 id="declarations">Declarations</h2>
+<h3 id="ethics-approval-and-consent-to-participate">Ethics approval and consent to participate</h3>
+<p>Not applicable. This study is a secondary analysis of publicly available, aggregate county-level estimates published by the Centers for Disease Control and Prevention and the U.S. Census Bureau. No participants were recruited, no individual-level or identifiable data were accessed, and ethics approval was therefore not sought.</p>
+<h3 id="consent-for-publication">Consent for publication</h3>
+<p>Not applicable.</p>
+<h3 id="availability-of-data-and-materials">Availability of data and materials</h3>
+<p>The datasets analyzed during the current study are publicly available from the Centers for Disease Control and Prevention and the U.S. Census Bureau. They are the 2025 release of PLACES County Data (data.cdc.gov dataset swc5-untb) [20] and its 2024 release (dataset fu4u-a9bh) [31], the ACS 5-year variance replicate tables B05003 and B17001 [23], and the Census Vintage 2023 county characteristics file CC-EST2023-AGESEX [22]. These files are U.S. federal government works and may be reused without restriction. The datasets generated during the current study, namely the county priority table, summary tables and an analysis workbook with definitions, are provided as Additional files 1 and 2 (the supplement and the analysis workbook in this project's downloads). The analysis code (Python, SQL and R), configuration, analysis plan, source manifest with the SHA-256 hash of every downloaded file, and all derived tables are provided in Additional file 3 under the MIT License. The workflow downloads the public files, stops if any file differs from its recorded hash, and reproduces every reported result.</p>
+<ul>
+<li>Project name: Diabetes outreach priorities</li>
+<li>Project home page: not applicable (the code is provided as Additional file 3)</li>
+<li>Archived version: Additional file 3</li>
+<li>Operating system: platform independent (run on macOS)</li>
+<li>Programming languages: Python 3.13, SQL (DuckDB 1.5.6) and R 4.5.1</li>
+<li>Other requirements: Python packages listed in requirements.lock and base R only</li>
+<li>License: MIT</li>
+<li>Any restrictions to use by non-academics: none</li>
+</ul>
+<h3 id="competing-interests">Competing interests</h3>
+<p>I own Norlowe Research and have no other competing interests.</p>
+<h3 id="funding">Funding</h3>
+<p>This research received no specific grant from any funding agency in the public, commercial or not-for-profit sectors. I carried out the work using internal resources from Norlowe Research, which I own. No external funder was involved in the design of the study, the collection, analysis or interpretation of the data, or the writing of the manuscript.</p>
+<h3 id="authors-contributions">Authors' contributions</h3>
+<p>Animesh Bose is the sole author and was responsible for conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, writing of the original draft, and review and editing. The author reviewed and revised the manuscript.</p>
+<h3 id="acknowledgements">Acknowledgements</h3>
+<p>Not applicable.</p>
+
+<h2 id="references">References</h2>
+<ol>
+<li>Rutledge SA, Masalovich S, Blacher RJ, Saunders MM. Diabetes self-management education programs in nonmetropolitan counties - United States, 2016. MMWR Surveill Summ. 2017;66(10):1-6. doi:10.15585/mmwr.ss6610a1</li>
+<li>Jayapaul-Philip B, Dai S, Kirtland K, Haslam A, Nhim K. Availability of the National Diabetes Prevention Program in United States counties, March 2017. Prev Chronic Dis. 2018;15:E109. doi:10.5888/pcd15.180063</li>
+<li>Probst JC, Yell N, Benavidez GA, McNatt MK, Browne T, Herbert L, et al. Dialysis more available than patient education in counties with high diabetes prevalence. Prev Chronic Dis. 2024;21:E60. doi:10.5888/pcd21.240052</li>
+<li>Greenlund KJ, Lu H, Wang Y, Matthews KA, LeClercq JM, Lee B, et al. PLACES: Local Data for Better Health. Prev Chronic Dis. 2022;19:E31. doi:10.5888/pcd19.210459</li>
+<li>Zhang X, Holt JB, Lu H, Wheaton AG, Ford ES, Greenlund KJ, et al. Multilevel regression and poststratification for small-area estimation of population health outcomes: a case study of chronic obstructive pulmonary disease prevalence using the Behavioral Risk Factor Surveillance System. Am J Epidemiol. 2014;179(8):1025-33. doi:10.1093/aje/kwu018</li>
+<li>Zhang X, Holt JB, Yun S, Lu H, Greenlund KJ, Croft JB. Validation of multilevel regression and poststratification methodology for small area estimation of health indicators from the Behavioral Risk Factor Surveillance System. Am J Epidemiol. 2015;182(2):127-37. doi:10.1093/aje/kwv002</li>
+<li>Carlson SA, Watson KB, Rockhill S, Wang Y, Pankowska MM, Greenlund KJ. Linking local-level chronic disease and social vulnerability measures to inform planning efforts: a COPD example. Prev Chronic Dis. 2023;20:E76. doi:10.5888/pcd20.230025</li>
+<li>Barker LE, Kirtland KA, Gregg EW, Geiss LS, Thompson TJ. Geographic distribution of diagnosed diabetes in the U.S.: a diabetes belt. Am J Prev Med. 2011;40(4):434-9. doi:10.1016/j.amepre.2010.12.019</li>
+<li>Rose G. Sick individuals and sick populations. Int J Epidemiol. 1985;14(1):32-8. doi:10.1093/ije/14.1.32</li>
+<li>Goldstein H, Spiegelhalter DJ. League tables and their limitations: statistical issues in comparisons of institutional performance. J R Stat Soc Ser A Stat Soc. 1996;159(3):385-409. doi:10.2307/2983325</li>
+<li>Marshall EC, Spiegelhalter DJ. Reliability of league tables of in vitro fertilisation clinics: retrospective analysis of live birth rates. BMJ. 1998;316(7146):1701-4. doi:10.1136/bmj.316.7146.1701</li>
+<li>Arndt S, Acion L, Caspers K, Blood P. How reliable are county and regional health rankings? Prev Sci. 2013;14(5):497-502. doi:10.1007/s11121-012-0320-3</li>
+<li>Athens JK, Catlin BB, Remington PL, Gangnon RE. Using empirical Bayes methods to rank counties on population health measures. Prev Chronic Dis. 2013;10:E129. PMID: 23906329; PMCID: PMC3733480</li>
+<li>Courtemanche C, Soneji S, Tchernis R. Modeling area-level health rankings. Health Serv Res. 2015;50(5):1413-31. doi:10.1111/1475-6773.12352</li>
+<li>Gelman A, Price PN. All maps of parameter estimates are misleading. Stat Med. 1999;18(23):3221-34. doi:10.1002/(SICI)1097-0258(19991215)18:23&lt;3221::AID-SIM312&gt;3.0.CO;2-M</li>
+<li>Centers for Disease Control and Prevention. PLACES: frequently asked questions. Updated 12 Dec 2025. https://www.cdc.gov/places/faqs/index.html. Accessed 7 Oct 2026.</li>
+<li>Klein M, Wright T, Wieczorek J. A joint confidence region for an overall ranking of populations. J R Stat Soc Ser C Appl Stat. 2020;69(3):589-606. doi:10.1111/rssc.12402</li>
+<li>Mogstad M, Romano JP, Shaikh AM, Wilhelm D. Inference for ranks with applications to mobility across neighbourhoods and academic achievement across countries. Rev Econ Stud. 2024;91(1):476-518. doi:10.1093/restud/rdad006</li>
+<li>Henderson NC, Newton MA. Making the cut: improved ranking and selection for large-scale inference. J R Stat Soc Series B Stat Methodol. 2016;78(4):781-804. doi:10.1111/rssb.12131</li>
+<li>Centers for Disease Control and Prevention. PLACES: Local Data for Better Health, County Data, 2025 release [dataset]. Dataset identifier swc5-untb. Updated 4 Dec 2025. https://data.cdc.gov/d/swc5-untb. Accessed 7 Oct 2026.</li>
+<li>Centers for Disease Control and Prevention. PLACES: methodology. Updated 8 Dec 2025. https://www.cdc.gov/places/methodology/index.html. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. Annual County and Puerto Rico Municipio Resident Population Estimates by Selected Age Groups and Sex: April 1, 2020 to July 1, 2023 (CC-EST2023-AGESEX) [dataset]. Released Jun 2024. https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. American Community Survey 2020-2024 and 2019-2023 5-year variance replicate estimates, tables B05003 and B17001, counties [dataset]. https://www2.census.gov/programs-surveys/acs/replicate_estimates/. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. Documentation for the 2020-2024 variance replicate estimates tables. https://www2.census.gov/programs-surveys/acs/replicate_estimates/2024/documentation/5-year/. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. Understanding and using American Community Survey data: what all data users need to know. Washington (DC): U.S. Government Publishing Office; 2020. https://www.census.gov/content/dam/Census/library/publications/2020/acs/acs_general_handbook_2020.pdf. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. Change to county-equivalents in the State of Connecticut. Fed Regist. 2022 Jun 6;87:34235-40.</li>
+<li>Centers for Disease Control and Prevention. PLACES: current release notes. Updated 16 Mar 2026. https://www.cdc.gov/places/current-release-notes/index.html. Accessed 7 Oct 2026.</li>
+<li>Centers for Disease Control and Prevention. Behavioral Risk Factor Surveillance System: 2023 BRFSS overview. https://www.cdc.gov/brfss/annual_data/2023/pdf/Overview_2023-508.pdf. Accessed 7 Oct 2026.</li>
+<li>Economic Research Service, U.S. Department of Agriculture. Poverty area measures: descriptions and maps. Updated 14 Aug 2026. https://ers.usda.gov/data-products/poverty-area-measures/descriptions-and-maps. Accessed 7 Oct 2026.</li>
+<li>Kong AY, Zhang X. The use of small area estimates in place-based health research. Am J Public Health. 2020;110(6):829-32. doi:10.2105/AJPH.2020.305611</li>
+<li>Centers for Disease Control and Prevention. PLACES: Local Data for Better Health, County Data 2024 release [dataset]. Dataset identifier fu4u-a9bh. Updated 11 Sep 2025. https://data.cdc.gov/d/fu4u-a9bh. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. American Community Survey 5-year estimates, table-based summary files, 2020-2024 and 2019-2023 [dataset]. https://www2.census.gov/programs-surveys/acs/summary_file/. Accessed 7 Oct 2026.</li>
+<li>U.S. Census Bureau. Poverty status in the past 12 months, American Community Survey 5-year estimates, 2020-2024, table S1701 [table]. https://data.census.gov/table/ACSST5Y2024.S1701. Accessed 7 Oct 2026.</li>
+<li>Holt JB, Matthews KA, Lu H, Wang Y, LeClercq JM, Greenlund KJ, et al. Small area estimates of populations with chronic conditions for community preparedness for public health emergencies. Am J Public Health. 2019;109(S4):S325-31. doi:10.2105/AJPH.2019.305241</li>
+<li>Dwyer-Lindgren L, Mackenbach JP, van Lenthe FJ, Flaxman AD, Mokdad AH. Diagnosed and undiagnosed diabetes prevalence by county in the U.S., 1999-2012. Diabetes Care. 2016;39(9):1556-62. doi:10.2337/dc16-0678</li>
+</ol>
+<h2 id="tables">Tables</h2>
+<p class="tcap" id="table-1"><strong>Table 1. Data sources.</strong></p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-1"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-1">
+<thead>
+<tr>
+<th>Source</th>
+<th>Quantities used</th>
+<th>Reference period</th>
+<th>Identifier and file hash (first 12 characters)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDC PLACES County Data, 2025 release</td>
+<td>Crude and age-adjusted prevalence of diagnosed diabetes among adults with 95% limits, and adult population (TotalPop18plus)</td>
+<td>BRFSS 2023 and Census 2023 county population estimates</td>
+<td>data.cdc.gov swc5-untb [20], file hash 2dc8d4ae9354</td>
+</tr>
+<tr>
+<td>CDC PLACES County Data, 2024 release (descriptive comparison only)</td>
+<td>Crude prevalence of diagnosed diabetes and adult population</td>
+<td>BRFSS 2022</td>
+<td>data.cdc.gov fu4u-a9bh [31], file hash 1068b7b1cc98</td>
+</tr>
+<tr>
+<td>Census Bureau Vintage 2023 county characteristics (CC-EST2023-AGESEX)</td>
+<td>Population aged 18 and older (AGE18PLUS_TOT), used to check the PLACES adult population</td>
+<td>July 1, 2023</td>
+<td>www2.census.gov [22], file hash b1d1e44d5737</td>
+</tr>
+<tr>
+<td>ACS 5-year variance replicate tables B05003 and B17001</td>
+<td>Adults 18 and older, people below the poverty level and the poverty universe, with 80 replicate estimates</td>
+<td>2020-2024 (primary) and 2019-2023 (aligned check)</td>
+<td>www2.census.gov [23], file hashes 9bea41916892 (2020-2024 B05003), 3d24fa18e9f0 (2020-2024 B17001), 79076ac622a9 (2019-2023 B05003), 3a221dba2c45 (2019-2023 B17001)</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>All files were accessed on 7 October 2026. File hashes are the first 12 characters of the SHA-256 hash recorded in the source manifest.</p>
+<p class="tcap" id="table-2"><strong>Table 2. Selected, core and boundary counties by rule and capacity.</strong></p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-2"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-2">
+<thead>
+<tr>
+<th>Rule</th>
+<th style="text-align: right;">Capacity</th>
+<th style="text-align: right;">Counties ranked</th>
+<th style="text-align: right;">Selected</th>
+<th style="text-align: right;">Core</th>
+<th style="text-align: right;">Boundary</th>
+<th style="text-align: right;">Estimated adults with diagnosed diabetes in selection (share of frame)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">14,304 (0.05%)</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">346</td>
+<td style="text-align: right;">40,255 (0.13%)</td>
+</tr>
+<tr>
+<td>Prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">563</td>
+<td style="text-align: right;">88,828 (0.30%)</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3,924,208 (13.1%)</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">6,593,790 (22.0%)</td>
+</tr>
+<tr>
+<td>Estimated burden</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">2,956</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">9,194,908 (30.7%)</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">13,867 (0.05%)</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">366</td>
+<td style="text-align: right;">39,818 (0.13%)</td>
+</tr>
+<tr>
+<td>High-poverty prevalence</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">547</td>
+<td style="text-align: right;">88,392 (0.30%)</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Selected counts exceed the capacity when counties tie at the cutoff. Core and boundary are defined in Methods. For high-poverty prevalence, counties ranked are those with poverty of at least 20% at the point estimate (425). Boundary counties can come from all counties whose ACS 95% upper poverty bound reaches 20% (829), and core counties need a lower bound of at least 20% (138), so the boundary count can exceed the number ranked. The last column is descriptive and was added after the primary results.</p>
+<p class="tcap" id="table-3"><strong>Table 3. Overlap between the point-estimate selections of the three rules.</strong></p>
+<div class="table-wrap" tabindex="0" role="region" aria-labelledby="table-3"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table class="wide" aria-labelledby="table-3">
+<thead>
+<tr>
+<th style="text-align: right;">Capacity</th>
+<th style="text-align: right;">Prevalence and burden</th>
+<th style="text-align: right;">Prevalence and high-poverty prevalence</th>
+<th style="text-align: right;">Burden and high-poverty prevalence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0 of 21 (0.00)</td>
+<td style="text-align: right;">10 of 11 (0.91)</td>
+<td style="text-align: right;">0 of 20 (0.00)</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0 of 51 (0.00)</td>
+<td style="text-align: right;">25 of 26 (0.96)</td>
+<td style="text-align: right;">0 of 50 (0.00)</td>
+</tr>
+<tr>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0 of 101 (0.00)</td>
+<td style="text-align: right;">50 of 51 (0.98)</td>
+<td style="text-align: right;">0 of 100 (0.00)</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Each cell gives the counties in both sets, of the counties in either set, with the Jaccard index in parentheses.</p>
+<h2 id="figure-legends">Figure legends</h2>
+<figure id="figure-1"><a href="assets/fig1_selection_scatter.png"><img src="assets/fig1_selection_scatter.svg" alt="Scatter plot of crude diabetes prevalence against adult population on a log scale for all frame counties. Prevalence-selected and high-poverty-selected counties sit at the top left with small populations and prevalence of 22.1 percent or more. Burden-selected counties sit at the far right with at least 1.03 million adults and prevalence between 7.3 and 16.1 percent." width="1917" height="1209" loading="lazy"></a><figcaption><b>Figure 1. Prevalence and adult population of counties selected under each rule.</b> Gray points are all 2,956 frame counties. Colored marks show counties selected at capacity 25 under the prevalence rule (filled circles), the high-poverty prevalence rule (open circles) and the estimated burden rule (squares). Adult population is the Census Vintage 2023 estimate on a logarithmic axis. Some burden-selected counties overlap at this scale. All are listed in Additional file 1, Table S8b. PLACES 2025 release. Select the figure to open it at full size.</figcaption></figure>
+
+<figure id="figure-2"><a href="assets/fig2_capacity_envelope.png"><img src="assets/fig2_capacity_envelope.svg" alt="Horizontal bars for three rules at capacities 10, 25 and 50. Under prevalence, 0, 0 and 1 counties are core and 180, 346 and 563 are boundary. Under estimated burden, 5, 17 and 29 are core and 12, 18 and 50 boundary. Under high-poverty prevalence, 0, 0 and 1 are core and 200, 366 and 547 boundary." width="2288" height="1280" loading="lazy"></a><figcaption><b>Figure 2. Core and boundary counties for each rule and capacity.</b> Bars show the number of counties classified as core (selected wherever every county's value falls within the bounds used for the rule) and boundary (selected under some combinations of values within the bounds). Bounds are the published PLACES 95% limits and, for estimated burden, scenario bounds that also span the adult population range. For high-poverty prevalence, eligibility also spans the ACS 95% poverty bounds: a county whose upper bound reaches 20% can be boundary, and only a county whose lower bound reaches 20% can be core. The vertical mark shows the capacity. National frame of 2,956 counties. PLACES 2025 release. Select the figure to open it at full size.</figcaption></figure>
+
+<figure id="figure-3"><a href="assets/fig3_rank_envelopes.png"><img src="assets/fig3_rank_envelopes.svg" alt="Two panels of horizontal lines, one per county, for the 35 highest-ranked counties under the prevalence rule (left) and the estimated burden rule (right). Prevalence lines run from rank 1 to worst-case ranks between 39 and 425 and all cross the capacity line at 25. Burden lines are short, and the 17 highest are entirely left of the capacity line." width="2193" height="2305" loading="lazy"></a><figcaption><b>Figure 3. Rank ranges for the highest-ranked counties at capacity 25.</b> Left panel: prevalence rule. Right panel: estimated burden rule. Each panel shows the 35 counties with the best point-estimate ranks under that rule. Lines run from the best-case to the worst-case rank within the rule's bounds, and dots mark point-estimate ranks. Blue marks core counties and orange marks boundary counties. The vertical line is the capacity of 25, the rank axis is logarithmic, and ties share a rank. PLACES 2025 release. Select the figure to open it at full size.</figcaption></figure>
+
+<h2 id="additional-files">Additional files</h2>
+<p><strong><a href="supplement.html">Additional file 1</a>.</strong> File format: .docx. Title: Supplementary methods and tables. Description: analysis plan and amendments, exclusions, scenario overlaps, within-state results, robustness checks, source reconciliation and the planning brief (sections S1 to S10, Tables S1 to S9). <a href="downloads/additional_file_1_supplement.docx">Download supplementary material (Word)</a>.</p>
+<p><strong><a href="downloads/diabetes-outreach-priorities-workbook.xlsx">Additional file 2</a>.</strong> File format: .xlsx. Title: Analysis workbook. Description: definitions sheet, the county priority table for all 2,956 frame counties, and the summary tables.</p>
+<p><strong><a href="downloads/diabetes-outreach-priorities-source.zip">Additional file 3</a>.</strong> File format: .zip. Title: Source archive. Description: analysis code (Python, SQL and R), configuration, tests, analysis plan, source manifest with file hashes, derived tables and the scripts for the independent rechecks. README.md gives the commands that reproduce every result.</p>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) to help with coding, analysis and manuscript preparation. I take responsibility for the work.</p></section></main>
+</body>
+</html>

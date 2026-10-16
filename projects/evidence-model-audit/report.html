@@ -1,0 +1,2382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full report: citation validity versus answer correctness</title>
+<meta name="description" content="Complete scientific report and supplementary material for the evidence model audit on Evidence Inference 2.0.">
+<link rel="stylesheet" href="assets/site.css?v=0d74ad063e">
+<style>
+.report main{max-width:1000px}.report article{max-width:760px}.report article .table-wrap{max-width:960px}
+.report article img{width:100%;max-width:960px;height:auto;border:1px solid var(--rule);background:#fcfcfb}
+.report article p,.report article li{text-wrap:pretty}.report article h1{font-size:clamp(1.5rem,3vw,2rem)}
+.report nav.toc{font-size:.92rem;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px 0;margin:16px 0}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="report portfolio-page portfolio-report">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+<article>
+<h1 id="verbatim-evidence-quotes-and-answer-correctness-an-evaluation-of-small-local-language-models-extracting-clinical-trial-results">Verbatim evidence quotes and answer correctness: an evaluation of small local language models extracting clinical trial results</h1>
+<p><strong>Animesh Bose</strong></p>
+<p>Norlowe Research</p>
+
+<p>Article type: Research and Applications. Keywords: large language models; evidence synthesis; randomized controlled trials; information extraction; selective prediction.</p>
+<h2 id="abstract">Abstract</h2>
+<p><strong>Objectives:</strong> Language-model tools that extract trial results can be checked by confirming that a quoted sentence appears in the source. This study measured how often small local models give a genuine quote with a wrong result and whether rejecting failed checks reduces error.</p>
+<p><strong>Materials and Methods:</strong> Qwen3-1.7B and Qwen3-0.6B, run locally, answered 1,209 eligible Evidence Inference 2.0 test prompts from retrieved passages (1,024 tokens) and, where available, the abstract and annotated evidence; Qwen3-4B-Instruct-2507 used retrieved passages. Answers gave a direction label, a verbatim quote, and a passage identifier. Parse validity, quote existence, locator validity, evidence overlap, and label correctness were scored separately.</p>
+<p><strong>Results:</strong> For Qwen3-1.7B with retrieved passages, 928 of 1,196 answers quoted the source verbatim; 423 of these (45.6%; 95% CI 41.8% to 49.3%) had the wrong label, mostly reporting significance the trial did not find. With annotated evidence, 29.2% were wrong. With retrieved passages, the rate was 42.8% for Qwen3-0.6B and 20.5% for Qwen3-4B-Instruct-2507. Keeping only answers with a valid quote and passage identifier changed error by +0.1 percentage points (95% CI -1.6 to +1.9) as coverage fell from 98.9% to 72.0%, no better than random rejection (45.6%).</p>
+<p><strong>Discussion:</strong> A present quote confirmed copying but did not show that the label followed from the text. Qwen3-4B-Instruct-2507, a later release, erred less overall, yet the rule again did no better than random.</p>
+<p><strong>Conclusion:</strong> For these small models, passing a quote-presence check did not show that an extracted trial result was correct; the label needs a separate check.</p>
+<h2 id="lay-summary">Lay summary</h2>
+<p>Artificial intelligence tools that read clinical trial reports often show a quotation beside each answer. A program can confirm that the quotation appears in the report, but does that mean the answer is right? Small language models running locally answered 1,209 questions about published trials. Each question asked whether an outcome was significantly higher, significantly lower, or not significantly different with one treatment than with another. Experts had already answered the questions. Among answers with a quotation found in the article, close to half were wrong for the main model and about one in five for the largest model. The most common mistake was reporting a statistically significant difference when the trial found none. For the main model, discarding answers whose quotations could not be found removed many answers without making those retained more accurate. A quotation's presence confirms copying, not that the answer follows from the text. People using these tools still need to check what the quoted evidence supports.</p>
+<h2 id="background-and-significance">Background and Significance</h2>
+<p>Systematic reviewers spend much of their time reading trial reports to find out what happened to an outcome under one treatment compared with another. Language models are now being used to draft these extractions,[1] and one proposed safeguard is to have the model quote its evidence and then check mechanically that the quote appears in the source.[2] A quote that matches the article is easy to verify and looks reassuring. It does not show that the model read the sentence correctly.</p>
+<p>Evidence Inference formalized this task. Given a trial report and a prompt naming an intervention, a comparator, and an outcome, a system must say whether the intervention significantly increased, did not significantly change, or significantly decreased the outcome relative to the comparator, and identify supporting evidence.[3] In the first release, logistic regression over a bag of words reached a macro-F1 of 0.388 on full articles and 0.731 when given the annotated evidence span, which located much of the difficulty in finding evidence. Evidence Inference 2.0 added prompts, released an abstract-only version, and reported that most evidence for the newly collected prompts lay outside the abstract.[4]</p>
+<p>Work on attributed generation has shown that support and correctness are different properties. Frameworks for attribution deliberately make no factuality judgment.[5] Human-rated attribution correlated only modestly with exact-match accuracy in attributed question answering,[6] and an audit of generative search engines found about half of generated sentences fully supported by their citations, without judging whether statements were true.[7] A model trained to support answers with verbatim quotes produced false answers that raters judged supported.[8] In medicine, an automated framework for checking whether cited sources support claims warns that verbatim quoting can satisfy source checks trivially.[9]</p>
+<p>Three studies come closest to the present question. Elbakian and Carton asked GPT-4 and Gemini 1.5 Pro for a structured label with quoted spans on five datasets including Evidence Inference, checked quotes by substring match, and found that a quarter or more of Evidence Inference errors with valid quotes were misreadings of evidence that overlapped the human rationale.[10] Their analysis used 300 development items and frontier models. Windisch and colleagues required verbatim quotes for classifying oncology trial eligibility criteria and reported that keeping only mechanically valid outputs left macro-F1 essentially unchanged.[2] Buchmann and colleagues included Evidence Inference in a long-document benchmark and showed that ordering answers by an NLI-based attributability score improved selective prediction over a random order.[11] None of these studies evaluated models below about 3 billion parameters, reported the joint rate of valid quotes and wrong labels over a full test split, or compared a fixed quote-validity rule with random rejection at the same coverage.</p>
+<p>Small local models matter because restricted documents often cannot be sent to remote services and local tools are cheap to run at scale. The selective prediction literature supplies the frame for asking whether a check is worth applying: a rejection rule is judged by the error it leaves and the coverage it costs.[12,13] This study adds a comparison with random rejection at the same coverage, so that any drop in error can be separated from the effect of simply answering fewer questions.</p>
+<h2 id="objective">Objective</h2>
+<p>This study measured how often small local instruction models answer Evidence Inference 2.0 prompts with a quote that is present in the supplied source while the direction label is wrong, with each validity check reported separately, across a retrieved context, an abstract-only context, and an annotated-evidence oracle. It also tested whether rejecting answers whose quote fails the check lowers error more than rejecting the same number of answers at random. It extends earlier frontier-model analyses to models of 0.6 to 4 billion parameters and to the full official test split, and it releases the evaluation harness.</p>
+<h2 id="materials-and-methods">Materials and Methods</h2>
+<h3 id="data-and-labels">Data and labels</h3>
+<p>Evidence Inference 2.0 contains randomized trial reports from the PubMed Central Open Access subset with prompts of the form "With respect to <em>outcome</em>, characterize the reported difference between patients receiving <em>intervention</em> and those receiving <em>comparator</em>".[3,4] Physicians wrote each prompt, answered it with one of three labels (significantly increased, no significant difference, significantly decreased) and an evidence span, and verified other annotators' answers. The corpus repository was used at a pinned commit (a661e8c, two commits after its v2.0 tag, differing only in model code) with its official article-level splits, which share no article. The files hold 12,865 prompts and 24,686 annotation rows, and they matched the tarball posted on the project site in prompts, splits, and label codes (Supplementary S1).</p>
+<p>Following the corpus authors' preprocessing, an annotation was accepted when the verifier accepted its label and its reasoning and its evidence string was not empty. A prompt's benchmark label was the label shared by all its accepted annotations; prompts whose accepted annotations disagreed were analyzed only in a sensitivity analysis, and prompts on the corpus authors' list of incorrect prompts were excluded. Evidence offsets were treated as half-open intervals, which reproduced the annotated strings (Supplementary S1). Annotation strings were compared with the text after collapsing whitespace and unescaping HTML entities; spans that still could not be found were not used as evidence (Supplementary S1). Increased and decreased refer to the value of the outcome measure, not to benefit or harm, and "no significant difference" is a reported absence of statistical significance, distinct from equivalence and from abstention.</p>
+<h3 id="context-conditions">Context conditions</h3>
+<p>Every eligible prompt was answered with retrieved passages, and with the abstract and the annotated evidence where those contexts could be built, using identical instructions and output limits. In the retrieved context, each paragraph was split into chunks of at most 60 words built from whole sentences (longer unbroken segments, mostly tables, were cut at word boundaries). Chunks were ranked by BM25 (k1 = 1.2, b = 0.75, each chunk treated as a document, with statistics from training-split chunks only) against the intervention, comparator, and outcome text, added in rank order up to 1,024 tokens, and shown in article order with passage identifiers. The budget was fixed before testing; on the 1,201 eligible validation prompts with located evidence, supplied passages overlapped annotated evidence for 57.9%, 76.4%, and 84.5% of prompts at 512, 1,024, and 1,536 tokens. In the abstract context, the passages were the title and abstract paragraphs of the same text (when at least 200 characters long), truncated at 1,024 tokens; the corpus's folder of abstract files was not used because 2,334 of its 3,285 files contain full articles. In the oracle context, the passages were the located accepted evidence spans, merged where they overlapped. The oracle is an upper bound on evidence access, not a deployable method.</p>
+<h3 id="models-and-inference">Models and inference</h3>
+<p>The primary model was Qwen3-1.7B,[14] with Qwen3-0.6B for lower capacity and Qwen3-4B-Instruct-2507 as a larger extension (retrieved context only), each pinned to a repository revision (Supplementary S3). Models ran locally with Hugging Face Transformers in float32 on an Apple M5 Pro GPU, with no remote service; the same code runs on CPU. Each model's chat template was used with thinking disabled for the hybrid models. The prompt asked for one JSON object with a label (the three benchmark labels or "cannot determine"), a quote copied from one passage, and that passage's identifier, and defined each label, including that increased and decreased describe the outcome value (Supplementary S2).</p>
+<p>Three settings were fixed on 347 development prompts from 100 validation articles before any language-model test prediction, by rules written in advance. The prompt without a worked example was kept (45.8% versus 43.2% end-to-end success with the example); greedy decoding was kept because the model card's recommended sampling did not reduce invalid outputs (0.3% with both); and GPU inference was kept because it matched CPU inference on 40 of 40 prompts, with identical responses. Output was limited to 256 new tokens.</p>
+<p>All test articles with an eligible prompt were evaluated, with no subset drawn; every call was cached with its prompt hash, token counts, latency, and raw response.</p>
+<h3 id="baselines">Baselines</h3>
+<p>A majority-class reference predicted the most frequent training label. For each context, a logistic regression on TF-IDF features of the passages and prompt text was trained on training prompts built with the same context procedure, with settings chosen on validation macro-F1; it is a variant of the original bag-of-words baselines,[3] not a replication. Both baselines returned the top-ranked passage as their quote, so their quote is always an exact copy of a supplied passage and fails the quote check only when that passage is shorter than four words.</p>
+<h3 id="separated-validity-checks">Separated validity checks</h3>
+<p>Parse validity required the first JSON object in the response to match the schema after markdown fences were removed; no other repair was made, and text after the object was tolerated (this affected 8 of 8,428 recorded test responses). An answer abstained if its label was "cannot determine" and was answered otherwise. The quote existed if, after collapsing whitespace, it was a substring of one supplied passage and had at least four words. The locator was valid if the returned identifier named the passage holding the quote. Evidence overlap required the located quote to share at least one character with an accepted evidence span. End-to-end task success required an answer, an existing quote, a valid locator, and the correct label, with every eligible prompt in the denominator, including invalid outputs. A present quote is a syntactic check, not a test of entailment, and annotated spans can miss other valid evidence.</p>
+<h3 id="estimand-and-statistical-analysis">Estimand and statistical analysis</h3>
+<p>The primary estimand, fixed in a timestamped internal analysis plan before any test prediction, was the label-error rate among quote-valid answers: the proportion of answered prompts with an existing quote whose label was wrong, for Qwen3-1.7B in the retrieved context. All intervals are 95% percentile intervals from 10,000 bootstrap resamples of articles. Secondary measures included macro-F1 (abstentions and invalid outputs counted as wrong), per-class precision and recall, coverage, and evidence recall at the token budget.</p>
+<p>The quote check was tested as a rejection rule by comparing, on the same predictions, acceptance of every answer with acceptance of only answers with an existing quote and valid locator (retained error, coverage, paired bootstrap difference), against rejecting the same number of answers uniformly at random 2,000 times. Contexts and models were compared on unconditional quantities (task success, correct labels over all prompts) with paired article-bootstrap intervals on shared prompts. A logistic scoring rule on six observable answer features (Supplementary S13) was fitted on development predictions only and applied to test answers for a risk-coverage curve. Five sensitivity analyses were fixed in advance: exact rather than normalized quote matching, with the same four-word minimum; inclusion of prompts with disagreeing accepted labels; exclusion of prompts flagged as questionable or malformed (none in the test split); a one-word minimum; and restriction to prompts whose retrieved passages overlapped annotated evidence. Quote-valid wrong answers were sorted by fixed rules into significance errors and direction reversals, crossed with evidence overlap; these categories are automated, not expert labels.</p>
+<h3 id="software-checks-and-reproducibility">Software checks and reproducibility</h3>
+<p>Unit tests on synthetic fixtures covered parsing, quote location, the label contract, chunking, and the statistics. A validation stage rebuilt all outputs from cached inputs and compared 4,809 reported numbers with the stored results, recounted the headline aggregates in base R from the item-level files, and regenerated a sample of test calls (40 of 40 identical responses); the final archive was then installed in an empty directory, where its tests passed and its demonstration ran (Supplementary S11). Three amendments to the analysis plan were recorded after test outputs had been generated: the four-word minimum in the exact-match sensitivity analysis, exclusion of the 6 prompts of one test article whose text file is empty, and HTML-entity-aware location of evidence spans, after which the oracle condition was re-run for the 13 prompts per model whose passages changed. None changed the primary estimate (Supplementary S1, S3, and S7). I also checked the primary result and its inputs by hand. I recounted the primary counts (423 of 928) from the item-level file. I compared 20 quote-valid wrong answers, drawn at random with a fixed seed (20261007), with the source articles to confirm that each quote appeared in the article and that the benchmark label reflected the reported result. I checked the label codes of five sampled prompts against the raw annotation file, confirmed that the analysis plan and frozen configuration predated the first language-model test prediction, and checked the descriptions of the five closest prior studies against the papers.</p>
+<h2 id="results">Results</h2>
+<h3 id="output-validity-and-evidence-availability">Output validity and evidence availability</h3>
+<p>The test split contains 1,252 prompts in 334 articles; 1,209 prompts in 332 articles met the eligibility rule after the exclusions listed in Supplementary S1. In the retrieved context, 1,205 of 1,209 responses parsed under the schema and 9 of 1,209 abstained, leaving 1,196 answered prompts (Table 1). The retrieved passages overlapped annotated evidence for 916 of 1,202 prompts with locatable evidence (76.2%, 95% CI 72.4% to 79.9%); the title and abstract did so for 581 of 1,158 (50.2%, 95% CI 45.8% to 54.5%).</p>
+<p><strong>Table 1.</strong> Separated validity checks by context and system, eligible test prompts. Percentages for quote existence, locator validity, and label correctness are of answered prompts; task success is of all prompts. Baselines return the top-ranked passage as their quote.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>System</th>
+<th style="text-align: right;">Prompts</th>
+<th style="text-align: right;">Parse valid</th>
+<th style="text-align: right;">Abstained</th>
+<th style="text-align: right;">Quote exists (of answered)</th>
+<th style="text-align: right;">Locator valid (of answered)</th>
+<th style="text-align: right;">Label correct (of answered)</th>
+<th style="text-align: right;">Quote valid, label wrong</th>
+<th style="text-align: right;">Task success</th>
+<th style="text-align: right;">Macro-F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">1,205 (99.7%)</td>
+<td style="text-align: right;">9 (0.7%)</td>
+<td style="text-align: right;">928 (77.6%)</td>
+<td style="text-align: right;">871 (72.8%)</td>
+<td style="text-align: right;">651 (54.4%)</td>
+<td style="text-align: right;">423 of 928 (45.6%)</td>
+<td style="text-align: right;">473 (39.1%)</td>
+<td style="text-align: right;">0.513</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">1,179 (97.5%)</td>
+<td style="text-align: right;">6 (0.5%)</td>
+<td style="text-align: right;">773 (65.9%)</td>
+<td style="text-align: right;">454 (38.7%)</td>
+<td style="text-align: right;">671 (57.2%)</td>
+<td style="text-align: right;">331 of 773 (42.8%)</td>
+<td style="text-align: right;">260 (21.5%)</td>
+<td style="text-align: right;">0.480</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">1,206 (99.8%)</td>
+<td style="text-align: right;">46 (3.8%)</td>
+<td style="text-align: right;">1,039 (89.6%)</td>
+<td style="text-align: right;">1,029 (88.7%)</td>
+<td style="text-align: right;">920 (79.3%)</td>
+<td style="text-align: right;">213 of 1,039 (20.5%)</td>
+<td style="text-align: right;">818 (67.7%)</td>
+<td style="text-align: right;">0.774</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">695 (57.5%)</td>
+<td style="text-align: right;">514 of 1,209 (42.5%)</td>
+<td style="text-align: right;">695 (57.5%)</td>
+<td style="text-align: right;">0.565</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">1,209 (100.0%)</td>
+<td style="text-align: right;">511 (42.3%)</td>
+<td style="text-align: right;">698 of 1,209 (57.7%)</td>
+<td style="text-align: right;">511 (42.3%)</td>
+<td style="text-align: right;">0.198</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">1,156 (99.2%)</td>
+<td style="text-align: right;">11 (0.9%)</td>
+<td style="text-align: right;">1,026 (89.6%)</td>
+<td style="text-align: right;">997 (87.1%)</td>
+<td style="text-align: right;">586 (51.2%)</td>
+<td style="text-align: right;">504 of 1,026 (49.1%)</td>
+<td style="text-align: right;">505 (43.3%)</td>
+<td style="text-align: right;">0.481</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">994 (85.3%)</td>
+<td style="text-align: right;">45 (3.9%)</td>
+<td style="text-align: right;">725 (76.4%)</td>
+<td style="text-align: right;">358 (37.7%)</td>
+<td style="text-align: right;">482 (50.8%)</td>
+<td style="text-align: right;">352 of 725 (48.6%)</td>
+<td style="text-align: right;">174 (14.9%)</td>
+<td style="text-align: right;">0.393</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">1,165 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,161 (99.7%)</td>
+<td style="text-align: right;">1,161 (99.7%)</td>
+<td style="text-align: right;">620 (53.2%)</td>
+<td style="text-align: right;">543 of 1,161 (46.8%)</td>
+<td style="text-align: right;">618 (53.0%)</td>
+<td style="text-align: right;">0.525</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">1,165 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,161 (99.7%)</td>
+<td style="text-align: right;">1,161 (99.7%)</td>
+<td style="text-align: right;">492 (42.2%)</td>
+<td style="text-align: right;">670 of 1,161 (57.7%)</td>
+<td style="text-align: right;">491 (42.1%)</td>
+<td style="text-align: right;">0.198</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">1,195 (99.4%)</td>
+<td style="text-align: right;">47 (3.9%)</td>
+<td style="text-align: right;">980 (85.4%)</td>
+<td style="text-align: right;">978 (85.2%)</td>
+<td style="text-align: right;">816 (71.1%)</td>
+<td style="text-align: right;">286 of 980 (29.2%)</td>
+<td style="text-align: right;">692 (57.6%)</td>
+<td style="text-align: right;">0.683</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">1,187 (98.8%)</td>
+<td style="text-align: right;">372 (30.9%)</td>
+<td style="text-align: right;">406 (49.8%)</td>
+<td style="text-align: right;">393 (48.2%)</td>
+<td style="text-align: right;">531 (65.2%)</td>
+<td style="text-align: right;">120 of 406 (29.6%)</td>
+<td style="text-align: right;">276 (23.0%)</td>
+<td style="text-align: right;">0.489</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">910 (75.7%)</td>
+<td style="text-align: right;">292 of 1,202 (24.3%)</td>
+<td style="text-align: right;">910 (75.7%)</td>
+<td style="text-align: right;">0.745</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">0 (0.0%)</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">1,202 (100.0%)</td>
+<td style="text-align: right;">508 (42.3%)</td>
+<td style="text-align: right;">694 of 1,202 (57.7%)</td>
+<td style="text-align: right;">508 (42.3%)</td>
+<td style="text-align: right;">0.198</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Among answered prompts, the quote existed in the supplied passages for 928 of 1,196 (77.6%, 95% CI 74.8% to 80.4%), the returned passage identifier pointed to the passage holding it for 871 of 1,196, and the located quote overlapped annotated evidence for 385 of 1,189 prompts with evaluable evidence (mean token F1 against the best-matching span, 0.548). The label was correct for 651 of 1,196 (54.4%, 95% CI 50.9% to 57.9%). End-to-end success (an answer, existing quote, valid locator and correct label) was 473 of 1,209 (39.1%, 95% CI 35.9% to 42.3%; Figure 1).</p>
+<h3 id="quote-valid-answers-with-wrong-labels">Quote-valid answers with wrong labels</h3>
+<p>Of the 928 answers whose quote existed, 423 carried the wrong label (45.6%; 95% CI 41.8% to 49.3%; Figure 2). Answered prompts without an existing quote were wrong about as often (122 of 268, 45.5%). The rate depended strongly on the benchmark class. For prompts whose benchmark label was no significant difference, 295 of 385 quote-valid answers were wrong; for significantly decreased, 109 of 233; for significantly increased, 19 of 310. The fixed sensitivity analyses gave similar estimates: 422 of 926 (45.6%, 95% CI 41.8% to 49.3%) with exact rather than whitespace-normalized matching and 423 of 931 (45.4%, 95% CI 41.6% to 49.1%) when prompts with disagreeing accepted labels were included and a match to any accepted label counted as correct (Supplementary S7). Restricted to prompts whose retrieved passages overlapped annotated evidence, the rate was 288 of 698 (41.3%, 95% CI 37.1% to 45.4%).</p>
+<p>By the automated categories, 295 (69.7%) of the 423 quote-valid wrong answers reported a significant effect where the benchmark recorded no significant difference, 122 (28.8%) reversed the direction (106 answered increased for a benchmark decrease and 16 the reverse), and 6 (1.4%) reported no significant difference where the benchmark recorded a significant effect. 123 (29.1%) of these wrong answers quoted text that overlapped annotated evidence, including 47 direction reversals (Supplementary S10).</p>
+<h3 id="contexts-models-and-baselines">Contexts, models, and baselines</h3>
+<p>With the title and abstract, 89.6% of Qwen3-1.7B answers had an existing quote and 504 of 1,026 of these were wrong (49.1%, 95% CI 45.1% to 53.2%). With the annotated evidence supplied, 286 of 980 quote-valid answers were wrong (29.2%, 95% CI 25.7% to 32.9%), and end-to-end success was higher than with retrieved passages (+18.5 percentage points, 95% CI +14.6 to +22.3, 1,202 prompts).</p>
+<p>With retrieved passages, Qwen3-0.6B's label accuracy did not differ clearly from that of Qwen3-1.7B (671 of 1,173 answered prompts correct, 57.2%; Qwen3-1.7B minus Qwen3-0.6B in correct labels over all prompts: -1.7 percentage points, 95% CI -6.1 to +2.9, 1,209 prompts), but it quoted less reliably: the quote existed for 65.9% of its answers and the locator was valid for 454 of 1,173, so end-to-end success was 21.5% against 39.1% for Qwen3-1.7B. Among its quote-valid answers, 331 of 773 were wrong (42.8%, 95% CI 38.5% to 47.3%). With the annotated evidence it abstained on 372 of 1,202 prompts. Qwen3-4B-Instruct-2507, run with retrieved passages only, gave more correct labels than Qwen3-1.7B (920 of 1,160 answered prompts correct, 79.3%; Qwen3-4B-Instruct-2507 minus Qwen3-1.7B in correct labels over all prompts: +22.2 percentage points, 95% CI +18.5 to +26.0, 1,209 prompts) and returned an existing quote for 89.6% of its answers; 213 of 1,039 of those were still wrong (20.5%, 95% CI 17.4% to 23.7%). Its end-to-end success exceeded that of Qwen3-1.7B on the same prompts (+28.5 percentage points, 95% CI +24.6 to +32.4, 1,209 prompts).</p>
+<p>The TF-IDF baseline's quote, its top-ranked passage, existed for 1,209 of 1,209 answered prompts; 514 of 1,209 of these labels were wrong (42.5%, 95% CI 39.2% to 45.8%). Its share of correct labels over all prompts did not differ clearly from that of Qwen3-1.7B (Qwen3-1.7B minus TF-IDF: -3.6 percentage points, 95% CI -8.1 to +0.7, 1,209 prompts). The majority-class label paired with the same passage passed the quote check for 1,209 of 1,209 prompts while being wrong for 698 of 1,209.</p>
+<h3 id="the-quote-validity-rule-and-random-rejection">The quote-validity rule and random rejection</h3>
+<p>For Qwen3-1.7B with retrieved passages, accepting every answer gave a retained error of 45.6% at 98.9% coverage. Keeping only answers with an existing quote and a valid locator gave 45.7% at 72.0% coverage, a difference of +0.1 percentage points, 95% CI -1.6 to +1.9 (Table 2, Figure 3). The rule rejected 325 answers, 178 of which had the correct label. Random rejection of the same number of answers gave a mean retained error of 45.6% (middle 95% of draws 44.0% to 47.3%). The same held with the abstract (+0.5 percentage points, 95% CI -0.8 to +1.8) and with annotated evidence (+0.3 percentage points, 95% CI -0.8 to +1.4).</p>
+<p>For Qwen3-0.6B the rule did not detectably beat random rejection with retrieved passages (-0.1 percentage points, 95% CI -4.1 to +3.9, coverage falling to 37.6%) or with the abstract (+2.2 percentage points, 95% CI -2.8 to +7.1). The one exception was Qwen3-0.6B with annotated evidence, where the rule lowered retained error from 34.8% to 29.8% (-5.1 percentage points, 95% CI -8.6 to -1.6), below the middle 95% of random rejections (31.3% to 38.4%; 0.2% of draws at or below the rule), at 32.7% coverage. For Qwen3-4B-Instruct-2507 the rule changed retained error by -0.2 percentage points (95% CI -1.1 to +0.7) as coverage fell from 95.9% to 85.1%, again within the random-rejection range (19.8% to 21.5%).</p>
+<p>A logistic scoring rule fitted on development predictions from six observable answer features (Supplementary S13) ordered test answers better than random (area under the risk-coverage curve 0.337 against 0.450; Figure 4).</p>
+<p><strong>Table 2.</strong> Retained error with all answers and with only answers whose quote exists and whose passage identifier is valid, against random rejection keeping the same number of answers (2,000 draws), with the share of random draws whose error was at or below the rule's. Differences are in percentage points with paired article-bootstrap 95% intervals.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th style="text-align: right;">Error, all answers (at coverage)</th>
+<th style="text-align: right;">Error, quote and locator valid only (at coverage)</th>
+<th style="text-align: right;">Difference, points (95% CI)</th>
+<th style="text-align: right;">Random rejection, same coverage: mean (middle 95%)</th>
+<th style="text-align: right;">Random draws with error at or below the rule</th>
+<th style="text-align: right;">Answers rejected by the rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">45.6% at 98.9%</td>
+<td style="text-align: right;">45.7% at 72.0%</td>
+<td style="text-align: right;">+0.1 (-1.6 to +1.9)</td>
+<td style="text-align: right;">45.6% (44.0% to 47.3%)</td>
+<td style="text-align: right;">55.4%</td>
+<td style="text-align: right;">325 (178 correct)</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">42.8% at 97.0%</td>
+<td style="text-align: right;">42.7% at 37.6%</td>
+<td style="text-align: right;">-0.1 (-4.1 to +3.9)</td>
+<td style="text-align: right;">42.8% (39.2% to 46.5%)</td>
+<td style="text-align: right;">49.8%</td>
+<td style="text-align: right;">719 (411 correct)</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td style="text-align: right;">20.7% at 95.9%</td>
+<td style="text-align: right;">20.5% at 85.1%</td>
+<td style="text-align: right;">-0.2 (-1.1 to +0.7)</td>
+<td style="text-align: right;">20.7% (19.8% to 21.5%)</td>
+<td style="text-align: right;">37.0%</td>
+<td style="text-align: right;">131 (102 correct)</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">48.8% at 98.3%</td>
+<td style="text-align: right;">49.3% at 85.6%</td>
+<td style="text-align: right;">+0.5 (-0.8 to +1.8)</td>
+<td style="text-align: right;">48.8% (47.7% to 49.9%)</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">148 (81 correct)</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">49.2% at 81.5%</td>
+<td style="text-align: right;">51.4% at 30.7%</td>
+<td style="text-align: right;">+2.2 (-2.8 to +7.1)</td>
+<td style="text-align: right;">49.2% (45.0% to 53.4%)</td>
+<td style="text-align: right;">86.4%</td>
+<td style="text-align: right;">591 (308 correct)</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">28.9% at 95.5%</td>
+<td style="text-align: right;">29.2% at 81.4%</td>
+<td style="text-align: right;">+0.3 (-0.8 to +1.4)</td>
+<td style="text-align: right;">28.9% (27.7% to 30.0%)</td>
+<td style="text-align: right;">74.7%</td>
+<td style="text-align: right;">170 (124 correct)</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">34.8% at 67.8%</td>
+<td style="text-align: right;">29.8% at 32.7%</td>
+<td style="text-align: right;">-5.1 (-8.6 to -1.6)</td>
+<td style="text-align: right;">34.8% (31.3% to 38.4%)</td>
+<td style="text-align: right;">0.2%</td>
+<td style="text-align: right;">422 (255 correct)</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="discussion">Discussion</h2>
+<p>For a small local model answering questions about trial reports, a quote that genuinely appeared in the source was attached to a wrong answer close to half the time. Rejecting answers without such a quote removed about a quarter of the primary model's answers without lowering the error of the rest, and in 6 of the 7 model and context combinations the rule did no better than random rejection at the same coverage. Qwen3-4B-Instruct-2507, a later and larger release, gave more correct labels than Qwen3-1.7B (+22.2 percentage points, 95% CI +18.5 to +26.0, 1,209 prompts) and about half as many quote-valid wrong answers (213 against 423), yet about one in five of its quote-valid answers was still wrong, and quote validity again did not say which. In the primary condition, quote presence did not distinguish correct from incorrect labels. </p>
+<p>The finding matches earlier observations on frontier models, where a substantial share of errors with valid quotes were misreadings of the right evidence [10] and filtering on mechanical quote validity left macro-F1 essentially unchanged.[2] Here the joint rate covers a full test split and laptop-sized models, and the rule is compared with random rejection.</p>
+<p>Most quote-valid wrong answers reported a statistically significant effect where the trial reported none, and the model rarely chose "no significant difference" (recall 0.219 for that class, against precision 0.918). A sentence describing a numerical difference can be quoted correctly while its p-value or confidence interval is ignored. About three in ten errors reversed the direction of a significant effect, and most of these answered an increase where the benchmark recorded a decrease (106 of 122), in line with the model's preference for that label (recall 0.926, precision 0.488). Confusing the intervention with the comparator may also contribute: a fine-tuned 4-billion-parameter classifier on the same benchmark kept its direction answer for about a third of prompts when the two were exchanged.[15] </p>
+<p>Retrieval failure explains only part of the errors. In 123 (29.1%) of the quote-valid wrong answers the quote overlapped the annotators' evidence, and in the oracle condition, where the model was handed the annotated evidence, it still erred on 29.2% of quote-valid answers.</p>
+<p>The baselines illustrate the limits of a presence check. An extractive system passes it almost automatically: a majority-class guess with a retrieved passage attached passed it for 1,209 of 1,209 prompts. Quote presence can therefore be satisfied without reading the evidence at all, and in these results it carried little information about whether the answer was right. Work on attribution treats support as separate from correctness,[5-7] and medical citation checking has warned that verbatim quoting can satisfy source checks trivially.[9] </p>
+<p>The development-fitted scoring rule ordered test answers better than random, which suggests that cheap observable signals beyond quote presence carry some information about correctness, but it was exploratory, was not designed to show which signals matter, and does not give calibrated probabilities. Semantic checks with natural language inference models [16,17] or human review are candidates for tools that inform clinical or review decisions, but neither was tested here, and both deserve the same comparison with random rejection.</p>
+<p>For developers and reviewers of evidence tools, the practical implication is to report quote validity and answer correctness as separate quantities and to test any validity-based filter against random rejection at the same coverage before relying on it. The released harness supports models that return its specified answer schema.</p>
+<h3 id="limitations">Limitations</h3>
+<p>Evidence Inference 2.0 is public and may be in the pretraining data of the evaluated models; a clean train and test split does not rule this out. Only models of 0.6 to 4 billion parameters from one family were evaluated, with one prompt, greedy decoding, thinking mode disabled for the two hybrid models, and a lexical retriever at one token budget, so the estimates do not describe larger, proprietary, or task-fine-tuned models, reasoning modes, or better retrieval. Qwen3-4B-Instruct-2507 also differs from the other two models in release and post-training, so comparisons with it do not isolate model size. The estimate is sensitive to the prompt: on development data, a variant with a worked example gave a lower label-error rate among quote-valid answers, 35.3% (83 of 235) against 41.7% (120 of 288), but fewer existing quotes, and it lost on the prespecified success rule. </p>
+<p>Benchmark labels come from physicians with verification, but they contain known noise, and annotators marked one or two evidence spans, so a quote outside them may still be valid evidence. Error categories are rule-based, not expert judgments. The pooled rate depends on the benchmark's mix of labels, so it will differ where null results are more or less common. </p>
+<p>The test articles were published between 1993 and 2018, so the benchmark is an older expert-annotated sample, not a sample of current literature. Finally, the benchmark asks for statistical significance in one comparison, which is narrower than the judgments evidence reviewers make.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>For the primary model, answers whose verbatim quote appeared in the trial report were right no more often than answers without one, and keeping only answers with a valid quote and passage identifier performed no better than random rejection in any context. Qwen3-4B-Instruct-2507, a later and larger release, gave more correct labels, but about one in five of its quote-valid answers was still wrong; across all models and contexts the rule beat random rejection in 1 of 7 combinations. Tools that extract trial results need a check on whether the label follows from the quoted evidence, in addition to the check that the quote exists.</p>
+<h2 id="competing-interests">Competing interests</h2>
+<p>I own Norlowe Research, where I conducted this work. I have no other competing interests to declare.</p>
+<h2 id="funding">Funding</h2>
+<p>I received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors. I used the resources of Norlowe Research.</p>
+<h2 id="author-contributions">Author contributions</h2>
+<p>Animesh Bose (sole author): Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Visualization, Project administration, Writing (original draft), Writing (review and editing).</p>
+<h2 id="ethics">Ethics</h2>
+<p>This study was a secondary analysis of published clinical trial reports and existing, publicly available benchmark annotations. No participants were recruited, and no individual-level or identifiable personal data were used. Institutional review board review was not sought.</p>
+<h2 id="data-availability">Data availability</h2>
+<p>The Evidence Inference 2.0 corpus is publicly available from its authors at https://github.com/jayded/evidence-inference (analyzed at commit a661e8c14f973398380c8865cf2f27a535aaaf6d) and https://evidence-inference.ebm-nlp.com/; the underlying articles come from the PubMed Central Open Access subset and remain under their own licenses. The evaluated models are publicly available from Hugging Face at the revisions listed in Supplementary S3. The analysis code, frozen configuration, every model and baseline response, item-level scores, and result tables are provided in the supplementary archive (Supplementary File 2); its workflow downloads the corpus and models from the sources above, so the analysis can be reproduced without redistributing article texts.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Wadhwa S, DeYoung J, Nye B, et al. Jointly Extracting Interventions, Outcomes, and Findings from RCT Reports with LLMs. In: Proceedings of the 8th Machine Learning for Healthcare Conference. 2023;219:754-771. https://proceedings.mlr.press/v219/wadhwa23a.html</li>
+<li>Windisch P, Weyrich J, Dennstädt F, et al. Show Your Work: Verbatim Evidence Requirements and Automated Assessment of Large Language Models for Biomedical Text Processing of Trial Eligibility Criteria. Cureus. 2026;18(5):e108666. doi:10.7759/cureus.108666</li>
+<li>Lehman E, DeYoung J, Barzilay R, et al. Inferring Which Medical Treatments Work from Reports of Clinical Trials. In: Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers). 2019:3705-3717. doi:10.18653/v1/N19-1371</li>
+<li>DeYoung J, Lehman E, Nye B, et al. Evidence Inference 2.0: More Data, Better Models. In: Proceedings of the 19th SIGBioMed Workshop on Biomedical Language Processing. 2020:123-132. doi:10.18653/v1/2020.bionlp-1.13</li>
+<li>Rashkin H, Nikolaev V, Lamm M, et al. Measuring Attribution in Natural Language Generation Models. Comput Linguist. 2023;49(4):777-840. doi:10.1162/coli_a_00486</li>
+<li>Bohnet B, Tran VQ, Verga P, et al. Attributed Question Answering: Evaluation and Modeling for Attributed Large Language Models. arXiv:2212.08037. Preprint posted 2022. https://arxiv.org/abs/2212.08037</li>
+<li>Liu NF, Zhang T, Liang P. Evaluating Verifiability in Generative Search Engines. In: Findings of the Association for Computational Linguistics: EMNLP 2023. 2023:7001-7025. doi:10.18653/v1/2023.findings-emnlp.467</li>
+<li>Menick J, Trebacz M, Mikulik V, et al. Teaching language models to support answers with verified quotes. arXiv:2203.11147. Preprint posted 2022. doi:10.48550/arXiv.2203.11147</li>
+<li>Wu K, Wu E, Wei K, et al. An automated framework for assessing how well LLMs cite relevant medical references. Nat Commun. 2025;16(1):3615. doi:10.1038/s41467-025-58551-6</li>
+<li>Elbakian K, Carton S. Retrieving Versus Understanding Extractive Evidence in Few-Shot Learning. In: Proceedings of the AAAI Conference on Artificial Intelligence. 2025;39(26):27268-27276. doi:10.1609/aaai.v39i26.34936</li>
+<li>Buchmann J, Liu X, Gurevych I. Attribute or Abstain: Large Language Models as Long Document Assistants. In: Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing. 2024:8113-8140. doi:10.18653/v1/2024.emnlp-main.463</li>
+<li>Geifman Y, El-Yaniv R. Selective Classification for Deep Neural Networks. In: Advances in Neural Information Processing Systems. 2017;30. https://proceedings.neurips.cc/paper_files/paper/2017/file/4a8423d5e91fda00bb7e46540e2b0cf1-Paper.pdf</li>
+<li>Kamath A, Jia R, Liang P. Selective Question Answering under Domain Shift. In: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. 2020:5684-5696. doi:10.18653/v1/2020.acl-main.503</li>
+<li>Yang A, Li A, Yang B, et al. Qwen3 Technical Report. arXiv:2505.09388. Preprint posted 2025. doi:10.48550/arXiv.2505.09388</li>
+<li>Li JE. Calibrated Answers About Randomized Trials From a 4-Billion-Parameter Open Model: A Registered Test and a License-Clean Release. arXiv:2610.07019. Preprint posted 2026. doi:10.48550/arXiv.2610.07019</li>
+<li>Honovich O, Aharoni R, Herzig J, et al. TRUE: Re-evaluating Factual Consistency Evaluation. In: Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. 2022:3905-3920. doi:10.18653/v1/2022.naacl-main.287</li>
+<li>Zha Y, Yang Y, Li R, et al. AlignScore: Evaluating Factual Consistency with A Unified Alignment Function. In: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2023:11328-11348. doi:10.18653/v1/2023.acl-long.634</li>
+</ol>
+<h2 id="figure-legends">Figure legends</h2>
+<p><strong>Figure 1.</strong> Outcome of every eligible test prompt by model and context: quote valid and label right, quote valid and label wrong, no valid quote with the label right or wrong, abstained, and invalid output.</p>
+<p>Alt text: stacked bars; the segment with a valid quote and a wrong label ranges from 10.0% of prompts (Qwen3-0.6B with annotated evidence) to 43.3% (Qwen3-1.7B with the title and abstract).</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 1, scrollable"><img alt="Figure 1" src="assets/figures/fig2_answer_outcomes.svg" /></div>
+<p><strong>Figure 2.</strong> Share of quote-valid answers with the wrong label, by context and system. Dots are point estimates and lines are 95% intervals from 10,000 bootstrap resamples of articles; numbers at right are wrong answers out of quote-valid answers.</p>
+<p>Alt text: dot and interval chart; the share of quote-valid answers with a wrong label ranges from 20.5% (Qwen3-4B-Instruct-2507 with retrieved passages) to 49.1% (Qwen3-1.7B with the title and abstract), and each system run with annotated evidence has its lowest share in that context.</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 2, scrollable"><img alt="Figure 2" src="assets/figures/fig1_quote_valid_wrong.svg" /></div>
+<p><strong>Figure 3.</strong> Retained error for each model and context with all answers (ring) and with only answers whose quote exists and whose passage identifier is valid (triangle), against the middle 95% of 2,000 random rejections at the same coverage (grey band).</p>
+<p>Alt text: dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the grey band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%).</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 3, scrollable"><img alt="Figure 3" src="assets/figures/fig3_rejection_rule.svg" /></div>
+<p><strong>Figure 4.</strong> Risk-coverage curve for Qwen3-1.7B with retrieved passages, ordering test answers by a scoring rule fitted on development predictions only. The dashed line is the expected error under random ordering; the triangle is the quote-validity rule's single operating point.</p>
+<p>Alt text: line chart; the fitted rule's error falls below the random line at most coverages, while the quote-validity rule sits on the random line.</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 4, scrollable"><img alt="Figure 4" src="assets/figures/fig4_risk_coverage.svg" /></div>
+<h1 id="supplementary-material-supplementary-file-1">Supplementary material (Supplementary File 1)</h1>
+<p>Verbatim evidence quotes and answer correctness: an evaluation of small local language models extracting clinical trial results. Supplementary File 2 is the analysis archive (code, configuration, model responses, item-level scores, and result tables).</p>
+<h2 id="s1-data-reconciliation">S1. Data reconciliation</h2>
+<p>The corpus was used at commit a661e8c14f973398380c8865cf2f27a535aaaf6d of github.com/jayded/evidence-inference and reconciled against the tarball linked from the project site (v2.0.tar.gz, Last-Modified 12 May 2020, SHA-256 6abe0d4e...1586). Prompts and split files were byte-identical. Annotation rows (24,686) matched in order and in user, prompt, article, validity flags, label code, and "In Abstract" values. The tarball writes the label "significantly increase" in 693 rows whose label code is 1. Of its 4,454 text files, 3,525 are identical to the repository texts once line endings are converted; the other 929 use a different rendering without the title line and with plain section headers, and all 4,666 annotation rows whose offsets differ between the releases belong to 915 of those articles. The posted test answers file (2,408 rows) matched the repository's test rows in order and in user, prompt, article, validity flags, label code, and "In Abstract" values; like the tarball, it uses the "significantly increase" spelling and the tarball's offsets. Two links in the project site's JavaScript returned the site's HTML page instead of CSV and were rejected.</p>
+<p>Offsets were tested on a seeded sample of 3,000 training rows. Exclusive ends reproduced the annotation string for 2,759 rows with the repository text and 2,705 rows with the tarball text after newline normalization; inclusive ends reproduced 0 and 0. Location status of accepted evidence spans across all splits: exact 21,473; exact after whitespace normalization 934; exact at the recorded offsets after unescaping HTML entities 685; found at a different position by unique string match 108 (plus 75 after unescaping); missing offsets recovered by string match 25 (plus 1 after unescaping); ambiguous match, nearest used 1; offsets given but string not found 29; missing offsets and string not found 882; article without text 29. Spans in the last three groups are not used as evidence (analysis plan amendment A3).</p>
+<p>The repository's abstracts folder holds 3,285 files, of which 2,334 contain body sections. The abstract condition instead used the title-plus-abstract region of the plain-text rendering, which was delimitable for 319 of the 334 test articles with prompts. For the 818 abstract-only files whose article also had a delimitable region, 745 matched that region exactly after header lines were removed and whitespace collapsed. No article appears in two splits, no two texts are identical, and no pair of articles reached TF-IDF cosine 0.9 over their opening 4,000 characters.</p>
+<p>The 332 test articles with eligible prompts were published between 1993 and 2018 (median 2014; Europe PMC metadata). Test prompts by label status: unanimous accepted label 1,221, accepted labels disagree 3, no accepted annotation 4, no annotation 24. Six test prompts are on the corpus authors' "Incorrect" list; none are on the "Questionable" or "Somewhat malformed" lists. One test article (PMC2206488) has an empty plain-text file in the repository and in the tarball; its 6 eligible prompts were run with an empty retrieved context and then excluded under amendment A2. Fourteen other articles have texts shorter than 500 characters (twelve training, one validation, one test); none has a prompt in the corpus, so none enters any analysis.</p>
+<h2 id="s2-prompt-and-answer-schema">S2. Prompt and answer schema</h2>
+<p>Each request was a single user message containing, in order: a one-sentence task statement ("You are reading passages from a report of a clinical trial and answering one question about it."); the question, built from the template "With respect to {outcome}, characterize the reported difference between patients receiving {intervention} and those receiving {comparator}."; the passages, one per line as "[P<em>n</em>] text"; the label guide; and the format guide.</p>
+<p>Label guide: Label meanings. "significantly increased": the report says the outcome was statistically significantly higher with the intervention than with the comparator. "significantly decreased": statistically significantly lower. "no significant difference": the report says the difference was not statistically significant. "cannot determine": the passages do not report this comparison. Increased and decreased describe the value of the outcome measure, not whether the result is good or bad for patients.</p>
+<p>Format guide: Answer with one JSON object and nothing else, using exactly these keys: {"label": "significantly increased" | "significantly decreased" | "no significant difference" | "cannot determine", "evidence_quote": "&lt;text copied character for character from one passage&gt;", "passage_id": "&lt;the passage ID the quote comes from, for example P2&gt;"} If the label is "cannot determine", use "" for evidence_quote and null for passage_id. Copy the quote exactly; do not paraphrase, shorten words, or join text from different passages.</p>
+<p>Variant v2 (evaluated on development data only) added this invented example before the format guide: Example. Question: With respect to pain score at 24 hours, characterize the reported difference between patients receiving drug A and those receiving placebo. [P1] Pain scores at 24 hours were lower with drug A than with placebo (2.1 versus 3.4, P = 0.01). [P2] Nausea occurred in 12% and 10% of patients, respectively (P = 0.62). Answer: {"label": "significantly decreased", "evidence_quote": "Pain scores at 24 hours were lower with drug A than with placebo (2.1 versus 3.4, P = 0.01).", "passage_id": "P1"}</p>
+<p>The answer schema required exactly three keys: <code>label</code> (one of the three benchmark labels or "cannot determine"), <code>evidence_quote</code> (string), and <code>passage_id</code> (string or null); additional keys were not allowed.</p>
+<h2 id="s3-models-and-inference-settings">S3. Models and inference settings</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Repository</th>
+<th>Pinned revision</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-1.7B</td>
+<td>Qwen/Qwen3-1.7B</td>
+<td><code>70d244cc86ccca08cf5af4e1e306ecf908b1ad5e</code></td>
+<td>primary</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B</td>
+<td>Qwen/Qwen3-0.6B</td>
+<td><code>c1899de289a04d12100db370d81485cdf75e47ca</code></td>
+<td>lower-capacity comparison</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>Qwen/Qwen3-4B-Instruct-2507</td>
+<td><code>cdbee75f17c01a7cc42f958dc650907174af0554</code></td>
+<td>larger extension</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>All models were loaded from local snapshots at these revisions with Hugging Face Transformers 5.19.0 and PyTorch 2.14.1, in float32, on an Apple M5 Pro (Metal Performance Shaders). Chat templates came from each repository; the two hybrid models received <code>enable_thinking=False</code>. Decoding was greedy with at most 256 new tokens and no repetition penalty. Prompts were not batched. Development parity between the GPU and CPU paths: same label for 40 of 40 prompts, identical responses for 40 of 40.</p>
+<p>Runs on the frozen test sample: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
+<h2 id="s4-baseline-training">S4. Baseline training</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: right;">Training prompts</th>
+<th style="text-align: right;">Validation prompts</th>
+<th style="text-align: right;">C</th>
+<th>Class weight</th>
+<th style="text-align: right;">Validation macro-F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td style="text-align: right;">10,030</td>
+<td style="text-align: right;">1,231</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.550</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td style="text-align: right;">9,701</td>
+<td style="text-align: right;">1,174</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.517</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td style="text-align: right;">9,829</td>
+<td style="text-align: right;">1,201</td>
+<td style="text-align: right;">1.0</td>
+<td>balanced</td>
+<td style="text-align: right;">0.780</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s5-parse-status-by-model-and-context">S5. Parse status by model and context</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th style="text-align: right;">Valid</th>
+<th style="text-align: right;">Schema error</th>
+<th style="text-align: right;">Invalid JSON</th>
+<th style="text-align: right;">No JSON object</th>
+<th style="text-align: right;">Empty</th>
+<th style="text-align: right;">Runtime error</th>
+<th style="text-align: right;">Not run</th>
+<th style="text-align: right;">Stopped at length limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,205</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,179</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td style="text-align: right;">1,206</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,156</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">994</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td style="text-align: right;">1,195</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td style="text-align: right;">1,187</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s6-per-class-results">S6. Per-class results</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>System</th>
+<th>Benchmark class</th>
+<th style="text-align: right;">Support</th>
+<th style="text-align: right;">Precision</th>
+<th style="text-align: right;">Recall</th>
+<th style="text-align: right;">Quote-valid wrong, by benchmark class</th>
+<th style="text-align: right;">Quote-valid wrong, by predicted class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.488</td>
+<td style="text-align: right;">0.926</td>
+<td style="text-align: right;">19 of 310</td>
+<td style="text-align: right;">309 of 600</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.918</td>
+<td style="text-align: right;">0.219</td>
+<td style="text-align: right;">295 of 385</td>
+<td style="text-align: right;">6 of 96</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.536</td>
+<td style="text-align: right;">0.557</td>
+<td style="text-align: right;">109 of 233</td>
+<td style="text-align: right;">108 of 232</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.485</td>
+<td style="text-align: right;">0.742</td>
+<td style="text-align: right;">59 of 259</td>
+<td style="text-align: right;">218 of 418</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.674</td>
+<td style="text-align: right;">0.659</td>
+<td style="text-align: right;">107 of 326</td>
+<td style="text-align: right;">101 of 320</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.640</td>
+<td style="text-align: right;">0.110</td>
+<td style="text-align: right;">165 of 188</td>
+<td style="text-align: right;">12 of 35</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.809</td>
+<td style="text-align: right;">0.740</td>
+<td style="text-align: right;">89 of 358</td>
+<td style="text-align: right;">64 of 333</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.910</td>
+<td style="text-align: right;">0.716</td>
+<td style="text-align: right;">92 of 426</td>
+<td style="text-align: right;">33 of 367</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.655</td>
+<td style="text-align: right;">0.869</td>
+<td style="text-align: right;">32 of 255</td>
+<td style="text-align: right;">116 of 339</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.574</td>
+<td style="text-align: right;">0.541</td>
+<td style="text-align: right;">187 of 407</td>
+<td style="text-align: right;">163 of 383</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.620</td>
+<td style="text-align: right;">0.628</td>
+<td style="text-align: right;">190 of 511</td>
+<td style="text-align: right;">197 of 518</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">137 of 291</td>
+<td style="text-align: right;">154 of 308</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">407</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">407 of 407</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">0.423</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 511</td>
+<td style="text-align: right;">698 of 1209</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">291 of 291</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.478</td>
+<td style="text-align: right;">0.843</td>
+<td style="text-align: right;">52 of 348</td>
+<td style="text-align: right;">328 of 624</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.828</td>
+<td style="text-align: right;">0.205</td>
+<td style="text-align: right;">343 of 437</td>
+<td style="text-align: right;">19 of 113</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.466</td>
+<td style="text-align: right;">0.545</td>
+<td style="text-align: right;">109 of 241</td>
+<td style="text-align: right;">157 of 289</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.463</td>
+<td style="text-align: right;">0.558</td>
+<td style="text-align: right;">66 of 241</td>
+<td style="text-align: right;">212 of 387</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.562</td>
+<td style="text-align: right;">0.478</td>
+<td style="text-align: right;">119 of 297</td>
+<td style="text-align: right;">115 of 293</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.481</td>
+<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">167 of 187</td>
+<td style="text-align: right;">25 of 45</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">0.508</td>
+<td style="text-align: right;">194 of 394</td>
+<td style="text-align: right;">179 of 379</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.584</td>
+<td style="text-align: right;">0.563</td>
+<td style="text-align: right;">214 of 491</td>
+<td style="text-align: right;">197 of 474</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.457</td>
+<td style="text-align: right;">0.513</td>
+<td style="text-align: right;">135 of 276</td>
+<td style="text-align: right;">167 of 308</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">394 of 394</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">492</td>
+<td style="text-align: right;">0.422</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 491</td>
+<td style="text-align: right;">670 of 1161</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">277</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">276 of 276</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.617</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">22 of 332</td>
+<td style="text-align: right;">200 of 510</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.992</td>
+<td style="text-align: right;">0.518</td>
+<td style="text-align: right;">170 of 404</td>
+<td style="text-align: right;">1 of 235</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.646</td>
+<td style="text-align: right;">0.610</td>
+<td style="text-align: right;">94 of 244</td>
+<td style="text-align: right;">85 of 235</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.680</td>
+<td style="text-align: right;">0.579</td>
+<td style="text-align: right;">16 of 195</td>
+<td style="text-align: right;">86 of 265</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.600</td>
+<td style="text-align: right;">0.474</td>
+<td style="text-align: right;">14 of 79</td>
+<td style="text-align: right;">26 of 91</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.812</td>
+<td style="text-align: right;">0.193</td>
+<td style="text-align: right;">90 of 132</td>
+<td style="text-align: right;">8 of 50</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.706</td>
+<td style="text-align: right;">0.733</td>
+<td style="text-align: right;">108 of 404</td>
+<td style="text-align: right;">123 of 419</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.876</td>
+<td style="text-align: right;">0.805</td>
+<td style="text-align: right;">99 of 508</td>
+<td style="text-align: right;">58 of 467</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>TF-IDF + LR</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.649</td>
+<td style="text-align: right;">0.707</td>
+<td style="text-align: right;">85 of 290</td>
+<td style="text-align: right;">111 of 316</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>significantly increased</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">404 of 404</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>no significant difference</td>
+<td style="text-align: right;">508</td>
+<td style="text-align: right;">0.423</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0 of 508</td>
+<td style="text-align: right;">694 of 1202</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Majority class</td>
+<td>significantly decreased</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">290 of 290</td>
+<td style="text-align: right;">0 of 0</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s7-sensitivity-analyses">S7. Sensitivity analyses</h2>
+<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately as "quote exists (strict, any length)".</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th>Analysis</th>
+<th style="text-align: right;">Wrong of quote-valid</th>
+<th style="text-align: right;">Rate (95% CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">422 of 926</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">423 of 931</td>
+<td style="text-align: right;">45.4%, 95% CI 41.6% to 49.1%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">423 of 928</td>
+<td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">288 of 698</td>
+<td style="text-align: right;">41.3%, 95% CI 37.1% to 45.4%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">331 of 776</td>
+<td style="text-align: right;">42.7%, 95% CI 38.4% to 47.1%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">331 of 773</td>
+<td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">341 of 793</td>
+<td style="text-align: right;">43.0%, 95% CI 38.7% to 47.3%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">244 of 584</td>
+<td style="text-align: right;">41.8%, 95% CI 36.9% to 46.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">213 of 1,038</td>
+<td style="text-align: right;">20.5%, 95% CI 17.5% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">213 of 1,042</td>
+<td style="text-align: right;">20.4%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">213 of 1,039</td>
+<td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>S5 retrieved passages hold benchmark evidence</td>
+<td style="text-align: right;">142 of 808</td>
+<td style="text-align: right;">17.6%, 95% CI 14.5% to 20.9%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">504 of 1,029</td>
+<td style="text-align: right;">49.0%, 95% CI 45.0% to 53.0%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">504 of 1,026</td>
+<td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">352 of 727</td>
+<td style="text-align: right;">48.4%, 95% CI 43.7% to 53.1%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">352 of 725</td>
+<td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">361 of 740</td>
+<td style="text-align: right;">48.8%, 95% CI 44.1% to 53.4%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">286 of 983</td>
+<td style="text-align: right;">29.1%, 95% CI 25.6% to 32.7%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">286 of 980</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">289 of 991</td>
+<td style="text-align: right;">29.2%, 95% CI 25.7% to 32.8%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>Primary (definition Q)</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S1 strict quote existence</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S2 include label disagreements</td>
+<td style="text-align: right;">120 of 409</td>
+<td style="text-align: right;">29.3%, 95% CI 24.9% to 34.0%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S3 exclude flagged prompts</td>
+<td style="text-align: right;">120 of 406</td>
+<td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>S4 one-word minimum quote</td>
+<td style="text-align: right;">123 of 412</td>
+<td style="text-align: right;">29.9%, 95% CI 25.4% to 34.5%</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s8-paired-comparisons">S8. Paired comparisons</h2>
+<p>Differences are on the prompts both systems had, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>System A</th>
+<th>System B</th>
+<th>Quantity</th>
+<th style="text-align: right;">Shared prompts</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">A minus B, points (95% CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">21.5%</td>
+<td style="text-align: right;">+17.6 (+13.8 to +21.5)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">55.5%</td>
+<td style="text-align: right;">-1.7 (-6.1 to +2.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">37.6%</td>
+<td style="text-align: right;">+34.5 (+30.1 to +39.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">57.5%</td>
+<td style="text-align: right;">-18.4 (-22.7 to -14.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">57.5%</td>
+<td style="text-align: right;">-3.6 (-8.1 to +0.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, retrieved</td>
+<td>TF-IDF + LR, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">-28.0 (-30.9 to -25.0)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">14.9%</td>
+<td style="text-align: right;">+28.4 (+24.1 to +32.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;">+8.9 (+4.0 to +13.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-0.6B, abstract</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">+54.8 (+49.3 to +60.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">53.0%</td>
+<td style="text-align: right;">-9.7 (-14.6 to -4.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">53.2%</td>
+<td style="text-align: right;">-2.9 (-7.7 to +1.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>TF-IDF + LR, abstract</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">99.7%</td>
+<td style="text-align: right;">-14.1 (-17.0 to -11.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">23.0%</td>
+<td style="text-align: right;">+34.6 (+30.9 to +38.2)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">44.2%</td>
+<td style="text-align: right;">+23.7 (+19.6 to +27.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-0.6B, oracle</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">32.7%</td>
+<td style="text-align: right;">+48.7 (+45.0 to +52.2)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">75.7%</td>
+<td style="text-align: right;">-18.1 (-22.0 to -14.4)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">75.7%</td>
+<td style="text-align: right;">-7.8 (-11.4 to -4.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>TF-IDF + LR, oracle</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">-18.6 (-21.2 to -16.2)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">67.7%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">+28.5 (+24.6 to +32.4)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">76.1%</td>
+<td style="text-align: right;">53.8%</td>
+<td style="text-align: right;">+22.2 (+18.5 to +26.0)</td>
+</tr>
+<tr>
+<td>Qwen3-4B-Instruct-2507, retrieved</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,209</td>
+<td style="text-align: right;">85.1%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">+13.1 (+9.5 to +16.5)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">43.3%</td>
+<td style="text-align: right;">39.2%</td>
+<td style="text-align: right;">+4.1 (+0.4 to +7.9)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">50.3%</td>
+<td style="text-align: right;">54.1%</td>
+<td style="text-align: right;">-3.8 (-6.9 to -0.6)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, abstract</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">85.6%</td>
+<td style="text-align: right;">71.8%</td>
+<td style="text-align: right;">+13.7 (+9.5 to +17.7)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">57.6%</td>
+<td style="text-align: right;">39.1%</td>
+<td style="text-align: right;">+18.5 (+14.6 to +22.3)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">67.9%</td>
+<td style="text-align: right;">53.9%</td>
+<td style="text-align: right;">+14.0 (+10.4 to +17.4)</td>
+</tr>
+<tr>
+<td>Qwen3-1.7B, oracle</td>
+<td>Qwen3-1.7B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">81.4%</td>
+<td style="text-align: right;">72.0%</td>
+<td style="text-align: right;">+9.3 (+5.9 to +12.8)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">14.9%</td>
+<td style="text-align: right;">21.6%</td>
+<td style="text-align: right;">-6.7 (-10.4 to -2.9)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">41.4%</td>
+<td style="text-align: right;">56.1%</td>
+<td style="text-align: right;">-14.7 (-18.7 to -10.7)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, abstract</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,165</td>
+<td style="text-align: right;">30.7%</td>
+<td style="text-align: right;">37.1%</td>
+<td style="text-align: right;">-6.4 (-12.0 to -0.6)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Task success</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">23.0%</td>
+<td style="text-align: right;">21.4%</td>
+<td style="text-align: right;">+1.6 (-1.9 to +5.1)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Correct label (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">44.2%</td>
+<td style="text-align: right;">55.4%</td>
+<td style="text-align: right;">-11.2 (-15.2 to -7.3)</td>
+</tr>
+<tr>
+<td>Qwen3-0.6B, oracle</td>
+<td>Qwen3-0.6B, retrieved</td>
+<td>Quote valid and locator valid (all prompts)</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">32.7%</td>
+<td style="text-align: right;">37.5%</td>
+<td style="text-align: right;">-4.8 (-9.5 to -0.2)</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s9-evidence-available-in-the-supplied-passages">S9. Evidence available in the supplied passages</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th style="text-align: right;">Prompts with located evidence</th>
+<th style="text-align: right;">Passages overlap evidence (95% CI)</th>
+<th style="text-align: right;">Passages contain a full span (95% CI)</th>
+<th style="text-align: right;">Median context tokens</th>
+<th style="text-align: right;">Truncated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieved</td>
+<td style="text-align: right;">1,202</td>
+<td style="text-align: right;">76.2%, 95% CI 72.4% to 79.9%</td>
+<td style="text-align: right;">70.0%, 95% CI 66.2% to 73.7%</td>
+<td style="text-align: right;">1021</td>
+<td style="text-align: right;">0.0%</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td style="text-align: right;">1,158</td>
+<td style="text-align: right;">50.2%, 95% CI 45.8% to 54.5%</td>
+<td style="text-align: right;">50.1%, 95% CI 45.7% to 54.4%</td>
+<td style="text-align: right;">429</td>
+<td style="text-align: right;">2.1%</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s10-automated-error-categories-for-quote-valid-wrong-answers">S10. Automated error categories for quote-valid wrong answers</h2>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Model</th>
+<th>Error type</th>
+<th>Quote relation to benchmark evidence</th>
+<th style="text-align: right;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">105</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">84</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">288</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">88</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">53</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">170</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">115</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">218</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">76</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s11-reproducibility-and-software-checks">S11. Reproducibility and software checks</h2>
+<ul>
+<li>Software tests: synthetic fixtures for parsing, quote location across line breaks, locators, the label contract, offsets, chunking, abstract delimiting, the bootstrap, macro-F1, and the rejection arithmetic.</li>
+<li>Deterministic rerun: data, contexts, scores, and analysis rebuilt from cached inputs; 4,809 reported numbers compared with the stored results at a relative tolerance of 1e-9.</li>
+<li>Separate recount: the headline numerators and denominators and task success counts recomputed from the item-level files in base R.</li>
+<li>Model rerun: a sample of test calls regenerated with the frozen configuration on the same device; 40 of 40 responses were identical and 40 of 40 had the same label.</li>
+<li>Clean installation: the analysis archive (Supplementary File 2) was extracted into an empty directory and installed into a new virtual environment from requirements.lock.txt; all 34 tests passed and the cached demonstration reproduced the saved outputs for the bundled examples.</li>
+<li>Author check against source articles: 20 quote-valid wrong answers from Qwen3-1.7B with retrieved passages, drawn with seed 20261007 (prompt IDs 572, 770, 1461, 2826, 3950, 4353, 4458, 5216, 5362, 7727, 7931, 9354, 11214, 11896, 12175, 12355, 13005, 13492, 13837, 13876), were compared with the articles in PubMed Central, and the label codes of five of them were checked against the raw annotation file.</li>
+<li>Claims: every headline number in evidence/claims.json is mapped to its file, key, numerator, denominator, scope, configuration, source hashes, and run identifier, and re-read from the results file.</li>
+</ul>
+<p>These checks test the software and its consistency. They are not external scientific validation.</p>
+<h2 id="s12-tripod-llm-checklist">S12. TRIPOD-LLM checklist</h2>
+<p>Items are paraphrased from the TRIPOD-LLM reporting guideline (Gallifant et al., Nature Medicine 2025;31:60-69, doi:10.1038/s41591-024-03425-5), main checklist (Table 2) and abstract checklist (Table 3). This study is an LLM evaluation without patient data.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Section</th>
+<th>What is reported (paraphrased)</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Title</td>
+<td>Title should state whether the LLM is developed, fine-tuned or evaluated, plus the task, target population and outcome.</td>
+<td>Title</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Abstract</td>
+<td>Abstract should follow the separate TRIPOD-LLM for Abstracts checklist (items 2a-2l).</td>
+<td>Abstract (structured; see items 2a to 2l)</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>Introduction</td>
+<td>Explain the healthcare use case and why the LLM is developed or evaluated, citing existing approaches and models.</td>
+<td>Background and Significance, paragraphs 1 to 2</td>
+</tr>
+<tr>
+<td>3b</td>
+<td>Introduction</td>
+<td>Describe the target population, the LLM's intended use within the care pathway, and its intended users.</td>
+<td>Background and Significance, paragraphs 1 and 5 (evidence reviewers; local deployment); not a care-pathway tool</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Introduction</td>
+<td>State study objectives, including whether it covers initial development, fine-tuning, validation, or several stages.</td>
+<td>Objective</td>
+</tr>
+<tr>
+<td>5a</td>
+<td>Methods</td>
+<td>Give data sources separately for training, tuning and evaluation, with the rationale for choosing them.</td>
+<td>Methods, Data and labels; Context conditions; Models and inference; Baselines (training split for BM25 statistics and baselines; validation for development decisions; test for evaluation)</td>
+</tr>
+<tr>
+<td>5b</td>
+<td>Methods</td>
+<td>Describe the data points and characterize dataset distribution and descriptors (e.g., source, language, country) quantitatively and qualitatively.</td>
+<td>Methods, Data and labels; Results, Output validity; Supplementary S1</td>
+</tr>
+<tr>
+<td>5c</td>
+<td>Methods</td>
+<td>State the earliest and latest dates of text in development data and in evaluation datasets.</td>
+<td>Supplementary S1: test articles published 1993 to 2018; model training cutoffs are not stated on the model cards</td>
+</tr>
+<tr>
+<td>5d</td>
+<td>Methods</td>
+<td>Describe preprocessing and quality checks, and whether they were consistent across corpora, sites and sociodemographic groups.</td>
+<td>Methods, Data and labels; Supplementary S1 (offset convention, abstract delimiting, reconciliation)</td>
+</tr>
+<tr>
+<td>5e</td>
+<td>Methods</td>
+<td>Explain how missing and imbalanced data were handled and justify any data exclusions.</td>
+<td>Methods, Data and labels (eligibility, disagreement, unlocatable spans); Supplementary S1</td>
+</tr>
+<tr>
+<td>6a</td>
+<td>Methods</td>
+<td>Report the LLM's name, version and last training date.</td>
+<td>Methods, Models and inference; Supplementary S3 (revisions; training cutoff not stated by the developer)</td>
+</tr>
+<tr>
+<td>6b</td>
+<td>Methods</td>
+<td>Describe how the LLM was built: architecture, training, fine-tuning, alignment approach and alignment goals.</td>
+<td>Not applicable (evaluation of existing models; no training or fine-tuning)</td>
+</tr>
+<tr>
+<td>6c</td>
+<td>Methods</td>
+<td>Describe how text was generated: prompt engineering, output consistency, and inference settings such as seed and temperature.</td>
+<td>Methods, Models and inference; Supplementary S2 and S3 (prompt, greedy decoding, output limit)</td>
+</tr>
+<tr>
+<td>6d</td>
+<td>Methods</td>
+<td>Specify the raw and post-processed LLM outputs (e.g., probabilities, labels, free text).</td>
+<td>Methods, Separated validity checks (raw JSON responses and parsed fields; raw responses released)</td>
+</tr>
+<tr>
+<td>6e</td>
+<td>Methods</td>
+<td>Justify any classification approach and explain how probabilities and decision thresholds were derived.</td>
+<td>Methods, Baselines (logistic regression, settings chosen on validation macro-F1); no thresholds on model outputs</td>
+</tr>
+<tr>
+<td>7a</td>
+<td>Methods</td>
+<td>Report metrics of generative output quality (consistency, relevance, accuracy, error types) against gold standards.</td>
+<td>Methods, Separated validity checks; Results; Table 1</td>
+</tr>
+<tr>
+<td>7b</td>
+<td>Methods</td>
+<td>Explain how outcome metrics relate to the downstream deployment task and, where possible, to human judgments.</td>
+<td>Discussion, paragraphs 6 and 7</td>
+</tr>
+<tr>
+<td>7c</td>
+<td>Methods</td>
+<td>Define the outcome, how predictions were computed, inference date for closed-source models, and evaluation metrics.</td>
+<td>Methods, Estimand and statistical analysis</td>
+</tr>
+<tr>
+<td>7d</td>
+<td>Methods</td>
+<td>For subjective outcome assessment, describe assessor qualifications, instructions, demographics and inter-assessor agreement.</td>
+<td>Not applicable (no subjective assessment; labels from the published benchmark)</td>
+</tr>
+<tr>
+<td>7e</td>
+<td>Methods</td>
+<td>Describe how performance was benchmarked against other LLMs, humans, or other standards.</td>
+<td>Methods, Baselines; Results, Contexts, models, and baselines; Table 1</td>
+</tr>
+<tr>
+<td>8a</td>
+<td>Methods</td>
+<td>If annotation occurred, explain the labeling process and share annotation guidelines with examples.</td>
+<td>Not applicable (no new annotation); benchmark annotation process summarized in Methods, Data and labels</td>
+</tr>
+<tr>
+<td>8b</td>
+<td>Methods</td>
+<td>If annotation occurred, report annotator count, share of data multiply annotated, and inter-annotator agreement.</td>
+<td>Not applicable (no new annotation); label contract and disagreement handling in Methods, Data and labels</td>
+</tr>
+<tr>
+<td>8c</td>
+<td>Methods</td>
+<td>If annotation occurred, describe annotators' background and experience, or characteristics of any labeling models.</td>
+<td>Not applicable (no new annotation)</td>
+</tr>
+<tr>
+<td>9a</td>
+<td>Methods</td>
+<td>If prompting was used, describe how prompts were designed, curated and selected.</td>
+<td>Methods, Models and inference (two variants written in advance; selected on development data by a fixed rule)</td>
+</tr>
+<tr>
+<td>9b</td>
+<td>Methods</td>
+<td>If prompting was used, state which data informed prompt development.</td>
+<td>Methods, Models and inference (100 validation articles; no test data)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Methods</td>
+<td>Describe any data preprocessing performed before summarization.</td>
+<td>Not applicable (no summarization)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Methods</td>
+<td>If instruction tuning/alignment was used, report instructions, data, evaluation interface and evaluator population characteristics.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Methods</td>
+<td>Report compute resources or proxies (hardware, time, cost, inference time, FLOPs) needed for the methods.</td>
+<td>Results, Output validity; Supplementary S3 (Apple M5 Pro GPU, float32, run times)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Methods</td>
+<td>Name the approving ethics board and describe participant consent or the consent waiver.</td>
+<td>Ethics statement (no human participants or individual-level data)</td>
+</tr>
+<tr>
+<td>14a</td>
+<td>Methods</td>
+<td>State funding sources and the funders' role in the study.</td>
+<td>Funding statement</td>
+</tr>
+<tr>
+<td>14b</td>
+<td>Methods</td>
+<td>Declare all authors' conflicts of interest and financial disclosures.</td>
+<td>Conflict of interest statement</td>
+</tr>
+<tr>
+<td>14c</td>
+<td>Methods</td>
+<td>Say where the study protocol is available, or that none was prepared.</td>
+<td>Internal timestamped analysis plan released in the project archive (docs/analysis_plan.md); not a registered protocol</td>
+</tr>
+<tr>
+<td>14d</td>
+<td>Methods</td>
+<td>Give registry name and registration number, or state the study was not registered.</td>
+<td>Not registered</td>
+</tr>
+<tr>
+<td>14e</td>
+<td>Methods</td>
+<td>Describe availability of the study data.</td>
+<td>Data availability statement</td>
+</tr>
+<tr>
+<td>14f</td>
+<td>Methods</td>
+<td>Describe availability of code needed to reproduce the results.</td>
+<td>Data availability statement (code, configuration, responses, scores)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Methods</td>
+<td>Describe patient/public involvement across study stages, or state there was none.</td>
+<td>Not applicable (no patient or public involvement)</td>
+</tr>
+<tr>
+<td>16a</td>
+<td>Results</td>
+<td>With patient/EHR data, describe data flow through the study, including counts with/without outcome and follow-up.</td>
+<td>Not applicable (no patient or EHR data); prompt flow in Results and Supplementary S1</td>
+</tr>
+<tr>
+<td>16b</td>
+<td>Results</td>
+<td>With patient/EHR data, report characteristics overall, per source/setting and per split, including dates and sample size.</td>
+<td>Not applicable (no patient or EHR data); test split size in Results (Output validity and evidence availability) and Supplementary S1; training and validation prompt counts in Supplementary S4</td>
+</tr>
+<tr>
+<td>16c</td>
+<td>Results</td>
+<td>For evaluations with clinical outcomes, compare distributions of outcome-related clinical variables between development and evaluation data.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>16d</td>
+<td>Results</td>
+<td>With patient/EHR data, give participant and outcome-event counts for each analysis.</td>
+<td>Not applicable (no patient or EHR data)</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Results</td>
+<td>Report performance on prespecified metrics (item 7a) and/or human evaluation (item 7d).</td>
+<td>Results; Tables 1 and 2; Figures 1 to 4; Supplementary S5 to S10</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Results</td>
+<td>If the LLM was updated, report the updated model and its subsequent performance.</td>
+<td>Not applicable (models not updated)</td>
+</tr>
+<tr>
+<td>19a</td>
+<td>Discussion</td>
+<td>Interpret the main results overall, including fairness, relative to objectives and prior studies.</td>
+<td>Discussion, paragraphs 1 to 3</td>
+</tr>
+<tr>
+<td>19b</td>
+<td>Discussion</td>
+<td>Discuss limitations and their effects on bias, statistical uncertainty and generalizability.</td>
+<td>Discussion, Limitations</td>
+</tr>
+<tr>
+<td>19c</td>
+<td>Discussion</td>
+<td>Describe known data challenges for the task/domain: representation, missingness, harmonization and bias.</td>
+<td>Discussion, Limitations (label noise, partial evidence annotation, possible pretraining exposure)</td>
+</tr>
+<tr>
+<td>19d</td>
+<td>Discussion</td>
+<td>Define intended use: inputs, end users, and level of autonomy or human oversight.</td>
+<td>Discussion, paragraphs 6 and 7 (evaluation harness for tool developers; outputs need semantic checks or human review)</td>
+</tr>
+<tr>
+<td>19e</td>
+<td>Discussion</td>
+<td>Where relevant, explain how poor or missing input data should be assessed and handled in clinical implementation.</td>
+<td>Not applicable (no clinical implementation)</td>
+</tr>
+<tr>
+<td>19f</td>
+<td>Discussion</td>
+<td>Where relevant, state whether users must interact with inputs or the LLM, and the expertise required.</td>
+<td>Discussion, paragraphs 6 and 7 (users are tool developers and reviewers; outputs need human review); Lay summary</td>
+</tr>
+<tr>
+<td>19g</td>
+<td>Discussion</td>
+<td>Discuss next research steps, focusing on the LLM's applicability and generalizability.</td>
+<td>Discussion, paragraph 6; Limitations</td>
+</tr>
+<tr>
+<td>2a</td>
+<td>Abstract</td>
+<td>Identify the study as LLM development, fine-tuning and/or evaluation, with task, target population and outcome.</td>
+<td>Abstract, title</td>
+</tr>
+<tr>
+<td>2b</td>
+<td>Abstract</td>
+<td>Briefly explain the healthcare context, use case and rationale for developing or evaluating the LLM.</td>
+<td>Abstract, Objectives</td>
+</tr>
+<tr>
+<td>2c</td>
+<td>Abstract</td>
+<td>State objectives, including whether the study involves LLM development, tuning and/or evaluation.</td>
+<td>Abstract, Objectives</td>
+</tr>
+<tr>
+<td>2d</td>
+<td>Abstract</td>
+<td>Summarize key elements of the study setting.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2e</td>
+<td>Abstract</td>
+<td>Describe all data used, the data splits, and any selective data use.</td>
+<td>Abstract, Materials and Methods (official test split)</td>
+</tr>
+<tr>
+<td>2f</td>
+<td>Abstract</td>
+<td>Name the LLM(s) and version(s) used.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2g</td>
+<td>Abstract</td>
+<td>Briefly summarize LLM-building steps such as fine-tuning, reward modeling and RLHF.</td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td>2h</td>
+<td>Abstract</td>
+<td>Describe the tasks the LLM performs and the key inputs/outputs of the final model.</td>
+<td>Abstract, Materials and Methods</td>
+</tr>
+<tr>
+<td>2i</td>
+<td>Abstract</td>
+<td>Specify evaluation datasets/populations, endpoints, whether held out from training/tuning, and performance measures.</td>
+<td>Abstract, Materials and Methods and Results</td>
+</tr>
+<tr>
+<td>2j</td>
+<td>Abstract</td>
+<td>Give an overall summary and interpretation of the main results.</td>
+<td>Abstract, Results</td>
+</tr>
+<tr>
+<td>2k</td>
+<td>Abstract</td>
+<td>State broader implications or concerns arising from the results.</td>
+<td>Abstract, Discussion and Conclusion</td>
+</tr>
+<tr>
+<td>2l</td>
+<td>Abstract</td>
+<td>Give registry/repository name and registration number, if relevant.</td>
+<td>Not applicable</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="s13-development-fitted-scoring-rule">S13. Development-fitted scoring rule</h2>
+<p>Logistic regression (scikit-learn, C = 1.0) predicting a correct label from six features of each answer, fitted on the answered prompts among the 347 development prompts, using Qwen3-1.7B with retrieved passages, and applied unchanged to test answers. Positive coefficients favor a correct label. The scores are used only to order answers for the risk-coverage curve (Figure 4); they are not calibrated probabilities, and the coefficients are not estimates of feature importance.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th style="text-align: right;">Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intercept</td>
+<td style="text-align: right;">-1.740</td>
+</tr>
+<tr>
+<td>Quote exists (0 or 1)</td>
+<td style="text-align: right;">+0.795</td>
+</tr>
+<tr>
+<td>Passage identifier valid (0 or 1)</td>
+<td style="text-align: right;">-0.336</td>
+</tr>
+<tr>
+<td>Quote length, log(1 + words)</td>
+<td style="text-align: right;">+0.176</td>
+</tr>
+<tr>
+<td>Quote contains significance wording (0 or 1)</td>
+<td style="text-align: right;">-0.303</td>
+</tr>
+<tr>
+<td>Label agrees with the quote's significance wording (0 or 1)</td>
+<td style="text-align: right;">+0.822</td>
+</tr>
+<tr>
+<td>Share of outcome words that appear in the quote</td>
+<td style="text-align: right;">+1.301</td>
+</tr>
+</tbody>
+</table></div></div>
+</article>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) to help with coding, analysis and manuscript preparation. I take responsibility for the work. I recall using Opus models in Claude Code and models from the GPT-5 and GPT-6 families in ChatGPT and Codex. Exact model version records are unavailable.</p></section></main>
+<footer>Downloads: <a href="downloads/manuscript-draft.docx">manuscript draft (DOCX)</a>, <a href="downloads/evidence-model-audit-source.zip">source archive (ZIP, 9.3 MB)</a>, <a href="downloads/README.txt">all files</a>. <a href="index.html">Back to the project page</a>.</footer>
+</body>
+</html>

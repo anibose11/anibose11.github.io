@@ -1,0 +1,7 @@
+{
+  "checked": "local file format checks only; no REDCap server import was performed",
+  "dictionary_fields": 14,
+  "example_records": 6,
+  "issues": [],
+  "passed": true
+}

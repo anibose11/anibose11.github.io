@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hospital comparability</title>
+<meta name="description" content="A release-aware check of CMS hospital outcome files that rejects comparisons the data cannot support and measures how much of a within-state hospital ordering the published intervals support.">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/viewer.css">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main" class="page-main">
+<p class="kicker">Animesh Bose. Health services research using public CMS data.</p>
+<h1>When hospital quality comparisons are not comparable</h1>
+<p class="lede">In Arizona, the hospital ranked first for heart-failure readmission could occupy any rank from 1 to 52 within the published intervals. I built a check that first establishes whether CMS records can be compared, then shows how much of their apparent ordering those intervals support.</p>
+
+<div class="question">
+<p><strong>Research question.</strong> When hospitals in one state are ranked on heart-failure readmission or mortality from the CMS Provider Data Catalog, how many requested records can enter a valid same-measure comparison, and how many of the resulting orderings do the published intervals separate?</p>
+</div>
+
+<figure>
+  <img src="assets/figures/fig2_lead_example.svg" width="721" height="570" alt="Two-panel chart for Arizona. Left: 52 hospitals' heart-failure readmission rates with published 95% intervals, all overlapping. Right: each hospital's point rank and interval-compatible rank range; the first-ranked hospital's range spans ranks 1 to 52.">
+  <figcaption>Heart-failure readmission in Arizona, April 2026 refresh (released 2026-05-13). The hospital ranked first on its point estimate (17.5%, interval 14.6 to 21.0) could hold any rank from 1 to 52. None of the state's 1,299 point orderings is separated by the published intervals. The state was chosen by a rule fixed before the analysis; the report explains how a four-way tie at the median count was resolved.</figcaption>
+</figure>
+
+<ul class="facts" aria-label="Key results">
+  <li><span class="num">99.6%</span><span class="what">of 141,219 same-state orderings on heart-failure readmission were not separated by the published intervals</span></li>
+  <li><span class="num">97.0%</span><span class="what">for heart-failure mortality (138,228 orderings), against 62.0% for heart-failure excess days</span></li>
+  <li><span class="num">0 of 3,253</span><span class="what">hospitals with a heart-failure readmission rate in the current CMS files have a usable interval</span></li>
+  <li><span class="num">62.1%</span><span class="what">of 4,792 requested heart-failure readmission records passed every gate in the primary release</span></li>
+</ul>
+
+<section class="prose" aria-labelledby="data">
+<h2 id="data">The data: three releases of the same measures</h2>
+<p>All data are public files from the CMS Provider Data Catalog: the hospital-level Unplanned Hospital Visits and Complications and Deaths files, Hospital General Information, the Footnote Crosswalk, Measure Dates, the Hospital Readmissions Reduction Program file and the national and state reference files. Each release is loaded with its own hospital list and dictionaries, and every file is pinned by SHA-256.</p>
+<div class="table-wrap" tabindex="0">
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<caption class="small" style="caption-side: bottom; text-align: left; padding: 0.5rem 0.65rem;">Heart-failure readmission window and interval status by release.</caption>
+<thead><tr><th scope="col">Release</th><th scope="col">Readmission window</th><th scope="col">Intervals</th><th scope="col">Role</th></tr></thead>
+<tbody>
+<tr><td>2026-05-13 (archive)</td><td>2021-07-01 to 2024-06-30, 36 months</td><td>Published</td><td>Primary analysis</td></tr>
+<tr><td>2026-08-13 (archive)</td><td>2023-07-01 to 2025-06-30, 24 months</td><td>Published, then flagged by CMS</td><td>Gate check only</td></tr>
+<tr><td>2026-09-30 (current)</td><td>2023-07-01 to 2025-06-30, 24 months</td><td>Suppressed</td><td>Gate check only</td></tr>
+</tbody>
+</table></div>
+</div>
+<p>Primary measures are the heart-failure 30-day readmission and mortality rates. Heart-failure excess days in acute care is a supporting measure with a different unit (days per 100 discharges), and the acute myocardial infarction measures are a separate secondary analysis. No score is ever averaged across measures.</p>
+</section>
+
+<section class="prose" aria-labelledby="method">
+<h2 id="method">How the check works</h2>
+<p>Every hospital-measure-release record goes through eight gates in a fixed order: release status, identity, measure definition, population, observation window, numeric score, usable interval and footnotes. The tool records the first gate each record fails and keeps the source string next to every parsed value, so a suppressed score, too few cases and a hospital outside the reporting program stay distinct.</p>
+<p>For records that pass, every pair of hospitals in the same state and measure is checked for separation: one hospital's upper limit must sit below the other's lower limit. Each hospital also gets an interval-compatible rank range, the ranks it could hold if every true value lay inside its published interval. The range uses the counting rule of Klein, Wright and Wieczorek (2020). Because CMS publishes marginal 95% intervals and no covariance, the range carries no probability and is not a simultaneous confidence set.</p>
+</section>
+
+<section class="prose" aria-labelledby="decisions">
+<h2 id="decisions">Why the release and comparison rules matter</h2>
+<h3>The newest files could not be used for uncertainty</h3>
+<p>In the current files, released 2026-09-30, CMS shows "Not Available" for the intervals and national categories of 18 outcome measures, following a notice that issues had affected the published values. The previous release still carries the intervals the notice describes. I therefore used the April 2026 refresh, the latest release with intervals not covered by a notice, and ran the two newer releases through the same gates to show what the check does with them: every record fails at the release gate, even though most hospitals still have a rate.</p>
+<h3>VA hospitals were moved to their own comparison after the plan was locked</h3>
+<p>The first version of the population gate excluded no hospital type. While checking a VA medical center that appeared in an example, I found CMS methodology text stating that Medicare enrollment criteria do not apply to VA hospitalizations and that VA data are a separate source. I recorded a dated amendment and applied the gate as written, so VA hospitals are compared only with other VA hospitals. The headline shares barely moved: readmission stayed at 99.6% and mortality went from 96.3% to 97.0%. The share of hospitals separated from no peer on mortality moved more, from 46.5% to 54.2%. Both runs are kept.</p>
+</section>
+
+<section aria-labelledby="results">
+<h2 id="results">Results</h2>
+<div class="prose">
+<p>In the primary release, 2,975 of 4,792 requested heart-failure readmission records passed every gate. Too few cases removed 1,118, and 59 records with valid-looking numbers failed because CMS marked them as covering only part of the performance period.</p>
+</div>
+<figure>
+  <img src="assets/figures/fig1_gate_flow.svg" width="728" height="272" alt="Bar charts of heart-failure readmission records remaining after each gate. Primary release: 4,792 requested, 2,975 compatible. Flagged and current releases: zero records pass the release gate.">
+  <figcaption>Records remaining after each gate in the three releases.</figcaption>
+</figure>
+<div class="prose">
+<p>Among compatible hospitals in the same state, the intervals separated about one heart-failure readmission ordering in 257, and 87.3% of hospitals were separated from none of their peers. For mortality the intervals separated about one ordering in 34, and 54.2% of hospitals were separated from none. Excess days separated hospitals far more often, which matches earlier work comparing that measure with readmission. Weighting each state equally instead of each pair gave the same picture.</p>
+</div>
+<figure>
+  <img src="assets/figures/fig4_separation.svg" width="723" height="298" alt="Dot chart of the share of point-ordered same-state pairs not separated, by measure and rule. Readmission and mortality measures sit close to 100 percent; the excess days measures sit near two thirds.">
+  <figcaption>Share of point orderings not separated, by measure, under the primary rule (R1), a rounding-robust rule (R2) and a lenient rule (R3), with the median and interquartile range across states.</figcaption>
+</figure>
+<div class="prose">
+<p>In all 48 states with at least 10 compatible hospitals, the hospital ranked first on heart-failure readmission could rank in the bottom half of its state. In Arizona, two hospitals' mortality intervals sit 1.9 percentage points apart, one of 10 separated mortality pairs out of 1,199.</p>
+<p>Between releases, the readmission Measure ID kept its name but moved from a 36-month to a 24-month window and, under the FY 2026 final rule, added Medicare Advantage beneficiaries. The mortality and excess-days measures kept their identifiers too, but from the Summer 2026 refresh every study measure includes patients admitted with COVID-19 and uses updated risk adjustment. A comparison across those releases would mix definitions under one identifier.</p>
+</div>
+<figure>
+  <img src="assets/figures/fig6_windows.svg" width="721" height="323" alt="Timeline of observation windows for heart-failure measures in three releases; the readmission window shortens from 36 to 24 months.">
+  <figcaption>Observation windows of the same Measure IDs across the three releases.</figcaption>
+</figure>
+</section>
+
+
+<section aria-labelledby="explore">
+<h2 id="explore">Explore the frozen snapshot</h2>
+<p class="prose">Pick a release, measure and state to see each hospital's published score and interval, its interval-compatible rank range, and every record that was not compared with the reason. The controls only filter precomputed rows from run hc-20261007T214017-783661a110; nothing is recalculated in the browser, and nothing here recommends a hospital.</p>
+<section id="viewer" class="hc-viewer" data-base="assets/data/" aria-label="Records by release, measure and state">
+  <noscript>
+    <p>The interactive views of the records need JavaScript. The review workbook in the downloads lists every primary-release record and every current heart-failure record with the gate it fails and the source text.</p>
+  </noscript>
+</section>
+
+</section>
+
+
+<section class="prose" aria-labelledby="limits">
+<h2 id="limits">Limits</h2>
+<ul>
+<li>The primary release is not the newest; it is the newest whose intervals are not covered by a CMS notice, and its window ends in June 2024.</li>
+<li>Separation is judged from marginal 95% intervals published to one decimal, without covariance. Overlap does not show that two hospitals perform the same, and non-overlap is not a formal test.</li>
+<li>A statistical white paper commissioned for CMS cautions that indirectly standardized rates should not generally be compared directly between hospitals. The study describes what the published intervals show for orderings people commonly make.</li>
+<li>The VA exclusion rests on documentation found after the plan was locked; both runs are reported.</li>
+<li>CMS national category counts exceed the counts in the hospital file by 137 to 229 hospitals per measure, and the public files do not identify the difference, so that reconciliation is incomplete.</li>
+<li>The CMS notice does not describe the issues it reports, so it cannot be ruled out that earlier releases were affected.</li>
+<li>The results describe heart-failure and heart-attack outcome measures in the public files and say nothing about other aspects of hospital quality.</li>
+</ul>
+</section>
+
+<section class="prose" aria-labelledby="reproduce">
+<h2 id="reproduce">Reproduce the analysis</h2>
+<p>The source archive contains the code, SQL, configuration, the locked plan, tests and a synthetic demonstration. With Python 3.12 or later:</p>
+<pre><code>python3 -m venv .venv
+.venv/bin/pip install -r requirements.lock -e .
+.venv/bin/python -m pytest -q
+.venv/bin/hospcomp demo
+.venv/bin/hospcomp all</code></pre>
+<p>The demo runs on a small synthetic fixture and only shows that the software works. <code>hospcomp all</code> downloads the CMS files, stops if any file differs from the checksums pinned for the study, and rebuilds every table. The R cross-check needs R and is skipped without it; everything else needs only Python.</p>
+</section>
+
+<section class="prose" aria-labelledby="files">
+<h2 id="files">Report and files</h2>
+<ul class="files">
+<li><a href="report.html">Full report and references</a><span class="meta">HTML</span></li>
+<li><a href="supplement.html">Supplementary tables S1 to S12</a><span class="meta">HTML</span></li>
+<li><a href="downloads/hospital-comparability-source.zip">Source archive (code, SQL, configuration, plan, tests, demo)</a><span class="meta">2.1 MB</span></li>
+<li><a href="downloads/hospital-comparability-review.xlsx">Review workbook (original fields, gate decisions, source evidence)</a><span class="meta">7.0 MB</span></li>
+<li><a href="downloads/hospital-comparability-tables.zip">Output tables (CSV) and evidence map</a><span class="meta">729.4 KB</span></li>
+<li><a href="downloads/analysis_plan.md">Analysis plan with lock history and amendments</a><span class="meta">22.8 KB</span></li>
+<li><a href="downloads/source_manifest.json">Source manifest (URLs, release dates, SHA-256)</a><span class="meta">48.5 KB</span></li>
+<li><a href="downloads/strobe_record_checklist.md">STROBE checklist with applicable RECORD items</a><span class="meta">5.1 KB</span></li>
+<li><a href="downloads/hospital-comparability-supplement.docx">Supplementary tables S1 to S12 (Word)</a><span class="meta">49.4 KB</span></li>
+</ul>
+</section>
+</main>
+<footer class="page-footer">
+<p>Data: CMS Provider Data Catalog, U.S. federal public data, retrieved 2026-10-07. Code: MIT license. Run hc-20261007T214017-783661a110. This page describes a public measure population and does not rate or recommend hospitals.</p>
+</footer>
+<script src="assets/viewer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* Project page: quiet light background, dark text, one restrained accent, system fonts. */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #1d1d1b;
+  --ink-2: #4a4945;
+  --rule: #dedbd3;
+  --accent: #1f5f9e;
+  --accent-dark: #174a7c;
+  --panel: #f2f0ea;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+.skip { position: absolute; left: -999px; top: 0; background: var(--surface); padding: .5rem 1rem; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 10; }
+.page { max-width: 48rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+header h1 { font-size: 2rem; line-height: 1.2; margin: .25rem 0 .75rem; letter-spacing: -.01em; text-wrap: balance; }
+.eyebrow { color: var(--ink-2); font-size: .9rem; margin: 0; }
+.lede { font-size: 1.125rem; margin: 0 0 1.25rem; }
+nav.links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0 0 2rem; }
+nav.links a { font-weight: 600; }
+a { color: var(--accent); text-underline-offset: .15em; }
+a:hover { color: var(--accent-dark); }
+a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.75rem 0 .75rem; padding-top: .75rem; border-top: 1px solid var(--rule); text-wrap: balance; }
+h3 { font-size: 1.08rem; margin: 1.5rem 0 .4rem; }
+p, ul { margin: 0 0 1rem; text-wrap: pretty; }
+li { margin-bottom: .45rem; }
+figure { margin: 1.5rem 0 1.5rem; }
+figure img { display: block; width: 100%; height: auto; background: #fcfcfb; border: 1px solid var(--rule); border-radius: 4px; }
+figcaption { color: var(--ink-2); font-size: .92rem; margin-top: .6rem; }
+.table-wrap { overflow-x: auto; margin: 0 0 1.25rem; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; font-variant-numeric: tabular-nums; }
+caption { text-align: left; color: var(--ink-2); font-size: .9rem; padding-bottom: .4rem; }
+th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+thead th { border-bottom: 2px solid var(--ink-2); }
+.meta { color: var(--ink-2); font-size: .92rem; }
+code { font-size: .9em; background: var(--panel); padding: .05em .3em; border-radius: 3px; overflow-wrap: anywhere; }
+pre { background: var(--panel); padding: .75rem 1rem; border-radius: 4px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+ul.files { padding-left: 1.1rem; }
+footer { color: var(--ink-2); font-size: .9rem; border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1rem; }
+@media (max-width: 600px) {
+  .page { padding: 1.5rem 1rem 2.5rem; }
+  header h1 { font-size: 1.6rem; }
+  body { font-size: 1rem; }
+  table { font-size: .88rem; }
+}

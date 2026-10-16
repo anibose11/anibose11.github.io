@@ -1,0 +1,15 @@
+Variable / Field Name,Form Name,Section Header,Field Type,Field Label,"Choices, Calculations, OR Slider Labels",Field Note,Text Validation Type OR Show Slider Number,Text Validation Min,Text Validation Max,Identifier?,Branching Logic (Show field only if...),Required Field?,Custom Alignment,Question Number (surveys only),Matrix Group Name,Matrix Ranking?,Field Annotation
+record_id,ledger_item_review,Ledger item (filled from the issue ledger),text,Record ID,,Ledger issue_id,,,,,,y,,,,,@READONLY
+nct_id,ledger_item_review,,text,ClinicalTrials.gov identifier,,,,,,,,y,,,,,@READONLY
+registry_url,ledger_item_review,,text,Registry record link,,Open the public record to review the source,,,,,,,,,,,@READONLY
+issue_class,ledger_item_review,,dropdown,Issue class assigned by the audit,"1, transformation defect | 2, possible source inconsistency | 3, unresolved interpretation",,,,,,,y,,,,,@READONLY
+rule_id,ledger_item_review,,text,Rule or check identifier,,See docs/rules.md,,,,,,y,,,,,@READONLY
+json_pointer,ledger_item_review,,text,JSON pointer of the flagged object,,,,,,,,y,,,,,@READONLY
+evidence_json,ledger_item_review,,notes,Source values and denominators recorded by the audit,,,,,,,,,,,,,@READONLY
+snapshot_id,ledger_item_review,,text,Registry snapshot,,,,,,,,y,,,,,@READONLY
+rv_decision,ledger_item_review,Review,radio,Reviewer decision,"1, Confirmed as described | 2, Acceptable reporting variation | 3, Audit rule misapplied | 4, Cannot determine from the public record",,,,,,,y,,,,,
+rv_source_checked,ledger_item_review,,yesno,Did you open the public registry record for this item?,,,,,,,,y,,,,,
+rv_corrected_denominator,ledger_item_review,,text,"Denominator you would use, if any",,Leave blank when not applicable,integer,,,,[issue_class] = '3',,,,,,
+rv_notes,ledger_item_review,,notes,Notes,,,,,,,,,,,,,
+rv_reviewer,ledger_item_review,,text,Reviewer initials,,,,,,,,y,,,,,
+rv_date,ledger_item_review,,text,Review date,,,date_ymd,,,,,y,,,,,

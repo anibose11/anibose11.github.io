@@ -1,0 +1,172 @@
+system,condition,scope,metric,numerator,denominator,estimate,ci_low,ci_high,unit,suppressed
+qwen3-1.7b,retrieved,model sample,qvwr,423,928,0.4558189655172414,0.41782955893848306,0.4929286206455354,proportion,False
+qwen3-1.7b,retrieved,model sample,task_success,473,1209,0.391232423490488,0.35945840732282597,0.4227239648600668,proportion,False
+qwen3-1.7b,retrieved,model sample,parse_validity,1205,1209,0.9966914805624483,0.9916386210660361,1.0,proportion,False
+qwen3-1.7b,retrieved,model sample,coverage,1196,1209,0.989247311827957,0.9819460282058592,0.9957555178268251,proportion,False
+qwen3-1.7b,retrieved,model sample,quote_exists_among_answered,928,1196,0.7759197324414716,0.7477098575998069,0.8038888130503037,proportion,False
+qwen3-1.7b,retrieved,model sample,locator_valid_among_answered,871,1196,0.7282608695652174,0.698834512200781,0.7573473863580901,proportion,False
+qwen3-1.7b,retrieved,model sample,gold_overlap_among_answered,385,1189,0.32380151387720774,0.2917007194747136,0.35604802281761394,proportion,False
+qwen3-1.7b,retrieved,model sample,accuracy_among_answered,651,1196,0.544314381270903,0.5091049449362988,0.5790736328151108,proportion,False
+qwen3-1.7b,retrieved,model sample,abstention,9,1209,0.007444168734491315,0.002527326763847404,0.01309328968903437,proportion,False
+qwen3-1.7b,abstract,model sample,qvwr,504,1026,0.49122807017543857,0.4513015925661077,0.5315742386896862,proportion,False
+qwen3-1.7b,abstract,model sample,task_success,505,1165,0.4334763948497854,0.39714372588582464,0.4702384590755618,proportion,False
+qwen3-1.7b,abstract,model sample,parse_validity,1156,1165,0.992274678111588,0.9834782608695652,0.9982978723404256,proportion,False
+qwen3-1.7b,abstract,model sample,coverage,1145,1165,0.9828326180257511,0.9722455845248108,0.9914385392619849,proportion,False
+qwen3-1.7b,abstract,model sample,quote_exists_among_answered,1026,1145,0.8960698689956332,0.8684193870752832,0.9215348503918561,proportion,False
+qwen3-1.7b,abstract,model sample,locator_valid_among_answered,997,1145,0.8707423580786027,0.8413793103448276,0.8979604528378515,proportion,False
+qwen3-1.7b,abstract,model sample,gold_overlap_among_answered,378,1138,0.3321616871704745,0.2953539250397723,0.36869661261128145,proportion,False
+qwen3-1.7b,abstract,model sample,accuracy_among_answered,586,1145,0.5117903930131005,0.47415936999853886,0.5495183748527852,proportion,False
+qwen3-1.7b,abstract,model sample,abstention,11,1165,0.00944206008583691,0.004152737762093161,0.016000355871886116,proportion,False
+qwen3-1.7b,oracle,model sample,qvwr,286,980,0.29183673469387755,0.25661866070794903,0.32851249621809264,proportion,False
+qwen3-1.7b,oracle,model sample,task_success,692,1202,0.5757071547420965,0.5414875098064419,0.6098370775146731,proportion,False
+qwen3-1.7b,oracle,model sample,parse_validity,1195,1202,0.9941763727121464,0.9896329670035934,0.9982964224872232,proportion,False
+qwen3-1.7b,oracle,model sample,coverage,1148,1202,0.9550748752079867,0.938574590979603,0.9697978823328494,proportion,False
+qwen3-1.7b,oracle,model sample,quote_exists_among_answered,980,1148,0.8536585365853658,0.8301882531403931,0.8759760587843574,proportion,False
+qwen3-1.7b,oracle,model sample,locator_valid_among_answered,978,1148,0.8519163763066202,0.8283002588438308,0.8745358120890606,proportion,False
+qwen3-1.7b,oracle,model sample,gold_overlap_among_answered,991,1148,0.8632404181184669,0.8404255319148937,0.8845486111111112,proportion,False
+qwen3-1.7b,oracle,model sample,accuracy_among_answered,816,1148,0.710801393728223,0.6762638265788758,0.7442665277076114,proportion,False
+qwen3-1.7b,oracle,model sample,abstention,47,1202,0.039101497504159734,0.024793388429752067,0.05532288635156121,proportion,False
+qwen3-0.6b,retrieved,model sample,qvwr,331,773,0.4282018111254851,0.38522376958699045,0.4729559748427673,proportion,False
+qwen3-0.6b,retrieved,model sample,task_success,260,1209,0.21505376344086022,0.1887998275862069,0.24247295958795562,proportion,False
+qwen3-0.6b,retrieved,model sample,parse_validity,1179,1209,0.9751861042183623,0.9640516998166173,0.9849750902360324,proportion,False
+qwen3-0.6b,retrieved,model sample,coverage,1173,1209,0.9702233250620348,0.9576985746325063,0.9815748075847612,proportion,False
+qwen3-0.6b,retrieved,model sample,quote_exists_among_answered,773,1173,0.658994032395567,0.6243565515698412,0.6919868148984691,proportion,False
+qwen3-0.6b,retrieved,model sample,locator_valid_among_answered,454,1173,0.38704177323103156,0.35004443938012764,0.42414088982905995,proportion,False
+qwen3-0.6b,retrieved,model sample,gold_overlap_among_answered,249,1162,0.21428571428571427,0.18866326383799506,0.24051826765188833,proportion,False
+qwen3-0.6b,retrieved,model sample,accuracy_among_answered,671,1173,0.5720375106564365,0.5357135360441405,0.6085470085470085,proportion,False
+qwen3-0.6b,retrieved,model sample,abstention,6,1209,0.004962779156327543,0.0008071025020177562,0.01134406992692237,proportion,False
+qwen3-0.6b,abstract,model sample,qvwr,352,725,0.48551724137931035,0.4392248773326121,0.5329046283309958,proportion,False
+qwen3-0.6b,abstract,model sample,task_success,174,1165,0.14935622317596567,0.12068929143023426,0.17931128185907044,proportion,False
+qwen3-0.6b,abstract,model sample,parse_validity,994,1165,0.8532188841201717,0.8180965121025726,0.8864013623791541,proportion,False
+qwen3-0.6b,abstract,model sample,coverage,949,1165,0.8145922746781116,0.7753079483978361,0.8524049030340248,proportion,False
+qwen3-0.6b,abstract,model sample,quote_exists_among_answered,725,949,0.7639620653319283,0.7156754146850713,0.8084661835748792,proportion,False
+qwen3-0.6b,abstract,model sample,locator_valid_among_answered,358,949,0.3772391991570074,0.32325987150226254,0.4309586885695506,proportion,False
+qwen3-0.6b,abstract,model sample,gold_overlap_among_answered,257,892,0.2881165919282511,0.24865342180497926,0.32941210950968897,proportion,False
+qwen3-0.6b,abstract,model sample,accuracy_among_answered,482,949,0.5079030558482613,0.4669347902370771,0.548140246373288,proportion,False
+qwen3-0.6b,abstract,model sample,abstention,45,1165,0.03862660944206009,0.01926259688644447,0.06187514031280398,proportion,False
+qwen3-0.6b,oracle,model sample,qvwr,120,406,0.2955665024630542,0.24938256211323545,0.3417085427135678,proportion,False
+qwen3-0.6b,oracle,model sample,task_success,276,1202,0.22961730449251247,0.20358787775701828,0.25591246237351095,proportion,False
+qwen3-0.6b,oracle,model sample,parse_validity,1187,1202,0.9875207986688852,0.9804918388878545,0.9935697754344954,proportion,False
+qwen3-0.6b,oracle,model sample,coverage,815,1202,0.6780366056572379,0.6438561683337519,0.7108225457902356,proportion,False
+qwen3-0.6b,oracle,model sample,quote_exists_among_answered,406,815,0.498159509202454,0.4573450708128932,0.53905367253066,proportion,False
+qwen3-0.6b,oracle,model sample,locator_valid_among_answered,393,815,0.4822085889570552,0.44124621042927875,0.5229902094407342,proportion,False
+qwen3-0.6b,oracle,model sample,gold_overlap_among_answered,412,540,0.762962962962963,0.7219248874838735,0.8027687699656394,proportion,False
+qwen3-0.6b,oracle,model sample,accuracy_among_answered,531,815,0.6515337423312884,0.613923439714579,0.6881479144239454,proportion,False
+qwen3-0.6b,oracle,model sample,abstention,372,1202,0.30948419301164726,0.27716835221627417,0.34275981899133384,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,qvwr,213,1039,0.20500481231953802,0.17433776287066063,0.23716272555533838,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,task_success,818,1209,0.6765922249793217,0.6423233341676744,0.7097602739726028,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,parse_validity,1206,1209,0.9975186104218362,0.9943135662063363,1.0,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,coverage,1160,1209,0.9594706368899917,0.944579251399818,0.9731093530213473,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,quote_exists_among_answered,1039,1160,0.8956896551724138,0.8754415422119896,0.9150554651494152,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,locator_valid_among_answered,1029,1160,0.8870689655172413,0.8661970260456584,0.90673609641171,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,gold_overlap_among_answered,628,1153,0.5446660884648742,0.5083235067590895,0.5808403635658835,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,accuracy_among_answered,920,1160,0.7931034482758621,0.7621107266435986,0.8219309826952389,proportion,False
+qwen3-4b-instruct-2507,retrieved,model sample,abstention,46,1209,0.0380479735318445,0.024659130893736805,0.05280628672623359,proportion,False
+tfidf-lr,retrieved,full official test split,qvwr,514,1209,0.4251447477253929,0.3920595533498759,0.4582299924129451,proportion,False
+tfidf-lr,retrieved,full official test split,task_success,695,1209,0.5748552522746071,0.541770007587055,0.607940446650124,proportion,False
+tfidf-lr,retrieved,full official test split,parse_validity,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,full official test split,coverage,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,full official test split,quote_exists_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,full official test split,locator_valid_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,full official test split,gold_overlap_among_answered,214,1202,0.17803660565723795,0.1480878424757219,0.20926243567753003,proportion,False
+tfidf-lr,retrieved,full official test split,accuracy_among_answered,695,1209,0.5748552522746071,0.541770007587055,0.607940446650124,proportion,False
+tfidf-lr,retrieved,full official test split,abstention,0,1209,0.0,0.0,0.0,proportion,False
+tfidf-lr,retrieved,model sample,qvwr,514,1209,0.4251447477253929,0.3920595533498759,0.4582299924129451,proportion,False
+tfidf-lr,retrieved,model sample,task_success,695,1209,0.5748552522746071,0.541770007587055,0.607940446650124,proportion,False
+tfidf-lr,retrieved,model sample,parse_validity,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,model sample,coverage,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,model sample,quote_exists_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,model sample,locator_valid_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+tfidf-lr,retrieved,model sample,gold_overlap_among_answered,214,1202,0.17803660565723795,0.1480878424757219,0.20926243567753003,proportion,False
+tfidf-lr,retrieved,model sample,accuracy_among_answered,695,1209,0.5748552522746071,0.541770007587055,0.607940446650124,proportion,False
+tfidf-lr,retrieved,model sample,abstention,0,1209,0.0,0.0,0.0,proportion,False
+tfidf-lr,abstract,full official test split,qvwr,543,1161,0.46770025839793283,0.43307708566718095,0.5034484247513549,proportion,False
+tfidf-lr,abstract,full official test split,task_success,618,1165,0.5304721030042918,0.4945513219782625,0.5652535878117757,proportion,False
+tfidf-lr,abstract,full official test split,parse_validity,1165,1165,1.0,1.0,1.0,proportion,False
+tfidf-lr,abstract,full official test split,coverage,1165,1165,1.0,1.0,1.0,proportion,False
+tfidf-lr,abstract,full official test split,quote_exists_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+tfidf-lr,abstract,full official test split,locator_valid_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+tfidf-lr,abstract,full official test split,gold_overlap_among_answered,220,1158,0.18998272884283246,0.15467578485541972,0.22557832890506874,proportion,False
+tfidf-lr,abstract,full official test split,accuracy_among_answered,620,1165,0.5321888412017167,0.4965690246643402,0.5666965085049239,proportion,False
+tfidf-lr,abstract,full official test split,abstention,0,1165,0.0,0.0,0.0,proportion,False
+tfidf-lr,abstract,model sample,qvwr,543,1161,0.46770025839793283,0.43307708566718095,0.5034484247513549,proportion,False
+tfidf-lr,abstract,model sample,task_success,618,1165,0.5304721030042918,0.4945513219782625,0.5652535878117757,proportion,False
+tfidf-lr,abstract,model sample,parse_validity,1165,1165,1.0,1.0,1.0,proportion,False
+tfidf-lr,abstract,model sample,coverage,1165,1165,1.0,1.0,1.0,proportion,False
+tfidf-lr,abstract,model sample,quote_exists_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+tfidf-lr,abstract,model sample,locator_valid_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+tfidf-lr,abstract,model sample,gold_overlap_among_answered,220,1158,0.18998272884283246,0.15467578485541972,0.22557832890506874,proportion,False
+tfidf-lr,abstract,model sample,accuracy_among_answered,620,1165,0.5321888412017167,0.4965690246643402,0.5666965085049239,proportion,False
+tfidf-lr,abstract,model sample,abstention,0,1165,0.0,0.0,0.0,proportion,False
+tfidf-lr,oracle,full official test split,qvwr,292,1202,0.24292845257903495,0.2138728323699422,0.27349210682374137,proportion,False
+tfidf-lr,oracle,full official test split,task_success,910,1202,0.757071547420965,0.7265078931762586,0.7861271676300579,proportion,False
+tfidf-lr,oracle,full official test split,parse_validity,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,full official test split,coverage,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,full official test split,quote_exists_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,full official test split,locator_valid_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,full official test split,gold_overlap_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,full official test split,accuracy_among_answered,910,1202,0.757071547420965,0.7265078931762586,0.7861271676300579,proportion,False
+tfidf-lr,oracle,full official test split,abstention,0,1202,0.0,0.0,0.0,proportion,False
+tfidf-lr,oracle,model sample,qvwr,292,1202,0.24292845257903495,0.2138728323699422,0.27349210682374137,proportion,False
+tfidf-lr,oracle,model sample,task_success,910,1202,0.757071547420965,0.7265078931762586,0.7861271676300579,proportion,False
+tfidf-lr,oracle,model sample,parse_validity,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,model sample,coverage,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,model sample,quote_exists_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,model sample,locator_valid_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,model sample,gold_overlap_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+tfidf-lr,oracle,model sample,accuracy_among_answered,910,1202,0.757071547420965,0.7265078931762586,0.7861271676300579,proportion,False
+tfidf-lr,oracle,model sample,abstention,0,1202,0.0,0.0,0.0,proportion,False
+majority,retrieved,full official test split,qvwr,698,1209,0.5773366418527709,0.5408245755860954,0.6120349700903248,proportion,False
+majority,retrieved,full official test split,task_success,511,1209,0.4226633581472291,0.3879650299096752,0.45917542441390463,proportion,False
+majority,retrieved,full official test split,parse_validity,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,full official test split,coverage,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,full official test split,quote_exists_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,full official test split,locator_valid_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,full official test split,gold_overlap_among_answered,214,1202,0.17803660565723795,0.1480878424757219,0.20926243567753003,proportion,False
+majority,retrieved,full official test split,accuracy_among_answered,511,1209,0.4226633581472291,0.3879650299096752,0.45917542441390463,proportion,False
+majority,retrieved,full official test split,abstention,0,1209,0.0,0.0,0.0,proportion,False
+majority,retrieved,model sample,qvwr,698,1209,0.5773366418527709,0.5408245755860954,0.6120349700903248,proportion,False
+majority,retrieved,model sample,task_success,511,1209,0.4226633581472291,0.3879650299096752,0.45917542441390463,proportion,False
+majority,retrieved,model sample,parse_validity,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,model sample,coverage,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,model sample,quote_exists_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,model sample,locator_valid_among_answered,1209,1209,1.0,1.0,1.0,proportion,False
+majority,retrieved,model sample,gold_overlap_among_answered,214,1202,0.17803660565723795,0.1480878424757219,0.20926243567753003,proportion,False
+majority,retrieved,model sample,accuracy_among_answered,511,1209,0.4226633581472291,0.3879650299096752,0.45917542441390463,proportion,False
+majority,retrieved,model sample,abstention,0,1209,0.0,0.0,0.0,proportion,False
+majority,abstract,full official test split,qvwr,670,1161,0.5770887166236004,0.5398299338641992,0.6138973381340765,proportion,False
+majority,abstract,full official test split,task_success,491,1165,0.42145922746781117,0.38474562513757427,0.458763653005632,proportion,False
+majority,abstract,full official test split,parse_validity,1165,1165,1.0,1.0,1.0,proportion,False
+majority,abstract,full official test split,coverage,1165,1165,1.0,1.0,1.0,proportion,False
+majority,abstract,full official test split,quote_exists_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+majority,abstract,full official test split,locator_valid_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+majority,abstract,full official test split,gold_overlap_among_answered,220,1158,0.18998272884283246,0.15467578485541972,0.22557832890506874,proportion,False
+majority,abstract,full official test split,accuracy_among_answered,492,1165,0.4223175965665236,0.38581314878892736,0.4595283021442176,proportion,False
+majority,abstract,full official test split,abstention,0,1165,0.0,0.0,0.0,proportion,False
+majority,abstract,model sample,qvwr,670,1161,0.5770887166236004,0.5398299338641992,0.6138973381340765,proportion,False
+majority,abstract,model sample,task_success,491,1165,0.42145922746781117,0.38474562513757427,0.458763653005632,proportion,False
+majority,abstract,model sample,parse_validity,1165,1165,1.0,1.0,1.0,proportion,False
+majority,abstract,model sample,coverage,1165,1165,1.0,1.0,1.0,proportion,False
+majority,abstract,model sample,quote_exists_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+majority,abstract,model sample,locator_valid_among_answered,1161,1165,0.9965665236051502,0.9894642110444366,1.0,proportion,False
+majority,abstract,model sample,gold_overlap_among_answered,220,1158,0.18998272884283246,0.15467578485541972,0.22557832890506874,proportion,False
+majority,abstract,model sample,accuracy_among_answered,492,1165,0.4223175965665236,0.38581314878892736,0.4595283021442176,proportion,False
+majority,abstract,model sample,abstention,0,1165,0.0,0.0,0.0,proportion,False
+majority,oracle,full official test split,qvwr,694,1202,0.5773710482529119,0.5408525029313087,0.6123833757421544,proportion,False
+majority,oracle,full official test split,task_success,508,1202,0.4226289517470882,0.38761662425784565,0.4591474970686913,proportion,False
+majority,oracle,full official test split,parse_validity,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,full official test split,coverage,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,full official test split,quote_exists_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,full official test split,locator_valid_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,full official test split,gold_overlap_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,full official test split,accuracy_among_answered,508,1202,0.4226289517470882,0.38761662425784565,0.4591474970686913,proportion,False
+majority,oracle,full official test split,abstention,0,1202,0.0,0.0,0.0,proportion,False
+majority,oracle,model sample,qvwr,694,1202,0.5773710482529119,0.5408525029313087,0.6123833757421544,proportion,False
+majority,oracle,model sample,task_success,508,1202,0.4226289517470882,0.38761662425784565,0.4591474970686913,proportion,False
+majority,oracle,model sample,parse_validity,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,model sample,coverage,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,model sample,quote_exists_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,model sample,locator_valid_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,model sample,gold_overlap_among_answered,1202,1202,1.0,1.0,1.0,proportion,False
+majority,oracle,model sample,accuracy_among_answered,508,1202,0.4226289517470882,0.38761662425784565,0.4591474970686913,proportion,False
+majority,oracle,model sample,abstention,0,1202,0.0,0.0,0.0,proportion,False

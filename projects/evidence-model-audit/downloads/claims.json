@@ -1,0 +1,1873 @@
+{
+  "generated_utc": "2026-10-07T18:06:45+00:00",
+  "results_sha256": "193f333cb635644048663f306d28589cf542707dada87faae828ce8692d0de97",
+  "counts_kept_separate": {
+    "source_prompt_rows": 12865,
+    "source_annotation_rows": 24686,
+    "test_split_articles_with_prompts": 334,
+    "eligible_test_prompts_full_split": 1209,
+    "eligible_test_prompts_primary_model_sample": 1209,
+    "test_articles_with_eligible_prompts_analyzed": 332,
+    "test_articles_in_model_sample_run": 333,
+    "test_model_calls_recorded": 8428,
+    "test_model_calls_oracle_rerun_after_amendment_a3": 26
+  },
+  "claims": [
+    {
+      "id": "headline_qvwr",
+      "statement": "Quote-valid answers with the wrong direction label, Qwen3-1.7B, retrieved context",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4558189655172414,
+      "numerator": 423,
+      "denominator": 928,
+      "ci_low": 0.41782955893848306,
+      "ci_high": 0.4929286206455354,
+      "articles": 315,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "task_success_primary",
+      "statement": "End-to-end task success, Qwen3-1.7B, retrieved context",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items including invalid outputs",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.391232423490488,
+      "numerator": 473,
+      "denominator": 1209,
+      "ci_low": 0.35945840732282597,
+      "ci_high": 0.4227239648600668,
+      "articles": 332,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "quote_exists_primary",
+      "statement": "Answered prompts whose quote exists in the supplied passages, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > metrics > quote_exists_among_answered",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "metrics",
+        "quote_exists_among_answered"
+      ],
+      "scope": "answered prompts",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.7759197324414716,
+      "numerator": 928,
+      "denominator": 1196,
+      "ci_low": 0.7477098575998069,
+      "ci_high": 0.8038888130503037,
+      "articles": 332,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "accuracy_answered_primary",
+      "statement": "Direction-label accuracy among answered prompts, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > metrics > accuracy_among_answered",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "metrics",
+        "accuracy_among_answered"
+      ],
+      "scope": "answered prompts",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.544314381270903,
+      "numerator": 651,
+      "denominator": 1196,
+      "ci_low": 0.5091049449362988,
+      "ci_high": 0.5790736328151108,
+      "articles": 332,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "parse_validity_primary",
+      "statement": "Parse-valid answers, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > metrics > parse_validity",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "metrics",
+        "parse_validity"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.9966914805624483,
+      "numerator": 1205,
+      "denominator": 1209,
+      "ci_low": 0.9916386210660361,
+      "ci_high": 1.0,
+      "articles": 332,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "filter_error_primary",
+      "statement": "Retained error after quote-validity rejection, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > rejection > quote_filter > retained_error",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "rejection",
+        "quote_filter",
+        "retained_error"
+      ],
+      "scope": "answered prompts kept by the filter",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "value": 0.4569460390355913,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "unfiltered_error_primary",
+      "statement": "Retained error without rejection, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > rejection > unfiltered > retained_error",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "rejection",
+        "unfiltered",
+        "retained_error"
+      ],
+      "scope": "answered prompts",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "value": 0.45568561872909696,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "random_error_primary",
+      "statement": "Mean retained error under coverage-matched random rejection, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > rejection > random_same_coverage > mean_error",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "rejection",
+        "random_same_coverage",
+        "mean_error"
+      ],
+      "scope": "2,000 seeded draws",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "value": 0.45614982778415614,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "filter_coverage_primary",
+      "statement": "Coverage after quote-validity rejection, Qwen3-1.7B, retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::retrieved > rejection > quote_filter > coverage",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::retrieved",
+        "rejection",
+        "quote_filter",
+        "coverage"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "value": 0.7204301075268817,
+      "system": "qwen3-1.7b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "qvwr::qwen3-1.7b::abstract",
+      "statement": "Quote-valid wrong-direction rate, qwen3-1.7b::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::abstract > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::abstract",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.49122807017543857,
+      "numerator": 504,
+      "denominator": 1026,
+      "ci_low": 0.4513015925661077,
+      "ci_high": 0.5315742386896862,
+      "articles": 308,
+      "system": "qwen3-1.7b::abstract",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "task_success::qwen3-1.7b::abstract",
+      "statement": "End-to-end task success, qwen3-1.7b::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::abstract > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::abstract",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4334763948497854,
+      "numerator": 505,
+      "denominator": 1165,
+      "ci_low": 0.39714372588582464,
+      "ci_high": 0.4702384590755618,
+      "articles": 318,
+      "system": "qwen3-1.7b::abstract",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "qvwr::qwen3-1.7b::oracle",
+      "statement": "Quote-valid wrong-direction rate, qwen3-1.7b::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::oracle > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::oracle",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.29183673469387755,
+      "numerator": 286,
+      "denominator": 980,
+      "ci_low": 0.25661866070794903,
+      "ci_high": 0.32851249621809264,
+      "articles": 315,
+      "system": "qwen3-1.7b::oracle",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "task_success::qwen3-1.7b::oracle",
+      "statement": "End-to-end task success, qwen3-1.7b::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-1.7b::oracle > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-1.7b::oracle",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5757071547420965,
+      "numerator": 692,
+      "denominator": 1202,
+      "ci_low": 0.5414875098064419,
+      "ci_high": 0.6098370775146731,
+      "articles": 332,
+      "system": "qwen3-1.7b::oracle",
+      "run_id": "test-main",
+      "model_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+    },
+    {
+      "id": "qvwr::qwen3-0.6b::retrieved",
+      "statement": "Quote-valid wrong-direction rate, qwen3-0.6b::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::retrieved > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::retrieved",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4282018111254851,
+      "numerator": 331,
+      "denominator": 773,
+      "ci_low": 0.38522376958699045,
+      "ci_high": 0.4729559748427673,
+      "articles": 296,
+      "system": "qwen3-0.6b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "task_success::qwen3-0.6b::retrieved",
+      "statement": "End-to-end task success, qwen3-0.6b::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::retrieved > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::retrieved",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.21505376344086022,
+      "numerator": 260,
+      "denominator": 1209,
+      "ci_low": 0.1887998275862069,
+      "ci_high": 0.24247295958795562,
+      "articles": 332,
+      "system": "qwen3-0.6b::retrieved",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "qvwr::qwen3-0.6b::abstract",
+      "statement": "Quote-valid wrong-direction rate, qwen3-0.6b::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::abstract > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::abstract",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.48551724137931035,
+      "numerator": 352,
+      "denominator": 725,
+      "ci_low": 0.4392248773326121,
+      "ci_high": 0.5329046283309958,
+      "articles": 234,
+      "system": "qwen3-0.6b::abstract",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "task_success::qwen3-0.6b::abstract",
+      "statement": "End-to-end task success, qwen3-0.6b::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::abstract > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::abstract",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.14935622317596567,
+      "numerator": 174,
+      "denominator": 1165,
+      "ci_low": 0.12068929143023426,
+      "ci_high": 0.17931128185907044,
+      "articles": 318,
+      "system": "qwen3-0.6b::abstract",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "qvwr::qwen3-0.6b::oracle",
+      "statement": "Quote-valid wrong-direction rate, qwen3-0.6b::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::oracle > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::oracle",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.2955665024630542,
+      "numerator": 120,
+      "denominator": 406,
+      "ci_low": 0.24938256211323545,
+      "ci_high": 0.3417085427135678,
+      "articles": 221,
+      "system": "qwen3-0.6b::oracle",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "task_success::qwen3-0.6b::oracle",
+      "statement": "End-to-end task success, qwen3-0.6b::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-0.6b::oracle > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-0.6b::oracle",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.22961730449251247,
+      "numerator": 276,
+      "denominator": 1202,
+      "ci_low": 0.20358787775701828,
+      "ci_high": 0.25591246237351095,
+      "articles": 332,
+      "system": "qwen3-0.6b::oracle",
+      "run_id": "test-main",
+      "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+    },
+    {
+      "id": "qvwr::qwen3-4b-instruct-2507::retrieved",
+      "statement": "Quote-valid wrong-direction rate, qwen3-4b-instruct-2507::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-4b-instruct-2507::retrieved > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "qwen3-4b-instruct-2507::retrieved",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.20500481231953802,
+      "numerator": 213,
+      "denominator": 1039,
+      "ci_low": 0.17433776287066063,
+      "ci_high": 0.23716272555533838,
+      "articles": 323,
+      "system": "qwen3-4b-instruct-2507::retrieved",
+      "run_id": "test-main",
+      "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    {
+      "id": "task_success::qwen3-4b-instruct-2507::retrieved",
+      "statement": "End-to-end task success, qwen3-4b-instruct-2507::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > qwen3-4b-instruct-2507::retrieved > metrics > task_success",
+      "json_path": [
+        "systems",
+        "qwen3-4b-instruct-2507::retrieved",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.6765922249793217,
+      "numerator": 818,
+      "denominator": 1209,
+      "ci_low": 0.6423233341676744,
+      "ci_high": 0.7097602739726028,
+      "articles": 332,
+      "system": "qwen3-4b-instruct-2507::retrieved",
+      "run_id": "test-main",
+      "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    {
+      "id": "qvwr::tfidf-lr::retrieved::full_split",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::retrieved::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::retrieved::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::retrieved::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4251447477253929,
+      "numerator": 514,
+      "denominator": 1209,
+      "ci_low": 0.3920595533498759,
+      "ci_high": 0.4582299924129451,
+      "articles": 332,
+      "system": "tfidf-lr::retrieved::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::retrieved::full_split",
+      "statement": "End-to-end task success, tfidf-lr::retrieved::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::retrieved::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::retrieved::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5748552522746071,
+      "numerator": 695,
+      "denominator": 1209,
+      "ci_low": 0.541770007587055,
+      "ci_high": 0.607940446650124,
+      "articles": 332,
+      "system": "tfidf-lr::retrieved::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::tfidf-lr::retrieved",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::retrieved > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::retrieved",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4251447477253929,
+      "numerator": 514,
+      "denominator": 1209,
+      "ci_low": 0.3920595533498759,
+      "ci_high": 0.4582299924129451,
+      "articles": 332,
+      "system": "tfidf-lr::retrieved",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::retrieved",
+      "statement": "End-to-end task success, tfidf-lr::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::retrieved > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::retrieved",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5748552522746071,
+      "numerator": 695,
+      "denominator": 1209,
+      "ci_low": 0.541770007587055,
+      "ci_high": 0.607940446650124,
+      "articles": 332,
+      "system": "tfidf-lr::retrieved",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::tfidf-lr::abstract::full_split",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::abstract::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::abstract::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::abstract::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.46770025839793283,
+      "numerator": 543,
+      "denominator": 1161,
+      "ci_low": 0.43307708566718095,
+      "ci_high": 0.5034484247513549,
+      "articles": 318,
+      "system": "tfidf-lr::abstract::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::abstract::full_split",
+      "statement": "End-to-end task success, tfidf-lr::abstract::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::abstract::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::abstract::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5304721030042918,
+      "numerator": 618,
+      "denominator": 1165,
+      "ci_low": 0.4945513219782625,
+      "ci_high": 0.5652535878117757,
+      "articles": 318,
+      "system": "tfidf-lr::abstract::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::tfidf-lr::abstract",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::abstract > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::abstract",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.46770025839793283,
+      "numerator": 543,
+      "denominator": 1161,
+      "ci_low": 0.43307708566718095,
+      "ci_high": 0.5034484247513549,
+      "articles": 318,
+      "system": "tfidf-lr::abstract",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::abstract",
+      "statement": "End-to-end task success, tfidf-lr::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::abstract > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::abstract",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5304721030042918,
+      "numerator": 618,
+      "denominator": 1165,
+      "ci_low": 0.4945513219782625,
+      "ci_high": 0.5652535878117757,
+      "articles": 318,
+      "system": "tfidf-lr::abstract",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::tfidf-lr::oracle::full_split",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::oracle::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::oracle::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::oracle::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.24292845257903495,
+      "numerator": 292,
+      "denominator": 1202,
+      "ci_low": 0.2138728323699422,
+      "ci_high": 0.27349210682374137,
+      "articles": 332,
+      "system": "tfidf-lr::oracle::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::oracle::full_split",
+      "statement": "End-to-end task success, tfidf-lr::oracle::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::oracle::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::oracle::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.757071547420965,
+      "numerator": 910,
+      "denominator": 1202,
+      "ci_low": 0.7265078931762586,
+      "ci_high": 0.7861271676300579,
+      "articles": 332,
+      "system": "tfidf-lr::oracle::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::tfidf-lr::oracle",
+      "statement": "Quote-valid wrong-direction rate, tfidf-lr::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::oracle > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "tfidf-lr::oracle",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.24292845257903495,
+      "numerator": 292,
+      "denominator": 1202,
+      "ci_low": 0.2138728323699422,
+      "ci_high": 0.27349210682374137,
+      "articles": 332,
+      "system": "tfidf-lr::oracle",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::tfidf-lr::oracle",
+      "statement": "End-to-end task success, tfidf-lr::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > tfidf-lr::oracle > metrics > task_success",
+      "json_path": [
+        "systems",
+        "tfidf-lr::oracle",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.757071547420965,
+      "numerator": 910,
+      "denominator": 1202,
+      "ci_low": 0.7265078931762586,
+      "ci_high": 0.7861271676300579,
+      "articles": 332,
+      "system": "tfidf-lr::oracle",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::retrieved::full_split",
+      "statement": "Quote-valid wrong-direction rate, majority::retrieved::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::retrieved::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::retrieved::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5773366418527709,
+      "numerator": 698,
+      "denominator": 1209,
+      "ci_low": 0.5408245755860954,
+      "ci_high": 0.6120349700903248,
+      "articles": 332,
+      "system": "majority::retrieved::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::retrieved::full_split",
+      "statement": "End-to-end task success, majority::retrieved::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::retrieved::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::retrieved::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4226633581472291,
+      "numerator": 511,
+      "denominator": 1209,
+      "ci_low": 0.3879650299096752,
+      "ci_high": 0.45917542441390463,
+      "articles": 332,
+      "system": "majority::retrieved::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::retrieved",
+      "statement": "Quote-valid wrong-direction rate, majority::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::retrieved > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::retrieved",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5773366418527709,
+      "numerator": 698,
+      "denominator": 1209,
+      "ci_low": 0.5408245755860954,
+      "ci_high": 0.6120349700903248,
+      "articles": 332,
+      "system": "majority::retrieved",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::retrieved",
+      "statement": "End-to-end task success, majority::retrieved",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::retrieved > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::retrieved",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4226633581472291,
+      "numerator": 511,
+      "denominator": 1209,
+      "ci_low": 0.3879650299096752,
+      "ci_high": 0.45917542441390463,
+      "articles": 332,
+      "system": "majority::retrieved",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::abstract::full_split",
+      "statement": "Quote-valid wrong-direction rate, majority::abstract::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::abstract::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::abstract::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5770887166236004,
+      "numerator": 670,
+      "denominator": 1161,
+      "ci_low": 0.5398299338641992,
+      "ci_high": 0.6138973381340765,
+      "articles": 318,
+      "system": "majority::abstract::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::abstract::full_split",
+      "statement": "End-to-end task success, majority::abstract::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::abstract::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::abstract::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.42145922746781117,
+      "numerator": 491,
+      "denominator": 1165,
+      "ci_low": 0.38474562513757427,
+      "ci_high": 0.458763653005632,
+      "articles": 318,
+      "system": "majority::abstract::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::abstract",
+      "statement": "Quote-valid wrong-direction rate, majority::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::abstract > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::abstract",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5770887166236004,
+      "numerator": 670,
+      "denominator": 1161,
+      "ci_low": 0.5398299338641992,
+      "ci_high": 0.6138973381340765,
+      "articles": 318,
+      "system": "majority::abstract",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::abstract",
+      "statement": "End-to-end task success, majority::abstract",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::abstract > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::abstract",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.42145922746781117,
+      "numerator": 491,
+      "denominator": 1165,
+      "ci_low": 0.38474562513757427,
+      "ci_high": 0.458763653005632,
+      "articles": 318,
+      "system": "majority::abstract",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::oracle::full_split",
+      "statement": "Quote-valid wrong-direction rate, majority::oracle::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::oracle::full_split > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::oracle::full_split",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "full official test split",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5773710482529119,
+      "numerator": 694,
+      "denominator": 1202,
+      "ci_low": 0.5408525029313087,
+      "ci_high": 0.6123833757421544,
+      "articles": 332,
+      "system": "majority::oracle::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::oracle::full_split",
+      "statement": "End-to-end task success, majority::oracle::full_split",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::oracle::full_split > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::oracle::full_split",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4226289517470882,
+      "numerator": 508,
+      "denominator": 1202,
+      "ci_low": 0.38761662425784565,
+      "ci_high": 0.4591474970686913,
+      "articles": 332,
+      "system": "majority::oracle::full_split",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "qvwr::majority::oracle",
+      "statement": "Quote-valid wrong-direction rate, majority::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::oracle > metrics > headline_qvwr",
+      "json_path": [
+        "systems",
+        "majority::oracle",
+        "metrics",
+        "headline_qvwr"
+      ],
+      "scope": "eligible test prompts in completed articles",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.5773710482529119,
+      "numerator": 694,
+      "denominator": 1202,
+      "ci_low": 0.5408525029313087,
+      "ci_high": 0.6123833757421544,
+      "articles": 332,
+      "system": "majority::oracle",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "task_success::majority::oracle",
+      "statement": "End-to-end task success, majority::oracle",
+      "output_path": "results/analysis/results.json",
+      "json_key": "systems > majority::oracle > metrics > task_success",
+      "json_path": [
+        "systems",
+        "majority::oracle",
+        "metrics",
+        "task_success"
+      ],
+      "scope": "all eligible items",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.4226289517470882,
+      "numerator": 508,
+      "denominator": 1202,
+      "ci_low": 0.38761662425784565,
+      "ci_high": 0.4591474970686913,
+      "articles": 332,
+      "system": "majority::oracle",
+      "run_id": "baselines",
+      "model_revision": null
+    },
+    {
+      "id": "evidence_recall_any::retrieved",
+      "statement": "Supplied passages overlap benchmark evidence, retrieved condition",
+      "output_path": "results/analysis/results.json",
+      "json_key": "evidence_recall_at_budget > retrieved > any_overlap",
+      "json_path": [
+        "evidence_recall_at_budget",
+        "retrieved",
+        "any_overlap"
+      ],
+      "scope": "eligible test prompts with located evidence",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.762063227953411,
+      "numerator": 916,
+      "denominator": 1202,
+      "ci_low": 0.7244458508920897,
+      "ci_high": 0.7987860372470336,
+      "articles": 332
+    },
+    {
+      "id": "evidence_recall_any::abstract",
+      "statement": "Supplied passages overlap benchmark evidence, abstract condition",
+      "output_path": "results/analysis/results.json",
+      "json_key": "evidence_recall_at_budget > abstract > any_overlap",
+      "json_path": [
+        "evidence_recall_at_budget",
+        "abstract",
+        "any_overlap"
+      ],
+      "scope": "eligible test prompts with located evidence",
+      "configuration": {
+        "variant": "v1",
+        "decoding": "greedy",
+        "budget_tokens": 1024,
+        "gen": {
+          "max_new_tokens": 256,
+          "do_sample": false,
+          "seed": 20261007,
+          "dtype": "float32",
+          "device": "mps",
+          "enable_thinking": false
+        }
+      },
+      "source_hashes": {
+        "annotations_merged.csv": "a5dd1a3583e5105a0f77d3e1c695008879859425c9a93dfbc07054ef462e0255",
+        "prompts_merged.csv": "0d70d9e1e78d113fdbbd4919310eab7768d6a328368f7d8f9d5a3b48f99c25d3",
+        "txt_files_digest": "4d66430bacff1f1cc885bf0c3a985bc8befc3e07ce8b9f33656f1de18cb3c551"
+      },
+      "estimate": 0.501727115716753,
+      "numerator": 581,
+      "denominator": 1158,
+      "ci_low": 0.4575366901434419,
+      "ci_high": 0.5450453406162067,
+      "articles": 318
+    }
+  ]
+}

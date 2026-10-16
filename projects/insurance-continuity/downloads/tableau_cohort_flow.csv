@@ -1,0 +1,13 @@
+data_year,step,description,n_unweighted,weighted_population,grain
+2024,1,All records on the public-use file,19140,339797630.0,one row per data year x cohort step (cumulative filters)
+2024,2,Positive person weight (PERWT > 0),18683,339797630.0,one row per data year x cohort step (cumulative filters)
+2024,3,Age 18 to 64 on 12/31,10128,202385406.0,one row per data year x cohort step (cumulative filters)
+2024,4,Ever told had diabetes (DIABDX_M18 = 1),1008,16659719.0,one row per data year x cohort step (cumulative filters)
+2024,5,In scope on 12/31 with a year-end coverage value (frame Y),1002,16573802.0,one row per data year x cohort step (cumulative filters)
+2024,6,In scope all 12 months (primary domain C),1001,16556019.0,one row per data year x cohort step (cumulative filters)
+2023,1,All records on the public-use file,18919,334530273.0,one row per data year x cohort step (cumulative filters)
+2023,2,Positive person weight (PERWT > 0),18463,334530273.0,one row per data year x cohort step (cumulative filters)
+2023,3,Age 18 to 64 on 12/31,10264,199755846.0,one row per data year x cohort step (cumulative filters)
+2023,4,Ever told had diabetes (DIABDX_M18 = 1),988,15730786.0,one row per data year x cohort step (cumulative filters)
+2023,5,In scope on 12/31 with a year-end coverage value (frame Y),987,15713293.0,one row per data year x cohort step (cumulative filters)
+2023,6,In scope all 12 months (primary domain C),986,15700012.0,one row per data year x cohort step (cumulative filters)

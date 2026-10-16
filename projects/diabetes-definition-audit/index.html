@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diabetes Estimates Under Different Definitions and Laboratory Denominators</title>
+  <meta name="description" content="An NHANES August 2021 to August 2023 audit that separates the effect of the diabetes biomarker definition from the effect of the laboratory sample and survey weight, with a checker that refuses invalid comparisons.">
+  <link rel="stylesheet" href="assets/site.css">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a><a href="https://github.com/anibose11/diabetes-definition-audit">Code on GitHub</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+  <div class="page">
+  <header>
+    <p class="eyebrow">Survey methods audit, CDC NHANES August 2021 to August 2023</p>
+    <h1>Diabetes Estimates Under Different Definitions and Laboratory Denominators</h1>
+    <p class="lede">HbA1c and fasting glucose can give different estimates of diabetes prevalence because they measure different things and are collected in different laboratory samples. I separated the definition difference from the combined sample and weight difference in NHANES, estimated the uncertainty in each, and repeated the analysis in the 2017 to March 2020 release. The accompanying checker refuses comparisons across mismatched denominators. All percentages are weighted survey estimates.</p>
+    <nav class="links" aria-label="Project files">
+      <a href="report.html">Read the report</a>
+      <a href="downloads/diabetes-definition-audit-source.zip">Download source</a>
+      <a href="downloads/supplementary.html">Supplementary tables</a>
+      <a href="#files">Result tables and workbook</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="paired" aria-labelledby="paired-h">
+      <h2 id="paired-h">Comparing the two tests in the same adults</h2>
+      <figure>
+        <img src="assets/fig1_paired_common_denominator.png" width="1840" height="680"
+             alt="Dot plot with 95% intervals. Left: HbA1c at or above 6.5% and fasting glucose at or above 126 mg/dL in the common paired domain, 10.8% and 11.2% for August 2021 to August 2023 and 10.3% and 11.8% for 2017 to March 2020. Right: paired differences of −0.41 and −1.54 percentage points.">
+        <figcaption>Threshold prevalence in the common paired domain (adults 20+, not pregnant, valid fasting glucose and HbA1c), fasting subsample weight, with 95% Korn-Graubard intervals; paired differences use t intervals with design degrees of freedom. n = 2,938 (2021 to 2023) and 3,757 (2017 to March 2020).</figcaption>
+      </figure>
+      <p>Among 2,938 adults with both tests in August 2021 to August 2023, 10.8% (95% CI 9.1 to 12.7) had HbA1c at or above 6.5% and 11.2% (9.5 to 13.1) had fasting glucose at or above 126 mg/dL. The paired difference was −0.41 percentage points (−1.15 to +0.33). In the 2017 to March 2020 release the difference was −1.54 points (−2.71 to −0.37), with glucose higher.</p>
+      <p>An exploratory analysis split the overall difference by reported diagnosis. Adults without a reported diagnosis contributed −1.12 points (−1.69 to −0.56) and those with a diagnosis contributed +0.71 points (+0.20 to +1.22). Both contributions use all adults in the paired domain as the denominator. Their opposite signs explain the small overall 2021 to 2023 difference. Moving the HbA1c cut point one reporting unit to 6.4% or 6.6% changed the paired difference to +0.85 or −1.30 points, so its size and sign depend on small calibration differences.</p>
+      <p>The two estimates come from the same people, so they move together: their sampling correlation was 0.91. Treating them as independent would have made the standard error of the difference 3.4 times too large.</p>
+    </section>
+
+    <section id="sample" aria-labelledby="sample-h">
+      <h2 id="sample-h">How much the laboratory sample and weight changed the estimate</h2>
+      <figure>
+        <img src="assets/fig2_sample_and_definition_parts.png" width="1840" height="780"
+             alt="Left: HbA1c prevalence in its laboratory domain and in the paired domain for both releases, 10.5% versus 10.8% and 10.4% versus 10.3%. Right: the naive cross-domain difference split into a definition part and a sample and weight part, with 95% intervals.">
+        <figcaption>Left: HbA1c at or above 6.5% in the HbA1c laboratory domain (phlebotomy weight in 2021 to 2023, examination weight in 2017 to March 2020) and in the paired domain. Right: the naive difference between HbA1c in its laboratory domain and glucose in the paired domain equals the definition part plus the sample and weight part exactly.</figcaption>
+      </figure>
+      <p>In the HbA1c laboratory domain (5,729 adults, phlebotomy weight WTPH2YR) the HbA1c estimate was 10.5% (9.2 to 12.0), −0.24 points (−1.44 to +0.96) from the paired-domain value. In 2017 to March 2020 the same comparison gave +0.07 points (−1.32 to +1.47). Both intervals include zero but also allow shifts of up to about 1.5 points, so the data exclude only differences larger than about 1.5 points rather than show that there is none. This part is a descriptive comparison of two documented estimators, not a causal effect.</p>
+      <div class="table-wrap" role="region" aria-labelledby="decomp-cap" tabindex="0">
+        <div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+          <caption id="decomp-cap">Decomposition of the naive HbA1c-versus-glucose difference, August 2021 to August 2023 (percentage points, 95% CI)</caption>
+          <thead><tr><th>Part</th><th>Comparison (domain, weight, unweighted denominator)</th><th class="num">Difference</th></tr></thead>
+          <tbody>
+            <tr><td>Naive</td><td>HbA1c in domain H (WTPH2YR, n = 5,729) minus glucose in domain P (WTSAF2YR, n = 2,938)</td><td class="num">−0.65 (−2.02 to +0.72)</td></tr>
+            <tr><td>Definition</td><td>HbA1c minus glucose, both in domain P (WTSAF2YR, n = 2,938)</td><td class="num">−0.41 (−1.15 to +0.33)</td></tr>
+            <tr><td>Sample and weight</td><td>HbA1c in domain H (WTPH2YR, n = 5,729) minus HbA1c in domain P (WTSAF2YR, n = 2,938)</td><td class="num">−0.24 (−1.44 to +0.96)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section id="overlap" aria-labelledby="overlap-h">
+      <h2 id="overlap-h">Similar totals hide different people</h2>
+      <p>The tests agreed for 95.0% of adults in the paired domain (kappa 0.74, 95% CI 0.70 to 0.79). Of adults above either threshold, 17.0% were above the HbA1c threshold only and 20.1% were above the glucose threshold only. Among adults who reported diagnosed diabetes, 20.3% (16.0 to 25.3) had both values below threshold, as did 16.3% of those reporting insulin or diabetes pills, so a definition built only on biomarkers misses many treated people.</p>
+      <figure>
+        <img src="assets/fig3_overlap_of_definitions.png" width="1720" height="680" loading="lazy"
+             alt="Horizontal bar chart of the weighted share of adults in each combination of self-reported diagnosis, HbA1c, and glucose classification. The largest group with any positive is diagnosed with both biomarkers high at 6.7%; diagnosed with both below threshold is 2.3%.">
+        <figcaption>Overlap of self-reported diagnosis, HbA1c at or above 6.5%, and fasting glucose at or above 126 mg/dL in the paired domain, August 2021 to August 2023 (n = 2,938, WTSAF2YR). The diagnosis-negative, both-below group (84.2%) is not drawn.</figcaption>
+      </figure>
+    </section>
+
+    <section id="data" aria-labelledby="data-h">
+      <h2 id="data-h">Each laboratory domain has its own sample and weight</h2>
+      <p>The data are the NHANES August 2021 to August 2023 public-use files for demographics, glycohemoglobin, fasting glucose, the fasting questionnaire, diabetes, and reproductive health, downloaded from the links on the official NCHS listing pages and recorded with SHA-256 checksums. Of 11,933 participants, 6,022 were examined adults aged 20 or older who were not pregnant. Most of the adults without fasting glucose were never assigned to the morning fasting subsample.</p>
+      <div class="table-wrap" role="region" aria-labelledby="dom-cap" tabindex="0">
+        <div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+          <caption id="dom-cap">Analysis domains, August 2021 to August 2023 (unweighted counts)</caption>
+          <thead><tr><th>Domain</th><th>Who is in it</th><th>Weight</th><th class="num">n</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>Examined, age 20+, not pregnant, diagnosis question answered</td><td>WTMEC2YR (description only)</td><td class="num">6,022</td></tr>
+            <tr><td>H</td><td>A with an HbA1c result and a positive phlebotomy weight</td><td>WTPH2YR</td><td class="num">5,729</td></tr>
+            <tr><td>F</td><td>A with a valid fasting glucose (8 to less than 24 hour fast)</td><td>WTSAF2YR</td><td class="num">2,940</td></tr>
+            <tr><td>P</td><td>F with an HbA1c result (common paired domain)</td><td>WTSAF2YR</td><td class="num">2,938</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <p>Thresholds follow the American Diabetes Association criteria with inclusive boundaries. A single survey measurement is not a confirmed diagnosis, so every result is an estimate under a surveillance definition.</p>
+    </section>
+
+    <section id="decisions" aria-labelledby="decisions-h">
+      <h2 id="decisions-h">Keeping the definition comparison separate from the sample comparison</h2>
+      <h3>Compare definitions only on one denominator</h3>
+      <p>The primary contrast estimates both proportions in one call on the paired domain, so their covariance enters the standard error. The checker refuses any request that would label a difference between two domains or two weights as a definition difference.</p>
+      <h3>Linearize estimators with different weights together</h3>
+      <p>HbA1c in its laboratory domain and HbA1c in the paired domain use different weights on overlapping people. Each was written as a ratio of weighted totals, and all four totals were linearized jointly on the full design, so the sample and weight part has a valid interval. The 311 glucose values that NCHS released with a zero weight because the 8 to less than 24 hour fasting criterion was not met were left out rather than reweighted.</p>
+    </section>
+
+    <section id="checks" aria-labelledby="checks-h">
+      <h2 id="checks-h">The composite reproduces the published NCHS estimates</h2>
+      <p>The surveillance composite was 15.8% (13.6 to 18.2), with diagnosed diabetes 11.3% and undiagnosed biochemical positivity 4.5% (3.3 to 5.9). All 18 published rows of NCHS Data Brief 516 matched for sample size, percent, and standard error, and 17 of 18 intervals matched; the remaining interval matched once the cap on the effective sample size, which the NCHS presentation standards require, was removed.</p>
+      <p>Software checks, source reconciliation against the NCHS codebooks, and external reconciliation are kept apart: 39 automated checks passed. Python code written separately from the R estimation reproduced every reported point estimate, and an independent implementation of the linearized variance reproduced the standard error of every proportion and contrast. A rerun from cached inputs reproduced every table value. These checks test the code and its agreement with official sources, not the scientific conclusions.</p>
+    </section>
+
+    <section id="limits" aria-labelledby="limits-h">
+      <h2 id="limits-h">Limitations</h2>
+      <ul>
+        <li>Each test was measured once, and diagnosis was self-reported.</li>
+        <li>HbA1c moved from one instrument to another during 2021 to 2023 with no participant-level flag, and NCHS applied no adjustment; a calibration difference of one reporting unit would move the paired difference by about 0.9 to 1.3 points.</li>
+        <li>The unweighted 2021 to 2023 examination response rate was 25.7% (46.9% in 2017 to March 2020), and the full weighting report is not yet published.</li>
+        <li>Item nonresponse was not reweighted. In 2017 to March 2020, 451 of 8,451 adults (5.3% unweighted; 4.2% weighted) lacked HbA1c under an examination weight that does not adjust for it.</li>
+        <li>Pregnancy can be identified only at ages 20 to 44 in public files, and gestational diabetes history was not collected in 2021 to 2023.</li>
+        <li>Group results have fewer degrees of freedom; several do not meet the NCHS presentation standards.</li>
+        <li>The splits by diagnosis status and the cut-point analysis were added after the planned analyses and are exploratory.</li>
+      </ul>
+    </section>
+
+    <section id="reproduce" aria-labelledby="reproduce-h">
+      <h2 id="reproduce-h">Reproduce the analysis</h2>
+      <p>The source archive has the Python package, DuckDB SQL, R survey code, configuration, tests, and a labeled synthetic fixture. With Python 3.12 or newer and R 4.5:</p>
+      <pre><code>make setup
+make demo
+make test
+make acquire
+make pipeline
+make repro-check</code></pre>
+      <p>Check a configuration before using it: <code>make check-config ARGS="--phenotype FPG126 --domain H --weight WTPH2YR"</code> is refused because fasting glucose needs the fasting subsample weight.</p>
+    </section>
+
+    <section id="files" aria-labelledby="files-h">
+      <h2 id="files-h">Report, tables, and files</h2>
+      <ul class="files">
+        <li><a href="downloads/diabetes-definition-audit-source.zip">Source archive</a> <span class="meta">(ZIP, 998 KB): code, SQL, R, configuration, tests, fixture, documentation, and result tables</span></li>
+        <li><a href="downloads/manuscript.pdf">Download manuscript (PDF)</a> <span class="meta">(404 KB)</span></li>
+        <li><a href="downloads/manuscript.docx">Download manuscript (Word)</a> <span class="meta">(39 KB)</span></li>
+        <li><a href="downloads/supplementary.html">Supplementary material (HTML)</a> <span class="meta">(1.3 MB): participant flow, validation, group tables and additional analyses</span></li>
+        <li><a href="downloads/supplementary.pdf">Supplementary material (PDF)</a> <span class="meta">(283 KB)</span></li>
+        <li><a href="downloads/strobe_checklist.pdf">STROBE checklist (PDF)</a> <span class="meta">(41 KB): reporting checklist with manuscript locations</span></li>
+        <li><a href="downloads/diabetes-definition-audit-results.xlsx">Results workbook</a> <span class="meta">(XLSX, 71 KB): aggregate tables with a definitions sheet, thresholds and units, domains and weights; no person-level data</span></li>
+        <li><a href="downloads/tableau_estimates.csv">Estimates</a> <span class="meta">(CSV, 6 KB): every configuration in both releases with universe, weight, denominator, interval, and NCHS status</span></li>
+        <li><a href="downloads/tableau_contrasts.csv">Contrasts</a> <span class="meta">(CSV, 6 KB): paired, selection and weighting, and naive differences with design-based intervals</span></li>
+        <li><a href="downloads/tableau_missingness.csv">Laboratory status by group</a> <span class="meta">(CSV, 39 KB): fasting subsample and HbA1c status by age, sex, and race and Hispanic origin</span></li>
+        <li><a href="downloads/tableau_paired_by_group.csv">Paired estimates by group</a> <span class="meta">(CSV, 8 KB): HbA1c and glucose estimates and their difference by group</span></li>
+        <li><a href="downloads/participant_flow_2021-2023.csv">Participant flow, 2021 to 2023</a> <span class="meta">(CSV, 2 KB): count remaining and removed at each step, with the weight used</span></li>
+        <li><a href="downloads/participant_flow_2017-2020.csv">Participant flow, 2017 to March 2020</a> <span class="meta">(CSV, 2 KB): participant counts at each step of the replication</span></li>
+        <li><a href="downloads/reference_reconciliation.csv">NCHS reconciliation</a> <span class="meta">(CSV, 6 KB): published and reproduced NCHS Data Brief 516 estimates</span></li>
+        <li><a href="downloads/validation_summary.csv">Automated checks</a> <span class="meta">(CSV, 5 KB): software checks, source reconciliation, and external reconciliation</span></li>
+        <li><a href="downloads/phenotype_spec.md">Phenotype specification</a> <span class="meta">(MD, 5 KB): version 1.0.0: measures, codes, thresholds, boundaries, domains, weights</span></li>
+        <li><a href="downloads/data_dictionary.csv">Data dictionary</a> <span class="meta">(CSV, 8 KB): source variable, SAS label, universe, analysis column, and rule</span></li>
+        <li><a href="downloads/analysis_plan.md">Analysis plan</a> <span class="meta">(MD, 17 KB): frozen before any estimate, with dated amendments</span></li>
+        <li><a href="downloads/contribution_decision.md">Contribution decision</a> <span class="meta">(MD, 4 KB): users, estimand, comparator, and what counts as a negative result</span></li>
+        <li><a href="downloads/prior_art.csv">Prior work</a> <span class="meta">(CSV, 9 KB): the five closest studies and what this project adds</span></li>
+        <li><a href="downloads/claims.json">Claims ledger</a> <span class="meta">(JSON, 28 KB): each headline number with its file, row, numerator, denominator, and source checksums</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data: CDC National Center for Health Statistics, National Health and Nutrition Examination Survey, August 2021 to August 2023 and 2017 to March 2020 public-use files, available at no charge from the <a href="https://wwwn.cdc.gov/nchs/nhanes/">NHANES website</a>. Use of these data does not imply endorsement by NCHS or CDC. Results on this page come from pipeline run 20261007T212439Z.</p>
+  </footer>
+  </div>
+</body>
+</html>

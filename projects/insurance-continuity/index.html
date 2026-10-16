@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insurance continuity and prescription spending in diabetes</title>
+<meta name="description" content="Within-year coverage gaps among US adults aged 18 to 64 with diabetes who were insured at year end, MEPS 2024: measurement study with design-based estimates.">
+<link rel="stylesheet" href="assets/site.css?v=2f9db82a5a">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+
+<article>
+<h1>Year-end coverage misses within-year gaps</h1>
+<p class="lede">About one in twelve US adults aged 18 to 64 with diagnosed diabetes who were insured on December 31, 2024, had been uninsured earlier that year. I used the Medical Expenditure Panel Survey to compare their prescription use and spending with those insured all year.</p>
+<p class="note">Animesh Bose, Norlowe Research</p>
+<div class="question"><strong>Research question.</strong> Among US adults aged 18 to 64 with diagnosed diabetes who were insured on December 31, 2024, what share had at least one fully uninsured month that year, and how do annual prescription summaries change when monthly continuity is kept?</div>
+
+<figure><img src="assets/fig1_yearend_vs_continuity_2024.png" alt="Two stacked bars. Left: by the year-end indicator, 87.9 percent insured and 12.1 percent uninsured. Right: by monthly continuity, 80.4 percent insured all 12 months, 7.5 percent insured on December 31 after at least one uninsured month, and 12.1 percent uninsured on December 31." loading="lazy" width="1800"><figcaption>The same 1,001 adults under two coverage measures. Among those insured on December 31, 8.5% (95% CI, 6.3% to 11.4%) had at least one fully uninsured month. Weighted shares; labels give unweighted counts.</figcaption></figure>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><caption class="note" style="text-align:left;padding:8px 10px">Table view of the figure: primary domain, 2024 (unweighted n = 1,001)</caption><thead><tr><th scope="col">Class</th><th scope="col">Weighted %</th><th scope="col">95% CI</th><th scope="col">Unweighted n</th><th scope="col">Weighted people, millions</th></tr></thead><tbody><tr><td>Insured on 12/31 and in all 12 months</td><td>80.4</td><td>76.1 to 84.1</td><td>815</td><td>13.31</td></tr><tr><td>Insured on 12/31 with at least 1 uninsured month</td><td>7.5</td><td>5.6 to 10.0</td><td>70</td><td>1.24</td></tr><tr><td>Uninsured on 12/31</td><td>12.1</td><td>9.3 to 15.5</td><td>116</td><td>2.00</td></tr><tr><td>Continuity indeterminate</td><td>0.0</td><td></td><td>0</td><td>0.00</td></tr></tbody></table></div></div>
+
+<div class="stats" role="list">
+<div class="stat" role="listitem"><div class="v">8.5%</div><div class="l">of the year-end insured had a gap of at least 1 month in 2024 (95% CI, 6.3% to 11.4%; 70 of 885 respondents)</div></div>
+<div class="stat" role="listitem"><div class="v">4.7%</div><div class="l">had a gap of 3 or more consecutive months (95% CI, 3.2% to 7.0%)</div></div>
+<div class="stat" role="listitem"><div class="v">8.4%</div><div class="l">same measure in the separate 2023 replication (95% CI, 6.3% to 11.3%)</div></div>
+</div>
+
+<h2>Out-of-scope and missing months are never counted as uninsured</h2>
+<div class="prose">
+<p>The analysis uses the AHRQ MEPS 2024 Full Year Consolidated file (HC-256, released August 2026), the 2024 Prescribed Medicines file for imputation flags, and the 2023 file for replication. MEPS records coverage on December 31 and, separately, any coverage in each calendar month. The primary domain is the 1,001 adults aged 18 to 64 who reported ever being told they had diabetes and who were in scope for all 12 months, representing 16.6 million people.</p>
+<p>Two decisions shaped the results. First, months when a person was outside the civilian noninstitutionalized population, and any month without usable information, are never counted as uninsured; they make continuity indeterminate unless a gap is observed. In the 2024 domain no month was missing, so the indeterminate class is empty, but the rule matters for anyone applying the classification to other data. Second, spending summaries are shown on a common denominator (the same people split by class) and on classification-specific denominators, so differences in who is in scope are not mistaken for coverage effects.</p>
+<p>Estimates are design-based (Taylor linearization with the MEPS strata, primary sampling units, and full-year weight), with the whole file kept in the design and domains taken as subsets. A survey-weighted two-part model, fit only after a prespecified support rule was met, standardized spending for age, sex, race and ethnicity, and income, with jackknife replicate intervals.</p>
+</div>
+
+<h2>People with a gap filled fewer prescriptions, and their median spending was similar</h2>
+<figure><img src="assets/fig2_oop_spending_2024.png" alt="Dot and interval chart of annual out-of-pocket prescription spending for three groups: mean including zeros, mean among users, and median among users." loading="lazy" width="1800"><figcaption>Annual out-of-pocket prescription spending by continuity class, 2024 dollars, with 95% CIs. Group sizes are unweighted; user subgroups are smaller.</figcaption></figure>
+<div class="prose">
+<p>Adults insured on December 31 after a gap filled any prescription less often than the continuously insured (78.8% vs 92.6%) and had fewer fills (20.1 vs 30.4). Their median out-of-pocket spending among users was about the same ($154 vs $152). Their unadjusted mean was lower ($240 vs $642), a difference partly driven by a few very large amounts among the continuously insured; the top 1% of people accounted for 42% of 2024 out-of-pocket dollars, and without them the means were $383 and $240. Because the gap group is small, the summary for everyone insured on December 31 barely moved, with mean out-of-pocket spending of $608 against $642 for the continuously insured. After adjustment the difference was -$238 (95% CI, -$536 to $59) in 2024 and $105 (95% CI, -$215 to $425) in 2023, so the adjusted difference was imprecise and changed sign between years.</p>
+</div>
+
+<h2>The estimate is a lower bound and supports description only</h2>
+<div class="prose">
+<ul>
+<li>A month counts as covered if any day was covered, so gaps shorter than a calendar month are invisible. The estimate is a lower bound on people with any uninsured day.</li>
+<li>Coverage is self-reported in interview rounds and edited by AHRQ; the year-end and December values come from the same interviews.</li>
+<li>Out-of-pocket spending describes payments made. It is not a measure of affordability or unmet need, and it covers all prescribed medicines, not only diabetes drugs.</li>
+<li>The gap group has 70 respondents, so its subgroup estimates are imprecise, and a few very large amounts dominate the means.</li>
+<li>Uninsured months are counted within 2024, so gaps that began in 2023 are truncated at January.</li>
+<li>The design is cross-sectional and descriptive. Nothing here estimates what coverage gaps cause.</li>
+</ul>
+</div>
+
+<h2>How the results were checked</h2>
+<div class="prose">
+<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and matches fill counts and out-of-pocket totals between the prescription and person files. An independent SQL classification and a separately written variance calculation agree with the main implementation. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
+<pre><code>./setup.sh
+./icont all      # acquire, build, analyze, validate, render, package
+./icont test     # unit tests on synthetic fixtures
+./icont demo     # fast demo on synthetic records (not study evidence)</code></pre>
+</div>
+
+<h2>Report and downloads</h2>
+<ul class="files">
+<li><a href="report.html">Full report, tables and references</a></li>
+<li><a href="downloads/insurance-continuity-source.zip">Source archive: code, SQL, R, configuration, tests, documentation, and result tables</a></li>
+<li><a href="downloads/insurance_continuity_results.xlsx">Results workbook with a definitions sheet (Excel, aggregates only)</a> <span class="note">(52 KB)</span></li>
+<li><a href="downloads/tableau_estimates_long.csv">Tableau-ready estimates with grain, units, CIs, and suppression flags (CSV)</a> <span class="note">(124 KB)</span></li>
+<li><a href="downloads/tableau_monthly_transitions.csv">Month-to-month coverage transitions (CSV)</a> <span class="note">(8 KB)</span></li>
+<li><a href="downloads/tableau_cohort_flow.csv">Cohort flow counts (CSV)</a> <span class="note">(2 KB)</span></li>
+<li><a href="downloads/tableau_spec.md">Tableau import and filtering specification (Markdown)</a> <span class="note">(3 KB)</span></li>
+<li><a href="downloads/data_dictionary.csv">Source-to-analysis data dictionary (CSV)</a> <span class="note">(18 KB)</span></li>
+<li><a href="downloads/analysis_plan.md">Time-stamped analysis plan with amendments (Markdown)</a> <span class="note">(18 KB)</span></li>
+<li><a href="downloads/prior_art.csv">Related studies and tools (CSV)</a> <span class="note">(16 KB)</span></li>
+<li><a href="downloads/claims.json">Reported values and source tables (JSON)</a> <span class="note">(208 KB)</span></li>
+</ul>
+</article>
+
+</main>
+<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251. I calculated these estimates. AHRQ has not endorsed them.</footer>
+</body>
+</html>

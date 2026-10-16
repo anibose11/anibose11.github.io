@@ -1,0 +1,13 @@
+unit,scope,check_id,n_applicable,n_pass,n_fail,n_not_evaluable,pct_fail_of_evaluable,n_studies_with_a_failure
+applicable check,"heldout portion, confirmed cohort",K1,25338,25293,0,45,0,0
+applicable check,"heldout portion, confirmed cohort",K2,188,188,0,0,0,0
+applicable check,"heldout portion, confirmed cohort",K3,12324,12209,1,114,0.01,1
+applicable check,"heldout portion, confirmed cohort",K4,12115,11999,1,115,0.01,1
+applicable check,"heldout portion, confirmed cohort",K5,2504,2491,13,0,0.52,3
+applicable check,"heldout portion, confirmed cohort",K6,228743,228743,0,0,0,0
+applicable check,"heldout portion, confirmed cohort",K7,155251,155251,0,0,0,0
+applicable check,"heldout portion, confirmed cohort",K8,15265,15265,0,0,0,0
+applicable check,"heldout portion, confirmed cohort",K9,75831,75802,0,29,0,0
+applicable check,"heldout portion, confirmed cohort",K10,6196,6195,1,0,0.02,1
+applicable check,"heldout portion, confirmed cohort",K11,104,104,0,0,0,0
+applicable check,"heldout portion, confirmed cohort",K12,2884,2873,0,11,0,0

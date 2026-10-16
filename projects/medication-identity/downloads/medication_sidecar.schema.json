@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "medication_sidecar.schema.json",
+  "title": "Companion provenance record for FHIR R4 Medication resources built from one SPL version",
+  "description": "Holds the SPL attributes that FHIR R4 Medication has no element for (label provenance, basis of strength, routes, package hierarchy, marketing data) keyed by Medication.id. Values are the source's own text.",
+  "type": "object",
+  "required": ["sidecar_version", "bundle_id", "source", "medications"],
+  "additionalProperties": false,
+  "properties": {
+    "sidecar_version": {"const": "1.0"},
+    "bundle_id": {"type": "string", "pattern": "^[0-9a-f-]{36}$"},
+    "source": {
+      "type": "object",
+      "required": ["set_id", "document_id", "version_number", "doc_type_code", "source_url", "source_sha256", "retrieved_utc"],
+      "properties": {
+        "set_id": {"type": "string"},
+        "document_id": {"type": "string"},
+        "version_number": {"type": "string", "pattern": "^[0-9]+$"},
+        "version_kind": {"enum": ["current", "preceding"]},
+        "effective_time": {"type": ["string", "null"]},
+        "doc_type_code": {"type": "string"},
+        "doc_type_display": {"type": ["string", "null"]},
+        "labeler_name": {"type": ["string", "null"]},
+        "labeler_id": {"type": ["string", "null"]},
+        "labeler_id_root": {"type": ["string", "null"]},
+        "source_url": {"type": "string"},
+        "source_path": {"type": "string"},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_zip_sha256": {"type": ["string", "null"]},
+        "retrieved_utc": {"type": "string"}
+      }
+    },
+    "medications": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {"$ref": "#/$defs/product"},
+          {"$ref": "#/$defs/package"}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "nullable_string": {"type": ["string", "null"]},
+    "ingredient": {
+      "type": "object",
+      "required": ["source_index", "class_code", "basis_of_strength", "strength_substance_unii", "moiety_uniis",
+                   "num_value_source_text", "den_value_source_text", "strength_in_fhir", "json_decimal_normalized"],
+      "properties": {
+        "source_index": {"type": "integer"},
+        "class_code": {"$ref": "#/$defs/nullable_string"},
+        "basis_of_strength": {"enum": ["ingredient", "active_moiety", "reference_substance", "unspecified"]},
+        "strength_substance_unii": {"$ref": "#/$defs/nullable_string"},
+        "strength_substance_name": {"$ref": "#/$defs/nullable_string"},
+        "moiety_uniis": {"type": "array", "items": {"$ref": "#/$defs/nullable_string"}},
+        "moiety_names": {"type": "array", "items": {"$ref": "#/$defs/nullable_string"}},
+        "reference_unii": {"$ref": "#/$defs/nullable_string"},
+        "reference_name": {"$ref": "#/$defs/nullable_string"},
+        "num_value_source_text": {"$ref": "#/$defs/nullable_string"},
+        "num_unit_source": {"$ref": "#/$defs/nullable_string"},
+        "den_value_source_text": {"$ref": "#/$defs/nullable_string"},
+        "den_unit_source": {"$ref": "#/$defs/nullable_string"},
+        "strength_in_fhir": {"type": "boolean"},
+        "json_decimal_normalized": {"type": "boolean"}
+      }
+    },
+    "product": {
+      "type": "object",
+      "required": ["medication_id", "resource_level", "product", "ingredients", "kit_parts", "ingredient_list_complete", "mapping"],
+      "additionalProperties": false,
+      "properties": {
+        "medication_id": {"type": "string"},
+        "resource_level": {"const": "product"},
+        "product": {
+          "type": "object",
+          "required": ["index", "ndc_original", "form_code", "route_codes", "is_kit"],
+          "properties": {
+            "index": {"type": "integer"},
+            "ndc_original": {"$ref": "#/$defs/nullable_string"},
+            "ndc_configuration": {"$ref": "#/$defs/nullable_string"},
+            "proprietary_name": {"$ref": "#/$defs/nullable_string"},
+            "name_suffix": {"$ref": "#/$defs/nullable_string"},
+            "generic_name": {"$ref": "#/$defs/nullable_string"},
+            "form_code": {"$ref": "#/$defs/nullable_string"},
+            "form_display": {"$ref": "#/$defs/nullable_string"},
+            "route_codes": {"type": "array", "items": {"type": ["string", "null"]}},
+            "route_displays": {"type": "array", "items": {"type": ["string", "null"]}},
+            "approval_id": {"$ref": "#/$defs/nullable_string"},
+            "approval_id_root": {"$ref": "#/$defs/nullable_string"},
+            "marketing_category_code": {"$ref": "#/$defs/nullable_string"},
+            "marketing_category_display": {"$ref": "#/$defs/nullable_string"},
+            "marketing_status": {"$ref": "#/$defs/nullable_string"},
+            "marketing_low": {"$ref": "#/$defs/nullable_string"},
+            "marketing_high": {"$ref": "#/$defs/nullable_string"},
+            "equivalent_ndc": {"$ref": "#/$defs/nullable_string"},
+            "equivalent_code": {"$ref": "#/$defs/nullable_string"},
+            "is_kit": {"type": "boolean"}
+          }
+        },
+        "ingredients": {"type": "array", "items": {"$ref": "#/$defs/ingredient"}},
+        "kit_parts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["part_index", "contained_id", "ndc_original", "ingredients", "package_ndcs"],
+            "properties": {
+              "part_index": {"type": "integer"},
+              "contained_id": {"type": "string"},
+              "ndc_original": {"$ref": "#/$defs/nullable_string"},
+              "qty_num_value": {"$ref": "#/$defs/nullable_string"},
+              "qty_num_unit": {"$ref": "#/$defs/nullable_string"},
+              "ingredients": {"type": "array", "items": {"$ref": "#/$defs/ingredient"}},
+              "package_ndcs": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        },
+        "ingredient_list_complete": {"type": "boolean"},
+        "mapping": {
+          "type": "object",
+          "required": ["product_rxcui"],
+          "properties": {
+            "product_rxcui": {"$ref": "#/$defs/nullable_string"},
+            "method": {"$ref": "#/$defs/nullable_string"},
+            "outcome": {"$ref": "#/$defs/nullable_string"}
+          }
+        }
+      }
+    },
+    "package": {
+      "type": "object",
+      "required": ["medication_id", "resource_level", "product_medication_id", "package", "mapping"],
+      "additionalProperties": false,
+      "properties": {
+        "medication_id": {"type": "string"},
+        "resource_level": {"const": "package"},
+        "product_medication_id": {"type": "string"},
+        "package": {
+          "type": "object",
+          "required": ["path", "level", "ndc_original", "ndc_configuration", "ndc11", "total_amount_status", "hierarchy"],
+          "properties": {
+            "path": {"type": "string"},
+            "level": {"type": "integer"},
+            "ndc_original": {"type": "string"},
+            "ndc_configuration": {"$ref": "#/$defs/nullable_string"},
+            "ndc11": {"$ref": "#/$defs/nullable_string"},
+            "total_amount_value": {"$ref": "#/$defs/nullable_string"},
+            "total_amount_unit": {"$ref": "#/$defs/nullable_string"},
+            "total_amount_status": {"enum": ["computed", "inexact", "unresolved", "not_evaluated"]},
+            "marketing_status": {"$ref": "#/$defs/nullable_string"},
+            "marketing_low": {"$ref": "#/$defs/nullable_string"},
+            "marketing_high": {"$ref": "#/$defs/nullable_string"},
+            "marketing_act_code": {"$ref": "#/$defs/nullable_string"},
+            "combination_type_code": {"$ref": "#/$defs/nullable_string"},
+            "hierarchy": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["path", "ndc_original", "form_code", "qty_num_value", "qty_num_unit"],
+                "properties": {
+                  "path": {"type": "string"},
+                  "ndc_original": {"$ref": "#/$defs/nullable_string"},
+                  "form_code": {"$ref": "#/$defs/nullable_string"},
+                  "form_display": {"$ref": "#/$defs/nullable_string"},
+                  "qty_num_value": {"$ref": "#/$defs/nullable_string"},
+                  "qty_num_unit": {"$ref": "#/$defs/nullable_string"},
+                  "qty_den_value": {"$ref": "#/$defs/nullable_string"},
+                  "qty_den_unit": {"$ref": "#/$defs/nullable_string"}
+                }
+              }
+            }
+          }
+        },
+        "mapping": {
+          "type": "object",
+          "required": ["package_rxcui"],
+          "properties": {
+            "package_rxcui": {"$ref": "#/$defs/nullable_string"},
+            "ndc_status": {"$ref": "#/$defs/nullable_string"}
+          }
+        }
+      }
+    }
+  }
+}

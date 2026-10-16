@@ -1,0 +1,220 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data dictionary</title><style>body{margin:0;background:#fbfbfa;color:#1d1d1b;font:17px/1.6 Georgia,'Times New Roman',serif}
+main{max-width:760px;margin:0 auto;padding:32px 16px 80px}h1{font-size:1.6rem;line-height:1.3}h2{font-size:1.25rem;margin-top:2em}h3{font-size:1.05rem}
+table{border-collapse:collapse;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:1em 0;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid #d9d8d3;padding:4px 8px;text-align:left;vertical-align:top}td{font-variant-numeric:tabular-nums}
+img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0 3px}a{color:#1f5fae}</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../../index.html">Portfolio</a><div class="portfolio-links"><a href="../index.html">Project</a><a href="../report.html">Full report</a></div></nav>
+<main><h1 id="data-dictionary">Data dictionary</h1>
+<p>Source-to-analysis fields. Offsets are character offsets into the pinned repository's plain-text article rendering, half-open [start, end).</p>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data/processed/articles.csv</code></td>
+<td><code>pmcid</code></td>
+<td>PubMed Central article number (identifier used by the corpus)</td>
+</tr>
+<tr>
+<td><code>data/processed/articles.csv</code></td>
+<td><code>split</code></td>
+<td>official split: train, validation, test, or unassigned</td>
+</tr>
+<tr>
+<td><code>data/processed/articles.csv</code></td>
+<td><code>abstract_status / abstract_end</code></td>
+<td>whether a title-plus-abstract region was delimited, and its end offset</td>
+</tr>
+<tr>
+<td><code>data/processed/articles.csv</code></td>
+<td><code>abst_file_contains_body</code></td>
+<td>the repository's .abst file contains BODY sections</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>prompt_id</code></td>
+<td>corpus PromptID (stable key)</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>intervention, comparator, outcome</code></td>
+<td>prompt fields as distributed</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>label_status</code></td>
+<td>unanimous, accepted_disagreement, no_accepted_annotation, no_annotation</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>gold_label</code></td>
+<td>benchmark label when label_status is unanimous; empty otherwise</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>accepted_labels</code></td>
+<td>JSON list of distinct accepted labels</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>gold_spans</code></td>
+<td>JSON list of located accepted evidence spans [start, end) in article text offsets</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>flag</code></td>
+<td>corpus authors' list: incorrect, questionable, malformed, or empty</td>
+</tr>
+<tr>
+<td><code>data/processed/prompts.csv</code></td>
+<td><code>eligible_primary</code></td>
+<td>meets the primary eligibility rule</td>
+</tr>
+<tr>
+<td><code>data/processed/annotations.csv</code></td>
+<td><code>accepted</code></td>
+<td>Valid Label = 1, Valid Reasoning = 1, non-empty evidence, label not 'invalid prompt'</td>
+</tr>
+<tr>
+<td><code>data/processed/annotations.csv</code></td>
+<td><code>span_start, span_end, span_status</code></td>
+<td>located evidence span and how it was located</td>
+</tr>
+<tr>
+<td><code>results/contexts/*.jsonl</code></td>
+<td><code>passages</code></td>
+<td>supplied passages: pid, start, end (article offsets), text, section, BM25 score</td>
+</tr>
+<tr>
+<td><code>results/contexts/*.jsonl</code></td>
+<td><code>budget_tokens, context_tokens, truncated</code></td>
+<td>token budget, tokens used (Qwen3 tokenizer), whether truncated</td>
+</tr>
+<tr>
+<td><code>results/predictions/**.jsonl</code></td>
+<td><code>response, finish_reason, prompt_tokens, gen_tokens, latency_s</code></td>
+<td>raw model output and call metadata</td>
+</tr>
+<tr>
+<td><code>results/predictions/**.jsonl</code></td>
+<td><code>cache_key, rendered_sha256, revision, gen_config, env</code></td>
+<td>provenance of each call</td>
+</tr>
+<tr>
+<td><code>results/scored/**.csv</code></td>
+<td><code>parse_status</code></td>
+<td>valid, schema_error, invalid_json, no_json_object, empty, runtime_error, not_run</td>
+</tr>
+<tr>
+<td><code>results/scored/**.csv</code></td>
+<td><code>quote_exists, quote_exists_strict, locator_valid, gold_overlap, gold_token_f1</code></td>
+<td>separated validity checks (see definitions)</td>
+</tr>
+<tr>
+<td><code>results/scored/**.csv</code></td>
+<td><code>label_pred, label_correct, task_success</code></td>
+<td>predicted label and correctness</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="metric-definitions">Metric definitions</h2>
+<div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Unit</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>items</code></td>
+<td>count</td>
+<td>Eligible test prompts in the analysis population (unanimous accepted benchmark label, not on the corpus 'Incorrect' list).</td>
+</tr>
+<tr>
+<td><code>parse_valid</code></td>
+<td>count</td>
+<td>Responses that parse as one JSON object matching the answer schema (code fences stripped; no other repair).</td>
+</tr>
+<tr>
+<td><code>abstained</code></td>
+<td>count</td>
+<td>Parse-valid responses with label 'cannot determine'. Not the same as 'no significant difference'.</td>
+</tr>
+<tr>
+<td><code>answered</code></td>
+<td>count</td>
+<td>Parse-valid responses that did not abstain.</td>
+</tr>
+<tr>
+<td><code>quote_exists</code></td>
+<td>count</td>
+<td>Answered prompts whose quote, after collapsing whitespace, is a substring of one supplied passage and has at least 4 words.</td>
+</tr>
+<tr>
+<td><code>quote_exists_strict</code></td>
+<td>count</td>
+<td>Answered prompts whose quote is an exact substring of the passages as displayed to the model, any length (sensitivity S1 adds the 4-word minimum).</td>
+</tr>
+<tr>
+<td><code>locator_valid</code></td>
+<td>count</td>
+<td>Answered prompts whose returned passage ID names a supplied passage containing the quote.</td>
+</tr>
+<tr>
+<td><code>gold_overlap</code></td>
+<td>count</td>
+<td>Answered prompts whose located quote overlaps an accepted benchmark evidence span by at least one character.</td>
+</tr>
+<tr>
+<td><code>label_correct</code></td>
+<td>count</td>
+<td>Answered prompts whose label equals the benchmark label.</td>
+</tr>
+<tr>
+<td><code>task_success</code></td>
+<td>count</td>
+<td>Answered, quote exists, locator valid, and label correct. Denominator: all items.</td>
+</tr>
+<tr>
+<td><code>qvwr</code></td>
+<td>proportion</td>
+<td>Label-error rate among quote-valid answers: label_wrong / answered prompts with an existing quote.</td>
+</tr>
+<tr>
+<td><code>ci_low, ci_high</code></td>
+<td>proportion</td>
+<td>95% percentile interval from 10,000 bootstrap resamples of articles (seed 20261007).</td>
+</tr>
+<tr>
+<td><code>coverage</code></td>
+<td>proportion</td>
+<td>Retained answers / items.</td>
+</tr>
+<tr>
+<td><code>macro_f1</code></td>
+<td>proportion</td>
+<td>Mean F1 over the three benchmark classes; abstentions and invalid outputs count as a wrong 'no answer'.</td>
+</tr>
+<tr>
+<td><code>retained_error</code></td>
+<td>proportion</td>
+<td>Wrong labels / retained answers under a rejection policy.</td>
+</tr>
+<tr>
+<td><code>random_*</code></td>
+<td>proportion</td>
+<td>Coverage-matched random rejection: 2,000 seeded draws keeping the same number of answered prompts.</td>
+</tr>
+</tbody>
+</table></div></main></body></html>

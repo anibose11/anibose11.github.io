@@ -1,0 +1,5 @@
+unit,scope,tier,tier_label,n,denominator,pct
+outcome group,"heldout portion, confirmed cohort",A,directly structured and applicable,37592,43715,85.99
+outcome group,"heldout portion, confirmed cohort",B,requires an explicitly reproducible transformation,6118,43715,14
+outcome group,"heldout portion, confirmed cohort",C,ambiguous and not safely resolvable,5,43715,0.01
+outcome group,"heldout portion, confirmed cohort",D,not applicable,1885,45600,4.13

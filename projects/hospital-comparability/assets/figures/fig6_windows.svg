@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="540.544561pt" height="242.03195pt" viewBox="0 0 540.544561 242.03195" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M -0 242.03195 
+L 540.544561 242.03195 
+L 540.544561 0 
+L -0 0 
+z
+" style="fill: #fcfcfb"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 109.479687 174.86808 
+L 530.374365 174.86808 
+L 530.374365 7.2 
+L 109.479687 7.2 
+z
+" style="fill: #fcfcfb"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 159.998031 174.86808 
+L 159.998031 7.2 
+" clip-path="url(#pdd3521c3a9)" style="fill: none; stroke: #e1e0d9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: middle; fill: #52514e" x="159.998031" y="186.93608" transform="rotate(-0 159.998031 186.93608)">2022</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 260.211049 174.86808 
+L 260.211049 7.2 
+" clip-path="url(#pdd3521c3a9)" style="fill: none; stroke: #e1e0d9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: middle; fill: #52514e" x="260.211049" y="186.93608" transform="rotate(-0 260.211049 186.93608)">2023</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 360.424068 174.86808 
+L 360.424068 7.2 
+" clip-path="url(#pdd3521c3a9)" style="fill: none; stroke: #e1e0d9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: middle; fill: #52514e" x="360.424068" y="186.93608" transform="rotate(-0 360.424068 186.93608)">2024</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 460.911642 174.86808 
+L 460.911642 7.2 
+" clip-path="url(#pdd3521c3a9)" style="fill: none; stroke: #e1e0d9; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 9px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: middle; fill: #52514e" x="460.911642" y="186.93608" transform="rotate(-0 460.911642 186.93608)">2025</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9"/>
+     <g id="text_5">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="167.295797" transform="rotate(-0 105.979687 167.295797)">HF HRRP ratio · 2026-09-30</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10"/>
+     <g id="text_6">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="155.93771" transform="rotate(-0 105.979687 155.93771)">HF HRRP ratio · 2026-08-13</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_11"/>
+     <g id="text_7">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="144.579623" transform="rotate(-0 105.979687 144.579623)">HF HRRP ratio · 2026-05-13</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="126.406684" transform="rotate(-0 105.979687 126.406684)">HF excess days · 2026-09-30</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13"/>
+     <g id="text_9">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="115.048597" transform="rotate(-0 105.979687 115.048597)">HF excess days · 2026-08-13</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_14"/>
+     <g id="text_10">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="103.69051" transform="rotate(-0 105.979687 103.69051)">HF excess days · 2026-05-13</text>
+     </g>
+    </g>
+    <g id="ytick_7">
+     <g id="line2d_15"/>
+     <g id="text_11">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="85.51757" transform="rotate(-0 105.979687 85.51757)">HF mortality · 2026-09-30</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_16"/>
+     <g id="text_12">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="74.159483" transform="rotate(-0 105.979687 74.159483)">HF mortality · 2026-08-13</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_17"/>
+     <g id="text_13">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="62.801396" transform="rotate(-0 105.979687 62.801396)">HF mortality · 2026-05-13</text>
+     </g>
+    </g>
+    <g id="ytick_10">
+     <g id="line2d_18"/>
+     <g id="text_14">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="44.628457" transform="rotate(-0 105.979687 44.628457)">HF readmission · 2026-09-30</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_19"/>
+     <g id="text_15">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="33.27037" transform="rotate(-0 105.979687 33.27037)">HF readmission · 2026-08-13</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_20"/>
+     <g id="text_16">
+      <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: end; fill: #52514e" x="105.979687" y="21.912283" transform="rotate(-0 105.979687 21.912283)">HF readmission · 2026-05-13</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 109.479688 167.246804 
+L 410.118743 167.246804 
+L 410.118743 160.20479 
+L 109.479688 160.20479 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #1baf7a"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 109.479688 155.888717 
+L 410.118743 155.888717 
+L 410.118743 148.846703 
+L 109.479688 148.846703 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #1baf7a"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 109.479688 144.53063 
+L 410.118743 144.53063 
+L 410.118743 137.488616 
+L 109.479688 137.488616 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #1baf7a"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 209.692706 126.357691 
+L 510.331761 126.357691 
+L 510.331761 119.315677 
+L 209.692706 119.315677 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #b9b7ae"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 209.692706 114.999604 
+L 510.331761 114.999604 
+L 510.331761 107.95759 
+L 209.692706 107.95759 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #eb6834"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 109.479688 103.641517 
+L 410.118743 103.641517 
+L 410.118743 96.599503 
+L 109.479688 96.599503 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 209.692706 85.468577 
+L 510.331761 85.468577 
+L 510.331761 78.426563 
+L 209.692706 78.426563 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #b9b7ae"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 209.692706 74.11049 
+L 510.331761 74.11049 
+L 510.331761 67.068476 
+L 209.692706 67.068476 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #eb6834"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 109.479688 62.752403 
+L 410.118743 62.752403 
+L 410.118743 55.710389 
+L 109.479688 55.710389 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 309.905724 44.579464 
+L 510.331761 44.579464 
+L 510.331761 37.53745 
+L 309.905724 37.53745 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #b9b7ae"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 309.905724 33.221377 
+L 510.331761 33.221377 
+L 510.331761 26.179363 
+L 309.905724 26.179363 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #eb6834"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 109.479688 21.86329 
+L 410.118743 21.86329 
+L 410.118743 14.821276 
+L 109.479688 14.821276 
+z
+" clip-path="url(#pdd3521c3a9)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 109.479687 174.86808 
+L 109.479687 7.2 
+" style="fill: none; stroke: #c3c2b7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 109.479688 174.86808 
+L 530.374365 174.86808 
+" style="fill: none; stroke: #c3c2b7; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="166.312297" transform="rotate(-0 413.413417 166.312297)">36 mo</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="154.95421" transform="rotate(-0 413.413417 154.95421)">36 mo</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="143.596123" transform="rotate(-0 413.413417 143.596123)">36 mo</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="125.423184" transform="rotate(-0 513.626436 125.423184)">36 mo</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="114.065097" transform="rotate(-0 513.626436 114.065097)">36 mo</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="102.70701" transform="rotate(-0 413.413417 102.70701)">36 mo</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="84.53407" transform="rotate(-0 513.626436 84.53407)">36 mo</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="73.175983" transform="rotate(-0 513.626436 73.175983)">36 mo</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="61.817896" transform="rotate(-0 413.413417 61.817896)">36 mo</text>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="43.644957" transform="rotate(-0 513.626436 43.644957)">24 mo</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="513.626436" y="32.28687" transform="rotate(-0 513.626436 32.28687)">24 mo</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 7px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #52514e" x="413.413417" y="20.928783" transform="rotate(-0 413.413417 20.928783)">36 mo</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_17">
+     <path d="M 116.229687 217.74695 
+L 131.229688 217.74695 
+L 131.229688 212.49695 
+L 116.229687 212.49695 
+z
+" style="fill: #2a78d6; stroke: #2a78d6; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_29">
+     <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start" x="137.229688" y="217.74695" transform="rotate(-0 137.229688 217.74695)">intervals published</text>
+    </g>
+    <g id="patch_18">
+     <path d="M 116.229687 230.23445 
+L 131.229688 230.23445 
+L 131.229688 224.98445 
+L 116.229687 224.98445 
+z
+" style="fill: #eb6834; stroke: #eb6834; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_30">
+     <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start" x="137.229688" y="230.23445" transform="rotate(-0 137.229688 230.23445)">published, then flagged by CMS</text>
+    </g>
+    <g id="patch_19">
+     <path d="M 260.174609 217.74695 
+L 275.174609 217.74695 
+L 275.174609 212.49695 
+L 260.174609 212.49695 
+z
+" style="fill: #b9b7ae; stroke: #b9b7ae; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_31">
+     <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start" x="281.174609" y="217.74695" transform="rotate(-0 281.174609 217.74695)">intervals suppressed</text>
+    </g>
+    <g id="patch_20">
+     <path d="M 260.174609 230.23445 
+L 275.174609 230.23445 
+L 275.174609 224.98445 
+L 260.174609 224.98445 
+z
+" style="fill: #1baf7a; stroke: #1baf7a; stroke-linejoin: miter"/>
+    </g>
+    <g id="text_32">
+     <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start" x="281.174609" y="230.23445" transform="rotate(-0 281.174609 230.23445)">HRRP payment file (ratio; not covered by the notice)</text>
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pdd3521c3a9">
+   <rect x="109.479687" y="7.2" width="420.894677" height="167.66808"/>
+  </clipPath>
+ </defs>
+</svg>

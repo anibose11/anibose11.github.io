@@ -1,0 +1,22 @@
+unit,scope,family,n_scalars_in_scope,warehouse_exact,warehouse_pct,flat_recoverable,flat_pct,flat_ambiguous_context,flat_absent_from_rows,flat_no_column,flat_module_not_exported,flat_value_differs,excluded_by_design
+source scalar,"heldout portion, confirmed cohort",adverse events,1160134,1160134,100,0,0,0,0,0,1160134,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: class and category titles,25764,25764,100,25645,99.54,18,101,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: groups,18520,18520,100,18370,99.19,0,150,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: measure and module fields,48607,48607,100,48285,99.34,22,300,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: measure and row denominators,31040,31040,100,0,0,0,0,31040,0,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: measurement values,211784,211784,100,211608,99.92,176,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",baseline: overall denominators,14378,14378,100,12248,85.19,0,100,2030,0,0,0
+source scalar,"heldout portion, confirmed cohort",more information,481,481,100,0,0,0,0,0,481,0,11982
+source scalar,"heldout portion, confirmed cohort",outcome: class and category titles,28212,28212,100,28141,99.75,2,69,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: groups,136790,136790,100,131117,95.85,18,5655,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: measure-level fields,163792,163792,100,152628,93.18,30,11134,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: measurement values,270946,270946,100,270926,99.99,20,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: outcome-level denominators,111467,111467,100,87418,78.43,12,3770,20267,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: row-specific denominators,78727,78727,100,0,0,0,0,78727,0,0,0
+source scalar,"heldout portion, confirmed cohort",outcome: statistical analyses,101757,101757,100,101757,100,0,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",participant flow: groups,14675,14675,100,14675,100,0,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",participant flow: milestone counts,46655,46655,100,46559,99.79,96,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort","participant flow: periods, milestones and module fields",12835,12835,100,12815,99.84,20,0,0,0,0,0
+source scalar,"heldout portion, confirmed cohort",participant flow: reasons not completed,26253,26253,100,0,0,0,0,26253,0,0,0
+source scalar,"heldout portion, confirmed cohort","TOTAL: all families the flat export attempts (participant flow, baseline, outcomes)",1342202,1342202,100,1162192,86.59,414,21279,158317,0,0,0
+source scalar,"heldout portion, confirmed cohort","TOTAL: all in-scope results scalars, including adverse events",2502817,2502817,100,1162192,46.44,414,21279,158317,1160615,0,0

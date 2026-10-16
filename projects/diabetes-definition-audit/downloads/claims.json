@@ -1,0 +1,784 @@
+{
+  "schema": "ddaudit-claims/1",
+  "run_id": "20261007T212439Z",
+  "analysis_code_tree_sha256": "24c0b0b8fe7925fc1b139b0b6bca26364bc15099faa8986c7197f9a1633b4ca8",
+  "counts_kept_separate": {
+    "source_records_and_domains": {
+      "2021-2023": {
+        "source_records_demographics": 11933,
+        "domain_A": 6022,
+        "domain_H": 5729,
+        "domain_F": 2940,
+        "domain_P": 2938,
+        "domain_P_narrow": 2766
+      },
+      "2017-2020": {
+        "source_records_demographics": 15560,
+        "domain_A": 8451,
+        "domain_H": 8000,
+        "domain_F": 3767,
+        "domain_P": 3757,
+        "domain_P_narrow": 3591
+      }
+    },
+    "predictive_model": "none; deterministic classification and design-based estimation, so there is no test set",
+    "automated_checks": {
+      "total": 39,
+      "passed": 39,
+      "failed": 0
+    }
+  },
+  "claims": [
+    {
+      "id": "hba1c_paired",
+      "statement": "HbA1c at or above 6.5% in the common paired domain",
+      "value_percent": 10.78,
+      "ci95_percent": [
+        9.09,
+        12.66
+      ],
+      "numerator_unweighted": 371,
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "configuration": {
+        "config_id": "K1",
+        "phenotype": "A1C65"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/estimates.csv",
+        "row_key": {
+          "config_id": "K1"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "n_unweighted",
+          "n_positive_unweighted"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "glucose_paired",
+      "statement": "Fasting glucose at or above 126 mg/dL in the common paired domain",
+      "value_percent": 11.19,
+      "ci95_percent": [
+        9.47,
+        13.11
+      ],
+      "numerator_unweighted": 383,
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "configuration": {
+        "config_id": "K2",
+        "phenotype": "FPG126"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/estimates.csv",
+        "row_key": {
+          "config_id": "K2"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "n_unweighted",
+          "n_positive_unweighted"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "definition_part",
+      "statement": "Paired difference, HbA1c minus glucose threshold prevalence, same adults and weight",
+      "value_percentage_points": -0.412,
+      "ci95_percentage_points": [
+        -1.151,
+        0.326
+      ],
+      "p_value": "0.2525",
+      "analysis_scope": {
+        "release": "2021-2023",
+        "left": "K1 (P, WTSAF2YR)",
+        "right": "K2 (P, WTSAF2YR)",
+        "kind": "paired_definition"
+      },
+      "configuration": {
+        "contrast_id": "C1"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C1"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "hba1c_lab_domain",
+      "statement": "HbA1c at or above 6.5% in the HbA1c laboratory domain with the phlebotomy weight",
+      "value_percent": 10.54,
+      "ci95_percent": [
+        9.25,
+        11.95
+      ],
+      "numerator_unweighted": 721,
+      "denominator_unweighted": 5729,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "H: Domain A with an HbA1c result and a positive HbA1c laboratory weight",
+        "weight": "WTPH2YR"
+      },
+      "configuration": {
+        "config_id": "K3",
+        "phenotype": "A1C65"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/estimates.csv",
+        "row_key": {
+          "config_id": "K3"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "n_unweighted",
+          "n_positive_unweighted"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "sample_weight_part",
+      "statement": "HbA1c in its laboratory domain minus HbA1c in the paired domain (selection and weighting comparison)",
+      "value_percentage_points": -0.236,
+      "ci95_percentage_points": [
+        -1.435,
+        0.964
+      ],
+      "p_value": "0.6813",
+      "analysis_scope": {
+        "release": "2021-2023",
+        "left": "K3 (H, WTPH2YR)",
+        "right": "K1 (P, WTSAF2YR)",
+        "kind": "selection_weighting"
+      },
+      "configuration": {
+        "contrast_id": "C2"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C2"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "naive_difference",
+      "statement": "Naive cross-domain difference, HbA1c laboratory domain minus glucose paired domain",
+      "value_percentage_points": -0.648,
+      "ci95_percentage_points": [
+        -2.016,
+        0.72
+      ],
+      "p_value": "0.3286",
+      "analysis_scope": {
+        "release": "2021-2023",
+        "left": "K3 (H, WTPH2YR)",
+        "right": "K2 (P, WTSAF2YR)",
+        "kind": "naive_cross_domain"
+      },
+      "configuration": {
+        "contrast_id": "C3"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C3"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "total_composite",
+      "statement": "Diagnosed, or HbA1c or glucose at or above threshold (surveillance composite)",
+      "value_percent": 15.79,
+      "ci95_percent": [
+        13.59,
+        18.19
+      ],
+      "numerator_unweighted": 565,
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "configuration": {
+        "config_id": "K6",
+        "phenotype": "TOTAL_A1C_FPG"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/estimates.csv",
+        "row_key": {
+          "config_id": "K6"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "n_unweighted",
+          "n_positive_unweighted"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "diagnosed",
+      "statement": "Self-reported diagnosed diabetes in the paired domain",
+      "value_percent": 11.3,
+      "ci95_percent": [
+        9.31,
+        13.55
+      ],
+      "numerator_unweighted": 409,
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "configuration": {
+        "config_id": "K5",
+        "phenotype": "DX"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/estimates.csv",
+        "row_key": {
+          "config_id": "K5"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "n_unweighted",
+          "n_positive_unweighted"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "undiagnosed_share",
+      "statement": "Composite minus diagnosed: biochemical positivity without a reported diagnosis",
+      "value_percentage_points": 4.487,
+      "ci95_percentage_points": [
+        3.263,
+        5.711
+      ],
+      "p_value": "<0.0001",
+      "analysis_scope": {
+        "release": "2021-2023",
+        "left": "K6 (P, WTSAF2YR)",
+        "right": "K5 (P, WTSAF2YR)",
+        "kind": "paired_definition"
+      },
+      "configuration": {
+        "contrast_id": "C8"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C8"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "diagnosed_below_threshold_share_of_adults",
+      "statement": "Composite minus biochemical only: diagnosed with both biomarkers below threshold",
+      "value_percentage_points": 2.298,
+      "ci95_percentage_points": [
+        1.645,
+        2.951
+      ],
+      "p_value": "<0.0001",
+      "analysis_scope": {
+        "release": "2021-2023",
+        "left": "K6 (P, WTSAF2YR)",
+        "right": "K8 (P, WTSAF2YR)",
+        "kind": "paired_definition"
+      },
+      "configuration": {
+        "contrast_id": "C9"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C9"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "diagnosed_below_threshold_share_of_diagnosed",
+      "statement": "Among adults with diagnosed diabetes in domain P, share with HbA1c below 6.5% and glucose below 126 mg/dL",
+      "value_percent": 20.33,
+      "ci95_percent": [
+        15.96,
+        25.29
+      ],
+      "numerator_unweighted": 95,
+      "denominator_unweighted": 409,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P with DX = 1 (all diagnosed)",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/s3_diagnosed_below_threshold.csv",
+        "row_key": {
+          "group": "all diagnosed"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "kappa",
+      "statement": "Cohen's kappa for HbA1c and glucose threshold classifications in domain P (weighted)",
+      "value": 0.744,
+      "ci95": [
+        0.696,
+        0.792
+      ],
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/agreement.csv",
+        "row_key": {
+          "measure": "cohens_kappa"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "percent_agreement",
+      "statement": "Percent agreement of HbA1c and glucose threshold classifications, domain P",
+      "value_percent": 94.99,
+      "ci95_percent": [
+        93.83,
+        96.15
+      ],
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain)",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/agreement.csv",
+        "row_key": {
+          "measure": "percent_agreement"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "hba1c_only_share",
+      "statement": "Share of adults above either threshold who were above the HbA1c threshold only",
+      "value_percent": 17.04,
+      "ci95_percent": [
+        13.47,
+        20.61
+      ],
+      "numerator_unweighted": 87,
+      "denominator_unweighted": 470,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain); adults above either threshold (cells c11 + c10 + c01)",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/agreement.csv",
+        "row_key": {
+          "measure": "share_of_either_positive_hba1c_only"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "glucose_only_share",
+      "statement": "Share of adults above either threshold who were above the glucose threshold only",
+      "value_percent": 20.1,
+      "ci95_percent": [
+        15.8,
+        24.39
+      ],
+      "numerator_unweighted": 99,
+      "denominator_unweighted": 470,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P: Domain F with an HbA1c result (common paired domain); adults above either threshold (cells c11 + c10 + c01)",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/agreement.csv",
+        "row_key": {
+          "measure": "share_of_either_positive_glucose_only"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "k1_k2_sampling_correlation",
+      "statement": "Sampling correlation between the paired HbA1c and glucose estimates (K1, K2)",
+      "value": 0.912,
+      "denominator_unweighted": 2938,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/design_checks.json",
+        "keys": [
+          "k1_k2_sampling_covariance",
+          "k1_k2_sampling_correlation"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "se_ratio_if_covariance_ignored",
+      "statement": "Ratio of the standard error of the paired difference computed without the covariance to the paired standard error (illustration only)",
+      "value": 3.37,
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P",
+        "weight": "WTSAF2YR"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/design_checks.json",
+        "keys": [
+          "c1_se_paired",
+          "c1_se_if_covariance_ignored_illustration_only"
+        ]
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "nchs_reconciliation",
+      "statement": "Published NCHS Data Brief 516 rows reproduced (sample size, percent, and SE, to rounding)",
+      "value": {
+        "rows": 18,
+        "n_match": 18,
+        "percent_match": 18,
+        "se_match": 18,
+        "ci_match": 17,
+        "ci_match_without_neff_cap": 18
+      },
+      "analysis_scope": {
+        "release": "2021-2023",
+        "sample_universe": "P",
+        "weight": "WTSAF2YR",
+        "reference": "NCHS Data Brief 516, Tables 1 and 2 (crude estimates)"
+      },
+      "evidence": {
+        "path": "results/tables/2021-2023/reference_reconciliation.csv"
+      },
+      "source_sha256": {
+        "DEMO_L": "ca4374a158b493b8b0163e1388da21d57a18d1b9cecff2aa4e2fa2bec494fe23",
+        "GHB_L": "67aee0353160e2392dc0a33bece99b90764a630c76d82415ac4639105ad9dd03",
+        "GLU_L": "70f773ab37e3d8485341f32137e280e05b9279e5fe9b6f0362e4052d8fe9a201",
+        "FASTQX_L": "e687d7ed729e81b256dbf911c9737883d948c1441079b012741d8ea3b115be6b",
+        "DIQ_L": "9535a023673ae869afae19d842d8679e06f6a464606ac15900686b41ef05090f",
+        "RHQ_L": "ed406dacc243094f1806a6a7de6d05b8a9830e9785daf1df16c28695dc197193"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "replication_definition_part",
+      "statement": "Replication: paired HbA1c minus glucose difference, 2017-March 2020",
+      "value_percentage_points": -1.544,
+      "ci95_percentage_points": [
+        -2.713,
+        -0.374
+      ],
+      "p_value": "0.0117",
+      "analysis_scope": {
+        "release": "2017-2020",
+        "left": "K1 (P, WTSAFPRP)",
+        "right": "K2 (P, WTSAFPRP)",
+        "kind": "paired_definition"
+      },
+      "configuration": {
+        "contrast_id": "C1"
+      },
+      "evidence": {
+        "path": "results/tables/2017-2020/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C1"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "P_DEMO": "2e46c6c26bf77cd8989f64011ace12cbf42c0f3e03414eb59acc5328c8f87913",
+        "P_GHB": "dac9e423f56041c2ec46486cb16be16d3347e0a81a575985882ffad5a60e1195",
+        "P_GLU": "91b83c46fb4707c431838159135e93693a0572bce54074f5a890f0ee104732b3",
+        "P_FASTQX": "2ff1a59eae3b7564373d61abecd585c4d7c39e1ad6826403775bd94def3ce6d1",
+        "P_DIQ": "79153f799fc2171792771c4aa250029c62807f14915f1f81405b03233b1e5ae3",
+        "P_RHQ": "1344cd314b9144d88ae2cdb0aaacf09fa29a996ac00ad3e7c861c3d64b7bb116"
+      },
+      "run_id": "20261007T212439Z"
+    },
+    {
+      "id": "replication_sample_weight_part",
+      "statement": "Replication: HbA1c in the examination-weight domain minus the paired domain, 2017-March 2020",
+      "value_percentage_points": 0.075,
+      "ci95_percentage_points": [
+        -1.324,
+        1.474
+      ],
+      "p_value": "0.9132",
+      "analysis_scope": {
+        "release": "2017-2020",
+        "left": "K3 (H, WTMECPRP)",
+        "right": "K1 (P, WTSAFPRP)",
+        "kind": "selection_weighting"
+      },
+      "configuration": {
+        "contrast_id": "C2"
+      },
+      "evidence": {
+        "path": "results/tables/2017-2020/contrasts.csv",
+        "row_key": {
+          "contrast_id": "C2"
+        },
+        "columns": [
+          "estimate",
+          "ci_low",
+          "ci_high",
+          "p_value"
+        ]
+      },
+      "source_sha256": {
+        "P_DEMO": "2e46c6c26bf77cd8989f64011ace12cbf42c0f3e03414eb59acc5328c8f87913",
+        "P_GHB": "dac9e423f56041c2ec46486cb16be16d3347e0a81a575985882ffad5a60e1195",
+        "P_GLU": "91b83c46fb4707c431838159135e93693a0572bce54074f5a890f0ee104732b3",
+        "P_FASTQX": "2ff1a59eae3b7564373d61abecd585c4d7c39e1ad6826403775bd94def3ce6d1",
+        "P_DIQ": "79153f799fc2171792771c4aa250029c62807f14915f1f81405b03233b1e5ae3",
+        "P_RHQ": "1344cd314b9144d88ae2cdb0aaacf09fa29a996ac00ad3e7c861c3d64b7bb116"
+      },
+      "run_id": "20261007T212439Z"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 161" width="100%" role="img" aria-labelledby="t2 d2" style="max-width:760px;background:#fcfcfb">
+<title id="t2">How name-based matching compares with the NDC crosswalk</title><desc id="d2">Held-out products with a unique RxCUI from package NDCs (n = 1,285).</desc>
+<rect width="760" height="161" fill="#fcfcfb"/>
+<text x="12.0" y="24.0" font-size="15" fill="#1d1d1b" text-anchor="start" font-weight="600" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">How name-based matching compares with the NDC crosswalk</text>
+<text x="12.0" y="42.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">Held-out products with a unique RxCUI from package NDCs (n = 1,285).</text>
+<rect x="12.0" y="52" width="10" height="10" rx="2" fill="#2470cc"/>
+<text x="26.0" y="61.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">Same RxCUI as identifier crosswalk</text>
+<rect x="259.6" y="52" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="273.6" y="61.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">Different RxCUI</text>
+<rect x="385.6" y="52" width="10" height="10" rx="2" fill="#9c9a93"/>
+<text x="399.6" y="61.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">Several candidates</text>
+<rect x="530.8" y="52" width="10" height="10" rx="2" fill="#d6d4cd"/>
+<text x="544.8" y="61.0" font-size="12" fill="#52514e" text-anchor="start" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">No match or abstained</text>
+<text x="202.0" y="95.0" font-size="12" fill="#1d1d1b" text-anchor="end" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">B: names + attributes</text>
+<g><title>B: names + attributes: Same RxCUI as identifier crosswalk 1,095 of 1,285 (85.2%)</title><rect x="212.0" y="81" width="447.9" height="20" rx="2" fill="#2470cc"/></g>
+<text x="436.0" y="95.0" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">85%</text>
+<g><title>B: names + attributes: Different RxCUI 9 of 1,285 (0.7%)</title><rect x="661.9" y="81" width="1.7" height="20" rx="2" fill="#eb6834"/></g>
+<g><title>B: names + attributes: Several candidates 115 of 1,285 (8.9%)</title><rect x="665.6" y="81" width="45.3" height="20" rx="2" fill="#9c9a93"/></g>
+<text x="688.3" y="95.0" font-size="11" fill="#1d1d1b" text-anchor="middle" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">9%</text>
+<g><title>B: names + attributes: No match or abstained 66 of 1,285 (5.1%)</title><rect x="712.9" y="81" width="25.1" height="20" rx="2" fill="#d6d4cd"/></g>
+<text x="202.0" y="131.0" font-size="12" fill="#1d1d1b" text-anchor="end" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">C: approximate names</text>
+<g><title>C: approximate names: Same RxCUI as identifier crosswalk 478 of 1,285 (37.2%)</title><rect x="212.0" y="117" width="194.4" height="20" rx="2" fill="#2470cc"/></g>
+<text x="309.2" y="131.0" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">37%</text>
+<g><title>C: approximate names: Different RxCUI 87 of 1,285 (6.8%)</title><rect x="408.4" y="117" width="33.7" height="20" rx="2" fill="#eb6834"/></g>
+<g><title>C: approximate names: No match or abstained 720 of 1,285 (56.0%)</title><rect x="444.2" y="117" width="293.8" height="20" rx="2" fill="#d6d4cd"/></g>
+<text x="591.1" y="131.0" font-size="11" fill="#1d1d1b" text-anchor="middle" font-weight="400" font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">56%</text>
+</svg>

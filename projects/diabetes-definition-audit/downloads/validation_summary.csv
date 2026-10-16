@@ -1,0 +1,40 @@
+release,check,kind,status,detail
+2021-2023,"join cardinality: unique SEQN, every component SEQN in DEMO",software check,pass,every component has unique SEQN and every SEQN is in DEMO
+2021-2023,analytic frame rows equal DEMO rows,software check,pass,11933 rows
+2021-2023,fasting weight outside window,software check,pass,count = 0
+2021-2023,domain nesting violations,software check,pass,count = 0
+2021-2023,null phenotype inside domain,software check,pass,count = 0
+2021-2023,laboratory weight without examination,software check,pass,count = 0
+2021-2023,file counts equal published codebook frequencies,source reconciliation,pass,91 of 91 codebook rows match
+2021-2023,glucose values with zero fasting weight equal the documented count,source reconciliation,pass,"311 in the file, 311 in the documentation; window breakdown <8 h, >=24 h, unknown, inside: [277, 32, 2, 0]"
+2021-2023,all configurations and contrasts accepted by the checker,software check,pass,"8 configurations plus 3 auxiliary or sensitivity estimates, 12 contrasts"
+2021-2023,invalid requests refused by the checker,software check,pass,7 refusal examples
+2021-2023,direct weighted proportions equal R survey estimates,software check,pass,max abs difference 3.75e-16 over 23 estimates and contrasts
+2021-2023,second implementation of linearized SE equals R survey SE,software check,pass,max relative difference 1.83e-12
+2021-2023,direct weighted 2x2 cross-tab equals R cell estimates,software check,pass,max abs difference 2.22e-16
+2021-2023,second implementation reproduces every other reported table,software check,pass,"162 point estimates (agreement, kappa and ratios, overlap, sensitivity 3, missingness, groups, post hoc, reconciliation), max abs difference 1.67e-15; 143 standard errors, max relative difference 4.80e-14; kappa and ratio standard errors not recomputed"
+2021-2023,decompositions add up exactly,software check,pass,max error 8.3e-17
+2021-2023,paired SE equals joint-totals SE for same-domain contrasts,software check,pass,max difference 4.3e-18
+2021-2023,no singleton strata in the full design or analysis domains,software check,pass,"design df 15; domain df {'A': 15, 'H': 15, 'F': 15, 'P': 15, 'P_NARROW': 15}"
+2021-2023,sample sizes equal NCHS Data Brief 516,external reconciliation,pass,18 of 18
+2021-2023,percents round to NCHS Data Brief 516 values,external reconciliation,pass,18 of 18
+2021-2023,standard errors round to NCHS Data Brief 516 values,external reconciliation,pass,18 of 18
+2021-2023,Korn-Graubard intervals reconcile with NCHS Data Brief 516,external reconciliation,pass,17 of 18 match with the effective sample size capped at n as in the NCHS standard; 18 of 18 match without the cap
+2017-2020,"join cardinality: unique SEQN, every component SEQN in DEMO",software check,pass,every component has unique SEQN and every SEQN is in DEMO
+2017-2020,analytic frame rows equal DEMO rows,software check,pass,15560 rows
+2017-2020,fasting weight outside window,software check,pass,count = 0
+2017-2020,domain nesting violations,software check,pass,count = 0
+2017-2020,null phenotype inside domain,software check,pass,count = 0
+2017-2020,laboratory weight without examination,software check,pass,count = 0
+2017-2020,file counts equal published codebook frequencies,source reconciliation,pass,85 of 85 codebook rows match
+2017-2020,glucose values with zero fasting weight equal the documented count,source reconciliation,pass,"268 in the file, 268 in the documentation; window breakdown <8 h, >=24 h, unknown, inside: [225, 43, 0, 0]"
+2017-2020,all configurations and contrasts accepted by the checker,software check,pass,"8 configurations plus 3 auxiliary or sensitivity estimates, 12 contrasts"
+2017-2020,invalid requests refused by the checker,software check,pass,6 refusal examples
+2017-2020,direct weighted proportions equal R survey estimates,software check,pass,max abs difference 6.73e-16 over 23 estimates and contrasts
+2017-2020,second implementation of linearized SE equals R survey SE,software check,pass,max relative difference 7.07e-13
+2017-2020,direct weighted 2x2 cross-tab equals R cell estimates,software check,pass,max abs difference 9.99e-16
+2017-2020,second implementation reproduces every other reported table,software check,pass,"143 point estimates (agreement, kappa and ratios, overlap, sensitivity 3, missingness, groups, post hoc, reconciliation), max abs difference 3.89e-15; 124 standard errors, max relative difference 4.60e-14; kappa and ratio standard errors not recomputed"
+2017-2020,decompositions add up exactly,software check,pass,max error 4.2e-16
+2017-2020,paired SE equals joint-totals SE for same-domain contrasts,software check,pass,max difference 7.8e-18
+2017-2020,no singleton strata in the full design or analysis domains,software check,pass,"design df 25; domain df {'A': 25, 'H': 25, 'F': 25, 'P': 25, 'P_NARROW': 25}"
+2017-2020,sample sizes equal NCHS Data Brief 516,external reconciliation,pass,1 of 1

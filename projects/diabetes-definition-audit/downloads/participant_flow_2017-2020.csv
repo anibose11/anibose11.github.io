@@ -1,0 +1,15 @@
+release,step,branch,description,n,n_removed,weight_sum,weight_used
+2017-2020,1,all,Participants in the demographics file,15560,,322324171.99215674,interview weight
+2017-2020,2,all,Interviewed and examined (RIDSTATR = 2),14300,1260,322324171.9929065,examination weight
+2017-2020,3,all,Aged 20 or older,8544,5756,240449493.03234616,examination weight
+2017-2020,4,all,Excluding pregnant at the examination (RIDEXPRG = 1),8457,87,238099022.6546161,examination weight
+2017-2020,5,all,Excluding pregnancy not ascertained at the examination but reported at the interview (RIDEXPRG = 3 and RHD143 = 1),8456,1,238074984.3706691,examination weight
+2017-2020,6,all,"Excluding DIQ010 refused, don't know, or missing: domain A",8451,5,237879602.63107207,examination weight
+2017-2020,7,hba1c,"Record in the HbA1c file (no phlebotomy weight in this release, so no adult is removed here)",8451,0,237879602.63107207,examination weight (WTMECPRP); no phlebotomy weight in this release
+2017-2020,8,hba1c,"Excluding no HbA1c result, including adults who gave no blood specimen: domain H",8000,451,227915571.10461614,examination weight (WTMECPRP); no phlebotomy weight in this release
+2017-2020,9,fasting,Assigned to the fasting subsample (record in GLU file),4210,4241,117836426.38878828,examination weight
+2017-2020,10,fasting,Excluding subsample members with no blood specimen,3965,245,112244877.54910618,examination weight
+2017-2020,11,fasting,"Excluding fast outside 8 to less than 24 hours (zero fasting weight, glucose not used)",3767,198,238235299.08091486,fasting subsample weight
+2017-2020,12,fasting,Excluding positive weight but no glucose result: domain F,3767,0,238235299.08091486,fasting subsample weight
+2017-2020,13,paired,Excluding no HbA1c result: common paired domain P,3757,10,237591882.67091605,fasting subsample weight
+2017-2020,14,paired,Excluding intake within 8 hours or unknown on any FASTQX item: domain P-narrow,3591,166,227215436.74476218,fasting subsample weight

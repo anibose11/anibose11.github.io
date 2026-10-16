@@ -1,0 +1,256 @@
+table,column,source_path,json_key,kind,registry_label,storage_note,row_unit
+ctr.flow_module,recruitment_details,/resultsSection/participantFlowModule,recruitmentDetails,text,Recruitment Details,exact source string,study
+ctr.flow_module,pre_assignment_details,/resultsSection/participantFlowModule,preAssignmentDetails,text,Pre-assignment Details,exact source string,study
+ctr.flow_module,type_units_analyzed,/resultsSection/participantFlowModule,typeUnitsAnalyzed,text,Type of Unit Analyzed,exact source string,study
+ctr.flow_module,source_pointer,/resultsSection/participantFlowModule,,text,,RFC 6901 JSON pointer of this object in the study record,study
+ctr.flow_group,group_id,/resultsSection/participantFlowModule/groups/{g},id,text,Arm/Group ID,exact source string,participant flow group
+ctr.flow_group,title,/resultsSection/participantFlowModule/groups/{g},title,text,Arm/Group Title,exact source string,participant flow group
+ctr.flow_group,description,/resultsSection/participantFlowModule/groups/{g},description,text,Arm/Group Description,exact source string,participant flow group
+ctr.flow_group,source_pointer,/resultsSection/participantFlowModule/groups/{g},,text,,RFC 6901 JSON pointer of this object in the study record,participant flow group
+ctr.flow_period,period_ordinal,/resultsSection/participantFlowModule/periods/{p},(list position),integer,,zero-based position in the source list,period
+ctr.flow_period,title,/resultsSection/participantFlowModule/periods/{p},title,text,Period Title,exact source string,period
+ctr.flow_period,source_pointer,/resultsSection/participantFlowModule/periods/{p},,text,,RFC 6901 JSON pointer of this object in the study record,period
+ctr.flow_milestone,period_ordinal,.../periods/{p}/milestones/{m},(list position),integer,,zero-based position in the source list,milestone
+ctr.flow_milestone,milestone_ordinal,.../periods/{p}/milestones/{m},(list position),integer,,zero-based position in the source list,milestone
+ctr.flow_milestone,type,.../periods/{p}/milestones/{m},type,text,Milestone Title,exact source string,milestone
+ctr.flow_milestone,comment,.../periods/{p}/milestones/{m},comment,text,Milestone Comment,exact source string,milestone
+ctr.flow_milestone,source_pointer,.../periods/{p}/milestones/{m},,text,,RFC 6901 JSON pointer of this object in the study record,milestone
+ctr.flow_achievement,period_ordinal,.../milestones/{m}/achievements/{a},(list position),integer,,zero-based position in the source list,milestone count
+ctr.flow_achievement,milestone_ordinal,.../milestones/{m}/achievements/{a},(list position),integer,,zero-based position in the source list,milestone count
+ctr.flow_achievement,achievement_ordinal,.../milestones/{m}/achievements/{a},(list position),integer,,zero-based position in the source list,milestone count
+ctr.flow_achievement,group_id,.../milestones/{m}/achievements/{a},groupId,text,Milestone Arm/Group ID,exact source string,milestone count
+ctr.flow_achievement,comment,.../milestones/{m}/achievements/{a},comment,text,Milestone Arm/Group Comment,exact source string,milestone count
+ctr.flow_achievement,num_subjects_text,.../milestones/{m}/achievements/{a},numSubjects,textint,Number of Milestone Arm/Group Participants,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,milestone count
+ctr.flow_achievement,num_subjects_int,.../milestones/{m}/achievements/{a},numSubjects,textint,Number of Milestone Arm/Group Participants,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,milestone count
+ctr.flow_achievement,num_units_text,.../milestones/{m}/achievements/{a},numUnits,textint,Number of Units,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,milestone count
+ctr.flow_achievement,num_units_int,.../milestones/{m}/achievements/{a},numUnits,textint,Number of Units,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,milestone count
+ctr.flow_achievement,source_pointer,.../milestones/{m}/achievements/{a},,text,,RFC 6901 JSON pointer of this object in the study record,milestone count
+ctr.flow_drop_withdraw,period_ordinal,.../periods/{p}/dropWithdraws/{d},(list position),integer,,zero-based position in the source list,reason not completed
+ctr.flow_drop_withdraw,drop_ordinal,.../periods/{p}/dropWithdraws/{d},(list position),integer,,zero-based position in the source list,reason not completed
+ctr.flow_drop_withdraw,type,.../periods/{p}/dropWithdraws/{d},type,text,Reason Not Completed Type,exact source string,reason not completed
+ctr.flow_drop_withdraw,comment,.../periods/{p}/dropWithdraws/{d},comment,text,Description of Reason Not Completed,exact source string,reason not completed
+ctr.flow_drop_withdraw,source_pointer,.../periods/{p}/dropWithdraws/{d},,text,,RFC 6901 JSON pointer of this object in the study record,reason not completed
+ctr.flow_drop_reason,period_ordinal,.../dropWithdraws/{d}/reasons/{r},(list position),integer,,zero-based position in the source list,reason count
+ctr.flow_drop_reason,drop_ordinal,.../dropWithdraws/{d}/reasons/{r},(list position),integer,,zero-based position in the source list,reason count
+ctr.flow_drop_reason,reason_ordinal,.../dropWithdraws/{d}/reasons/{r},(list position),integer,,zero-based position in the source list,reason count
+ctr.flow_drop_reason,group_id,.../dropWithdraws/{d}/reasons/{r},groupId,text,Reason Group ID,exact source string,reason count
+ctr.flow_drop_reason,comment,.../dropWithdraws/{d}/reasons/{r},comment,text,,exact source string,reason count
+ctr.flow_drop_reason,num_subjects_text,.../dropWithdraws/{d}/reasons/{r},numSubjects,textint,Reason Group Number of Subjects,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,reason count
+ctr.flow_drop_reason,num_subjects_int,.../dropWithdraws/{d}/reasons/{r},numSubjects,textint,Reason Group Number of Subjects,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,reason count
+ctr.flow_drop_reason,source_pointer,.../dropWithdraws/{d}/reasons/{r},,text,,RFC 6901 JSON pointer of this object in the study record,reason count
+ctr.baseline_module,population_description,/resultsSection/baselineCharacteristicsModule,populationDescription,text,Baseline Analysis Population Description,exact source string,study
+ctr.baseline_module,type_units_analyzed,/resultsSection/baselineCharacteristicsModule,typeUnitsAnalyzed,text,Type of Units Analyzed,exact source string,study
+ctr.baseline_module,source_pointer,/resultsSection/baselineCharacteristicsModule,,text,,RFC 6901 JSON pointer of this object in the study record,study
+ctr.baseline_group,group_id,.../baselineCharacteristicsModule/groups/{g},id,text,Arm/Group ID,exact source string,baseline group
+ctr.baseline_group,title,.../baselineCharacteristicsModule/groups/{g},title,text,Arm/Group Title,exact source string,baseline group
+ctr.baseline_group,description,.../baselineCharacteristicsModule/groups/{g},description,text,Arm/Group Description,exact source string,baseline group
+ctr.baseline_group,source_pointer,.../baselineCharacteristicsModule/groups/{g},,text,,RFC 6901 JSON pointer of this object in the study record,baseline group
+ctr.baseline_denom,denom_ordinal,.../baselineCharacteristicsModule/denoms/{d},(list position),integer,,zero-based position in the source list,baseline overall denominator
+ctr.baseline_denom,units,.../baselineCharacteristicsModule/denoms/{d},units,text,Units of the denominator (Participants or another analysis unit),exact source string,baseline overall denominator
+ctr.baseline_denom,source_pointer,.../baselineCharacteristicsModule/denoms/{d},,text,,RFC 6901 JSON pointer of this object in the study record,baseline overall denominator
+ctr.baseline_denom_count,denom_ordinal,.../denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,baseline overall denominator count
+ctr.baseline_denom_count,count_ordinal,.../denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,baseline overall denominator count
+ctr.baseline_denom_count,group_id,.../denoms/{d}/counts/{c},groupId,text,Arm/Group ID,exact source string,baseline overall denominator count
+ctr.baseline_denom_count,value_text,.../denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline overall denominator count
+ctr.baseline_denom_count,value_int,.../denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline overall denominator count
+ctr.baseline_denom_count,source_pointer,.../denoms/{d}/counts/{c},,text,,RFC 6901 JSON pointer of this object in the study record,baseline overall denominator count
+ctr.baseline_measure,measure_ordinal,.../baselineCharacteristicsModule/measures/{k},(list position),integer,,zero-based position in the source list,baseline measure
+ctr.baseline_measure,title,.../baselineCharacteristicsModule/measures/{k},title,text,Baseline Measure Title,exact source string,baseline measure
+ctr.baseline_measure,description,.../baselineCharacteristicsModule/measures/{k},description,text,,exact source string,baseline measure
+ctr.baseline_measure,population_description,.../baselineCharacteristicsModule/measures/{k},populationDescription,text,Baseline Measure Description,exact source string,baseline measure
+ctr.baseline_measure,param_type,.../baselineCharacteristicsModule/measures/{k},paramType,text,Baseline Measure Type,exact source string,baseline measure
+ctr.baseline_measure,dispersion_type,.../baselineCharacteristicsModule/measures/{k},dispersionType,text,Baseline Measure Dispersion/Precision,exact source string,baseline measure
+ctr.baseline_measure,unit_of_measure,.../baselineCharacteristicsModule/measures/{k},unitOfMeasure,text,Unit of Measure,exact source string,baseline measure
+ctr.baseline_measure,calculate_pct,.../baselineCharacteristicsModule/measures/{k},calculatePct,bool,Calculated Percentage,JSON boolean,baseline measure
+ctr.baseline_measure,denom_units_selected,.../baselineCharacteristicsModule/measures/{k},denomUnitsSelected,text,Type of Units Selected,exact source string,baseline measure
+ctr.baseline_measure,source_pointer,.../baselineCharacteristicsModule/measures/{k},,text,,RFC 6901 JSON pointer of this object in the study record,baseline measure
+ctr.baseline_measure_denom,measure_ordinal,.../measures/{k}/denoms/{d},(list position),integer,,zero-based position in the source list,baseline measure denominator
+ctr.baseline_measure_denom,denom_ordinal,.../measures/{k}/denoms/{d},(list position),integer,,zero-based position in the source list,baseline measure denominator
+ctr.baseline_measure_denom,units,.../measures/{k}/denoms/{d},units,text,Units of the denominator (Participants or another analysis unit),exact source string,baseline measure denominator
+ctr.baseline_measure_denom,source_pointer,.../measures/{k}/denoms/{d},,text,,RFC 6901 JSON pointer of this object in the study record,baseline measure denominator
+ctr.baseline_measure_denom_count,measure_ordinal,.../measures/{k}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,baseline measure denominator count
+ctr.baseline_measure_denom_count,denom_ordinal,.../measures/{k}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,baseline measure denominator count
+ctr.baseline_measure_denom_count,count_ordinal,.../measures/{k}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,baseline measure denominator count
+ctr.baseline_measure_denom_count,group_id,.../measures/{k}/denoms/{d}/counts/{c},groupId,text,Arm/Group ID,exact source string,baseline measure denominator count
+ctr.baseline_measure_denom_count,value_text,.../measures/{k}/denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline measure denominator count
+ctr.baseline_measure_denom_count,value_int,.../measures/{k}/denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline measure denominator count
+ctr.baseline_measure_denom_count,source_pointer,.../measures/{k}/denoms/{d}/counts/{c},,text,,RFC 6901 JSON pointer of this object in the study record,baseline measure denominator count
+ctr.baseline_class,measure_ordinal,.../measures/{k}/classes/{c},(list position),integer,,zero-based position in the source list,baseline class
+ctr.baseline_class,class_ordinal,.../measures/{k}/classes/{c},(list position),integer,,zero-based position in the source list,baseline class
+ctr.baseline_class,title,.../measures/{k}/classes/{c},title,text,Baseline Row Title,exact source string,baseline class
+ctr.baseline_class,source_pointer,.../measures/{k}/classes/{c},,text,,RFC 6901 JSON pointer of this object in the study record,baseline class
+ctr.baseline_class_denom,measure_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,baseline row denominator
+ctr.baseline_class_denom,class_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,baseline row denominator
+ctr.baseline_class_denom,denom_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,baseline row denominator
+ctr.baseline_class_denom,units,.../classes/{c}/denoms/{d},units,text,Units of the denominator (Participants or another analysis unit),exact source string,baseline row denominator
+ctr.baseline_class_denom,source_pointer,.../classes/{c}/denoms/{d},,text,,RFC 6901 JSON pointer of this object in the study record,baseline row denominator
+ctr.baseline_class_denom_count,measure_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,baseline row denominator count
+ctr.baseline_class_denom_count,class_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,baseline row denominator count
+ctr.baseline_class_denom_count,denom_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,baseline row denominator count
+ctr.baseline_class_denom_count,count_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,baseline row denominator count
+ctr.baseline_class_denom_count,group_id,.../classes/{c}/denoms/{d}/counts/{n},groupId,text,Arm/Group ID,exact source string,baseline row denominator count
+ctr.baseline_class_denom_count,value_text,.../classes/{c}/denoms/{d}/counts/{n},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline row denominator count
+ctr.baseline_class_denom_count,value_int,.../classes/{c}/denoms/{d}/counts/{n},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,baseline row denominator count
+ctr.baseline_class_denom_count,source_pointer,.../classes/{c}/denoms/{d}/counts/{n},,text,,RFC 6901 JSON pointer of this object in the study record,baseline row denominator count
+ctr.baseline_category,measure_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,baseline category
+ctr.baseline_category,class_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,baseline category
+ctr.baseline_category,category_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,baseline category
+ctr.baseline_category,title,.../classes/{c}/categories/{t},title,text,Category Title,exact source string,baseline category
+ctr.baseline_category,source_pointer,.../classes/{c}/categories/{t},,text,,RFC 6901 JSON pointer of this object in the study record,baseline category
+ctr.baseline_measurement,measure_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,baseline measurement
+ctr.baseline_measurement,class_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,baseline measurement
+ctr.baseline_measurement,category_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,baseline measurement
+ctr.baseline_measurement,measurement_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,baseline measurement
+ctr.baseline_measurement,group_id,.../categories/{t}/measurements/{v},groupId,text,Arm/Group ID,exact source string,baseline measurement
+ctr.baseline_measurement,value_text,.../categories/{t}/measurements/{v},value,textnum,Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,value_num,.../categories/{t}/measurements/{v},value,textnum,Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,spread_text,.../categories/{t}/measurements/{v},spread,textnum,Dispersion value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,spread_num,.../categories/{t}/measurements/{v},spread,textnum,Dispersion value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,lower_limit_text,.../categories/{t}/measurements/{v},lowerLimit,textnum,Lower limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,lower_limit_num,.../categories/{t}/measurements/{v},lowerLimit,textnum,Lower limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,upper_limit_text,.../categories/{t}/measurements/{v},upperLimit,textnum,Upper limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,upper_limit_num,.../categories/{t}/measurements/{v},upperLimit,textnum,Upper limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,baseline measurement
+ctr.baseline_measurement,comment,.../categories/{t}/measurements/{v},comment,text,Comments for N/A values,exact source string,baseline measurement
+ctr.baseline_measurement,source_pointer,.../categories/{t}/measurements/{v},,text,,RFC 6901 JSON pointer of this object in the study record,baseline measurement
+ctr.outcome_measure,outcome_ordinal,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},(list position),integer,,zero-based position in the source list,outcome measure
+ctr.outcome_measure,type,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},type,text,Outcome Measure Type,exact source string,outcome measure
+ctr.outcome_measure,title,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},title,text,Outcome Measure Title,exact source string,outcome measure
+ctr.outcome_measure,description,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},description,text,Outcome Measure Description,exact source string,outcome measure
+ctr.outcome_measure,population_description,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},populationDescription,text,Analysis Population Description,exact source string,outcome measure
+ctr.outcome_measure,reporting_status,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},reportingStatus,text,Reporting Status,exact source string,outcome measure
+ctr.outcome_measure,anticipated_posting_date,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},anticipatedPostingDate,text,Anticipated Reporting Date,exact source string,outcome measure
+ctr.outcome_measure,param_type,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},paramType,text,Outcome Measure Data Type,exact source string,outcome measure
+ctr.outcome_measure,dispersion_type,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},dispersionType,text,Outcome Measure Dispersion/Precision,exact source string,outcome measure
+ctr.outcome_measure,unit_of_measure,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},unitOfMeasure,text,Unit of Measure,exact source string,outcome measure
+ctr.outcome_measure,calculate_pct,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},calculatePct,bool,Calculated Percentage,JSON boolean,outcome measure
+ctr.outcome_measure,time_frame,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},timeFrame,text,Outcome Measure Time Frame,exact source string,outcome measure
+ctr.outcome_measure,type_units_analyzed,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},typeUnitsAnalyzed,text,Units Analyzed,exact source string,outcome measure
+ctr.outcome_measure,denom_units_selected,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},denomUnitsSelected,text,Units selected for the measure,exact source string,outcome measure
+ctr.outcome_measure,source_pointer,/resultsSection/outcomeMeasuresModule/outcomeMeasures/{o},,text,,RFC 6901 JSON pointer of this object in the study record,outcome measure
+ctr.outcome_group,outcome_ordinal,.../outcomeMeasures/{o}/groups/{g},(list position),integer,,zero-based position in the source list,outcome group
+ctr.outcome_group,group_id,.../outcomeMeasures/{o}/groups/{g},id,text,Arm/Group ID,exact source string,outcome group
+ctr.outcome_group,title,.../outcomeMeasures/{o}/groups/{g},title,text,Arm/Group Title,exact source string,outcome group
+ctr.outcome_group,description,.../outcomeMeasures/{o}/groups/{g},description,text,Arm/Group Description,exact source string,outcome group
+ctr.outcome_group,source_pointer,.../outcomeMeasures/{o}/groups/{g},,text,,RFC 6901 JSON pointer of this object in the study record,outcome group
+ctr.outcome_denom,outcome_ordinal,.../outcomeMeasures/{o}/denoms/{d},(list position),integer,,zero-based position in the source list,outcome denominator
+ctr.outcome_denom,denom_ordinal,.../outcomeMeasures/{o}/denoms/{d},(list position),integer,,zero-based position in the source list,outcome denominator
+ctr.outcome_denom,units,.../outcomeMeasures/{o}/denoms/{d},units,text,Units of the denominator (Participants or another analysis unit),exact source string,outcome denominator
+ctr.outcome_denom,source_pointer,.../outcomeMeasures/{o}/denoms/{d},,text,,RFC 6901 JSON pointer of this object in the study record,outcome denominator
+ctr.outcome_denom_count,outcome_ordinal,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,outcome denominator count
+ctr.outcome_denom_count,denom_ordinal,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,outcome denominator count
+ctr.outcome_denom_count,count_ordinal,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},(list position),integer,,zero-based position in the source list,outcome denominator count
+ctr.outcome_denom_count,group_id,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},groupId,text,Arm/Group ID,exact source string,outcome denominator count
+ctr.outcome_denom_count,value_text,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,outcome denominator count
+ctr.outcome_denom_count,value_int,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,outcome denominator count
+ctr.outcome_denom_count,source_pointer,.../outcomeMeasures/{o}/denoms/{d}/counts/{c},,text,,RFC 6901 JSON pointer of this object in the study record,outcome denominator count
+ctr.outcome_class,outcome_ordinal,.../outcomeMeasures/{o}/classes/{c},(list position),integer,,zero-based position in the source list,outcome class
+ctr.outcome_class,class_ordinal,.../outcomeMeasures/{o}/classes/{c},(list position),integer,,zero-based position in the source list,outcome class
+ctr.outcome_class,title,.../outcomeMeasures/{o}/classes/{c},title,text,Class (row) title,exact source string,outcome class
+ctr.outcome_class,source_pointer,.../outcomeMeasures/{o}/classes/{c},,text,,RFC 6901 JSON pointer of this object in the study record,outcome class
+ctr.outcome_class_denom,outcome_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,outcome row denominator
+ctr.outcome_class_denom,class_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,outcome row denominator
+ctr.outcome_class_denom,denom_ordinal,.../classes/{c}/denoms/{d},(list position),integer,,zero-based position in the source list,outcome row denominator
+ctr.outcome_class_denom,units,.../classes/{c}/denoms/{d},units,text,Units of the denominator (Participants or another analysis unit),exact source string,outcome row denominator
+ctr.outcome_class_denom,source_pointer,.../classes/{c}/denoms/{d},,text,,RFC 6901 JSON pointer of this object in the study record,outcome row denominator
+ctr.outcome_class_denom_count,outcome_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,outcome row denominator count
+ctr.outcome_class_denom_count,class_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,outcome row denominator count
+ctr.outcome_class_denom_count,denom_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,outcome row denominator count
+ctr.outcome_class_denom_count,count_ordinal,.../classes/{c}/denoms/{d}/counts/{n},(list position),integer,,zero-based position in the source list,outcome row denominator count
+ctr.outcome_class_denom_count,group_id,.../classes/{c}/denoms/{d}/counts/{n},groupId,text,Arm/Group ID,exact source string,outcome row denominator count
+ctr.outcome_class_denom_count,value_text,.../classes/{c}/denoms/{d}/counts/{n},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,outcome row denominator count
+ctr.outcome_class_denom_count,value_int,.../classes/{c}/denoms/{d}/counts/{n},value,textint,Number analyzed for the group,<base>_text holds the exact source string; <base>_int holds the integer only when the text is digits only,outcome row denominator count
+ctr.outcome_class_denom_count,source_pointer,.../classes/{c}/denoms/{d}/counts/{n},,text,,RFC 6901 JSON pointer of this object in the study record,outcome row denominator count
+ctr.outcome_category,outcome_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,outcome category
+ctr.outcome_category,class_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,outcome category
+ctr.outcome_category,category_ordinal,.../classes/{c}/categories/{t},(list position),integer,,zero-based position in the source list,outcome category
+ctr.outcome_category,title,.../classes/{c}/categories/{t},title,text,Category Title,exact source string,outcome category
+ctr.outcome_category,source_pointer,.../classes/{c}/categories/{t},,text,,RFC 6901 JSON pointer of this object in the study record,outcome category
+ctr.outcome_measurement,outcome_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,outcome measurement
+ctr.outcome_measurement,class_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,outcome measurement
+ctr.outcome_measurement,category_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,outcome measurement
+ctr.outcome_measurement,measurement_ordinal,.../categories/{t}/measurements/{v},(list position),integer,,zero-based position in the source list,outcome measurement
+ctr.outcome_measurement,group_id,.../categories/{t}/measurements/{v},groupId,text,Arm/Group ID,exact source string,outcome measurement
+ctr.outcome_measurement,value_text,.../categories/{t}/measurements/{v},value,textnum,Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,value_num,.../categories/{t}/measurements/{v},value,textnum,Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,spread_text,.../categories/{t}/measurements/{v},spread,textnum,Dispersion value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,spread_num,.../categories/{t}/measurements/{v},spread,textnum,Dispersion value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,lower_limit_text,.../categories/{t}/measurements/{v},lowerLimit,textnum,Lower limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,lower_limit_num,.../categories/{t}/measurements/{v},lowerLimit,textnum,Lower limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,upper_limit_text,.../categories/{t}/measurements/{v},upperLimit,textnum,Upper limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,upper_limit_num,.../categories/{t}/measurements/{v},upperLimit,textnum,Upper limit,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,outcome measurement
+ctr.outcome_measurement,comment,.../categories/{t}/measurements/{v},comment,text,Comments for N/A values,exact source string,outcome measurement
+ctr.outcome_measurement,source_pointer,.../categories/{t}/measurements/{v},,text,,RFC 6901 JSON pointer of this object in the study record,outcome measurement
+ctr.outcome_analysis,outcome_ordinal,.../outcomeMeasures/{o}/analyses/{a},(list position),integer,,zero-based position in the source list,statistical analysis
+ctr.outcome_analysis,analysis_ordinal,.../outcomeMeasures/{o}/analyses/{a},(list position),integer,,zero-based position in the source list,statistical analysis
+ctr.outcome_analysis,param_type,.../outcomeMeasures/{o}/analyses/{a},paramType,text,Estimation Parameter,exact source string,statistical analysis
+ctr.outcome_analysis,param_value_text,.../outcomeMeasures/{o}/analyses/{a},paramValue,textnum,Estimated Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,param_value_num,.../outcomeMeasures/{o}/analyses/{a},paramValue,textnum,Estimated Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,dispersion_type,.../outcomeMeasures/{o}/analyses/{a},dispersionType,text,Estimation Dispersion Type,exact source string,statistical analysis
+ctr.outcome_analysis,dispersion_value_text,.../outcomeMeasures/{o}/analyses/{a},dispersionValue,textnum,Parameter Dispersion Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,dispersion_value_num,.../outcomeMeasures/{o}/analyses/{a},dispersionValue,textnum,Parameter Dispersion Value,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,statistical_method,.../outcomeMeasures/{o}/analyses/{a},statisticalMethod,text,Statistical Method,exact source string,statistical analysis
+ctr.outcome_analysis,statistical_comment,.../outcomeMeasures/{o}/analyses/{a},statisticalComment,text,Statistical Comment,exact source string,statistical analysis
+ctr.outcome_analysis,p_value_text,.../outcomeMeasures/{o}/analyses/{a},pValue,text,P-Value,exact source string,statistical analysis
+ctr.outcome_analysis,p_value_comment,.../outcomeMeasures/{o}/analyses/{a},pValueComment,text,P-Value Comment,exact source string,statistical analysis
+ctr.outcome_analysis,ci_num_sides,.../outcomeMeasures/{o}/analyses/{a},ciNumSides,text,Number of Sides for Confidence Interval,exact source string,statistical analysis
+ctr.outcome_analysis,ci_pct_value_text,.../outcomeMeasures/{o}/analyses/{a},ciPctValue,text,Percentage for Confidence Interval,exact source string,statistical analysis
+ctr.outcome_analysis,ci_lower_limit_text,.../outcomeMeasures/{o}/analyses/{a},ciLowerLimit,textnum,Lower Limit for Confidence Interval,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,ci_lower_limit_num,.../outcomeMeasures/{o}/analyses/{a},ciLowerLimit,textnum,Lower Limit for Confidence Interval,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,ci_upper_limit_text,.../outcomeMeasures/{o}/analyses/{a},ciUpperLimit,textnum,Upper Limit for Confidence Interval,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,ci_upper_limit_num,.../outcomeMeasures/{o}/analyses/{a},ciUpperLimit,textnum,Upper Limit for Confidence Interval,<base>_text holds the exact source string; <base>_num holds the decimal only when the text is a plain number,statistical analysis
+ctr.outcome_analysis,ci_lower_limit_comment,.../outcomeMeasures/{o}/analyses/{a},ciLowerLimitComment,text,,exact source string,statistical analysis
+ctr.outcome_analysis,ci_upper_limit_comment,.../outcomeMeasures/{o}/analyses/{a},ciUpperLimitComment,text,,exact source string,statistical analysis
+ctr.outcome_analysis,estimate_comment,.../outcomeMeasures/{o}/analyses/{a},estimateComment,text,Estimation Comment,exact source string,statistical analysis
+ctr.outcome_analysis,tested_non_inferiority,.../outcomeMeasures/{o}/analyses/{a},testedNonInferiority,bool,Non-inferiority or Equivalence Test,JSON boolean,statistical analysis
+ctr.outcome_analysis,non_inferiority_type,.../outcomeMeasures/{o}/analyses/{a},nonInferiorityType,text,Type of Statistical Test,exact source string,statistical analysis
+ctr.outcome_analysis,non_inferiority_comment,.../outcomeMeasures/{o}/analyses/{a},nonInferiorityComment,text,,exact source string,statistical analysis
+ctr.outcome_analysis,other_analysis_description,.../outcomeMeasures/{o}/analyses/{a},otherAnalysisDescription,text,Other Statistical Analysis,exact source string,statistical analysis
+ctr.outcome_analysis,group_description,.../outcomeMeasures/{o}/analyses/{a},groupDescription,text,Selected Comparison Group Description,exact source string,statistical analysis
+ctr.outcome_analysis,source_pointer,.../outcomeMeasures/{o}/analyses/{a},,text,,RFC 6901 JSON pointer of this object in the study record,statistical analysis
+ctr.outcome_analysis_group,outcome_ordinal,.../analyses/{a}/groupIds/{i},(list position),integer,,zero-based position in the source list,analysis comparison group
+ctr.outcome_analysis_group,analysis_ordinal,.../analyses/{a}/groupIds/{i},(list position),integer,,zero-based position in the source list,analysis comparison group
+ctr.outcome_analysis_group,member_ordinal,.../analyses/{a}/groupIds/{i},(list position),integer,,zero-based position in the source list,analysis comparison group
+ctr.outcome_analysis_group,source_pointer,.../analyses/{a}/groupIds/{i},,text,,RFC 6901 JSON pointer of this object in the study record,analysis comparison group
+ctr.ae_module,frequency_threshold,/resultsSection/adverseEventsModule,frequencyThreshold,text,Frequency Threshold,exact source string,study
+ctr.ae_module,time_frame,/resultsSection/adverseEventsModule,timeFrame,text,Adverse Event Time Frame,exact source string,study
+ctr.ae_module,description,/resultsSection/adverseEventsModule,description,text,Adverse Event Reporting Description,exact source string,study
+ctr.ae_module,all_cause_mortality_comment,/resultsSection/adverseEventsModule,allCauseMortalityComment,text,All Cause Mortality Comment,exact source string,study
+ctr.ae_module,source_pointer,/resultsSection/adverseEventsModule,,text,,RFC 6901 JSON pointer of this object in the study record,study
+ctr.ae_group,group_id,.../adverseEventsModule/eventGroups/{g},id,text,Arm/Group ID,exact source string,adverse event group
+ctr.ae_group,title,.../adverseEventsModule/eventGroups/{g},title,text,Arm/Group Title,exact source string,adverse event group
+ctr.ae_group,description,.../adverseEventsModule/eventGroups/{g},description,text,Arm/Group Description,exact source string,adverse event group
+ctr.ae_group,deaths_num_affected,.../adverseEventsModule/eventGroups/{g},deathsNumAffected,int,,JSON integer,adverse event group
+ctr.ae_group,deaths_num_at_risk,.../adverseEventsModule/eventGroups/{g},deathsNumAtRisk,int,,JSON integer,adverse event group
+ctr.ae_group,serious_num_affected,.../adverseEventsModule/eventGroups/{g},seriousNumAffected,int,,JSON integer,adverse event group
+ctr.ae_group,serious_num_at_risk,.../adverseEventsModule/eventGroups/{g},seriousNumAtRisk,int,,JSON integer,adverse event group
+ctr.ae_group,other_num_affected,.../adverseEventsModule/eventGroups/{g},otherNumAffected,int,,JSON integer,adverse event group
+ctr.ae_group,other_num_at_risk,.../adverseEventsModule/eventGroups/{g},otherNumAtRisk,int,,JSON integer,adverse event group
+ctr.ae_group,source_pointer,.../adverseEventsModule/eventGroups/{g},,text,,RFC 6901 JSON pointer of this object in the study record,adverse event group
+ctr.ae_event,event_ordinal,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},(list position),integer,,zero-based position in the source list,adverse event term
+ctr.ae_event,term,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},term,text,Adverse Event Term,exact source string,adverse event term
+ctr.ae_event,organ_system,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},organSystem,text,Organ System,exact source string,adverse event term
+ctr.ae_event,source_vocabulary,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},sourceVocabulary,text,Source Vocabulary Name,exact source string,adverse event term
+ctr.ae_event,assessment_type,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},assessmentType,text,Collection Approach,exact source string,adverse event term
+ctr.ae_event,notes,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},notes,text,Additional Description,exact source string,adverse event term
+ctr.ae_event,source_pointer,.../adverseEventsModule/{seriousEvents|otherEvents}/{e},,text,,RFC 6901 JSON pointer of this object in the study record,adverse event term
+ctr.ae_event_stat,event_ordinal,.../{e}/stats/{s},(list position),integer,,zero-based position in the source list,adverse event count
+ctr.ae_event_stat,stat_ordinal,.../{e}/stats/{s},(list position),integer,,zero-based position in the source list,adverse event count
+ctr.ae_event_stat,group_id,.../{e}/stats/{s},groupId,text,,exact source string,adverse event count
+ctr.ae_event_stat,num_events,.../{e}/stats/{s},numEvents,int,"Number of events (events, not people)",JSON integer,adverse event count
+ctr.ae_event_stat,num_affected,.../{e}/stats/{s},numAffected,int,Number of Participants Affected,JSON integer,adverse event count
+ctr.ae_event_stat,num_at_risk,.../{e}/stats/{s},numAtRisk,int,Number of Participants at Risk,JSON integer,adverse event count
+ctr.ae_event_stat,source_pointer,.../{e}/stats/{s},,text,,RFC 6901 JSON pointer of this object in the study record,adverse event count
+ctr.more_info,limitations_and_caveats,/resultsSection/moreInfoModule/limitationsAndCaveats,description,text,Limitations and Caveats Description,exact source string,study
+ctr.more_info,source_pointer,/resultsSection/moreInfoModule/limitationsAndCaveats,,text,,RFC 6901 JSON pointer of this object in the study record,study
+(not loaded),,/resultsSection/moreInfoModule/pointOfContact,,,,deliberately excluded (contact details or out of scope),
+(not loaded),,/resultsSection/moreInfoModule/certainAgreement,,,,deliberately excluded (contact details or out of scope),
+audit.v_measurement_denominator,tier,,,derived,,Tier A/B/C for one outcome measurement (docs/rules.md),measurement
+audit.v_measurement_denominator,rule_id,,,derived,,Rule that decided the tier,measurement
+audit.v_measurement_denominator,participant_denominator,,,derived,,Participants analyzed associated with the measurement (A or B only); integer participants,measurement
+audit.v_measurement_denominator,denominator_scope,,,derived,,outcome (outcome-level count) or class (row-specific count),measurement
+audit.v_measurement_denominator,unit_denominator,,,derived,,"Count in the outcome's analysis unit, when exactly one usable count exists",measurement
+audit.v_outcome_group_tier,tier,,,derived,,Least favorable measurement tier of the group; D when not posted or no measurements,outcome group
+audit.v_outcome_group_tier,rules,,,derived,,"All rules used by the group's measurements, joined with |",outcome group
+audit.v_check,status,,,derived,,"pass, fail or not_evaluable for one applicable check",applicable check
+audit.v_evidence_table,caution,,,derived,,Plain-language cautions attached to a measurement row,measurement
+audit.v_issue_ledger,issue_class,,,derived,,"transformation defect, possible source inconsistency, or unresolved interpretation",ledger row

@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity from labels to FHIR</title>
+<meta name="description" content="Which drug-label identity and strength details survive FHIR R4 and common shortcuts, measured on 1,475 DailyMed prescription labels."><link rel="stylesheet" href="assets/style.css">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#content">Skip to content</a>
+<main id="content">
+<p class="muted small">This research project uses public drug-label and terminology data and no patient records.</p>
+<h1>What survives when drug labels are turned into FHIR medication records?</h1>
+<p class="lede">Research teams and drug-dictionary maintainers copy product identity from DailyMed labels and RxNorm into analysis tables and HL7 FHIR (Fast Healthcare Interoperability Resources) records. I measured, field by field, which identity and strength details survive that conversion for 1,475 current prescription labels for selected cardiometabolic drugs, and what common shortcuts lose.</p>
+<figure><picture><source media="(max-width: 640px)" srcset="assets/fig1_representations-narrow.svg"><img src="assets/fig1_representations.svg" alt="Dot chart of fields preserved: FHIR R4 + sidecar 100.0%; FHIR R4 core only 87.6%; RxCUI only (current RxNorm) 20.9% exact, 50.3% with conversion; DailyMed packaging service 37.2%; Flat export shortcut 24.2% exact, 32.2% with conversion; Latest label version only 98.6%." width="760" loading="lazy"></picture>
+<figcaption>Figure 1. Share of applicable identity and strength fields preserved, held-out records: 1,965 product-version records from 1,036 labels; 1,662 current-version records for RxCUI only and the DailyMed packaging service; 303 preceding-version records for the latest version only. Values are listed in the table below.</figcaption></figure>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Figure 1 data"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">Representation</th><th scope="col" class="num">Applicable fields</th><th scope="col" class="num">Preserved exactly</th><th scope="col" class="num">Including documented conversion</th></tr></thead><tbody>
+<tr><th scope='row'>FHIR R4 + sidecar</th><td class='num'>24,615</td><td class='num'>100.0%</td><td class='num'>100.0%</td></tr><tr><th scope='row'>FHIR R4 core only</th><td class='num'>24,615</td><td class='num'>87.6%</td><td class='num'>87.6%</td></tr><tr><th scope='row'>RxCUI only (current RxNorm)</th><td class='num'>20,760</td><td class='num'>20.9%</td><td class='num'>50.3%</td></tr><tr><th scope='row'>DailyMed packaging service</th><td class='num'>20,760</td><td class='num'>37.2%</td><td class='num'>37.2%</td></tr><tr><th scope='row'>Flat export shortcut</th><td class='num'>24,615</td><td class='num'>24.2%</td><td class='num'>32.2%</td></tr><tr><th scope='row'>Latest label version only</th><td class='num'>3,855</td><td class='num'>98.6%</td><td class='num'>98.6%</td></tr>
+</tbody></table></div></div>
+
+<div class="facts">
+<div><b>1,965 of 1,965</b><span>held-out records with every critical attribute reconstructed from FHIR plus a companion record</span></div>
+<div><b>28.0%</b><span>of active ingredients read with the wrong strength basis from FHIR core alone (670 of 2,392)</span></div>
+<div><b>91.2%</b><span>of package National Drug Codes (NDCs) changed by padding without the segment pattern (5,759 of 6,316)</span></div>
+<div><b>33 of 218</b><span>sampled label version pairs that changed product identity</span></div>
+</div>
+
+<h2>The data</h2>
+<p>The corpus is every current DailyMed human prescription label whose products contain metformin, a sodium-glucose cotransporter 2 (SGLT2) inhibitor (empagliflozin or dapagliflozin), a glucagon-like peptide-1 (GLP-1) receptor agonist (semaglutide or liraglutide), one of seven insulins, atorvastatin or lisinopril, including combination products. It holds 1,475 labels with 2,386 products, plus the preceding version of 218 labels. RxNorm came from the public RxNorm API, release of October 5, 2026. Every response was cached with its URL, time and SHA-256. Human regular, NPH (isophane) and 70/30 insulins sold without a prescription are filed as over-the-counter (OTC) labels and are outside this scope; 7 labels in the 2006 to 2008 format had no structured product section.</p>
+
+<h2>How it was measured</h2>
+<p>Each label was parsed into a lossless PostgreSQL layer that keeps NDCs with their hyphens, decimal strengths as written, and the class code that says whether a strength refers to the ingredient or its active moiety. Each label version became a FHIR R4 Bundle of Medication resources plus a companion record (a sidecar validated by a JSON Schema) for what R4 has no element for. The official HL7 validator checked every Bundle. A reverse transform read the files back and a second, separately written XML reader gave the comparison values. I split labels into development (30%) and held-out (70%) sets before tuning, and froze the matching rules before evaluating held-out labels. Later correctness fixes to comparison code, the FHIR export and one parser rule required reruns of the affected stages. The analysis plan records each change; no matching rule changed.</p>
+
+<h2>Representing the label without changing its meaning</h2>
+<h3>FHIR elements left empty where the source value does not fit</h3>
+<p>R4 Medication has a manufacturer element, but the labeler named in a Structured Product Labeling (SPL) document is often a repackager or distributor, and R4 states that the element is not meant for distributors. R4 also has a status element, but SPL marketing status describes Food and Drug Administration (FDA) listing and does not say whether a dictionary record is in use. Both elements were left empty in FHIR, and the source values were kept in the sidecar. The same rule kept the basis of strength out of FHIR core, because R4 Medication has no element for it. Read from FHIR core alone, 670 active ingredients took the wrong basis-of-strength substance; the sidecar records the basis explicitly.</p>
+<h3>Comparison against a separate read of the source XML</h3>
+<p>The round trip was checked against a second XML reader written with a different parser and no shared code. On development labels this found faults in the reverse transform and comparison code. A repeated-moiety error found later affected both readers and required a documented correction. I wrote both readers, so this is a software cross-check.</p>
+
+<h2>What the comparison found</h2>
+<figure><picture><source media="(max-width: 640px)" srcset="assets/fig2_matching-narrow.svg"><img src="assets/fig2_matching.svg" alt="Stacked bars of matching outcomes: B: names + attributes: 1,095 same RxCUI, 9 different, 115 several candidates, 66 no match or abstained; C: approximate names: 478 same RxCUI, 87 different, 0 several candidates, 720 no match or abstained." width="760" loading="lazy"></picture>
+<figcaption>Figure 2. Name-based matching against the package-NDC crosswalk, held-out products with a unique crosswalk RxCUI (n = 1,285).</figcaption></figure>
+<ul>
+<li>The package-NDC crosswalk gave a unique RxNorm concept unique identifier (RxCUI) for 77.3% of held-out products; for the rest, RxNorm lists none of the product's NDCs as active, mostly for repackaged products. DailyMed's own set-level mapping agreed with it in 1,269 of 1,270 checkable cases.</li>
+<li>Matching normalized names plus strength, form, fill volume and brand agreed with the crosswalk for 99.2% of its answers. Approximate name matching disagreed with the crosswalk for 87 of its 565 answers (15.4%).</li>
+<li>DailyMed's packaging service lists every strength in a label against every product of that label: 856 of 1,662 held-out products got the wrong ingredient count.</li>
+<li>Insulin strengths are coded in three Unified Code for Units of Measure (UCUM) units across labels ([iU], U and [arb'U]). The validator accepted [iU] and U, the sampled terminology check contained no [arb'U] codes, and UCUM defines U as the unit of catalytic activity.</li>
+</ul>
+<p>Two worked cases show the detail: a <a href="viewer-preserved.html">combination tablet preserved in full</a> and an <a href="viewer-ambiguous.html">insulin pen that neither name-based approach matched to the crosswalk concept</a>.</p>
+
+<h2>Limits</h2>
+<p>The study covers six ingredient groups at one retrieval date, with one preceding version per label for 218 sampled labels, and RxNorm only as its current release plus the dated NDC history it publishes. The crosswalk is a terminology reference with its own errors. The companion record was designed to hold what the round trip measures, so its complete preservation is partly by construction; the informative numbers are the losses without it. None of this speaks to the clinical correctness of any label.</p>
+
+<h2>Reproduce the analysis</h2>
+<pre tabindex="0" role="region" aria-label="Reproduction commands"><code>unzip medication-identity-source.zip && cd medication-identity
+python3 -m venv .venv && .venv/bin/pip install --require-hashes -r requirements.lock && .venv/bin/pip install --no-deps -e .
+.venv/bin/medid demo          # offline, about a minute, fixture labels only
+.venv/bin/medid scope && .venv/bin/medid acquire && .venv/bin/medid pipeline   # full study</code></pre>
+<p class="small muted">Needs Python 3.11 or later, PostgreSQL 16 or 17 server binaries on PATH (the pipeline runs its own cluster), and Java 17 or later with the HL7 validator jar (see the README's validator section). The full run downloads about 530 MB from DailyMed and RxNav.</p>
+
+<h2>Files</h2>
+<ul class="files"><li><a href="report.html">Full report</a> <span class="muted small">Methods, results and references.</span></li>
+<li><a href="downloads/medication-identity-source.zip">Source archive (ZIP)</a> <span class="muted small">Code, SQL, schemas, configuration, tests, demo fixture, documentation and results tables.</span></li>
+<li><a href="downloads/medication_dictionary.zip">Medication dictionary (CSV in ZIP)</a> <span class="muted small">One row per package NDC in each current label (6,349 rows for 6,316 distinct package NDCs), with label provenance, attributes as labeled, RxNorm status, crosswalk results and review reasons.</span></li><li><a href="downloads/roundtrip_field_status.csv">Round-trip field statuses (CSV)</a> <span class="muted small">Representation x attribute x split counts by status, with applicable denominators.</span></li><li><a href="downloads/roundtrip_record_outcomes.csv">Round-trip record outcomes (CSV)</a> <span class="muted small">Records with all critical attributes preserved, by representation and split, with exploratory intervals.</span></li><li><a href="downloads/matching_outcomes.csv">Matching outcomes (CSV)</a> <span class="muted small">Approaches A, A2, B and C by split and outcome.</span></li><li><a href="downloads/version_changes_by_set.csv">Label version changes (CSV)</a> <span class="muted small">One row per label with a retrieved preceding version.</span></li><li><a href="downloads/medication_identity_results.xlsx">Results workbook (Excel)</a> <span class="muted small">Summary tables, per-label version changes and removed package NDCs, with a definitions sheet.</span></li><li><a href="downloads/medication_sidecar.schema.json">Companion record schema (JSON Schema)</a> <span class="muted small">The local schema every sidecar validates against.</span></li><li><a href="downloads/fhir_examples.zip">FHIR examples (ZIP)</a> <span class="muted small">The two Bundles and sidecars shown in the comparison viewer.</span></li></ul>
+</main><footer><div class="inner">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+Medicine (DailyMed, RxNorm API), retrieved 2026-10-07; no patient records. This product uses publicly available data from the U.S. National Library of
+Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
+recommend this or any other product.</div></footer></body></html>

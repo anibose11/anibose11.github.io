@@ -1,0 +1,1623 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JANUMET source versus FHIR</title><link rel="stylesheet" href="assets/style.css"><style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5b5a55;--rule:#d9d6cc;--accent:#1f5f8b;--plate:#f1efe8;--bad:#8a2b1d;--ok:#2e5e2e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}h1{font-size:1.5rem;margin:.2em 0}h2{font-size:1.15rem;margin:2em 0 .5em}
+p{max-width:70ch}.muted{color:var(--muted)}a{color:var(--accent)}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:16px}
+pre{background:var(--plate);padding:12px;overflow:auto;max-height:520px;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600}td.st-discordant,td.st-unresolved{color:var(--bad)}td.st-preserved,td.st-preserved_normalized{color:var(--ok)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head><body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#content">Skip to content</a>
+<main id="content">
+<p class="muted"><a href="index.html">Medication identity</a> / comparison viewer</p>
+<h1>JANUMET (SITAGLIPTIN and METFORMIN HYDROCHLORIDE), product NDC 0006-0575</h1>
+<p class="muted">Merck Sharp &amp; Dohme LLC. SPL set <code>d19c7ed0-ad5c-426e-b2df-722508f97d67</code>, version 61 (current), held-out split. Drug-label and terminology data; no patient records.</p>
+<p>A two-ingredient tablet whose sitagliptin strength is stated for the active moiety, sold in nested packages. FHIR plus the sidecar keeps every critical attribute; FHIR core alone reads the sitagliptin strength as if it were the phosphate salt, the flat export keeps one ingredient, and the DailyMed packaging response lists both strengths in the label for this product.</p>
+<h2>Field-level round trip against a separate read of the source XML</h2>
+<p class="muted">Each column is one representation of the same record. The first column shows the source value.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Round-trip results"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">Attribute (source value)</th><th scope='col'>FHIR + sidecar</th><th scope='col'>FHIR core only</th><th scope='col'>RxCUI only</th><th scope='col'>Flat export</th><th scope='col'>DailyMed packaging API</th></tr></thead><tbody><tr><th scope='row'>SPL set ID<br><code>d19c7ed0-ad5c-426e-b2df-722508f97d67</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>SPL document ID<br><code>61bde692-38c6-42dc-aaac-503cc7e1d8f8</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>SPL version<br><code>61</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Product NDC<br><code>0006-0575</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Package NDCs<br><code>0006-0575-01|0006-0575-02|0006-0575-03|0006-0575-52|0006-0575-56|0006-0575-61|0006-0575-62|0006-0575-82</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Dosage form code<br><code>C42931</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-converted_equivalent'>equal after documented conversion</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Active ingredient count<br><code>2</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>1</code></td><td class='st-discordant'>discordant<br><code>3</code></td></tr><tr><th scope='row'>Ingredient UNII (ingredient 1)<br><code>TS63EW8X6F</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Ingredient UNII (ingredient 2)<br><code>786Z46389E</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength code (ingredient 1)<br><code>ACTIM</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>ACTIM</code></td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength code (ingredient 2)<br><code>ACTIB</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>ACTIB</code></td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength substance (ingredient 1)<br><code>QFP0P1DV7Z</code></th><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>TS63EW8X6F</code></td><td class='st-converted_equivalent'>equal after documented conversion</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength substance (ingredient 2)<br><code>786Z46389E</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Strength numerator (ingredient 1)<br><code>50</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>50.0</code></td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Strength numerator (ingredient 2)<br><code>500</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-discordant'>discordant<br><code>1000</code></td></tr><tr><th scope='row'>Numerator unit (ingredient 1)<br><code>mg</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>MG</code></td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Numerator unit (ingredient 2)<br><code>mg</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>MG</code></td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Strength denominator (ingredient 1)<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>1.0</code></td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Strength denominator (ingredient 2)<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Denominator unit (ingredient 1)<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>EACH</code></td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Denominator unit (ingredient 2)<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>EACH</code></td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Kit part NDCs<br><code></code></th><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td></tr></tbody></table></div></div>
+<h2>Matching results</h2>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Matching results"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">Approach</th><th scope="col">Outcome</th><th scope="col">RxCUI</th><th scope="col">Candidates</th><th scope="col">Score</th></tr></thead><tbody><tr><th scope='row'>A</th><td>unique</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td></td></tr><tr><th scope='row'>A2</th><td>agree</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]; 2709488 metformin hydrochloride 1000 MG / sitagliptin phosphate 50 MG Oral Tablet; 2709491 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet; 861771 metformin hydrochloride 1000 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td></td></tr><tr><th scope='row'>B</th><td>unique</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td></td></tr><tr><th scope='row'>C</th><td>unique</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td>861821 metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]</td><td>score 79</td></tr></tbody></table></div></div>
+<p class="muted">A: package NDC to RxNorm NDC status. A2: DailyMed set-level mapping file (agreement with A). B: normalized names with matched attributes. C: approximate name match with abstention. Agreement is terminology agreement, not clinical interchangeability.</p>
+<div class="grid">
+<section><h2>Source SPL product element</h2><pre tabindex="0">&lt;manufacturedProduct xmlns=&quot;urn:hl7-org:v3&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+                     &lt;manufacturedProduct&gt;
+                        &lt;code code=&quot;0006-0575&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                        &lt;name&gt;JANUMET&lt;/name&gt;
+                        &lt;formCode code=&quot;C42931&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;TABLET, FILM COATED&quot;/&gt;
+                        &lt;asEntityWithGeneric&gt;
+                           &lt;genericMedicine&gt;
+                              &lt;name&gt;SITAGLIPTIN and METFORMIN HYDROCHLORIDE&lt;/name&gt;
+                           &lt;/genericMedicine&gt;
+                        &lt;/asEntityWithGeneric&gt;
+                        &lt;ingredient classCode=&quot;ACTIM&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;50&quot; unit=&quot;mg&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot; unit=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;TS63EW8X6F&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;SITAGLIPTIN PHOSPHATE&lt;/name&gt;
+                              &lt;activeMoiety&gt;
+                                 &lt;activeMoiety&gt;
+                                    &lt;code code=&quot;QFP0P1DV7Z&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                                    &lt;name&gt;SITAGLIPTIN&lt;/name&gt;
+                                 &lt;/activeMoiety&gt;
+                              &lt;/activeMoiety&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;ACTIB&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;500&quot; unit=&quot;mg&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot; unit=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;786Z46389E&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;METFORMIN HYDROCHLORIDE&lt;/name&gt;
+                              &lt;activeMoiety&gt;
+                                 &lt;activeMoiety&gt;
+                                    &lt;code code=&quot;9100L32L2N&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                                    &lt;name&gt;METFORMIN&lt;/name&gt;
+                                 &lt;/activeMoiety&gt;
+                              &lt;/activeMoiety&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;XM0M87F357&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;FERROSOFERRIC OXIDE&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;OP1R32D61U&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;MICROCRYSTALLINE CELLULOSE&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;3WJQ0SDW1A&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;POLYETHYLENE GLYCOL, UNSPECIFIED&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;532B59J990&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;POLYVINYL ALCOHOL, UNSPECIFIED&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;U725QWY32X&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;POVIDONE K30&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;1K09F3G675&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;FERRIC OXIDE RED&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;368GB5141J&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;SODIUM LAURYL SULFATE&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;7CV7WJK4UI&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;SODIUM STEARYL FUMARATE&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;7SEV7J4R1U&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;TALC&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;15FIX9V2JP&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;TITANIUM DIOXIDE&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;1000&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0006-0575-82&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43169&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BOTTLE&quot;/&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;marketingAct&gt;
+                                 &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                 &lt;statusCode code=&quot;active&quot;/&gt;
+                                 &lt;effectiveTime&gt;
+                                    &lt;low value=&quot;20070330&quot;/&gt;
+                                 &lt;/effectiveTime&gt;
+                              &lt;/marketingAct&gt;
+                           &lt;/subjectOf&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;60&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0006-0575-61&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43169&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BOTTLE&quot;/&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;marketingAct&gt;
+                                 &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                 &lt;statusCode code=&quot;active&quot;/&gt;
+                                 &lt;effectiveTime&gt;
+                                    &lt;low value=&quot;20070330&quot;/&gt;
+                                 &lt;/effectiveTime&gt;
+                              &lt;/marketingAct&gt;
+                           &lt;/subjectOf&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;180&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0006-0575-62&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43169&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BOTTLE&quot;/&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;marketingAct&gt;
+                                 &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                 &lt;statusCode code=&quot;active&quot;/&gt;
+                                 &lt;effectiveTime&gt;
+                                    &lt;low value=&quot;20070330&quot;/&gt;
+                                 &lt;/effectiveTime&gt;
+                              &lt;/marketingAct&gt;
+                           &lt;/subjectOf&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;10&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0006-0575-01&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43168&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BLISTER PACK&quot;/&gt;
+                              &lt;asContent&gt;
+                                 &lt;quantity&gt;
+                                    &lt;numerator value=&quot;5&quot; unit=&quot;1&quot;/&gt;
+                                    &lt;denominator value=&quot;1&quot;/&gt;
+                                 &lt;/quantity&gt;
+                                 &lt;containerPackagedProduct&gt;
+                                    &lt;code code=&quot;0006-0575-52&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                                    &lt;formCode code=&quot;C43182&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;CARTON&quot;/&gt;
+                                 &lt;/containerPackagedProduct&gt;
+                                 &lt;subjectOf&gt;
+                                    &lt;marketingAct&gt;
+                                       &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                       &lt;statusCode code=&quot;completed&quot;/&gt;
+                                       &lt;effectiveTime&gt;
+                                          &lt;low value=&quot;20070330&quot;/&gt;
+                                          &lt;high value=&quot;20110820&quot;/&gt;
+                                       &lt;/effectiveTime&gt;
+                                    &lt;/marketingAct&gt;
+                                 &lt;/subjectOf&gt;
+                              &lt;/asContent&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;7&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code/&gt;
+                              &lt;formCode code=&quot;C43168&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BLISTER PACK&quot;/&gt;
+                              &lt;asContent&gt;
+                                 &lt;quantity&gt;
+                                    &lt;numerator value=&quot;2&quot; unit=&quot;1&quot;/&gt;
+                                    &lt;denominator value=&quot;1&quot;/&gt;
+                                 &lt;/quantity&gt;
+                                 &lt;containerPackagedProduct&gt;
+                                    &lt;code/&gt;
+                                    &lt;formCode code=&quot;C43200&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;POUCH&quot;/&gt;
+                                    &lt;asContent&gt;
+                                       &lt;quantity&gt;
+                                          &lt;numerator value=&quot;4&quot; unit=&quot;1&quot;/&gt;
+                                          &lt;denominator value=&quot;1&quot;/&gt;
+                                       &lt;/quantity&gt;
+                                       &lt;containerPackagedProduct&gt;
+                                          &lt;code code=&quot;0006-0575-56&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                                          &lt;formCode code=&quot;C43182&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;CARTON&quot;/&gt;
+                                       &lt;/containerPackagedProduct&gt;
+                                       &lt;subjectOf&gt;
+                                          &lt;marketingAct&gt;
+                                             &lt;code code=&quot;C96974&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                             &lt;statusCode code=&quot;active&quot;/&gt;
+                                             &lt;effectiveTime&gt;
+                                                &lt;low value=&quot;20070330&quot;/&gt;
+                                             &lt;/effectiveTime&gt;
+                                          &lt;/marketingAct&gt;
+                                       &lt;/subjectOf&gt;
+                                    &lt;/asContent&gt;
+                                 &lt;/containerPackagedProduct&gt;
+                              &lt;/asContent&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator value=&quot;14&quot; unit=&quot;1&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0006-0575-02&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43169&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BOTTLE&quot;/&gt;
+                              &lt;asContent&gt;
+                                 &lt;quantity&gt;
+                                    &lt;numerator value=&quot;2&quot; unit=&quot;1&quot;/&gt;
+                                    &lt;denominator value=&quot;1&quot;/&gt;
+                                 &lt;/quantity&gt;
+                                 &lt;containerPackagedProduct&gt;
+                                    &lt;code code=&quot;0006-0575-03&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                                    &lt;formCode code=&quot;C43182&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;CARTON&quot;/&gt;
+                                 &lt;/containerPackagedProduct&gt;
+                                 &lt;subjectOf&gt;
+                                    &lt;marketingAct&gt;
+                                       &lt;code code=&quot;C96974&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                       &lt;statusCode code=&quot;active&quot;/&gt;
+                                       &lt;effectiveTime&gt;
+                                          &lt;low value=&quot;20070330&quot;/&gt;
+                                       &lt;/effectiveTime&gt;
+                                    &lt;/marketingAct&gt;
+                                 &lt;/subjectOf&gt;
+                              &lt;/asContent&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C112160&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;Type 0: Not a Combination Product&quot; xsi:type=&quot;CV&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                     &lt;/manufacturedProduct&gt;
+                     &lt;subjectOf&gt;
+                        &lt;approval&gt;
+                           &lt;id extension=&quot;NDA022044&quot; root=&quot;2.16.840.1.113883.3.150&quot;/&gt;
+                           &lt;code code=&quot;C73594&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;NDA&quot;/&gt;
+                           &lt;author&gt;
+                              &lt;territorialAuthority&gt;
+                                 &lt;territory&gt;
+                                    &lt;code code=&quot;USA&quot; codeSystem=&quot;2.16.840.1.113883.5.28&quot;/&gt;
+                                 &lt;/territory&gt;
+                              &lt;/territorialAuthority&gt;
+                           &lt;/author&gt;
+                        &lt;/approval&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;marketingAct&gt;
+                           &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                           &lt;statusCode code=&quot;active&quot;/&gt;
+                           &lt;effectiveTime&gt;
+                              &lt;low value=&quot;20070330&quot;/&gt;
+                           &lt;/effectiveTime&gt;
+                        &lt;/marketingAct&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;characteristic classCode=&quot;OBS&quot;&gt;
+                           &lt;code code=&quot;SPLCOLOR&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                           &lt;value code=&quot;C48328&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;PINK&quot; xsi:type=&quot;CE&quot;&gt;
+                              &lt;originalText&gt;light pink&lt;/originalText&gt;
+                           &lt;/value&gt;
+                        &lt;/characteristic&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;characteristic classCode=&quot;OBS&quot;&gt;
+                           &lt;code code=&quot;SPLSCORE&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                           &lt;value value=&quot;1&quot; xsi:type=&quot;INT&quot;/&gt;
+                        &lt;/characteristic&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;characteristic classCode=&quot;OBS&quot;&gt;
+                           &lt;code code=&quot;SPLSHAPE&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                           &lt;value code=&quot;C48345&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;OVAL&quot; xsi:type=&quot;CE&quot;&gt;
+                              &lt;originalText&gt;capsule-shaped&lt;/originalText&gt;
+                           &lt;/value&gt;
+                        &lt;/characteristic&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;characteristic classCode=&quot;OBS&quot;&gt;
+                           &lt;code code=&quot;SPLSIZE&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                           &lt;value unit=&quot;mm&quot; value=&quot;17&quot; xsi:type=&quot;PQ&quot;/&gt;
+                        &lt;/characteristic&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;characteristic classCode=&quot;OBS&quot;&gt;
+                           &lt;code code=&quot;SPLIMPRINT&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                           &lt;value xsi:type=&quot;ST&quot;&gt;575&lt;/value&gt;
+                        &lt;/characteristic&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;consumedIn&gt;
+                        &lt;substanceAdministration&gt;
+                           &lt;routeCode code=&quot;C38288&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;ORAL&quot;/&gt;
+                        &lt;/substanceAdministration&gt;
+                     &lt;/consumedIn&gt;
+                  &lt;/manufacturedProduct&gt;
+               
+</pre></section>
+<section><h2>FHIR R4 Medication resources (first 3 of 8 package resources shown)</h2><pre tabindex="0">[
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0006-0575&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;861821&quot;,
+     &quot;display&quot;: &quot;metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;JANUMET&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42931&quot;,
+     &quot;display&quot;: &quot;TABLET, FILM COATED&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;TABLET, FILM COATED&quot;
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;TS63EW8X6F&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SITAGLIPTIN PHOSPHATE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;50&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;786Z46389E&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;METFORMIN HYDROCHLORIDE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;500&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;XM0M87F357&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERROSOFERRIC OXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;OP1R32D61U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;MICROCRYSTALLINE CELLULOSE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;3WJQ0SDW1A&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYETHYLENE GLYCOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;532B59J990&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYVINYL ALCOHOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;U725QWY32X&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POVIDONE K30&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;1K09F3G675&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERRIC OXIDE RED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;368GB5141J&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM LAURYL SULFATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7CV7WJK4UI&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM STEARYL FUMARATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7SEV7J4R1U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TALC&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;15FIX9V2JP&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TITANIUM DIOXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;1715571e-7eaf-5554-981a-89899e69bdf8&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0006-0575&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0006-0575-82&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;861821&quot;,
+     &quot;display&quot;: &quot;metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;JANUMET, BOTTLE 0006-0575-82&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42931&quot;,
+     &quot;display&quot;: &quot;TABLET, FILM COATED&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;TABLET, FILM COATED&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;1000&quot;,
+    &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;1&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;BOTTLE&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43169&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;TS63EW8X6F&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SITAGLIPTIN PHOSPHATE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;50&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;786Z46389E&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;METFORMIN HYDROCHLORIDE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;500&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;XM0M87F357&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERROSOFERRIC OXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;OP1R32D61U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;MICROCRYSTALLINE CELLULOSE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;3WJQ0SDW1A&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYETHYLENE GLYCOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;532B59J990&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYVINYL ALCOHOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;U725QWY32X&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POVIDONE K30&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;1K09F3G675&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERRIC OXIDE RED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;368GB5141J&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM LAURYL SULFATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7CV7WJK4UI&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM STEARYL FUMARATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7SEV7J4R1U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TALC&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;15FIX9V2JP&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TITANIUM DIOXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;e5fead5d-d172-5a73-a8c1-89b27339ae67&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0006-0575&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0006-0575-61&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;861821&quot;,
+     &quot;display&quot;: &quot;metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;JANUMET, BOTTLE 0006-0575-61&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42931&quot;,
+     &quot;display&quot;: &quot;TABLET, FILM COATED&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;TABLET, FILM COATED&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;60&quot;,
+    &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;1&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;BOTTLE&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43169&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;TS63EW8X6F&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SITAGLIPTIN PHOSPHATE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;50&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;786Z46389E&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;METFORMIN HYDROCHLORIDE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;500&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;XM0M87F357&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERROSOFERRIC OXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;OP1R32D61U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;MICROCRYSTALLINE CELLULOSE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;3WJQ0SDW1A&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYETHYLENE GLYCOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;532B59J990&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYVINYL ALCOHOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;U725QWY32X&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POVIDONE K30&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;1K09F3G675&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERRIC OXIDE RED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;368GB5141J&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM LAURYL SULFATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7CV7WJK4UI&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM STEARYL FUMARATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7SEV7J4R1U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TALC&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;15FIX9V2JP&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TITANIUM DIOXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;977c3b85-33ec-54fd-b2c0-6508dc654665&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0006-0575&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0006-0575-62&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;861821&quot;,
+     &quot;display&quot;: &quot;metformin hydrochloride 500 MG / sitagliptin phosphate 50 MG Oral Tablet [Janumet]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;JANUMET, BOTTLE 0006-0575-62&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42931&quot;,
+     &quot;display&quot;: &quot;TABLET, FILM COATED&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;TABLET, FILM COATED&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;180&quot;,
+    &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;1&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;BOTTLE&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43169&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;TS63EW8X6F&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SITAGLIPTIN PHOSPHATE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;50&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;786Z46389E&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;METFORMIN HYDROCHLORIDE&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;500&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;TABLET, FILM COATED&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;1&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;XM0M87F357&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERROSOFERRIC OXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;OP1R32D61U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;MICROCRYSTALLINE CELLULOSE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;3WJQ0SDW1A&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYETHYLENE GLYCOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;532B59J990&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POLYVINYL ALCOHOL, UNSPECIFIED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;U725QWY32X&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;POVIDONE K30&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;1K09F3G675&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;FERRIC OXIDE RED&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;368GB5141J&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM LAURYL SULFATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7CV7WJK4UI&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;SODIUM STEARYL FUMARATE&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7SEV7J4R1U&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TALC&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;15FIX9V2JP&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;TITANIUM DIOXIDE&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ }
+]</pre></section>
+<section><h2>Sidecar entries</h2><pre tabindex="0">{
+ &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;: {
+  &quot;medication_id&quot;: &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;,
+  &quot;resource_level&quot;: &quot;product&quot;,
+  &quot;product&quot;: {
+   &quot;index&quot;: &quot;0&quot;,
+   &quot;ndc_original&quot;: &quot;0006-0575&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4&quot;,
+   &quot;proprietary_name&quot;: &quot;JANUMET&quot;,
+   &quot;name_suffix&quot;: null,
+   &quot;generic_name&quot;: &quot;SITAGLIPTIN and METFORMIN HYDROCHLORIDE&quot;,
+   &quot;form_code&quot;: &quot;C42931&quot;,
+   &quot;form_display&quot;: &quot;TABLET, FILM COATED&quot;,
+   &quot;route_codes&quot;: [
+    &quot;C38288&quot;
+   ],
+   &quot;route_displays&quot;: [
+    &quot;ORAL&quot;
+   ],
+   &quot;approval_id&quot;: &quot;NDA022044&quot;,
+   &quot;approval_id_root&quot;: &quot;2.16.840.1.113883.3.150&quot;,
+   &quot;marketing_category_code&quot;: &quot;C73594&quot;,
+   &quot;marketing_category_display&quot;: &quot;NDA&quot;,
+   &quot;marketing_status&quot;: &quot;active&quot;,
+   &quot;marketing_low&quot;: &quot;20070330&quot;,
+   &quot;marketing_high&quot;: null,
+   &quot;equivalent_ndc&quot;: null,
+   &quot;equivalent_code&quot;: null,
+   &quot;is_kit&quot;: false
+  },
+  &quot;ingredients&quot;: [
+   {
+    &quot;source_index&quot;: &quot;0&quot;,
+    &quot;class_code&quot;: &quot;ACTIM&quot;,
+    &quot;basis_of_strength&quot;: &quot;active_moiety&quot;,
+    &quot;strength_substance_unii&quot;: &quot;QFP0P1DV7Z&quot;,
+    &quot;strength_substance_name&quot;: &quot;SITAGLIPTIN&quot;,
+    &quot;moiety_uniis&quot;: [
+     &quot;QFP0P1DV7Z&quot;
+    ],
+    &quot;moiety_names&quot;: [
+     &quot;SITAGLIPTIN&quot;
+    ],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;50&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;1&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;1&quot;,
+    &quot;class_code&quot;: &quot;ACTIB&quot;,
+    &quot;basis_of_strength&quot;: &quot;ingredient&quot;,
+    &quot;strength_substance_unii&quot;: &quot;786Z46389E&quot;,
+    &quot;strength_substance_name&quot;: &quot;METFORMIN HYDROCHLORIDE&quot;,
+    &quot;moiety_uniis&quot;: [
+     &quot;9100L32L2N&quot;
+    ],
+    &quot;moiety_names&quot;: [
+     &quot;METFORMIN&quot;
+    ],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;500&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;1&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;2&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;3&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;4&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;5&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;6&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;7&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;8&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;9&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;10&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;11&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   }
+  ],
+  &quot;kit_parts&quot;: [],
+  &quot;ingredient_list_complete&quot;: true,
+  &quot;mapping&quot;: {
+   &quot;product_rxcui&quot;: &quot;861821&quot;,
+   &quot;method&quot;: &quot;A: package NDC -&gt; RxNorm ndcstatus&quot;,
+   &quot;outcome&quot;: &quot;unique&quot;
+  }
+ },
+ &quot;1715571e-7eaf-5554-981a-89899e69bdf8&quot;: {
+  &quot;medication_id&quot;: &quot;1715571e-7eaf-5554-981a-89899e69bdf8&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;1&quot;,
+   &quot;level&quot;: &quot;1&quot;,
+   &quot;ndc_original&quot;: &quot;0006-0575-82&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00006057582&quot;,
+   &quot;total_amount_value&quot;: &quot;1000&quot;,
+   &quot;total_amount_unit&quot;: &quot;1&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: &quot;active&quot;,
+   &quot;marketing_low&quot;: &quot;20070330&quot;,
+   &quot;marketing_high&quot;: null,
+   &quot;marketing_act_code&quot;: &quot;C53292&quot;,
+   &quot;combination_type_code&quot;: &quot;C112160&quot;,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;1&quot;,
+     &quot;ndc_original&quot;: &quot;0006-0575-82&quot;,
+     &quot;form_code&quot;: &quot;C43169&quot;,
+     &quot;form_display&quot;: &quot;BOTTLE&quot;,
+     &quot;qty_num_value&quot;: &quot;1000&quot;,
+     &quot;qty_num_unit&quot;: &quot;1&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;861821&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ },
+ &quot;e5fead5d-d172-5a73-a8c1-89b27339ae67&quot;: {
+  &quot;medication_id&quot;: &quot;e5fead5d-d172-5a73-a8c1-89b27339ae67&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;2&quot;,
+   &quot;level&quot;: &quot;1&quot;,
+   &quot;ndc_original&quot;: &quot;0006-0575-61&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00006057561&quot;,
+   &quot;total_amount_value&quot;: &quot;60&quot;,
+   &quot;total_amount_unit&quot;: &quot;1&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: &quot;active&quot;,
+   &quot;marketing_low&quot;: &quot;20070330&quot;,
+   &quot;marketing_high&quot;: null,
+   &quot;marketing_act_code&quot;: &quot;C53292&quot;,
+   &quot;combination_type_code&quot;: &quot;C112160&quot;,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;2&quot;,
+     &quot;ndc_original&quot;: &quot;0006-0575-61&quot;,
+     &quot;form_code&quot;: &quot;C43169&quot;,
+     &quot;form_display&quot;: &quot;BOTTLE&quot;,
+     &quot;qty_num_value&quot;: &quot;60&quot;,
+     &quot;qty_num_unit&quot;: &quot;1&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;861821&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ },
+ &quot;977c3b85-33ec-54fd-b2c0-6508dc654665&quot;: {
+  &quot;medication_id&quot;: &quot;977c3b85-33ec-54fd-b2c0-6508dc654665&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;c78864d9-b2a1-59e9-820e-a67d098f5d39&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;3&quot;,
+   &quot;level&quot;: &quot;1&quot;,
+   &quot;ndc_original&quot;: &quot;0006-0575-62&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00006057562&quot;,
+   &quot;total_amount_value&quot;: &quot;180&quot;,
+   &quot;total_amount_unit&quot;: &quot;1&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: &quot;active&quot;,
+   &quot;marketing_low&quot;: &quot;20070330&quot;,
+   &quot;marketing_high&quot;: null,
+   &quot;marketing_act_code&quot;: &quot;C53292&quot;,
+   &quot;combination_type_code&quot;: &quot;C112160&quot;,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;3&quot;,
+     &quot;ndc_original&quot;: &quot;0006-0575-62&quot;,
+     &quot;form_code&quot;: &quot;C43169&quot;,
+     &quot;form_display&quot;: &quot;BOTTLE&quot;,
+     &quot;qty_num_value&quot;: &quot;180&quot;,
+     &quot;qty_num_unit&quot;: &quot;1&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;861821&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ }
+}</pre></section>
+</div><p class="muted">Other case: <a href="viewer-ambiguous.html">insulin pen with ambiguous name matching</a>.</p></main><footer><div class="inner">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+Medicine (DailyMed, RxNorm API), retrieved 2026-10-07; no patient records. This product uses publicly available data from the U.S. National Library of
+Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
+recommend this or any other product.</div></footer></body></html>

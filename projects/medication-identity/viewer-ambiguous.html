@@ -1,0 +1,1581 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LYUMJEV source versus FHIR</title><link rel="stylesheet" href="assets/style.css"><style>
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5b5a55;--rule:#d9d6cc;--accent:#1f5f8b;--plate:#f1efe8;--bad:#8a2b1d;--ok:#2e5e2e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 16px 64px}h1{font-size:1.5rem;margin:.2em 0}h2{font-size:1.15rem;margin:2em 0 .5em}
+p{max-width:70ch}.muted{color:var(--muted)}a{color:var(--accent)}a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:16px}
+pre{background:var(--plate);padding:12px;overflow:auto;max-height:520px;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600}td.st-discordant,td.st-unresolved{color:var(--bad)}td.st-preserved,td.st-preserved_normalized{color:var(--ok)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head><body class="portfolio-page">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Full report</a></div></nav>
+<a class="skip" href="#content">Skip to content</a>
+<main id="content">
+<p class="muted"><a href="index.html">Medication identity</a> / comparison viewer</p>
+<h1>LYUMJEV (Insulin lispro-aabc), product NDC 0002-8235</h1>
+<p class="muted">Eli Lilly and Company. SPL set <code>c5a056e2-b568-4ca6-9ed8-79c010942d00</code>, version 12 (current), held-out split. Drug-label and terminology data; no patient records.</p>
+<p>RxNorm maps this pen&#x27;s package NDC to one concept (&#x27;Sensor&#x27; pen). Approach B finds four candidates: three Lyumjev pens that differ only in dose increment and sensor connectivity, which the label&#x27;s structured product data does not state (the name suffix &#x27;Tempo Pen&#x27; is the only hint), and the vial concept, which its dose-form rule also admits. Approach C picks the plain pen.</p>
+<h2>Field-level round trip against a separate read of the source XML</h2>
+<p class="muted">Each column is one representation of the same record. The first column shows the source value.</p>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Round-trip results"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">Attribute (source value)</th><th scope='col'>FHIR + sidecar</th><th scope='col'>FHIR core only</th><th scope='col'>RxCUI only</th><th scope='col'>Flat export</th><th scope='col'>DailyMed packaging API</th></tr></thead><tbody><tr><th scope='row'>SPL set ID<br><code>c5a056e2-b568-4ca6-9ed8-79c010942d00</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>SPL document ID<br><code>965b6bd6-37d4-451e-8c41-4df16df442d1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>SPL version<br><code>12</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Product NDC<br><code>0002-8235</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Package NDCs<br><code>0002-8235-01|0002-8235-05|0002-8235-99</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Dosage form code<br><code>C42945</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-converted_equivalent'>equal after documented conversion</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Active ingredient count<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>2</code></td></tr><tr><th scope='row'>Ingredient UNII (ingredient 1)<br><code>GFX7QIS1II</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength code (ingredient 1)<br><code>ACTIB</code></th><td class='st-preserved'>preserved</td><td class='st-omitted_in_sidecar'>not in FHIR core; in sidecar</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>ACTIB</code></td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Basis-of-strength substance (ingredient 1)<br><code>GFX7QIS1II</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion</td><td class='st-unresolved'>unresolved</td><td class='st-unresolved'>unresolved</td></tr><tr><th scope='row'>Strength numerator (ingredient 1)<br><code>100</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>100.0</code></td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Numerator unit (ingredient 1)<br><code>[iU]</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>UNT</code></td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Strength denominator (ingredient 1)<br><code>1</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-discordant'>discordant<br><code>1.0</code></td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Denominator unit (ingredient 1)<br><code>mL</code></th><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td><td class='st-converted_equivalent'>equal after documented conversion<br><code>ML</code></td><td class='st-preserved'>preserved</td><td class='st-preserved'>preserved</td></tr><tr><th scope='row'>Kit part NDCs<br><code></code></th><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td><td class='st-inapplicable'>not applicable</td></tr></tbody></table></div></div>
+<h2>Matching results</h2>
+<div class="tablewrap" tabindex="0" role="region" aria-label="Matching results"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table><thead><tr><th scope="col">Approach</th><th scope="col">Outcome</th><th scope="col">RxCUI</th><th scope="col">Candidates</th><th scope="col">Score</th></tr></thead><tbody><tr><th scope='row'>A</th><td>unique</td><td>2380268 Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td>2380268 Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td></td></tr><tr><th scope='row'>A2</th><td>agree</td><td>2380268 Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td>2380268 Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]; 2380231 insulin lispro-aabc 100 UNT/ML Injectable Solution; 2380236 insulin lispro-aabc 100 UNT/ML Injectable Solution [Lyumjev]; 2380248 3 ML insulin lispro-aabc 100 UNT/ML Cartridge; 2380250 3 ML insulin lispro-aabc 100 UNT/ML Cartridge [Lyumjev] (5 of 12 shown)</td><td></td></tr><tr><th scope='row'>B</th><td>ambiguous</td><td> </td><td>2380236 insulin lispro-aabc 100 UNT/ML Injectable Solution [Lyumjev]; 2380260 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]; 2380266 0.5 UNT Doses 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]; 2380268 Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td></td></tr><tr><th scope='row'>C</th><td>unique</td><td>2380260 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td>2380260 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]</td><td>score 82</td></tr></tbody></table></div></div>
+<p class="muted">A: package NDC to RxNorm NDC status. A2: DailyMed set-level mapping file (agreement with A). B: normalized names with matched attributes. C: approximate name match with abstention. Agreement is terminology agreement, not clinical interchangeability.</p>
+<div class="grid">
+<section><h2>Source SPL product element</h2><pre tabindex="0">&lt;manufacturedProduct xmlns=&quot;urn:hl7-org:v3&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+                     &lt;manufacturedProduct&gt;
+                        &lt;code code=&quot;0002-8235&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                        &lt;name&gt;LYUMJEV&lt;suffix&gt;Tempo Pen
+&lt;/suffix&gt;
+                        &lt;/name&gt;
+                        &lt;formCode code=&quot;C42945&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;INJECTION, SOLUTION&quot;/&gt;
+                        &lt;asEntityWithGeneric&gt;
+                           &lt;genericMedicine&gt;
+                              &lt;name&gt;Insulin lispro-aabc&lt;/name&gt;
+                           &lt;/genericMedicine&gt;
+                        &lt;/asEntityWithGeneric&gt;
+                        &lt;ingredient classCode=&quot;ACTIB&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;[iU]&quot; value=&quot;100&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;GFX7QIS1II&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Insulin lispro&lt;/name&gt;
+                              &lt;activeMoiety&gt;
+                                 &lt;activeMoiety&gt;
+                                    &lt;code code=&quot;GFX7QIS1II&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                                    &lt;name&gt;Insulin lispro&lt;/name&gt;
+                                 &lt;/activeMoiety&gt;
+                              &lt;/activeMoiety&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;ug&quot; value=&quot;1.06&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;7JZ75N2NT6&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Treprostinil sodium&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mg&quot; value=&quot;4.41&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;B22547B95K&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Trisodium citrate dihydrate&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;SOI2LOH54Z&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Zinc oxide&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mg&quot; value=&quot;1.02&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;02F3473H9O&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Magnesium chloride&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mg&quot; value=&quot;3.15&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;GGO4Y809LO&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Metacresol&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mg&quot; value=&quot;12.1&quot;/&gt;
+                              &lt;denominator unit=&quot;mL&quot; value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;PDC6A3C0OX&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Glycerin&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;QTT17582CB&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Hydrochloric acid&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;55X04QC32I&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Sodium hydroxide&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;ingredient classCode=&quot;IACT&quot;&gt;
+                           &lt;ingredientSubstance&gt;
+                              &lt;code code=&quot;059QF0KO0R&quot; codeSystem=&quot;2.16.840.1.113883.4.9&quot;/&gt;
+                              &lt;name&gt;Water&lt;/name&gt;
+                           &lt;/ingredientSubstance&gt;
+                        &lt;/ingredient&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mL&quot; value=&quot;3&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code code=&quot;0002-8235-01&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                              &lt;formCode code=&quot;C43202&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;SYRINGE&quot;/&gt;
+                              &lt;asContent&gt;
+                                 &lt;quantity&gt;
+                                    &lt;numerator unit=&quot;1&quot; value=&quot;5&quot;/&gt;
+                                    &lt;denominator value=&quot;1&quot;/&gt;
+                                 &lt;/quantity&gt;
+                                 &lt;containerPackagedProduct&gt;
+                                    &lt;code code=&quot;0002-8235-05&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                                    &lt;formCode code=&quot;C43182&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;CARTON&quot;/&gt;
+                                 &lt;/containerPackagedProduct&gt;
+                                 &lt;subjectOf&gt;
+                                    &lt;marketingAct&gt;
+                                       &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                       &lt;statusCode code=&quot;completed&quot;/&gt;
+                                       &lt;effectiveTime&gt;
+                                          &lt;low value=&quot;20220929&quot;/&gt;
+                                          &lt;high value=&quot;20271106&quot;/&gt;
+                                       &lt;/effectiveTime&gt;
+                                    &lt;/marketingAct&gt;
+                                 &lt;/subjectOf&gt;
+                              &lt;/asContent&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C102836&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; xsi:type=&quot;CV&quot; displayName=&quot;Type 3: Prefilled Biologic Delivery Device/System (syringe, patch, etc.)&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                        &lt;asContent&gt;
+                           &lt;quantity&gt;
+                              &lt;numerator unit=&quot;mL&quot; value=&quot;3&quot;/&gt;
+                              &lt;denominator value=&quot;1&quot;/&gt;
+                           &lt;/quantity&gt;
+                           &lt;containerPackagedProduct&gt;
+                              &lt;code/&gt;
+                              &lt;formCode code=&quot;C43202&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;SYRINGE&quot;/&gt;
+                              &lt;asContent&gt;
+                                 &lt;quantity&gt;
+                                    &lt;numerator unit=&quot;1&quot; value=&quot;1&quot;/&gt;
+                                    &lt;denominator value=&quot;1&quot;/&gt;
+                                 &lt;/quantity&gt;
+                                 &lt;containerPackagedProduct&gt;
+                                    &lt;code code=&quot;0002-8235-99&quot; codeSystem=&quot;2.16.840.1.113883.6.69&quot;/&gt;
+                                    &lt;formCode code=&quot;C43182&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;CARTON&quot;/&gt;
+                                 &lt;/containerPackagedProduct&gt;
+                                 &lt;subjectOf&gt;
+                                    &lt;marketingAct&gt;
+                                       &lt;code code=&quot;C96974&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                                       &lt;statusCode code=&quot;completed&quot;/&gt;
+                                       &lt;effectiveTime&gt;
+                                          &lt;low value=&quot;20240110&quot;/&gt;
+                                          &lt;high value=&quot;20271106&quot;/&gt;
+                                       &lt;/effectiveTime&gt;
+                                    &lt;/marketingAct&gt;
+                                 &lt;/subjectOf&gt;
+                              &lt;/asContent&gt;
+                           &lt;/containerPackagedProduct&gt;
+                           &lt;subjectOf&gt;
+                              &lt;characteristic&gt;
+                                 &lt;code code=&quot;SPLCMBPRDTP&quot; codeSystem=&quot;2.16.840.1.113883.1.11.19255&quot;/&gt;
+                                 &lt;value code=&quot;C102836&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; xsi:type=&quot;CV&quot; displayName=&quot;Type 3: Prefilled Biologic Delivery Device/System (syringe, patch, etc.)&quot;/&gt;
+                              &lt;/characteristic&gt;
+                           &lt;/subjectOf&gt;
+                        &lt;/asContent&gt;
+                     &lt;/manufacturedProduct&gt;
+                     &lt;subjectOf&gt;
+                        &lt;marketingAct&gt;
+                           &lt;code code=&quot;C53292&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot;/&gt;
+                           &lt;statusCode code=&quot;completed&quot;/&gt;
+                           &lt;effectiveTime&gt;
+                              &lt;low value=&quot;20200615&quot;/&gt;
+                              &lt;high value=&quot;20271106&quot;/&gt;
+                           &lt;/effectiveTime&gt;
+                        &lt;/marketingAct&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;subjectOf&gt;
+                        &lt;approval&gt;
+                           &lt;id extension=&quot;BLA761109&quot; root=&quot;2.16.840.1.113883.3.150&quot;/&gt;
+                           &lt;code code=&quot;C73585&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;BLA&quot;/&gt;
+                           &lt;author&gt;
+                              &lt;territorialAuthority&gt;
+                                 &lt;territory&gt;
+                                    &lt;code code=&quot;USA&quot; codeSystem=&quot;2.16.840.1.113883.5.28&quot;/&gt;
+                                 &lt;/territory&gt;
+                              &lt;/territorialAuthority&gt;
+                           &lt;/author&gt;
+                        &lt;/approval&gt;
+                     &lt;/subjectOf&gt;
+                     &lt;consumedIn&gt;
+                        &lt;substanceAdministration&gt;
+                           &lt;routeCode code=&quot;C38299&quot; codeSystem=&quot;2.16.840.1.113883.3.26.1.1&quot; displayName=&quot;SUBCUTANEOUS&quot;/&gt;
+                        &lt;/substanceAdministration&gt;
+                     &lt;/consumedIn&gt;
+                  &lt;/manufacturedProduct&gt;
+               
+</pre></section>
+<section><h2>FHIR R4 Medication resources</h2><pre tabindex="0">[
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0002-8235&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;2380268&quot;,
+     &quot;display&quot;: &quot;Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;LYUMJEV Tempo Pen&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42945&quot;,
+     &quot;display&quot;: &quot;INJECTION, SOLUTION&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;INJECTION, SOLUTION&quot;
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GFX7QIS1II&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Insulin lispro&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;100&quot;,
+      &quot;unit&quot;: &quot;[iU]&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;[iU]&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7JZ75N2NT6&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Treprostinil sodium&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.06&quot;,
+      &quot;unit&quot;: &quot;ug&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;ug&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;B22547B95K&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Trisodium citrate dihydrate&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;4.41&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;SOI2LOH54Z&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Zinc oxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;02F3473H9O&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Magnesium chloride&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.02&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GGO4Y809LO&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Metacresol&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;3.15&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;PDC6A3C0OX&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Glycerin&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;12.1&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;QTT17582CB&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Hydrochloric acid&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;55X04QC32I&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Sodium hydroxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;059QF0KO0R&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Water&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;9e640c24-77bf-5728-8765-11a3246ea307&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0002-8235&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0002-8235-01&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;2380268&quot;,
+     &quot;display&quot;: &quot;Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;LYUMJEV Tempo Pen, SYRINGE 0002-8235-01&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42945&quot;,
+     &quot;display&quot;: &quot;INJECTION, SOLUTION&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;INJECTION, SOLUTION&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;3&quot;,
+    &quot;unit&quot;: &quot;mL&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;mL&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;SYRINGE&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43202&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GFX7QIS1II&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Insulin lispro&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;100&quot;,
+      &quot;unit&quot;: &quot;[iU]&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;[iU]&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7JZ75N2NT6&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Treprostinil sodium&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.06&quot;,
+      &quot;unit&quot;: &quot;ug&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;ug&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;B22547B95K&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Trisodium citrate dihydrate&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;4.41&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;SOI2LOH54Z&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Zinc oxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;02F3473H9O&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Magnesium chloride&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.02&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GGO4Y809LO&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Metacresol&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;3.15&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;PDC6A3C0OX&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Glycerin&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;12.1&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;QTT17582CB&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Hydrochloric acid&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;55X04QC32I&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Sodium hydroxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;059QF0KO0R&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Water&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;fce99c56-2ed0-5692-9cc9-2baece37bbbe&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0002-8235&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0002-8235-05&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;2380268&quot;,
+     &quot;display&quot;: &quot;Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;LYUMJEV Tempo Pen, CARTON 0002-8235-05&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42945&quot;,
+     &quot;display&quot;: &quot;INJECTION, SOLUTION&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;INJECTION, SOLUTION&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;15&quot;,
+    &quot;unit&quot;: &quot;mL&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;mL&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;CARTON&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43182&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GFX7QIS1II&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Insulin lispro&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;100&quot;,
+      &quot;unit&quot;: &quot;[iU]&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;[iU]&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7JZ75N2NT6&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Treprostinil sodium&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.06&quot;,
+      &quot;unit&quot;: &quot;ug&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;ug&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;B22547B95K&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Trisodium citrate dihydrate&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;4.41&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;SOI2LOH54Z&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Zinc oxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;02F3473H9O&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Magnesium chloride&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.02&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GGO4Y809LO&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Metacresol&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;3.15&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;PDC6A3C0OX&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Glycerin&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;12.1&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;QTT17582CB&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Hydrochloric acid&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;55X04QC32I&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Sodium hydroxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;059QF0KO0R&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Water&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ },
+ {
+  &quot;resourceType&quot;: &quot;Medication&quot;,
+  &quot;id&quot;: &quot;333e84ef-b427-585c-9499-c925f8ebf60f&quot;,
+  &quot;identifier&quot;: [
+   {
+    &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+    &quot;value&quot;: &quot;0002-8235&quot;
+   }
+  ],
+  &quot;code&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://hl7.org/fhir/sid/ndc&quot;,
+     &quot;code&quot;: &quot;0002-8235-99&quot;
+    },
+    {
+     &quot;system&quot;: &quot;http://www.nlm.nih.gov/research/umls/rxnorm&quot;,
+     &quot;code&quot;: &quot;2380268&quot;,
+     &quot;display&quot;: &quot;Sensor 3 ML insulin lispro-aabc 100 UNT/ML Pen Injector [Lyumjev]&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;LYUMJEV Tempo Pen, CARTON 0002-8235-99&quot;
+  },
+  &quot;form&quot;: {
+   &quot;coding&quot;: [
+    {
+     &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+     &quot;code&quot;: &quot;C42945&quot;,
+     &quot;display&quot;: &quot;INJECTION, SOLUTION&quot;
+    }
+   ],
+   &quot;text&quot;: &quot;INJECTION, SOLUTION&quot;
+  },
+  &quot;amount&quot;: {
+   &quot;numerator&quot;: {
+    &quot;value&quot;: &quot;3&quot;,
+    &quot;unit&quot;: &quot;mL&quot;,
+    &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+    &quot;code&quot;: &quot;mL&quot;
+   },
+   &quot;denominator&quot;: {
+    &quot;value&quot;: &quot;1&quot;,
+    &quot;unit&quot;: &quot;CARTON&quot;,
+    &quot;system&quot;: &quot;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl&quot;,
+    &quot;code&quot;: &quot;C43182&quot;
+   }
+  },
+  &quot;ingredient&quot;: [
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GFX7QIS1II&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Insulin lispro&quot;
+    },
+    &quot;isActive&quot;: true,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;100&quot;,
+      &quot;unit&quot;: &quot;[iU]&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;[iU]&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;7JZ75N2NT6&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Treprostinil sodium&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.06&quot;,
+      &quot;unit&quot;: &quot;ug&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;ug&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;B22547B95K&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Trisodium citrate dihydrate&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;4.41&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;SOI2LOH54Z&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Zinc oxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;02F3473H9O&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Magnesium chloride&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;1.02&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;GGO4Y809LO&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Metacresol&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;3.15&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;PDC6A3C0OX&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Glycerin&quot;
+    },
+    &quot;isActive&quot;: false,
+    &quot;strength&quot;: {
+     &quot;numerator&quot;: {
+      &quot;value&quot;: &quot;12.1&quot;,
+      &quot;unit&quot;: &quot;mg&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mg&quot;
+     },
+     &quot;denominator&quot;: {
+      &quot;value&quot;: &quot;1&quot;,
+      &quot;unit&quot;: &quot;mL&quot;,
+      &quot;system&quot;: &quot;http://unitsofmeasure.org&quot;,
+      &quot;code&quot;: &quot;mL&quot;
+     }
+    }
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;QTT17582CB&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Hydrochloric acid&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;55X04QC32I&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Sodium hydroxide&quot;
+    },
+    &quot;isActive&quot;: false
+   },
+   {
+    &quot;itemCodeableConcept&quot;: {
+     &quot;coding&quot;: [
+      {
+       &quot;system&quot;: &quot;http://fdasis.nlm.nih.gov&quot;,
+       &quot;code&quot;: &quot;059QF0KO0R&quot;
+      }
+     ],
+     &quot;text&quot;: &quot;Water&quot;
+    },
+    &quot;isActive&quot;: false
+   }
+  ]
+ }
+]</pre></section>
+<section><h2>Sidecar entries</h2><pre tabindex="0">{
+ &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;: {
+  &quot;medication_id&quot;: &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;,
+  &quot;resource_level&quot;: &quot;product&quot;,
+  &quot;product&quot;: {
+   &quot;index&quot;: &quot;4&quot;,
+   &quot;ndc_original&quot;: &quot;0002-8235&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4&quot;,
+   &quot;proprietary_name&quot;: &quot;LYUMJEV&quot;,
+   &quot;name_suffix&quot;: &quot;Tempo Pen&quot;,
+   &quot;generic_name&quot;: &quot;Insulin lispro-aabc&quot;,
+   &quot;form_code&quot;: &quot;C42945&quot;,
+   &quot;form_display&quot;: &quot;INJECTION, SOLUTION&quot;,
+   &quot;route_codes&quot;: [
+    &quot;C38299&quot;
+   ],
+   &quot;route_displays&quot;: [
+    &quot;SUBCUTANEOUS&quot;
+   ],
+   &quot;approval_id&quot;: &quot;BLA761109&quot;,
+   &quot;approval_id_root&quot;: &quot;2.16.840.1.113883.3.150&quot;,
+   &quot;marketing_category_code&quot;: &quot;C73585&quot;,
+   &quot;marketing_category_display&quot;: &quot;BLA&quot;,
+   &quot;marketing_status&quot;: &quot;completed&quot;,
+   &quot;marketing_low&quot;: &quot;20200615&quot;,
+   &quot;marketing_high&quot;: &quot;20271106&quot;,
+   &quot;equivalent_ndc&quot;: null,
+   &quot;equivalent_code&quot;: null,
+   &quot;is_kit&quot;: false
+  },
+  &quot;ingredients&quot;: [
+   {
+    &quot;source_index&quot;: &quot;0&quot;,
+    &quot;class_code&quot;: &quot;ACTIB&quot;,
+    &quot;basis_of_strength&quot;: &quot;ingredient&quot;,
+    &quot;strength_substance_unii&quot;: &quot;GFX7QIS1II&quot;,
+    &quot;strength_substance_name&quot;: &quot;Insulin lispro&quot;,
+    &quot;moiety_uniis&quot;: [
+     &quot;GFX7QIS1II&quot;
+    ],
+    &quot;moiety_names&quot;: [
+     &quot;Insulin lispro&quot;
+    ],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;100&quot;,
+    &quot;num_unit_source&quot;: &quot;[iU]&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;1&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;1.06&quot;,
+    &quot;num_unit_source&quot;: &quot;ug&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;2&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;4.41&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;3&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;4&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;1.02&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;5&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;3.15&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;6&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: &quot;12.1&quot;,
+    &quot;num_unit_source&quot;: &quot;mg&quot;,
+    &quot;den_value_source_text&quot;: &quot;1&quot;,
+    &quot;den_unit_source&quot;: &quot;mL&quot;,
+    &quot;strength_in_fhir&quot;: true,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;7&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;8&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   },
+   {
+    &quot;source_index&quot;: &quot;9&quot;,
+    &quot;class_code&quot;: &quot;IACT&quot;,
+    &quot;basis_of_strength&quot;: &quot;unspecified&quot;,
+    &quot;strength_substance_unii&quot;: null,
+    &quot;strength_substance_name&quot;: null,
+    &quot;moiety_uniis&quot;: [],
+    &quot;moiety_names&quot;: [],
+    &quot;reference_unii&quot;: null,
+    &quot;reference_name&quot;: null,
+    &quot;num_value_source_text&quot;: null,
+    &quot;num_unit_source&quot;: null,
+    &quot;den_value_source_text&quot;: null,
+    &quot;den_unit_source&quot;: null,
+    &quot;strength_in_fhir&quot;: false,
+    &quot;json_decimal_normalized&quot;: false
+   }
+  ],
+  &quot;kit_parts&quot;: [],
+  &quot;ingredient_list_complete&quot;: true,
+  &quot;mapping&quot;: {
+   &quot;product_rxcui&quot;: &quot;2380268&quot;,
+   &quot;method&quot;: &quot;A: package NDC -&gt; RxNorm ndcstatus&quot;,
+   &quot;outcome&quot;: &quot;unique&quot;
+  }
+ },
+ &quot;9e640c24-77bf-5728-8765-11a3246ea307&quot;: {
+  &quot;medication_id&quot;: &quot;9e640c24-77bf-5728-8765-11a3246ea307&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;1&quot;,
+   &quot;level&quot;: &quot;1&quot;,
+   &quot;ndc_original&quot;: &quot;0002-8235-01&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00002823501&quot;,
+   &quot;total_amount_value&quot;: &quot;3&quot;,
+   &quot;total_amount_unit&quot;: &quot;mL&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: null,
+   &quot;marketing_low&quot;: null,
+   &quot;marketing_high&quot;: null,
+   &quot;marketing_act_code&quot;: null,
+   &quot;combination_type_code&quot;: &quot;C102836&quot;,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;1&quot;,
+     &quot;ndc_original&quot;: &quot;0002-8235-01&quot;,
+     &quot;form_code&quot;: &quot;C43202&quot;,
+     &quot;form_display&quot;: &quot;SYRINGE&quot;,
+     &quot;qty_num_value&quot;: &quot;3&quot;,
+     &quot;qty_num_unit&quot;: &quot;mL&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;2380268&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ },
+ &quot;fce99c56-2ed0-5692-9cc9-2baece37bbbe&quot;: {
+  &quot;medication_id&quot;: &quot;fce99c56-2ed0-5692-9cc9-2baece37bbbe&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;1.1&quot;,
+   &quot;level&quot;: &quot;2&quot;,
+   &quot;ndc_original&quot;: &quot;0002-8235-05&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00002823505&quot;,
+   &quot;total_amount_value&quot;: &quot;15&quot;,
+   &quot;total_amount_unit&quot;: &quot;mL&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: &quot;completed&quot;,
+   &quot;marketing_low&quot;: &quot;20220929&quot;,
+   &quot;marketing_high&quot;: &quot;20271106&quot;,
+   &quot;marketing_act_code&quot;: &quot;C53292&quot;,
+   &quot;combination_type_code&quot;: null,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;1&quot;,
+     &quot;ndc_original&quot;: &quot;0002-8235-01&quot;,
+     &quot;form_code&quot;: &quot;C43202&quot;,
+     &quot;form_display&quot;: &quot;SYRINGE&quot;,
+     &quot;qty_num_value&quot;: &quot;3&quot;,
+     &quot;qty_num_unit&quot;: &quot;mL&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    },
+    {
+     &quot;path&quot;: &quot;1.1&quot;,
+     &quot;ndc_original&quot;: &quot;0002-8235-05&quot;,
+     &quot;form_code&quot;: &quot;C43182&quot;,
+     &quot;form_display&quot;: &quot;CARTON&quot;,
+     &quot;qty_num_value&quot;: &quot;5&quot;,
+     &quot;qty_num_unit&quot;: &quot;1&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;2380268&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ },
+ &quot;333e84ef-b427-585c-9499-c925f8ebf60f&quot;: {
+  &quot;medication_id&quot;: &quot;333e84ef-b427-585c-9499-c925f8ebf60f&quot;,
+  &quot;resource_level&quot;: &quot;package&quot;,
+  &quot;product_medication_id&quot;: &quot;d75d5a16-554d-5566-ac7f-4b4318155aad&quot;,
+  &quot;package&quot;: {
+   &quot;path&quot;: &quot;2.1&quot;,
+   &quot;level&quot;: &quot;2&quot;,
+   &quot;ndc_original&quot;: &quot;0002-8235-99&quot;,
+   &quot;ndc_configuration&quot;: &quot;4-4-2&quot;,
+   &quot;ndc11&quot;: &quot;00002823599&quot;,
+   &quot;total_amount_value&quot;: &quot;3&quot;,
+   &quot;total_amount_unit&quot;: &quot;mL&quot;,
+   &quot;total_amount_status&quot;: &quot;computed&quot;,
+   &quot;marketing_status&quot;: &quot;completed&quot;,
+   &quot;marketing_low&quot;: &quot;20240110&quot;,
+   &quot;marketing_high&quot;: &quot;20271106&quot;,
+   &quot;marketing_act_code&quot;: &quot;C96974&quot;,
+   &quot;combination_type_code&quot;: null,
+   &quot;hierarchy&quot;: [
+    {
+     &quot;path&quot;: &quot;2&quot;,
+     &quot;ndc_original&quot;: null,
+     &quot;form_code&quot;: &quot;C43202&quot;,
+     &quot;form_display&quot;: &quot;SYRINGE&quot;,
+     &quot;qty_num_value&quot;: &quot;3&quot;,
+     &quot;qty_num_unit&quot;: &quot;mL&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    },
+    {
+     &quot;path&quot;: &quot;2.1&quot;,
+     &quot;ndc_original&quot;: &quot;0002-8235-99&quot;,
+     &quot;form_code&quot;: &quot;C43182&quot;,
+     &quot;form_display&quot;: &quot;CARTON&quot;,
+     &quot;qty_num_value&quot;: &quot;1&quot;,
+     &quot;qty_num_unit&quot;: &quot;1&quot;,
+     &quot;qty_den_value&quot;: &quot;1&quot;,
+     &quot;qty_den_unit&quot;: null
+    }
+   ]
+  },
+  &quot;mapping&quot;: {
+   &quot;package_rxcui&quot;: &quot;2380268&quot;,
+   &quot;ndc_status&quot;: &quot;ACTIVE&quot;
+  }
+ }
+}</pre></section>
+</div><p class="muted">Other case: <a href="viewer-preserved.html">combination tablet preserved in full</a>.</p></main><footer><div class="inner">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+Medicine (DailyMed, RxNorm API), retrieved 2026-10-07; no patient records. This product uses publicly available data from the U.S. National Library of
+Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
+recommend this or any other product.</div></footer></body></html>

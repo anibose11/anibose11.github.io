@@ -1,0 +1,51 @@
+release,source_file,source_variable,sas_label,target_universe,analysis_column,transformation
+2021-2023,DEMO_L,SEQN,Respondent sequence number,Both males and females 0 YEARS - 150 YEARS,seqn,integer key; unique per file; every component joined on it
+2021-2023,DEMO_L,RIDSTATR,Interview/Examination status,Both males and females 0 YEARS - 150 YEARS,ridstatr,2 = interviewed and examined
+2021-2023,DEMO_L,RIDAGEYR,Age in years at screening,Both males and females 0 YEARS - 150 YEARS,age,years; 80 means 80 or older (top-coded)
+2021-2023,DEMO_L,RIAGENDR,Gender,Both males and females 0 YEARS - 150 YEARS,sex / sex_label,"1 Male, 2 Female"
+2021-2023,DEMO_L,RIDRETH3,Race/Hispanic origin w/ NH Asian,Both males and females 0 YEARS - 150 YEARS,reth3 / reth_label,self-reported race and Hispanic origin recode; 5 unused
+2021-2023,DEMO_L,RIDEXPRG,Pregnancy status at exam,Females only 20 YEARS - 44 YEARS,ridexprg / preg_status,"females 20-44 at exam: 1 pregnant, 2 not, 3 cannot ascertain; others not applicable"
+2021-2023,DEMO_L,SDMVPSU,Masked variance pseudo-PSU,Both males and females 0 YEARS - 150 YEARS,sdmvpsu,masked variance pseudo-PSU
+2021-2023,DEMO_L,SDMVSTRA,Masked variance pseudo-stratum,Both males and females 0 YEARS - 150 YEARS,sdmvstra,masked variance pseudo-stratum
+2021-2023,DEMO_L,WTINT2YR,Full sample 2-year interview weight,Both males and females 0 YEARS - 150 YEARS,w_int,interview weight; flow table only
+2021-2023,DEMO_L,WTMEC2YR,Full sample 2-year MEC exam weight,Both males and females 0 YEARS - 150 YEARS,w_exam,examination weight; missingness description in domain A only
+2021-2023,GHB_L,WTPH2YR,Phlebotomy 2 Year Weight,Both males and females 12 YEARS - 150 YEARS,w_a1c,phlebotomy weight; 0 = no blood specimen; absent from file treated as 0
+2021-2023,GHB_L,LBXGH,Glycohemoglobin (%),Both males and females 12 YEARS - 150 YEARS,lbxgh / a1c65,"percent, rounded to 1 decimal; a1c65 = 1 if >= 6.5"
+2021-2023,GLU_L,WTSAF2YR,Fasting Subsample 2 Year MEC Weight,Both males and females 12 YEARS - 150 YEARS,w_fast,fasting subsample weight; 0 = no blood or fast outside 8 to <24 h; absent = not in subsample
+2021-2023,GLU_L,LBXGLU,Fasting Glucose (mg/dL),Both males and females 12 YEARS - 150 YEARS,lbxglu / fpg126,"mg/dL, whole numbers; fpg126 = 1 if >= 126 and fast_status = valid"
+2021-2023,FASTQX_L,PHAFSTHR,Total length of 'food fast' (hours),Both males and females 1 YEARS - 150 YEARS,fast_hours,"hours since last food or drink other than water, plus PHAFSTMN/60"
+2021-2023,FASTQX_L,PHAFSTMN,Total length of 'food fast' (minutes),Both males and females 1 YEARS - 150 YEARS,fast_hours,minutes component
+2021-2023,FASTQX_L,PHQ020,Coffee or tea with cream or sugar?,Both males and females 1 YEARS - 150 YEARS,phq020 / ok_coffee,"coffee or tea with cream or sugar since fasting time; with PHACOFHR, PHACOFMN"
+2021-2023,FASTQX_L,PHQ030,"Alcohol, such as beer, wine, or liquor?",Both males and females 1 YEARS - 150 YEARS,phq030 / ok_alcohol,"alcohol; with PHAALCHR, PHAALCMN"
+2021-2023,FASTQX_L,PHQ040,"Gum, mints, lozenges or cough drops",Both males and females 1 YEARS - 150 YEARS,phq040 / ok_gum,"gum, mints, lozenges, cough drops, cold remedies; with PHAGUMHR, PHAGUMMN"
+2021-2023,FASTQX_L,PHQ050,"Antacids, laxatives, or anti-diarrheals?",Both males and females 1 YEARS - 150 YEARS,phq050 / ok_antacid,"antacids, laxatives, anti-diarrheals; with PHAANTHR, PHAANTMN"
+2021-2023,FASTQX_L,PHQ060,Dietary supplements?,Both males and females 1 YEARS - 150 YEARS,phq060 / ok_supplement,"dietary supplements; with PHASUPHR, PHASUPMN"
+2021-2023,DIQ_L,DIQ010,Doctor told you have diabetes,Both males and females 1 YEARS - 150 YEARS,diq010 / dx / dx_status,"1 yes, 2 no, 3 borderline (coded 0), 7 refused, 9 don't know"
+2021-2023,DIQ_L,DIQ050,Taking insulin now,Both males and females 1 YEARS - 150 YEARS,diq050 / dx_treated,taking insulin now; asked of diagnosed participants
+2021-2023,DIQ_L,DIQ070,Take diabetic pills to lower blood sugar,Both males and females 1 YEARS - 150 YEARS,diq070 / dx_treated,taking diabetic pills now
+2021-2023,RHQ_L,RHD143,Are you pregnant now?,Females only 20 YEARS - 44 YEARS,rhd143 / preg_status,"pregnant now (interview), females 20-44; used only when RIDEXPRG = 3"
+2017-2020,P_DEMO,SEQN,Respondent sequence number,Both males and females 0 YEARS - 150 YEARS,seqn,integer key; unique per file; every component joined on it
+2017-2020,P_DEMO,RIDSTATR,Interview/Examination status,Both males and females 0 YEARS - 150 YEARS,ridstatr,2 = interviewed and examined
+2017-2020,P_DEMO,RIDAGEYR,Age in years at screening,Both males and females 0 YEARS - 150 YEARS,age,years; 80 means 80 or older (top-coded)
+2017-2020,P_DEMO,RIAGENDR,Gender,Both males and females 0 YEARS - 150 YEARS,sex / sex_label,"1 Male, 2 Female"
+2017-2020,P_DEMO,RIDRETH3,Race/Hispanic origin w/ NH Asian,Both males and females 0 YEARS - 150 YEARS,reth3 / reth_label,self-reported race and Hispanic origin recode; 5 unused
+2017-2020,P_DEMO,RIDEXPRG,Pregnancy status at exam,Females only 20 YEARS - 44 YEARS,ridexprg / preg_status,"females 20-44 at exam: 1 pregnant, 2 not, 3 cannot ascertain; others not applicable"
+2017-2020,P_DEMO,SDMVPSU,Masked variance pseudo-PSU,Both males and females 0 YEARS - 150 YEARS,sdmvpsu,masked variance pseudo-PSU
+2017-2020,P_DEMO,SDMVSTRA,Masked variance pseudo-stratum,Both males and females 0 YEARS - 150 YEARS,sdmvstra,masked variance pseudo-stratum
+2017-2020,P_DEMO,WTINTPRP,Full sample interview weight,Both males and females 0 YEARS - 150 YEARS,w_int,interview weight; flow table only
+2017-2020,P_DEMO,WTMECPRP,Full sample MEC exam weight,Both males and females 0 YEARS - 150 YEARS,w_exam,examination weight; missingness description in domain A only
+2017-2020,P_DEMO,WTMECPRP,Full sample MEC exam weight,Both males and females 0 YEARS - 150 YEARS,w_a1c,examination weight used for HbA1c because this release has no phlebotomy weight; zero or absent HbA1c result excludes from domain H
+2017-2020,P_GHB,LBXGH,Glycohemoglobin (%),Both males and females 12 YEARS - 150 YEARS,lbxgh / a1c65,"percent, rounded to 1 decimal; a1c65 = 1 if >= 6.5"
+2017-2020,P_GLU,WTSAFPRP,Fasting Subsample Weight,Both males and females 12 YEARS - 150 YEARS,w_fast,fasting subsample weight; 0 = no blood or fast outside 8 to <24 h; absent = not in subsample
+2017-2020,P_GLU,LBXGLU,Fasting Glucose (mg/dL),Both males and females 12 YEARS - 150 YEARS,lbxglu / fpg126,"mg/dL, whole numbers; fpg126 = 1 if >= 126 and fast_status = valid"
+2017-2020,P_FASTQX,PHAFSTHR,"Total length of ""food fast,"" hours",Both males and females 1 YEARS - 150 YEARS,fast_hours,"hours since last food or drink other than water, plus PHAFSTMN/60"
+2017-2020,P_FASTQX,PHAFSTMN,"Total length of ""food fast,"" minutes",Both males and females 1 YEARS - 150 YEARS,fast_hours,minutes component
+2017-2020,P_FASTQX,PHQ020,Coffee or tea with cream or sugar?,Both males and females 1 YEARS - 150 YEARS,phq020 / ok_coffee,"coffee or tea with cream or sugar since fasting time; with PHACOFHR, PHACOFMN"
+2017-2020,P_FASTQX,PHQ030,"Alcohol, such as beer, wine, or liquor?",Both males and females 1 YEARS - 150 YEARS,phq030 / ok_alcohol,"alcohol; with PHAALCHR, PHAALCMN"
+2017-2020,P_FASTQX,PHQ040,"Gum, mints, lozenges or cough drops",Both males and females 1 YEARS - 150 YEARS,phq040 / ok_gum,"gum, mints, lozenges, cough drops, cold remedies; with PHAGUMHR, PHAGUMMN"
+2017-2020,P_FASTQX,PHQ050,"Antacids, laxatives, or anti-diarrheals?",Both males and females 1 YEARS - 150 YEARS,phq050 / ok_antacid,"antacids, laxatives, anti-diarrheals; with PHAANTHR, PHAANTMN"
+2017-2020,P_FASTQX,PHQ060,Dietary supplements?,Both males and females 1 YEARS - 150 YEARS,phq060 / ok_supplement,"dietary supplements; with PHASUPHR, PHASUPMN"
+2017-2020,P_DIQ,DIQ010,Doctor told you have diabetes,Both males and females 1 YEARS - 150 YEARS,diq010 / dx / dx_status,"1 yes, 2 no, 3 borderline (coded 0), 7 refused, 9 don't know"
+2017-2020,P_DIQ,DIQ050,Taking insulin now,Both males and females 1 YEARS - 150 YEARS,diq050 / dx_treated,taking insulin now; asked of diagnosed participants
+2017-2020,P_DIQ,DIQ070,Take diabetic pills to lower blood sugar,Both males and females 1 YEARS - 150 YEARS,diq070 / dx_treated,taking diabetic pills now
+2017-2020,P_RHQ,RHD143,Are you pregnant now?,Females only 20 YEARS - 44 YEARS,rhd143 / preg_status,"pregnant now (interview), females 20-44; used only when RIDEXPRG = 3"

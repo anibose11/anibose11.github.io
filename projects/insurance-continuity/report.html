@@ -1,0 +1,2189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</title>
+<meta name="description" content="Full scientific report: within-year coverage gaps and prescription spending among US adults with diabetes, MEPS 2024.">
+<link rel="stylesheet" href="assets/site.css?v=2f9db82a5a">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+</head>
+<body class="portfolio-page portfolio-report">
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main">
+<article><h1>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</h1>
+<p class="note">Author: Animesh Bose, BS, Norlowe Research. Data: AHRQ MEPS HC-256 (2024), HC-254A (2024), HC-251 (2023).</p>
+<nav class="toc" aria-label="Report contents"><strong>Contents:</strong> <a href="#abstract">Abstract</a> | <a href="#introduction">Introduction</a> | <a href="#methods">Methods</a> | <a href="#results">Results</a> | <a href="#discussion">Discussion</a> | <a href="#references">References</a> | <a href="#tables">Tables</a> | <a href="#supplementary-material">Supplementary material</a> | <a href="#reproducibility">Reproducibility</a></nav>
+<h2 id="abstract">Abstract</h2>
+<p><strong>Background:</strong> Annual spending analyses often classify insurance by year-end status, although people insured on December 31 may have been uninsured earlier that year.</p>
+<p><strong>Objectives:</strong> To estimate how many adults with diabetes insured at year end had a fully uninsured month that year, and how prescription summaries change when monthly continuity is retained.</p>
+<p><strong>Research Design:</strong> Cross-sectional, design-based analysis of the 2024 Medical Expenditure Panel Survey Full Year Consolidated file, replicated in 2023.</p>
+<p><strong>Subjects:</strong> 1,001 adults aged 18 to 64 with diagnosed diabetes, in scope all year (16.6 million people).</p>
+<p><strong>Measures:</strong> Coverage on December 31; monthly continuity classes; prescription fills; out-of-pocket prescription spending.</p>
+<p><strong>Results:</strong> Among 885 adults insured on December 31, 8.5% (95% CI, 6.3% to 11.4%) had at least 1 uninsured month (about 1.24 million people) and 4.7% had 3 or more consecutive uninsured months; the 2023 estimate was 8.4%. Compared with the continuously insured, those with a gap less often filled any prescription (78.8% vs 92.6%) and had fewer fills (20.1 vs 30.4). Median out-of-pocket spending among users was similar ($154 vs $152); lower mean spending with a gap ($240 vs $642) partly reflected a few very large amounts among the continuously insured. Pooled year-end summaries changed little (mean $608 vs $642), and adjusted spending differences were imprecise and reversed direction between years.</p>
+<p><strong>Conclusions:</strong> About 1 in 12 adults with diabetes counted as insured at year end had a coverage gap that year. Adults with gaps reported lower prescription use, while pooled spending summaries changed little.</p>
+<p><strong>Key Words:</strong> health insurance; coverage continuity; diabetes mellitus; prescription drugs; Medical Expenditure Panel Survey</p>
+<h2 id="introduction">Introduction</h2>
+<p>Surveys measure health insurance over different reference periods: on the interview date, on a fixed date such as December 31, at any time in a year, or in each month. Estimates of the uninsured depend heavily on that choice. In the Medical Expenditure Panel Survey (MEPS), 25.2% of people younger than 65 were uninsured at some point in 2011 but 14.5% for the entire year,<sup>1</sup> and in 2013 the corresponding figures were 27.1% and 15.6%.<sup>2</sup> Panel data show that point-in-time counts understate how many people experience a gap over time,<sup>3</sup> and even within a single instrument a calendar-year question and a point-in-time question give different answers.<sup>4</sup></p>
+<p>The reference period matters when coverage is used to group people for an analysis of annual outcomes. Annual prescription use and spending accumulate month by month, but a year-end indicator records only the last day. MEPS releases both kinds of measure, a December 31 indicator and monthly indicators for every source of coverage,<sup>5</sup> so the size of the mismatch can be measured directly.</p>
+<p>Coverage continuity is a particular concern for people with diabetes, whose treatment depends on regular refills. In community health centers, patients with diabetes churned more often than patients without diabetes,<sup>6</sup> and the share with hemoglobin A1c above 9.0% changed less favorably after churn than among matched patients without churn.<sup>7</sup> In a 2015 survey of low-income adults in 3 states, coverage changes that included an uninsured gap were associated with skipping medications because of cost, while changes without a gap were not, although those were linked to other problems such as changing doctors.<sup>8</sup> Among insulin users younger than 65 who were adequately insured, 14.3% rationed insulin because of cost.<sup>9</sup></p>
+<p>Earlier studies, many using MEPS, link part-year uninsurance to lower use of care. In 2016, 18.2% of adults aged 18 to 64 with at least 1 diagnosed chronic condition, a group that included diabetes, were uninsured for at least 1 month,<sup>10</sup> compared with 7.8% uninsured all year.<sup>11</sup> In 2002 to 2004, about 40% of working-age adults with part-year uninsurance gained coverage and kept it through the end of the year, and adults with chronic conditions who had short gaps filled fewer prescriptions than those insured all year.<sup>12</sup> MEPS monthly data have also been used to track part-year coverage and access<sup>13</sup> and multiyear coverage patterns.<sup>14</sup> In 2021 to 2022, 25.3% of nonelderly adults in MEPS had a coverage discontinuity, and those with discontinuities were less likely than adults with continuous private coverage to receive any prescriptions.<sup>15</sup> Medicaid churning among low-income adults has also been compared before and after the Affordable Care Act.<sup>16</sup> </p>
+<p>Two recent MEPS studies of diabetes costs and medication use classified coverage over the whole year. One treated only people uninsured all year as uninsured and assigned everyone else to the coverage type held longest,<sup>17</sup> and the other assigned the payer held for at least 7 months and excluded the uninsured,<sup>18</sup> so within-year gaps sit inside the insured groups.</p>
+<p>No study identified in a literature search (Supplemental Digital Content 1, Text, Section S1.8, search methods) reports the share of adults with diabetes who were insured on December 31 but uninsured earlier in the same year, or shows how annual prescription summaries change when those people are separated out. This study gives that estimate for 2024, the most recent MEPS full-year file, with a 2023 replication. It also provides a reusable classification of monthly coverage that keeps out-of-scope and missing months separate from uninsured months. This descriptive study measures what a year-end indicator omits for this population. It does not estimate the effects of coverage gaps.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="data">Data</h3>
+<p>MEPS Household Component data, released by the Agency for Healthcare Research and Quality (AHRQ), come from a nationally representative panel survey of the US civilian noninstitutionalized population. The 2024 Full Year Consolidated file (HC-256, released August 2026) contains 19,140 person records from Panel 28 rounds 3 to 5 and Panel 29 rounds 1 to 3, of whom 18,683 have a positive full-year weight.<sup>5</sup> Fill-level imputation flags came from the 2024 Prescribed Medicines file (HC-254A).<sup>19</sup> The replication used the 2023 file (HC-251).<sup>20</sup> An analysis plan with prespecified estimands, denominators, and robustness checks was written and dated before any data were tabulated; the 8 later amendments, none of which changed an estimand, are listed in Supplemental Digital Content 1, Text, Section S1.7 (amendments).</p>
+<h3 id="study-population">Study Population</h3>
+<p>The population was adults aged 18 to 64 on December 31, 2024, who reported ever being told by a doctor or other health professional that they had diabetes, excluding gestational diabetes. Responses of refused or don't know were not treated as no. The primary domain required a positive person weight, scope on December 31, and scope in all 12 months. MEPS codes monthly coverage as inapplicable in months a person was outside the civilian noninstitutionalized population, so a month was in scope when it carried a coverage value. The person's 2024 reference period also had to end in December. Of the 1,002 adults with diabetes in scope on December 31, 1,001 met these conditions; the remaining person is described in Supplemental Digital Content 1, Text, Section S1.2 (scope rule).</p>
+<h3 id="coverage-measures">Coverage Measures</h3>
+<p>Year-end status was the MEPS indicator of coverage on December 31, 2024. Monthly coverage used the edited indicators of any hospital or physician coverage in each month from Medicare, Medicaid or the Children's Health Insurance Program, TRICARE or the Civilian Health and Medical Program of the Department of Veterans Affairs, Veterans Affairs care, other public programs, or private insurance including Medigap. Indian Health Service coverage alone is not counted as insurance. MEPS counts a month as covered if coverage applied on any day of it.<sup>5</sup></p>
+<p>Each person was assigned to 1 of 4 classes: (A) insured on December 31 and in every month; (B) insured on December 31 with at least 1 uninsured month; (C) uninsured on December 31; and (D) indeterminate, when the year-end value was unusable, or when a person insured on December 31 had no observed uninsured month but at least 1 month without usable information. </p>
+<p>Missing and out-of-scope months were never counted as uninsured. Coverage from 2 sources in the same month counted once, and a change of coverage source without an uninsured month was not a gap; changes between private insurers cannot be identified in the public-use file. Uninsured months were counted within calendar year 2024, so a gap that began in 2023 counts only from January. The prespecified alternative definition required at least 3 consecutive uninsured months, following the statutory short coverage gap of less than 3 months.<sup>21</sup></p>
+<p>Classification was implemented as a reusable function that accepts any set of monthly indicators and code lists and returns each person's class with an audit table of rule counts. Monthly data were reshaped into a person-month table with structured query language (SQL) queries and reconciled with the annual MEPS indicators on their documented definitions before use (Supplemental Digital Content 1, Text, Section S1.4, reconciliation checks).</p>
+<h3 id="prescription-measures">Prescription Measures</h3>
+<p>Outcomes were any prescription fill in 2024, the number of fills including refills, and self or family out-of-pocket payments for all prescribed medicines, in nominal 2024 dollars. These cover all prescriptions and the diabetic supplies recorded in the MEPS prescribed medicines component, not only glucose-lowering drugs. No recorded fill, fills with zero out-of-pocket payment, and missing expenditure were kept as separate states. Total payments from all sources gave context. MEPS imputes missing payments,<sup>5</sup> so the share of fills with fully or partially imputed payments was summarized from fill-level flags.<sup>19</sup> Out-of-pocket spending describes payments made; it does not measure affordability, unmet need, or access to every prescribed treatment.</p>
+<h3 id="statistical-analysis">Statistical Analysis</h3>
+<p>Estimates used R version 4.5.1 (R Foundation for Statistical Computing, Vienna, Austria) with the survey package version 4.5,<sup>22</sup> with Taylor series linearization, the full-year weight, variance strata, and primary sampling units. The full file stayed in the design and domains were taken as subsets, so variance estimation used all 105 strata and 264 primary sampling units in 2024 (262 in 2023). No stratum had a single primary sampling unit in the full file. Proportions have logit-transformed 95% CIs. Proportions were flagged with the National Center for Health Statistics presentation standards using Korn-Graubard intervals<sup>23</sup>; estimates that met the standard but called for review (fewer than 8 design degrees of freedom, or a complementary proportion that would not meet it) are marked. </p>
+<p>Means and quantiles were flagged when the relative standard error exceeded 30% or could not be estimated, or when the group had fewer than 30 people. Medians and 90th percentiles used survey quantiles with Woodruff intervals.<sup>24</sup> Differences between classes in any fill, number of fills, and mean spending are design-based contrasts. A post hoc diagnostic described how concentrated out-of-pocket spending was.</p>
+<p>Summaries are shown 2 ways: on a common denominator, the primary domain split by class, and on classification-specific denominators, year-end status among everyone in scope on December 31. This keeps differences in scope or missing information from being read as coverage effects.</p>
+<p>A prespecified adjustment set (age group, sex, race and ethnicity, and family income below or above 200% of the federal poverty level) was used to standardize out-of-pocket spending across classes A, B, and C with a two-part model: a survey-weighted logistic model for any out-of-pocket spending and a gamma model with log link for positive amounts. Standardized means set every domain member to each class in turn. Uncertainty came from jackknife replicate weights built from the design (264 in 2024 and 262 in 2023), refitting both parts in every replicate. The model was fit only if a prespecified rule on event counts, positive spending observations, and design degrees of freedom was met; it was met in both years. No stepwise selection was used, and the model is descriptive.</p>
+<p>Three robustness checks were prespecified: a common complete-information domain, the 3-consecutive-month gap definition, and a replication in 2023 with definitions verified separately against that file's documentation. Years were not pooled and were not tested against each other, because Panel 28 contributes to both.</p>
+<h3 id="validation">Validation</h3>
+<p>Synthetic-record tests covered reshaping, overlapping coverage sources, missing and out-of-scope months, gaps before December coverage, source changes without gaps, expenditure states, and unchanged person counts. All 28 source reconciliation checks passed. In both years, the person-month table reproduced the annual MEPS uninsured and coverage indicators for every record, and weighted frequencies matched the AHRQ codebook. In 2024, fill counts and out-of-pocket sums from the prescribed medicines file matched every person's reported totals.</p>
+<p>In 4 software cross-checks, a separately written SQL classification agreed on class and uninsured-month counts for every record in both years. A separate Taylor variance calculation reproduced the primary estimate and its standard error. Rerunning the pipeline from cached files reproduced every numeric output.</p>
+<p>I confirmed the AHRQ file checksums and recomputed cohort counts, class counts, and the primary proportion and standard error in a separate script. I also checked the monthly coverage sequences of 25 randomly sampled domain members against their assigned classes and checked every reported number against the outputs. I reread each cited study, in full text where available and as an abstract otherwise, to confirm the statements attributed to it.</p>
+<h3 id="ethics">Ethics</h3>
+<p>This study was a secondary analysis of publicly available, deidentified MEPS public-use files released by AHRQ. No participants were recruited, there was no contact with survey respondents, and no identifiable private information was accessed. No institutional review board approval or exemption determination was sought.</p>
+<h2 id="results">Results</h2>
+<p>The 2024 file contained 19,140 records; 1,008 were adults aged 18 to 64 with a positive weight and diagnosed diabetes, and 1,001 formed the primary domain (Supplemental Digital Content 1, Figure S1, cohort flow). Monthly coverage had no missing values in the domain, so no one was classified as indeterminate. Table 1 shows characteristics by class.</p>
+<h3 id="year-end-status-versus-monthly-continuity">Year-End Status Versus Monthly Continuity</h3>
+<figure><img alt="Figure 1. Year-end status versus monthly continuity, MEPS 2024" src="assets/fig1_yearend_vs_continuity_2024.png" loading="lazy"></figure>
+<p><em>Figure 1. The same adults classified by year-end coverage (left) and by monthly continuity (right). Weighted shares; labels give unweighted counts.</em></p>
+<p>By the year-end indicator, 87.9% of adults with diabetes were insured (Figure 1). Monthly data split that group: 80.4% of the domain were insured in every month (class A), 7.5% were insured on December 31 after at least 1 uninsured month (class B), and 12.1% were uninsured on December 31 (class C). Among the 885 adults insured on December 31, 70 had a gap, a weighted 8.5% (95% CI, 6.3% to 11.4%; design effect 1.84), or about 1.24 million people. Under the 3-consecutive-month definition, the share was 4.7% (95% CI, 3.2% to 7.0%).</p>
+<p>People in class B averaged 3.8 uninsured months within 2024 (95% CI, 3.0 to 4.7). About two thirds of class B (63.7%; 95% CI, 45.4% to 78.7%) were uninsured in January and insured from a later month through December; this subgroup estimate does not meet the presentation standard and describes timing only (Supplemental Digital Content 1, Figure S3, monthly uninsured shares in class B). Changes in the categories of coverage held, such as gaining or losing Medicaid or private coverage, without an uninsured month were also common: 10.4% of class A had one (95% CI, 8.2% to 13.0%). In month-to-month transitions, 6.6% of uninsured person-months were followed by a covered month.</p>
+<h3 id="prescription-use-and-spending">Prescription Use and Spending</h3>
+<figure><img alt="Figure 2. Out-of-pocket prescription spending by continuity class, MEPS 2024" src="assets/fig2_oop_spending_2024.png" loading="lazy"></figure>
+<p><em>Figure 2. Annual out-of-pocket prescription spending by class, 2024 dollars, with 95% CIs.</em></p>
+<p>Class B used fewer prescriptions than class A (Table 2, Figure 2). Any fill was less common in class B (78.8% vs 92.6%; difference −13.8 percentage points, 95% CI, −26.4 to −1.2; the class B proportion is marked for review in Table 2), and class B had fewer fills (20.1 vs 30.4; difference −10.3, 95% CI, −17.4 to −3.2). Unadjusted mean out-of-pocket spending including zeros was lower in class B ($240 vs $642; difference −$403, 95% CI, −$802 to −$4), while median spending among users was similar ($154 vs $152). The difference in means partly reflected a few very large amounts. In the post hoc diagnostic, the top 1% of the domain accounted for 42% of out-of-pocket dollars, and the largest annual amount, $91,626, was in class A; excluding that top 1%, mean spending was $383 in class A and $240 in class B. Class C had the lowest use (73.1% with any fill) and a mean of $845, an estimate flagged as imprecise.</p>
+<p>Because class B is small, the year-end insured group looked much like class A. Its mean out-of-pocket spending was $608 versus $642 for class A, any fill 91.4% versus 92.6%, and mean fills 29.5 versus 30.4. The classification-specific year-end summaries were nearly identical to the common-denominator ones because only 1 person was in scope on December 31 for part of the year.</p>
+<p>Imputed payments were common in every class. Among users, 90.1% in class A and 90.1% in class B had at least 1 fill with fully or partially imputed payments; the class B estimate rests on fewer than 8 design degrees of freedom (Supplemental Digital Content 1, Table S6, imputation information).</p>
+<h3 id="adjusted-comparison-and-robustness">Adjusted Comparison and Robustness</h3>
+<p>After standardization, mean out-of-pocket spending was $590 in class A and $352 in class B (difference −$238; 95% CI, −$536 to $59) (Table 3). In 2023 the difference was $105 (95% CI, −$215 to $425). The share of year-end insured adults with a gap was 8.4% in 2023 (95% CI, 6.3% to 11.3%), and 3.9% under the 3-month definition. In 2023, class B again less often filled any prescription than class A (difference −10.0 percentage points; 95% CI, −19.4 to −0.5), and the unadjusted mean spending difference was −$21 (95% CI, −$217 to $176).</p>
+<h2 id="discussion">Discussion</h2>
+<p>About 1 in 12 working-age adults with diabetes who were insured on December 31, 2024, had spent at least 1 full month of that year without coverage, and about 1 in 20 had a gap of 3 months or more. The estimate was nearly the same in 2023. People with a gap filled fewer prescriptions and were less likely to fill any. Their median out-of-pocket spending was similar to that of the continuously insured, and their lower mean spending in 2024 partly reflected a few very large amounts in the continuously insured group. Because they are a small share of the insured, separating them out barely changed pooled summaries for the year-end insured.</p>
+<p>These results fit earlier MEPS evidence. The 2016 AHRQ estimates for adults with chronic conditions imply that roughly 10 percentage points were uninsured for part of the year but not all of it,<sup>10,11</sup> and the 2024 estimate here isolates the part of such a group that a year-end indicator records as insured. Gulley and colleagues found that adults with chronic conditions who had short gaps filled fewer prescriptions,<sup>12</sup> and class B showed a similar pattern in 2024. Wang and colleagues reported that limiting their public and private insurance groups to adults covered all year lowered the high out-of-pocket cost rate only slightly (within 1%) and did not change trends<sup>17</sup>; the comparison of pooled year-end summaries here points the same way for person-level prescription spending. Multiyear MEPS typologies and studies of Medicaid churning describe instability over longer windows or in specific programs<sup>14-16,25</sup>; none of them crosses year-end status with monthly continuity among adults with diabetes, which is the contrast reported here.</p>
+<p>For analysts, the choice of coverage measure depends on the question. When the aim is to describe annual spending for insured adults with diabetes, a year-end indicator loses little, at least at the level of means and medians in 2024 and 2023. For questions about prescription use, a year-end indicator combines people who had a gap with those continuously insured. About 1 in 12 of the year-end insured had a gap in these data. The lower use in class B could reflect forgone or deferred care. Coverage gaps have been associated with skipping medications because of cost,<sup>8</sup> adults who lost Medicaid deferred office-based care until they were insured again,<sup>25</sup> and longer gaps have been followed by later cost-related barriers to care,<sup>26</sup> but these data cannot separate that from differences in health or need. Lower spending in a group with less use should not be read as better financial protection.<sup>26</sup></p>
+<p>The classification function can be reused in other analyses. An AHRQ MEPS workshop program counts uninsured months but treats people whose months are all out of scope as fully insured and does not anchor the count to year-end status.<sup>27</sup> The function used here keeps out-of-scope and missing months apart from uninsured months, reports an explicit indeterminate class, and produces an audit table, so the same rules can be applied to other years, populations, or enrollment files.</p>
+<h3 id="limitations">Limitations</h3>
+<p>Coverage is self-reported in interview rounds and edited by AHRQ. Estimates of coverage dynamics depend on the survey instrument,<sup>28</sup> and self-reported Medicaid enrollment may lag true enrollment.<sup>25</sup> Monthly indicators count a month as covered if any day was covered, so gaps shorter than a month, or inside a partly covered month, are invisible, and the estimate is a lower bound on people with any uninsured day. Uninsured months were counted within the calendar year, so gaps that began in the previous year are truncated at January; the mean number of uninsured months and the 3-consecutive-month estimate are therefore lower bounds. The year-end indicator and the December monthly indicator come from the same interviews, so the contrast is between reference periods rather than independent measurements. </p>
+<p>Diabetes is self-reported ever-diagnosed. The prescription outcome covers all medicines, not only diabetes treatment, and includes imputed payments. Class B is small (n = 70), many of its subgroup estimates are imprecise, and adjusted spending differences reversed direction between years. Out-of-pocket means were dominated by a few very large amounts. </p>
+<p>The cross-sectional design supports description only. Results apply to the US civilian noninstitutionalized population, not to institutionalized people.</p>
+<h3 id="conclusions">Conclusions</h3>
+<p>A year-end coverage indicator counts about 1 in 12 working-age adults with diabetes as insured even though they went without coverage for at least 1 month that year. Separating these groups revealed differences in prescription use while changing pooled spending summaries little in 2023 and 2024. Studies that stratify annual outcomes by coverage can retain monthly continuity with the classification provided here.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Chu MC. <em>The Uninsured in America, 1996-2012: Estimates for the U.S. Civilian Noninstitutionalized Population under Age 65</em>. Statistical Brief #420. Agency for Healthcare Research and Quality; August 2013. Accessed October 7, 2026. https://meps.ahrq.gov/data_files/publications/st420/stat420.pdf</li>
+<li>Rhoades JA. <em>Spells of Uninsurance: Estimates for the U.S. Civilian Noninstitutionalized Population under Age 65, 2013</em>. Statistical Brief #476. Agency for Healthcare Research and Quality; June 2015. Accessed October 7, 2026. https://meps.ahrq.gov/data_files/publications/st476/stat476.pdf</li>
+<li>Short PF, Graefe DR, Swartz K, et al. New estimates of gaps and transitions in health insurance. <em>Med Care Res Rev</em>. 2012;69(6):721-736. doi:10.1177/1077558712454195</li>
+<li>Pascale J, Boudreaux M, King R. Understanding the new Current Population Survey health insurance questions. <em>Health Serv Res</em>. 2016;51(1):240-261. doi:10.1111/1475-6773.12312</li>
+<li>Agency for Healthcare Research and Quality. <em>MEPS HC-256: 2024 Full Year Consolidated Data File</em>. Agency for Healthcare Research and Quality; August 2026. Accessed October 7, 2026. https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-256</li>
+<li>Lester L, Dinh D, Larson AE, et al. Insurance instability among community-based health center patients with diabetes post-Affordable Care Act Medicaid expansion. <em>J Am Board Fam Med</em>. 2025;38(1):154-164. doi:10.3122/jabfm.2024.240186R1</li>
+<li>Huguet N, Dinh D, Larson A, et al. Insurance churn and diabetes outcomes among patients with low income. <em>JAMA Health Forum</em>. 2026;7(3):e260034. doi:10.1001/jamahealthforum.2026.0034</li>
+<li>Sommers BD, Gourevitch R, Maylone B, et al. Insurance churning rates for low-income adults under health reform: lower than expected but still harmful for many. <em>Health Aff (Millwood)</em>. 2016;35(10):1816-1824. doi:10.1377/hlthaff.2016.0455</li>
+<li>Fang M, Selvin E. Cost-related insulin rationing in US adults younger than 65 years with diabetes. <em>JAMA</em>. 2023;329(19):1700-1702. doi:10.1001/jama.2023.5747</li>
+<li>Keenan PS, Vistnes J. <em>Non-Elderly Adults Ever Uninsured During the Calendar Year, 2013-2016</em>. Research Findings #42. Agency for Healthcare Research and Quality; June 2019. Accessed October 7, 2026. https://meps.ahrq.gov/data_files/publications/rf42/rf42.pdf</li>
+<li>Vistnes J, Keenan P. <em>Uninsured All Year, 2013-2016: Estimates for Non-Elderly Adults by Selected Population Sub-groups and State Medicaid Expansion Status</em>. Research Findings #40. Agency for Healthcare Research and Quality; January 2019. Accessed October 7, 2026. https://meps.ahrq.gov/data_files/publications/rf40/rf40.pdf</li>
+<li>Gulley SP, Rasch EK, Chan L. Ongoing coverage for ongoing care: access, utilization, and out-of-pocket spending among uninsured working-aged adults with chronic health care needs. <em>Am J Public Health</em>. 2011;101(2):368-375. doi:10.2105/AJPH.2010.191569</li>
+<li>Abdus S. Part-year coverage and access to care for nonelderly adults. <em>Med Care</em>. 2014;52(8):709-714. doi:10.1097/MLR.0000000000000167</li>
+<li>Gai Y, Jones K. Insurance patterns and instability from 2006 to 2016. <em>BMC Health Serv Res</em>. 2020;20(1):334. doi:10.1186/s12913-020-05226-1</li>
+<li>Mac Arthur NS, Abraham JM, Drew JAR, et al. Insurance coverage disruptions and associated access and utilization, 2008 to 2022. <em>Med Care Res Rev</em>. Published online October 1, 2026. doi:10.1177/10775587261484437</li>
+<li>Goldman AL, Sommers BD. Among low-income adults enrolled in Medicaid, churning decreased after the Affordable Care Act. <em>Health Aff (Millwood)</em>. 2020;39(1):85-93. doi:10.1377/hlthaff.2019.00378</li>
+<li>Wang Y, Park J, Li R, et al. National trends in out-of-pocket costs among U.S. adults with diabetes aged 18–64 years: 2001–2017. <em>Diabetes Care</em>. 2021;44(11):2510-2517. doi:10.2337/dc20-2833</li>
+<li>Bepo L, Nguyen OK, Makam AN. Disparities in use of novel diabetes medications by insurance: a nationally representative cohort study. <em>J Gen Intern Med</em>. 2024;39(15):2987-2994. doi:10.1007/s11606-024-08961-x</li>
+<li>Agency for Healthcare Research and Quality. <em>MEPS HC-254A: 2024 Prescribed Medicines File</em>. Agency for Healthcare Research and Quality; July 2026. Accessed October 7, 2026. https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-254A</li>
+<li>Agency for Healthcare Research and Quality. <em>MEPS HC-251: 2023 Full Year Consolidated Data File</em>. Agency for Healthcare Research and Quality; August 2025. Accessed October 7, 2026. https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-251</li>
+<li>Requirement to maintain minimum essential coverage, 26 USC §5000A(e)(4) (2018). Accessed October 7, 2026. https://www.law.cornell.edu/uscode/text/26/5000A</li>
+<li>Lumley T. Analysis of complex survey samples. <em>J Stat Softw</em>. 2004;9(8):1-19. doi:10.18637/jss.v009.i08</li>
+<li>Parker JD, Talih M, Malec DJ, et al. National Center for Health Statistics data presentation standards for proportions. <em>Vital Health Stat 2</em>. 2017;(175):1-22. Accessed October 7, 2026. https://www.cdc.gov/nchs/data/series/sr_02/sr02_175.pdf</li>
+<li>Woodruff RS. Confidence intervals for medians and other position measures. <em>J Am Stat Assoc</em>. 1952;47(260):635-646. doi:10.1080/01621459.1952.10483443</li>
+<li>Roberts ET, Pollack CE. Does churning in Medicaid affect health care use? <em>Med Care</em>. 2016;54(5):483-489. doi:10.1097/MLR.0000000000000509</li>
+<li>Cao Y, Liu Z, Jiang M, et al. Duration of health insurance coverage gaps and subsequent cost-related barriers to care among adults aged 18–64 years with multimorbidity. <em>Front Public Health</em>. 2026;14:1965839. doi:10.3389/fpubh.2026.1965839</li>
+<li>Agency for Healthcare Research and Quality. HHS-AHRQ/MEPS workshop exercise 5b (SAS and Stata) [computer program]. GitHub repository, commit 02fbdd634959e97bd3584c3e9abdc62f84291d70; June 9, 2026. Accessed October 7, 2026. https://github.com/HHS-AHRQ/MEPS</li>
+<li>Graves JA, Mishra P. Health insurance dynamics: methodological considerations and a comparison of estimates from two surveys. <em>Health Serv Res</em>. 2016;51(5):1981-2001. doi:10.1111/1475-6773.12449</li>
+</ol>
+<h2 id="tables">Tables</h2>
+<h3 id="table-1-characteristics-of-adults-aged-18-to-64-with-diagnosed-diabetes-by-coverage-continuity-class-meps-2024">Table 1. Characteristics of adults aged 18 to 64 with diagnosed diabetes, by coverage continuity class, MEPS 2024</h3>
+<p>Weighted percentages (95% CI, logit). CI indicates confidence interval; MEPS, Medical Expenditure Panel Survey. Primary domain: in scope all 12 months. Class A, insured on December 31 and in all 12 months; class B, insured on December 31 with at least 1 uninsured month; class C, uninsured on December 31. † Does not meet the National Center for Health Statistics presentation standard for proportions.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>All</th>
+<th>A. Insured all 12 months</th>
+<th>B. Insured 12/31, gap</th>
+<th>C. Uninsured 12/31</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unweighted n</td>
+<td>1,001</td>
+<td>815</td>
+<td>70</td>
+<td>116</td>
+</tr>
+<tr>
+<td><strong>Age, y</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;18-44</td>
+<td>26.0 (22.6 to 29.8)</td>
+<td>24.9 (21.3 to 29.0)</td>
+<td>28.8 (14.7 to 48.8) †</td>
+<td>31.7 (20.5 to 45.5)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;45-64</td>
+<td>74.0 (70.2 to 77.4)</td>
+<td>75.1 (71.0 to 78.7)</td>
+<td>71.2 (51.2 to 85.3) †</td>
+<td>68.3 (54.5 to 79.5)</td>
+</tr>
+<tr>
+<td><strong>Sex</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Female</td>
+<td>49.3 (46.0 to 52.6)</td>
+<td>49.6 (46.0 to 53.3)</td>
+<td>56.6 (41.6 to 70.5) †</td>
+<td>42.6 (31.7 to 54.2)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Male</td>
+<td>50.7 (47.4 to 54.0)</td>
+<td>50.4 (46.7 to 54.0)</td>
+<td>43.4 (29.5 to 58.4) †</td>
+<td>57.4 (45.8 to 68.3)</td>
+</tr>
+<tr>
+<td><strong>Race and ethnicity</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Hispanic</td>
+<td>22.6 (18.8 to 26.9)</td>
+<td>19.4 (15.7 to 23.7)</td>
+<td>26.2 (13.5 to 44.7) †</td>
+<td>41.8 (30.1 to 54.4)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Non-Hispanic Black</td>
+<td>15.9 (13.0 to 19.4)</td>
+<td>16.8 (13.6 to 20.5)</td>
+<td>10.5 (4.7 to 21.7) †</td>
+<td>13.8 (7.1 to 25.2) †</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Non-Hispanic White</td>
+<td>49.6 (45.1 to 54.1)</td>
+<td>52.4 (47.7 to 57.1)</td>
+<td>51.5 (35.3 to 67.4) †</td>
+<td>29.6 (18.3 to 44.1)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Non-Hispanic Asian, other, or multiple</td>
+<td>11.9 (9.3 to 15.0)</td>
+<td>11.4 (8.8 to 14.6)</td>
+<td>11.8 (4.5 to 27.8) †</td>
+<td>14.8 (7.4 to 27.4) †</td>
+</tr>
+<tr>
+<td><strong>Family income</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Below 200% of the federal poverty level</td>
+<td>33.5 (29.9 to 37.4)</td>
+<td>33.8 (29.7 to 38.1)</td>
+<td>36.7 (23.8 to 51.8)</td>
+<td>30.1 (20.3 to 42.1)</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;200% of the federal poverty level or more</td>
+<td>66.5 (62.6 to 70.1)</td>
+<td>66.2 (61.9 to 70.3)</td>
+<td>63.3 (48.2 to 76.2)</td>
+<td>69.9 (57.9 to 79.7)</td>
+</tr>
+<tr>
+<td><strong>Census region</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Northeast</td>
+<td>14.9 (12.2 to 18.0)</td>
+<td>13.7 (10.9 to 17.0)</td>
+<td>19.4 (8.6 to 38.2) †</td>
+<td>20.0 (9.7 to 36.8) †</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;Midwest</td>
+<td>19.2 (16.2 to 22.5)</td>
+<td>21.4 (17.9 to 25.4)</td>
+<td>12.5 (4.5 to 30.4) †</td>
+<td>8.5 (3.7 to 18.4) †</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;South</td>
+<td>43.1 (38.9 to 47.4)</td>
+<td>42.7 (37.9 to 47.6)</td>
+<td>41.1 (26.2 to 57.8) †</td>
+<td>47.2 (32.9 to 61.9) †</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;West</td>
+<td>22.8 (19.2 to 26.9)</td>
+<td>22.2 (18.1 to 27.1)</td>
+<td>27.0 (15.0 to 43.7) †</td>
+<td>24.3 (13.5 to 39.8)</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-2-annual-prescription-use-and-out-of-pocket-spending-by-coverage-representation-meps-2024">Table 2. Annual prescription use and out-of-pocket spending by coverage representation, MEPS 2024</h3>
+<p>Estimates (95% CI). CI indicates confidence interval; MEPS, Medical Expenditure Panel Survey; OOP, out-of-pocket (self or family payments for all prescribed medicines, nominal 2024 dollars); Rx, prescription. The first 4 columns share the primary-domain denominator; the last column uses the classification-specific denominator (everyone in scope on December 31, including part-year in scope). Class definitions as in Table 1. Medians and 90th percentiles use Woodruff intervals. † Does not meet the National Center for Health Statistics (NCHS) presentation standard for proportions. ‡ Relative standard error above 30% or not estimable, or fewer than 30 people. § Meets the NCHS standard but calls for review (fewer than 8 design degrees of freedom, or the complementary proportion would not meet it).</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Insured on 12/31 (A+B)</th>
+<th>A. All 12 months</th>
+<th>B. 12/31 with gap</th>
+<th>C. Uninsured 12/31</th>
+<th>Insured on 12/31, classification-specific</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unweighted n</td>
+<td>885</td>
+<td>815</td>
+<td>70</td>
+<td>116</td>
+<td>886</td>
+</tr>
+<tr>
+<td>Any fill, %</td>
+<td>91.4 (88.6 to 93.5)</td>
+<td>92.6 (89.6 to 94.8)</td>
+<td>78.8 (61.6 to 89.6) §</td>
+<td>73.1 (60.1 to 83.0)</td>
+<td>91.3 (88.5 to 93.4)</td>
+</tr>
+<tr>
+<td>Fills per person, mean</td>
+<td>29.5 (27.3 to 31.8)</td>
+<td>30.4 (27.9 to 32.9)</td>
+<td>20.1 (12.9 to 27.3)</td>
+<td>13.7 (8.7 to 18.7)</td>
+<td>29.5 (27.2 to 31.7)</td>
+</tr>
+<tr>
+<td>OOP spending, mean incl. zeros, $</td>
+<td>$608 ($260 to $956)</td>
+<td>$642 ($263 to $1,022)</td>
+<td>$240 ($99 to $380)</td>
+<td>$845 ($139 to $1,551) ‡</td>
+<td>$607 ($260 to $955)</td>
+</tr>
+<tr>
+<td>OOP spending among users, mean, $</td>
+<td>$665 ($282 to $1,048)</td>
+<td>$694 ($281 to $1,107) ‡</td>
+<td>$304 ($115 to $494)</td>
+<td>$1,157 ($152 to $2,161) ‡</td>
+<td>$665 ($282 to $1,048)</td>
+</tr>
+<tr>
+<td>OOP spending among users, median, $</td>
+<td>$154 ($133 to $181)</td>
+<td>$152 ($133 to $186)</td>
+<td>$154 ($42 to $248)</td>
+<td>$131 ($90 to $249)</td>
+<td>$154 ($133 to $181)</td>
+</tr>
+<tr>
+<td>OOP spending among users, 90th percentile, $</td>
+<td>$1,167 ($940 to $1,436)</td>
+<td>$1,183 ($954 to $1,460)</td>
+<td>$607 ($461 to $3,268) ‡</td>
+<td>$3,262 ($686 to not estimable) ‡</td>
+<td>$1,167 ($940 to $1,436)</td>
+</tr>
+<tr>
+<td>Users with $0 OOP, %</td>
+<td>14.1 (11.4 to 17.3)</td>
+<td>14.2 (11.4 to 17.5)</td>
+<td>13.2 (5.0 to 30.7) †</td>
+<td>2.8 (0.8 to 9.0) †</td>
+<td>14.1 (11.4 to 17.3)</td>
+</tr>
+<tr>
+<td>Total Rx expenditure, mean, $</td>
+<td>$8,261 ($6,987 to $9,535)</td>
+<td>$8,657 ($7,286 to $10,029)</td>
+<td>$4,018 ($2,102 to $5,933)</td>
+<td>$1,931 ($869 to $2,993)</td>
+<td>$8,251 ($6,978 to $9,524)</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-3-robustness-of-the-primary-estimate-and-standardized-out-of-pocket-spending-meps-2024-and-2023">Table 3. Robustness of the primary estimate and standardized out-of-pocket spending, MEPS 2024 and 2023</h3>
+<p>CI indicates confidence interval; MEPS, Medical Expenditure Panel Survey; OOP, out-of-pocket. Proportions use logit 95% CIs with the unweighted numerator and denominator. Standardized means come from a survey-weighted two-part model adjusted for age group, sex, race and ethnicity, and family income, with jackknife replicate CIs. Class A, insured on December 31 and in all 12 months; class B, insured on December 31 with at least 1 uninsured month; class C, uninsured on December 31. Years are estimated separately and not pooled.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Quantity</th>
+<th>Estimate (95% CI)</th>
+<th>Unweighted n or variance basis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td>Share of year-end insured with a gap (≥1 uninsured month), %</td>
+<td>8.5 (6.3 to 11.4)</td>
+<td>70/885</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Share of year-end insured with a gap (≥3 consecutive uninsured months), %</td>
+<td>4.7 (3.2 to 7.0)</td>
+<td>39/885</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Share of year-end insured with a gap (≥1 uninsured month), %</td>
+<td>8.4 (6.3 to 11.3)</td>
+<td>63/860</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Share of year-end insured with a gap (≥3 consecutive uninsured months), %</td>
+<td>3.9 (2.6 to 5.9)</td>
+<td>33/860</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Standardized mean OOP, class A, $</td>
+<td>$590 ($293 to $887)</td>
+<td>264 jackknife replicates</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Standardized mean OOP, class B, $</td>
+<td>$352 ($110 to $594)</td>
+<td>264 jackknife replicates</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Standardized mean OOP, class C, $</td>
+<td>$1,182 ($124 to $2,239)</td>
+<td>264 jackknife replicates</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Standardized difference, B minus A, $</td>
+<td>−$238 (−$536 to $59)</td>
+<td>264 jackknife replicates</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Standardized difference, C minus A, $</td>
+<td>$592 (−$414 to $1,598)</td>
+<td>264 jackknife replicates</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Standardized mean OOP, class A, $</td>
+<td>$338 ($285 to $391)</td>
+<td>262 jackknife replicates</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Standardized mean OOP, class B, $</td>
+<td>$443 ($129 to $758)</td>
+<td>262 jackknife replicates</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Standardized mean OOP, class C, $</td>
+<td>$784 ($131 to $1,437)</td>
+<td>262 jackknife replicates</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Standardized difference, B minus A, $</td>
+<td>$105 (−$215 to $425)</td>
+<td>262 jackknife replicates</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Standardized difference, C minus A, $</td>
+<td>$446 (−$205 to $1,097)</td>
+<td>262 jackknife replicates</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="supplementary-material">Supplementary material</h2>
+<h1 id="supplemental-digital-content-1">Supplemental Digital Content 1</h1>
+<p>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</p>
+<h2 id="section-s1-methods-details">Section S1. Methods details</h2>
+<h3 id="s11-data-releases-and-verification">S1.1 Data releases and verification</h3>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Release</th>
+<th>Role</th>
+<th>Reference period</th>
+<th>Release date</th>
+<th>File checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HC-256: 2024 Full Year Consolidated Data File</td>
+<td>primary</td>
+<td>calendar year 2024</td>
+<td>August 2026</td>
+<td>h256dta.zip, SHA-256 653891861ec18574...</td>
+</tr>
+<tr>
+<td>HC-251: 2023 Full Year Consolidated Data File</td>
+<td>replication</td>
+<td>calendar year 2023</td>
+<td>August 2025</td>
+<td>h251dta.zip, SHA-256 82e321f4b3720431...</td>
+</tr>
+<tr>
+<td>HC-254A: 2024 Prescribed Medicines File</td>
+<td>imputation flags and reconciliation</td>
+<td>calendar year 2024</td>
+<td>July 2026</td>
+<td>h254adta.zip, SHA-256 8afe0228acf154e0...</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Each file was streamed from the AHRQ site, checked for the expected content type and file signature (so an HTML error page could not pass as data), hashed with SHA-256, and extracted only for its expected archive member. Official detail pages for later public-use file numbers were checked on the access date, and none was a 2025 Full Year Consolidated file, so HC-256 was the newest compatible release. Release year, data reference period, and access date are recorded separately for each file.</p>
+<h3 id="s12-scope-rule">S1.2 Scope rule</h3>
+<p>A month was treated as in scope when the monthly any-coverage indicator held a substantive value (1 or 2). MEPS codes months outside a person's in-scope period as −1. The primary domain also required in-scope status on December 31 (INSC1231 = 1) and a 2024 reference period ending in December (ENDRFM24 = 12). Among the 1,002 adults with diabetes who were in scope on December 31 with a year-end coverage value, the monthly rule and the round-level scope variables agreed for 1,002 (Table S1). The one adult in scope on December 31 but not all year was insured on December 31 and in scope for 9 months; with 3 months unobserved, that person's continuity is indeterminate.</p>
+<h3 id="s13-classification-rules">S1.3 Classification rules</h3>
+<p>The function applies these rules to each person in order. (1) A missing or unrecognized year-end value gives class D. (2) Uninsured on December 31 gives class C. (3) Insured on December 31 with any month coded uninsured gives class B. (4) Insured on December 31, no month coded uninsured, but any month out of scope, missing, or unrecognized gives class D. (5) Otherwise class A. Under the alternative definition, class B requires a run of at least 3 consecutive uninsured months; people whose only gaps are shorter move to class A if every month is observed and to class D otherwise. Across the full 2024 file the rules assigned rule 1 to 161 records, rule 2 to 1,896, rule 3 to 973, rule 4 to 319, and rule 5 to 15,791 (all ages and scope patterns).</p>
+<h3 id="s14-reconciliation-with-ahrq-indicators">S1.4 Reconciliation with AHRQ indicators</h3>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Kind</th>
+<th>Check</th>
+<th>Records checked</th>
+<th>Mismatches</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Each person has 12 person-month rows</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Person count unchanged by the reshape</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Uninsured-all-year indicator equals all in-scope months uninsured</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Annual coverage indicator 'uninsured' equals uninsured all year</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Annual 'any private' equals any month with private or TRICARE coverage</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Annual 'public only' equals public coverage with no private or TRICARE month</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Monthly any coverage equals private or public coverage (person-months)</td>
+<td>229,680</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Out-of-scope months coded the same across coverage sources</td>
+<td>229,680</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Insured on 12/31 implies insured in December (in scope in December)</td>
+<td>17,047</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Informational: 12/31 value recorded at the date a person left the household</td>
+<td>17,083</td>
+<td>36</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>December indicator equals the December person-month row</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Informational: covered in December but not on 12/31</td>
+<td>17,105</td>
+<td>58</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Informational: months with Indian Health Service coverage only</td>
+<td>229,680</td>
+<td>210</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Software cross-check</td>
+<td>Classification function agrees with independent SQL classification</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Software cross-check</td>
+<td>Uninsured-month counts agree between the two implementations</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>No missing values in the person table</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Weighted and unweighted frequencies equal the AHRQ codebook</td>
+<td>30</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Every person in the prescription file is in the person file</td>
+<td>12,135</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Fill count equals the number of prescription records</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Out-of-pocket total equals the sum over prescription records (within $1)</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Source reconciliation</td>
+<td>Total expenditure equals the sum over prescription records (within $1)</td>
+<td>19,140</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Each person has 12 person-month rows</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Person count unchanged by the reshape</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Uninsured-all-year indicator equals all in-scope months uninsured</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Annual coverage indicator 'uninsured' equals uninsured all year</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Annual 'any private' equals any month with private or TRICARE coverage</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Annual 'public only' equals public coverage with no private or TRICARE month</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Monthly any coverage equals private or public coverage (person-months)</td>
+<td>227,028</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Out-of-scope months coded the same across coverage sources</td>
+<td>227,028</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Insured on 12/31 implies insured in December (in scope in December)</td>
+<td>16,740</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Informational: 12/31 value recorded at the date a person left the household</td>
+<td>16,781</td>
+<td>41</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>December indicator equals the December person-month row</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Informational: covered in December but not on 12/31</td>
+<td>16,815</td>
+<td>75</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Informational: months with Indian Health Service coverage only</td>
+<td>227,028</td>
+<td>91</td>
+<td>Informational</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Software cross-check</td>
+<td>Classification function agrees with independent SQL classification</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Software cross-check</td>
+<td>Uninsured-month counts agree between the two implementations</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>No missing values in the person table</td>
+<td>18,919</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Source reconciliation</td>
+<td>Weighted and unweighted frequencies equal the AHRQ codebook</td>
+<td>30</td>
+<td>0</td>
+<td>Pass</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Informational counts are not errors. They record people whose December 31 coverage AHRQ captured on the date they left the household (36 in 2024; none in the analytic domain), people covered at some time in December but not on December 31, and person-months with Indian Health Service coverage only, which AHRQ counts as uninsured.</p>
+<h3 id="s15-prescription-expenditure-states-and-imputation">S1.5 Prescription expenditure states and imputation</h3>
+<p>Unweighted counts of prescription states in the primary domain. No record had missing expenditure.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Class</th>
+<th>State</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td>A. Insured all 12 months</td>
+<td>Fills with positive out-of-pocket</td>
+<td>636</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>A. Insured all 12 months</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>130</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>A. Insured all 12 months</td>
+<td>No recorded fill</td>
+<td>49</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>Fills with positive out-of-pocket</td>
+<td>49</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>No recorded fill</td>
+<td>14</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>C. Uninsured on 12/31</td>
+<td>Fills with positive out-of-pocket</td>
+<td>76</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>C. Uninsured on 12/31</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>C. Uninsured on 12/31</td>
+<td>No recorded fill</td>
+<td>36</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>A. Insured all 12 months</td>
+<td>Fills with positive out-of-pocket</td>
+<td>649</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>A. Insured all 12 months</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>111</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>A. Insured all 12 months</td>
+<td>No recorded fill</td>
+<td>37</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>Fills with positive out-of-pocket</td>
+<td>46</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>B. Insured on 12/31, ≥1 uninsured month</td>
+<td>No recorded fill</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>C. Uninsured on 12/31</td>
+<td>Fills with positive out-of-pocket</td>
+<td>89</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>C. Uninsured on 12/31</td>
+<td>Fills with $0 out-of-pocket</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>C. Uninsured on 12/31</td>
+<td>No recorded fill</td>
+<td>34</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="s16-two-part-model-support-and-specification">S1.6 Two-part model support and specification</h3>
+<p>The support rule required at least 80 people with the less common part-1 outcome, at least 80 people with positive out-of-pocket spending, at least 25 with positive spending in each class, and at least 30 design degrees of freedom. In 2024 the less common part-1 outcome had 240 people and class B had 49 people with positive spending; in 2023 the figures were 202 and 46. Both parts were refit in each of 264 (2024) and 262 (2023) jackknife replicates, and every replicate fit converged. Weights were divided by their mean within each fit, which leaves estimates unchanged and avoids a known failure of the binomial starting values when weights are large.</p>
+<h3 id="s17-analysis-plan-amendments">S1.7 Analysis plan amendments</h3>
+<p>The analysis plan was written and dated before any data were tabulated. All amendments were recorded on October 7, 2026. Amendments 1 to 4 are listed in the order made; amendments 5 to 8 were recorded after an internal review of the completed analysis, and each states when it was made relative to inspection of estimates. None changes the estimand, eligibility, classification rules, gap definitions, adjustment set, or robustness checks.</p>
+<ol>
+<li>After the first build, before any survey estimate. The reconciliation check "INS(12/31) = 1 implies INSDE = 1" flagged 36 records in 2024 and 41 in 2023. All had December coded out of scope (−1). AHRQ documents that for persons who left the household before December 31, the 12/31 variable records coverage on the date they left. The check was restricted to persons in scope in December, and the departures are reported as an informational count. None of these records is in an analytic frame.</li>
+<li>After the first model run. In the first run, the part-1 logistic model failed to converge in 257 of 264 jackknife replicates because R's binomial starting values break down with weights in the thousands, which inflated the replicate standard errors about eightfold. Weights inside each replicate fit are now divided by their mean, which leaves point estimates unchanged (the full-sample fit then reproduces the svyglm coefficients exactly). All replicate fits converge, and the count of non-converged fits is written to the output table. Only the corrected results are reported.</li>
+<li>After estimates were seen. The month-by-month uninsured shares in the gap group (n = 70) do not meet the NCHS presentation standard for proportions, so that figure was moved from the main text to the supplement, with the caveat printed on it.</li>
+<li>After estimates were seen (post hoc, descriptive). Because the 2024 class A mean had a relative standard error near 30%, a diagnostic of spending concentration was added: the weighted share of out-of-pocket dollars from the top 1% and 5% of persons, and the maximum annual out-of-pocket amount in each class. It is reported as a diagnostic with no inference and was not used to trim or recode any value.</li>
+<li>Before the first analysis run, with no estimates seen. Design-based contrasts between classes for any fill and for mean fills were added to the analysis code alongside the prespecified contrasts for mean out-of-pocket spending. They are reported as descriptive differences.</li>
+<li>Clarification, no change to the analysis. The plan described part 1 of the two-part model as "any fill" in one sentence and as P(OOP &gt; 0) in another. The analysis used P(OOP &gt; 0), consistent with modelling out-of-pocket spending, and the support rule was evaluated on that outcome.</li>
+<li>After estimates were seen. The reliability flags were completed to match this plan and the NCHS standard: quantiles are now flagged by the 30% relative standard error rule (the first implementation checked only n &lt; 30), and proportions whose complementary proportion would fail the relative width rule are marked for review. This changes footnotes only; no estimate changed.</li>
+<li>After estimates were seen. (a) The plan listed fewer than 8 design degrees of freedom among the criteria for flagging a proportion as unreliable; following the NCHS standard, such proportions are marked for review rather than suppressed, and means and quantiles whose standard error cannot be estimated are also flagged. (b) The code now computes the primary proportion on the complete-information denominator whenever anyone in it is indeterminate, as this plan specified; no one was indeterminate, so no estimate changed. (c) The post hoc spending diagnostic (amendment 4) also reports class means excluding the top 1% of the domain. These changes affect footnotes and descriptive diagnostics only.</li>
+</ol>
+<h3 id="s18-literature-search-methods">S1.8 Literature search methods</h3>
+<p>Searches were run on October 7, 2026, in PubMed through the National Center for Biotechnology Information E-utilities, with full text read in PubMed Central or publisher open-access copies where available; digital object identifiers were verified with the Crossref API. Official AHRQ MEPS publications (Statistical Briefs and Research Findings), the MEPS documentation, and the agency's public code repository were also searched, together with general web searches for official pages. Representative PubMed queries were: ("Medical Expenditure Panel Survey"[tiab] OR MEPS[tiab]) AND (churn<em>[tiab] OR "part-year"[tiab] OR "coverage disruption</em>"[tiab] OR discontinu<em>[tiab] OR "insurance gap</em>"[tiab] OR "coverage gap<em>"[tiab] OR "continuous coverage"[tiab]); (churn</em>[tiab] OR discontinu<em>[tiab] OR lapse</em>[tiab] OR gap<em>[tiab]) AND (insurance[tiab] OR Medicaid[tiab] OR coverage[tiab]) AND diabetes[tiab] AND (prescription</em>[tiab] OR medication<em>[tiab] OR expenditure</em>[tiab] OR "out-of-pocket"[tiab] OR cost*[tiab]); and (insurance coverage) AND (survey) AND ("reference period" OR "point-in-time") AND (uninsured). Studies, agency reports, and software were included if they measured coverage within a year or over time, or related coverage continuity to prescription use or spending, with priority to US data, MEPS, and diabetes. Three cited articles were available only as abstracts and are cited only for statements in their abstracts.</p>
+<h2 id="section-s2-supplementary-figures-and-tables">Section S2. Supplementary figures and tables</h2>
+<figure><img alt="Figure S1. Cohort flow, 2024. Unweighted record counts at each cumulative step and the classification of the primary domain." src="assets/figS1_cohort_flow_2024.png" loading="lazy"></figure>
+<p><em>Figure S1. Cohort flow, 2024. Unweighted record counts at each cumulative step and the classification of the primary domain.</em></p>
+<figure><img alt="Figure S2. Share of the year-end insured with a gap by gap definition and year. Separate design-based estimates; years are not pooled." src="assets/figS2_robustness_gap_definitions.png" loading="lazy"></figure>
+<p><em>Figure S2. Share of the year-end insured with a gap by gap definition and year. Separate design-based estimates; years are not pooled.</em></p>
+<figure><img alt="Figure S3. Share uninsured in each month among class B, 2024. Subgroup estimates do not meet the NCHS presentation standard and describe timing only." src="assets/figS3_monthly_uninsured_gap_group_2024.png" loading="lazy"></figure>
+<p><em>Figure S3. Share uninsured in each month among class B, 2024. Subgroup estimates do not meet the NCHS presentation standard and describe timing only.</em></p>
+<figure><img alt="Figure S4. Year-end status versus monthly continuity, 2023 replication." src="assets/fig1_yearend_vs_continuity_2023.png" loading="lazy"></figure>
+<p><em>Figure S4. Year-end status versus monthly continuity, 2023 replication.</em></p>
+<h3 id="table-s1-monthly-scope-rule-versus-round-level-scope-variables-2024">Table S1. Monthly scope rule versus round-level scope variables, 2024</h3>
+<p>Adults 18 to 64 with diagnosed diabetes and positive weight who were in scope on December 31 with a year-end coverage value. Columns: in scope for the whole reference period in each round covering 2024 (INSCOP31, INSCOP42, and INSCOP24 all equal 1). Unweighted counts.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Monthly rule</th>
+<th>Round-level: in scope throughout</th>
+<th>Round-level: not in scope throughout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Not in scope all 12 months (monthly rule)</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>In scope all 12 months (monthly rule)</td>
+<td>1001</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s2-month-to-month-coverage-transitions-primary-domain-2024">Table S2. Month-to-month coverage transitions, primary domain, 2024</h3>
+<p>Share of person-month transitions out of each coverage state (rows sum to 100% within a from-state), with linearized standard errors from ratio estimators.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>From</th>
+<th>To</th>
+<th>Share, % (SE)</th>
+<th>Transitions, n</th>
+<th>People with from-state, n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Private only</td>
+<td>Private only</td>
+<td>98.98 (0.16)</td>
+<td>5,012</td>
+<td>497</td>
+</tr>
+<tr>
+<td>Private only</td>
+<td>Public only</td>
+<td>0.05 (0.03)</td>
+<td>2</td>
+<td>497</td>
+</tr>
+<tr>
+<td>Private only</td>
+<td>Private and public</td>
+<td>0.34 (0.09)</td>
+<td>21</td>
+<td>497</td>
+</tr>
+<tr>
+<td>Private only</td>
+<td>Uninsured</td>
+<td>0.64 (0.14)</td>
+<td>27</td>
+<td>497</td>
+</tr>
+<tr>
+<td>Public only</td>
+<td>Private only</td>
+<td>0.08 (0.06)</td>
+<td>2</td>
+<td>417</td>
+</tr>
+<tr>
+<td>Public only</td>
+<td>Public only</td>
+<td>98.79 (0.24)</td>
+<td>4,109</td>
+<td>417</td>
+</tr>
+<tr>
+<td>Public only</td>
+<td>Private and public</td>
+<td>0.32 (0.10)</td>
+<td>12</td>
+<td>417</td>
+</tr>
+<tr>
+<td>Public only</td>
+<td>Uninsured</td>
+<td>0.81 (0.20)</td>
+<td>33</td>
+<td>417</td>
+</tr>
+<tr>
+<td>Private and public</td>
+<td>Private only</td>
+<td>1.14 (0.44)</td>
+<td>9</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Private and public</td>
+<td>Public only</td>
+<td>2.48 (0.71)</td>
+<td>17</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Private and public</td>
+<td>Private and public</td>
+<td>96.38 (0.93)</td>
+<td>544</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Private and public</td>
+<td>Uninsured</td>
+<td>0.00 (0.00)</td>
+<td>0</td>
+<td>79</td>
+</tr>
+<tr>
+<td>Uninsured</td>
+<td>Private only</td>
+<td>3.94 (0.78)</td>
+<td>41</td>
+<td>176</td>
+</tr>
+<tr>
+<td>Uninsured</td>
+<td>Public only</td>
+<td>2.57 (0.57)</td>
+<td>34</td>
+<td>176</td>
+</tr>
+<tr>
+<td>Uninsured</td>
+<td>Private and public</td>
+<td>0.04 (0.05)</td>
+<td>1</td>
+<td>176</td>
+</tr>
+<tr>
+<td>Uninsured</td>
+<td>Uninsured</td>
+<td>93.44 (0.98)</td>
+<td>1,147</td>
+<td>176</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s3-characteristics-of-gaps-in-class-b-with-december-coverage-source-in-classes-a-and-b-2024">Table S3. Characteristics of gaps in class B, with December coverage source in classes A and B, 2024</h3>
+<p>† Does not meet the National Center for Health Statistics (NCHS) presentation standard for proportions. ‡ Relative standard error above 30% or not estimable, or fewer than 30 people. § Meets the NCHS standard but calls for review (fewer than 8 design degrees of freedom, or the complementary proportion would not meet it).</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Measure</th>
+<th>Estimate (95% CI)</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class B</td>
+<td>Uninsured months in 2024, mean</td>
+<td>3.8 (3.0 to 4.7)</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Uninsured in January, then insured through December, %</td>
+<td>63.7 (45.4 to 78.7) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Single gap after an insured period, %</td>
+<td>32.8 (19.8 to 49.0) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>More than 1 gap, %</td>
+<td>3.5 (0.6 to 19.3) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Uninsured through December, %</td>
+<td>0</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>December coverage: private only, %</td>
+<td>63.6 (47.4 to 77.3) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>December coverage: private only, %</td>
+<td>58.5 (54.0 to 62.8)</td>
+<td>815</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>December coverage: public only, %</td>
+<td>35.6 (22.1 to 51.9) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>December coverage: public only, %</td>
+<td>33.8 (29.6 to 38.3)</td>
+<td>815</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>December coverage: private and public, %</td>
+<td>0.8 (0.1 to 7.7) †</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>December coverage: private and public, %</td>
+<td>7.7 (5.6 to 10.5)</td>
+<td>815</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>1 to 2 uninsured months (vs 3 to 11), %</td>
+<td>44.7 (29.4 to 61.0) †</td>
+<td>70</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s4-changes-in-coverage-without-an-uninsured-month-class-a-2024">Table S4. Changes in coverage without an uninsured month, class A, 2024</h3>
+<p>Changes between private insurers cannot be identified in the public-use file.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Estimate, % (95% CI)</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Change in coverage categories held (private, Medicare, Medicaid, TRICARE, VA, other public), no uninsured month</td>
+<td>10.4 (8.2 to 13.0)</td>
+<td>815</td>
+</tr>
+<tr>
+<td>Change between private only, public only, and both, no uninsured month</td>
+<td>5.2 (3.6 to 7.3)</td>
+<td>815</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s5-two-part-model-coefficients-2024-survey-weighted-descriptive">Table S5. Two-part model coefficients, 2024 (survey-weighted; descriptive)</h3>
+<p>Reference levels: class A, age 18 to 44, male, non-Hispanic White, income 200% of the federal poverty level or more.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Term</th>
+<th>Exponentiated estimate (95% CI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Intercept</td>
+<td>5.21 (2.99 to 9.07)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Class B vs A</td>
+<td>0.56 (0.27 to 1.18)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Class C vs A</td>
+<td>0.69 (0.35 to 1.36)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Age 45 to 64 vs 18 to 44</td>
+<td>1.33 (0.86 to 2.04)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Female vs male</td>
+<td>1.44 (0.94 to 2.20)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Hispanic vs non-Hispanic White</td>
+<td>0.60 (0.36 to 1.01)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Non-Hispanic Black vs non-Hispanic White</td>
+<td>0.62 (0.36 to 1.07)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Non-Hispanic Asian, other, or multiple race vs non-Hispanic White</td>
+<td>0.57 (0.30 to 1.09)</td>
+</tr>
+<tr>
+<td>Part 1: any out-of-pocket spending (odds ratio)</td>
+<td>Income below 200% of the federal poverty level vs 200% or more</td>
+<td>0.36 (0.25 to 0.51)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Intercept</td>
+<td>569.82 (283.59 to 1144.94)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Class B vs A</td>
+<td>0.68 (0.35 to 1.33)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Class C vs A</td>
+<td>2.16 (1.00 to 4.64)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Age 45 to 64 vs 18 to 44</td>
+<td>2.46 (1.59 to 3.81)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Female vs male</td>
+<td>0.54 (0.31 to 0.94)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Hispanic vs non-Hispanic White</td>
+<td>0.65 (0.38 to 1.12)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Non-Hispanic Black vs non-Hispanic White</td>
+<td>1.07 (0.47 to 2.43)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Non-Hispanic Asian, other, or multiple race vs non-Hispanic White</td>
+<td>0.65 (0.29 to 1.50)</td>
+</tr>
+<tr>
+<td>Part 2: mean among people with spending (ratio of means)</td>
+<td>Income below 200% of the federal poverty level vs 200% or more</td>
+<td>0.62 (0.38 to 1.01)</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s6-imputation-information-from-the-2024-prescribed-medicines-file-users-in-the-primary-domain">Table S6. Imputation information from the 2024 Prescribed Medicines file, users in the primary domain</h3>
+<p>† Does not meet the National Center for Health Statistics (NCHS) presentation standard for proportions. ‡ Relative standard error above 30% or not estimable, or fewer than 30 people. § Meets the NCHS standard but calls for review (fewer than 8 design degrees of freedom, or the complementary proportion would not meet it).</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Measure</th>
+<th>Estimate (95% CI)</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class A</td>
+<td>Users with ≥1 fill with fully or partially imputed payments, %</td>
+<td>90.1 (87.1 to 92.5)</td>
+<td>766</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>Share of out-of-pocket dollars from fills with imputed payments, %</td>
+<td>76.7 (62.4 to 91.0)</td>
+<td>766</td>
+</tr>
+<tr>
+<td>Class A</td>
+<td>Share of fills with fully imputed payments, %</td>
+<td>34.0 (29.5 to 38.6)</td>
+<td>766</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Users with ≥1 fill with fully or partially imputed payments, %</td>
+<td>90.1 (77.9 to 95.9) §</td>
+<td>56</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Share of out-of-pocket dollars from fills with imputed payments, %</td>
+<td>46.0 (13.1 to 79.0)</td>
+<td>56</td>
+</tr>
+<tr>
+<td>Class B</td>
+<td>Share of fills with fully imputed payments, %</td>
+<td>25.6 (11.7 to 39.5)</td>
+<td>56</td>
+</tr>
+<tr>
+<td>Class C</td>
+<td>Users with ≥1 fill with fully or partially imputed payments, %</td>
+<td>89.1 (77.7 to 95.0) §</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Class C</td>
+<td>Share of out-of-pocket dollars from fills with imputed payments, %</td>
+<td>51.1 (4.0 to 98.3) ‡</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Class C</td>
+<td>Share of fills with fully imputed payments, %</td>
+<td>52.4 (33.4 to 71.4)</td>
+<td>80</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s7-computed-frequencies-versus-the-ahrq-hc-256-codebook">Table S7. Computed frequencies versus the AHRQ HC-256 codebook</h3>
+<p>Weighted values agree to within the codebook's rounding (absolute difference under 1).</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Code</th>
+<th>Label</th>
+<th>Codebook n</th>
+<th>Computed n</th>
+<th>Codebook weighted</th>
+<th>Absolute difference, weighted</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INS24X</td>
+<td>−1</td>
+<td>Inapplicable</td>
+<td>161</td>
+<td>161</td>
+<td>2,998,984</td>
+<td>0.33</td>
+</tr>
+<tr>
+<td>INS24X</td>
+<td>1</td>
+<td>Yes</td>
+<td>17,083</td>
+<td>17,083</td>
+<td>303,194,046</td>
+<td>0.35</td>
+</tr>
+<tr>
+<td>INS24X</td>
+<td>2</td>
+<td>No</td>
+<td>1,896</td>
+<td>1,896</td>
+<td>33,604,599</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>INSCOV24</td>
+<td>1</td>
+<td>Any Private</td>
+<td>11,036</td>
+<td>11,036</td>
+<td>219,767,087</td>
+<td>0.44</td>
+</tr>
+<tr>
+<td>INSCOV24</td>
+<td>2</td>
+<td>Public Only</td>
+<td>6,816</td>
+<td>6,816</td>
+<td>98,034,323</td>
+<td>0.43</td>
+</tr>
+<tr>
+<td>INSCOV24</td>
+<td>3</td>
+<td>Uninsured</td>
+<td>1,288</td>
+<td>1,288</td>
+<td>21,996,220</td>
+<td>0.47</td>
+</tr>
+<tr>
+<td>UNINS24</td>
+<td>1</td>
+<td>Yes</td>
+<td>1,288</td>
+<td>1,288</td>
+<td>21,996,220</td>
+<td>0.47</td>
+</tr>
+<tr>
+<td>UNINS24</td>
+<td>2</td>
+<td>No</td>
+<td>17,852</td>
+<td>17,852</td>
+<td>317,801,409</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>INSJA24X</td>
+<td>−1</td>
+<td>Inapplicable</td>
+<td>379</td>
+<td>379</td>
+<td>3,310,431</td>
+<td>0.27</td>
+</tr>
+<tr>
+<td>INSJA24X</td>
+<td>1</td>
+<td>Yes</td>
+<td>16,842</td>
+<td>16,842</td>
+<td>300,835,181</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>INSJA24X</td>
+<td>2</td>
+<td>No</td>
+<td>1,919</td>
+<td>1,919</td>
+<td>35,652,017</td>
+<td>0.43</td>
+</tr>
+<tr>
+<td>INSDE24X</td>
+<td>−1</td>
+<td>Inapplicable</td>
+<td>198</td>
+<td>198</td>
+<td>3,593,646</td>
+<td>0.23</td>
+</tr>
+<tr>
+<td>INSDE24X</td>
+<td>1</td>
+<td>Yes</td>
+<td>17,105</td>
+<td>17,105</td>
+<td>303,962,138</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>INSDE24X</td>
+<td>2</td>
+<td>No</td>
+<td>1,837</td>
+<td>1,837</td>
+<td>32,241,845</td>
+<td>0.24</td>
+</tr>
+<tr>
+<td>DIABDX_M18</td>
+<td>−8</td>
+<td>Don'T Know</td>
+<td>14</td>
+<td>14</td>
+<td>153,954</td>
+<td>0.42</td>
+</tr>
+<tr>
+<td>DIABDX_M18</td>
+<td>−7</td>
+<td>Refused</td>
+<td>10</td>
+<td>10</td>
+<td>43,954</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>DIABDX_M18</td>
+<td>−1</td>
+<td>Inapplicable</td>
+<td>88</td>
+<td>88</td>
+<td>1,014,420</td>
+<td>0.21</td>
+</tr>
+<tr>
+<td>DIABDX_M18</td>
+<td>1</td>
+<td>Yes</td>
+<td>2,285</td>
+<td>2,285</td>
+<td>32,938,553</td>
+<td>0.43</td>
+</tr>
+<tr>
+<td>DIABDX_M18</td>
+<td>2</td>
+<td>No</td>
+<td>16,743</td>
+<td>16,743</td>
+<td>305,646,748</td>
+<td>0.39</td>
+</tr>
+<tr>
+<td>INSC1231</td>
+<td>1</td>
+<td>In-Scope On 12/31/2024</td>
+<td>18,909</td>
+<td>18,909</td>
+<td>336,022,966</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>INSC1231</td>
+<td>2</td>
+<td>Not In-Scope On 12/31/2024</td>
+<td>231</td>
+<td>231</td>
+<td>3,774,664</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>1</td>
+<td>&lt;65 Any Private</td>
+<td>9,080</td>
+<td>9,080</td>
+<td>193,358,937</td>
+<td>0.46</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>2</td>
+<td>&lt;65 Public Only</td>
+<td>3,793</td>
+<td>3,793</td>
+<td>60,991,070</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>3</td>
+<td>&lt;65 Uninsured</td>
+<td>1,270</td>
+<td>1,270</td>
+<td>21,770,810</td>
+<td>0.31</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>4</td>
+<td>65+ Edited Medicare Only</td>
+<td>2,140</td>
+<td>2,140</td>
+<td>27,809,268</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>5</td>
+<td>65+ Edited Medicare And Private</td>
+<td>1,891</td>
+<td>1,891</td>
+<td>25,396,671</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>6</td>
+<td>65+ Edited Medicare And Oth Pub Only</td>
+<td>881</td>
+<td>881</td>
+<td>9,218,140</td>
+<td>0.38</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>7</td>
+<td>65+ Uninsured</td>
+<td>18</td>
+<td>18</td>
+<td>225,410</td>
+<td>0.16</td>
+</tr>
+<tr>
+<td>INSURC24</td>
+<td>8</td>
+<td>65+ No Medicare And Any Public/Private</td>
+<td>67</td>
+<td>67</td>
+<td>1,027,322</td>
+<td>0.43</td>
+</tr>
+<tr>
+<td>PERWT24F (sum, all records)</td>
+<td>total</td>
+<td></td>
+<td>19,140</td>
+<td>19,140</td>
+<td>339,797,630</td>
+<td>0.40</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s8-prescription-outcomes-2023-replication-hc-251">Table S8. Prescription outcomes, 2023 replication (HC-251)</h3>
+<p>Nominal 2023 dollars. † Does not meet the National Center for Health Statistics (NCHS) presentation standard for proportions. ‡ Relative standard error above 30% or not estimable, or fewer than 30 people. § Meets the NCHS standard but calls for review (fewer than 8 design degrees of freedom, or the complementary proportion would not meet it).</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Measure</th>
+<th>Estimate (95% CI)</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Insured all 12 months</td>
+<td>Any fill, %</td>
+<td>95.6 (93.4 to 97.1)</td>
+<td>797</td>
+</tr>
+<tr>
+<td>A. Insured all 12 months</td>
+<td>Fills per person, mean</td>
+<td>30.5 (27.7 to 33.4)</td>
+<td>797</td>
+</tr>
+<tr>
+<td>A. Insured all 12 months</td>
+<td>OOP spending, mean incl. zeros, $</td>
+<td>$344 ($289 to $399)</td>
+<td>797</td>
+</tr>
+<tr>
+<td>A. Insured all 12 months</td>
+<td>OOP spending among users, median, $</td>
+<td>$133 ($114 to $176)</td>
+<td>760</td>
+</tr>
+<tr>
+<td>B. Insured 12/31, gap</td>
+<td>Any fill, %</td>
+<td>85.6 (72.5 to 93.1) §</td>
+<td>63</td>
+</tr>
+<tr>
+<td>B. Insured 12/31, gap</td>
+<td>Fills per person, mean</td>
+<td>22.8 (11.3 to 34.3)</td>
+<td>63</td>
+</tr>
+<tr>
+<td>B. Insured 12/31, gap</td>
+<td>OOP spending, mean incl. zeros, $</td>
+<td>$324 ($119 to $528)</td>
+<td>63</td>
+</tr>
+<tr>
+<td>B. Insured 12/31, gap</td>
+<td>OOP spending among users, median, $</td>
+<td>$125 ($60 to $342) ‡</td>
+<td>53</td>
+</tr>
+<tr>
+<td>C. Uninsured 12/31</td>
+<td>Any fill, %</td>
+<td>70.2 (58.5 to 79.8)</td>
+<td>126</td>
+</tr>
+<tr>
+<td>C. Uninsured 12/31</td>
+<td>Fills per person, mean</td>
+<td>12.1 (8.7 to 15.6)</td>
+<td>126</td>
+</tr>
+<tr>
+<td>C. Uninsured 12/31</td>
+<td>OOP spending, mean incl. zeros, $</td>
+<td>$735 ($45 to $1,424) ‡</td>
+<td>126</td>
+</tr>
+<tr>
+<td>C. Uninsured 12/31</td>
+<td>OOP spending among users, median, $</td>
+<td>$119 ($75 to $211)</td>
+<td>92</td>
+</tr>
+<tr>
+<td>Insured on 12/31 (A+B)</td>
+<td>Any fill, %</td>
+<td>94.8 (92.7 to 96.3)</td>
+<td>860</td>
+</tr>
+<tr>
+<td>Insured on 12/31 (A+B)</td>
+<td>Fills per person, mean</td>
+<td>29.9 (27.2 to 32.5)</td>
+<td>860</td>
+</tr>
+<tr>
+<td>Insured on 12/31 (A+B)</td>
+<td>OOP spending, mean incl. zeros, $</td>
+<td>$343 ($291 to $394)</td>
+<td>860</td>
+</tr>
+<tr>
+<td>Insured on 12/31 (A+B)</td>
+<td>OOP spending among users, median, $</td>
+<td>$132 ($114 to $174)</td>
+<td>813</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s9-concentration-of-out-of-pocket-spending-in-the-primary-domain-post-hoc-diagnostic-no-inference">Table S9. Concentration of out-of-pocket spending in the primary domain (post hoc diagnostic, no inference)</h3>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Diagnostic</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024</td>
+<td>Share of out-of-pocket dollars from the top 1% of people</td>
+<td>41.8%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Share of out-of-pocket dollars from the top 5% of people</td>
+<td>61.6%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Largest annual out-of-pocket amount, class A</td>
+<td>$91,626</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class A</td>
+<td>$383</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Largest annual out-of-pocket amount, class B</td>
+<td>$3,268</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class B</td>
+<td>$240</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Largest annual out-of-pocket amount, class C</td>
+<td>$15,377</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class C</td>
+<td>$399</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Share of out-of-pocket dollars from the top 1% of people</td>
+<td>23.0%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Share of out-of-pocket dollars from the top 5% of people</td>
+<td>44.9%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Largest annual out-of-pocket amount, class A</td>
+<td>$7,399</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class A</td>
+<td>$312</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Largest annual out-of-pocket amount, class B</td>
+<td>$3,556</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class B</td>
+<td>$324</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Largest annual out-of-pocket amount, class C</td>
+<td>$43,928</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>Mean out-of-pocket spending excluding the domain top 1%, class C</td>
+<td>$236</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s10-exclusions-and-records-outside-the-primary-domain-2024">Table S10. Exclusions and records outside the primary domain, 2024</h3>
+<p>Unweighted counts.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Unweighted n</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adults 18 to 64 with positive weight: diabetes reported no</td>
+<td>9,116</td>
+</tr>
+<tr>
+<td>Adults 18 to 64 with positive weight: diabetes question refused</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Adults 18 to 64 with positive weight: diabetes don't know</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Adults 18 to 64 with positive weight: diabetes inapplicable</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Adults 18 to 64 with positive weight: other diabetes codes</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Diabetes cohort not in scope on 12/31</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Diabetes cohort in scope on 12/31 without a year-end coverage value</td>
+<td>0</td>
+</tr>
+<tr>
+<td>In scope on 12/31 but not all year (described in Section S1.2)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>In scope on 12/31 with reference period ending before December</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div></div>
+<h3 id="table-s11-source-to-analysis-data-dictionary-2024">Table S11. Source-to-analysis data dictionary, 2024</h3>
+<p>AHRQ source variables for each analysis variable and the transformation applied. The same mapping with 2023 variable names applies to the replication.</p>
+<div class="table-wrap"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<thead>
+<tr>
+<th>Analysis variable</th>
+<th>AHRQ source variables</th>
+<th>Transformation</th>
+<th>Reserved-code handling</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>person id</td>
+<td>DUPERSID</td>
+<td>Copied. Unique key; uniqueness asserted in build.</td>
+<td>No reserved codes.</td>
+</tr>
+<tr>
+<td>panel</td>
+<td>PANEL</td>
+<td>Copied.</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>PERWT24F</td>
+<td>Copied. Full-year person weight.</td>
+<td>Zero weight kept in the design frame, excluded from frames by pos_weight.</td>
+</tr>
+<tr>
+<td>stratum</td>
+<td>VARSTR</td>
+<td>Copied.</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>psu</td>
+<td>VARPSU</td>
+<td>Copied. Nested within stratum (nest = TRUE).</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>age</td>
+<td>AGE24X</td>
+<td>Copied. Age on 12/31 of the data year.</td>
+<td>−1 (not in scope 12/31) fails the 18 to 64 filter.</td>
+</tr>
+<tr>
+<td>diabetes</td>
+<td>DIABDX_M18</td>
+<td>1 = ever told had diabetes (excluding gestational).</td>
+<td>−7, −8, −1 are not 'no'; counted in cohort exclusions and excluded from the cohort.</td>
+</tr>
+<tr>
+<td>inscope 1231</td>
+<td>INSC1231</td>
+<td>1 = in scope on 12/31.</td>
+<td>2 = not in scope; excluded from frame Y.</td>
+</tr>
+<tr>
+<td>end ref month</td>
+<td>ENDRFM24</td>
+<td>Reference period end month.</td>
+<td>Must equal 12 for domain C.</td>
+</tr>
+<tr>
+<td>inscop r31 / inscop r42 / inscop yy</td>
+<td>INSCOP31 / INSCOP42 / INSCOP24</td>
+<td>Round-level scope status.</td>
+<td>Used only in the scope agreement audit, not as a filter.</td>
+</tr>
+<tr>
+<td>ins 1231</td>
+<td>INS24X</td>
+<td>Year-end coverage (covered on 12/31, or on the date the person left the RU).</td>
+<td>−1 = not eligible on 12/31; excluded from frame Y.</td>
+</tr>
+<tr>
+<td>ins dec</td>
+<td>INSDE24X</td>
+<td>Any coverage at any time in December.</td>
+<td>−1 = out of scope in December.</td>
+</tr>
+<tr>
+<td>any cov (month 1 to 12)</td>
+<td>INSJA24X .. INSDE24X</td>
+<td>Monthly any hospital/physician coverage (TRICARE/CHAMPVA, Medicare, Medicaid/CHIP, other public, private incl. Medigap, VA). IHS not counted.</td>
+<td>−1 = out of scope that month: never counted as uninsured; defines scope. Other negative codes or nulls = missing.</td>
+</tr>
+<tr>
+<td>private cov</td>
+<td>PRIJA24 .. PRIDE24</td>
+<td>Monthly any private hospital/physician coverage.</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>public cov</td>
+<td>PUBJA24X .. PUBDE24X</td>
+<td>Monthly any public coverage (TRICARE/CHAMPVA, Medicare, Medicaid/CHIP, other public, VA).</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>medicare cov</td>
+<td>MCRJA24X .. MCRDE24X</td>
+<td>Monthly Medicare (edited).</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>medicaid cov</td>
+<td>MCDJA24X .. MCDDE24X</td>
+<td>Monthly Medicaid/CHIP (edited).</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>tricare cov</td>
+<td>TRIJA24X .. TRIDE24X</td>
+<td>Monthly TRICARE/CHAMPVA (edited).</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>va cov</td>
+<td>VAPJA24 .. VAPDE24</td>
+<td>Monthly VA coverage.</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>other public cov</td>
+<td>GVAJA24 .. GVADE24</td>
+<td>Monthly other public hospital/physician coverage (AHRQ: editing aid only).</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>ihs cov</td>
+<td>IHSJA24 .. IHSDE24</td>
+<td>Monthly Indian Health Service. Not counted as coverage by AHRQ.</td>
+<td>−1 out of scope.</td>
+</tr>
+<tr>
+<td>coverage state</td>
+<td>INSJA24X .. INSDE24X / PRIJA24 .. PRIDE24 / PUBJA24X .. PUBDE24X</td>
+<td>private_only, public_only, private_and_public, uninsured, not_in_scope, missing.</td>
+<td>Out of scope and missing kept as their own states.</td>
+</tr>
+<tr>
+<td>continuity class</td>
+<td>INS24X / INSJA24X .. INSDE24X</td>
+<td>inscont.continuity.classify_continuity rules 1 to 5.</td>
+<td>Unobserved months make continuity indeterminate unless a gap is observed.</td>
+</tr>
+<tr>
+<td>continuity class alt</td>
+<td>INS24X / INSJA24X .. INSDE24X</td>
+<td>As continuity_class, but a gap requires 3 or more consecutive uncovered months; 'insured_year_end_continuous' then means no such run.</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td>n months uncovered</td>
+<td>INSJA24X .. INSDE24X</td>
+<td>Count of months with code 2.</td>
+<td>Out-of-scope and missing months not counted.</td>
+</tr>
+<tr>
+<td>unins year</td>
+<td>UNINS24</td>
+<td>AHRQ annual indicator: uninsured all in-scope months.</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>inscov year</td>
+<td>INSCOV24</td>
+<td>AHRQ annual coverage indicator (TRICARE grouped with private).</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>rx fills</td>
+<td>RXTOT24</td>
+<td>Count of prescribed medicine fills and refills in the year.</td>
+<td>No reserved codes expected; checked.</td>
+</tr>
+<tr>
+<td>rx oop</td>
+<td>RXSLF24</td>
+<td>Self/family prescription payments, nominal dollars of the data year.</td>
+<td>Negative or null would be 'missing_expenditure' (none expected: AHRQ imputes).</td>
+</tr>
+<tr>
+<td>rx total exp</td>
+<td>RXEXP24</td>
+<td>Total prescription payments from all sources.</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td>rx state</td>
+<td>RXTOT24 / RXSLF24</td>
+<td>no_recorded_fill, fills_zero_oop, fills_positive_oop, missing_expenditure.</td>
+<td>Keeps no-fill, zero-OOP, and missing distinct.</td>
+</tr>
+<tr>
+<td>rx records fully imputed / partially imputed / complete pc</td>
+<td>IMPFLAG [HC-254A]</td>
+<td>Fill-level method of expenditure data creation, summed per person.</td>
+<td>2024 only; persons without fills get 0.</td>
+</tr>
+<tr>
+<td>rx oop event sum</td>
+<td>RXSF24X [HC-254A]</td>
+<td>Sum of fill-level OOP per person.</td>
+<td>2024 only.</td>
+</tr>
+<tr>
+<td>age group</td>
+<td>AGE24X</td>
+<td>18-44, 45-64.</td>
+<td>None in frame.</td>
+</tr>
+<tr>
+<td>sex label</td>
+<td>SEX</td>
+<td>Male, Female.</td>
+<td>None.</td>
+</tr>
+<tr>
+<td>race eth4</td>
+<td>RACETHX</td>
+<td>Hispanic; NH White; NH Black; NH Asian, other, or multiple (codes 4 and 5 combined).</td>
+<td>None (edited/imputed by AHRQ).</td>
+</tr>
+<tr>
+<td>income2</td>
+<td>POVCAT24</td>
+<td>Below 200% FPL (codes 1 to 3) versus 200% or more (codes 4 to 5).</td>
+<td>None (imputed by AHRQ).</td>
+</tr>
+<tr>
+<td>region label</td>
+<td>REGION24</td>
+<td>Census region on 12/31.</td>
+<td>−1 inapplicable.</td>
+</tr>
+</tbody>
+</table></div></div>
+<h2 id="reproducibility">Reproducibility</h2>
+<ul>
+<li>Pipeline stages: <code>./icont acquire</code>, <code>build</code>, <code>analyze</code>, <code>validate</code>, <code>render</code>, <code>package</code> (or <code>./icont all</code>). <code>./icont rerun</code> rebuilds from cached raw files and compares every numeric output.</li>
+<li>Software: Python with pandas, DuckDB, matplotlib, openpyxl, and python-docx; R version 4.5.1 with survey 4.5 and data.table. Versions are locked in <code>requirements.lock</code> and <code>R/packages.lock.csv</code>.</li>
+<li>Source files: SHA-256 checksums, URLs, release dates, and access dates are recorded for every AHRQ file, and <code>./icont acquire</code> stops if a download differs from the version analyzed here. Raw MEPS files are not redistributed.</li>
+<li>Evidence: <code>evidence/claims.json</code> maps each headline number to an output table, row, and column, with numerators, denominators, scope, and source checksums.</li>
+<li>Checks: unit tests on synthetic records, 28 reconciliation checks against the AHRQ source files, and 4 software cross-checks all passed; my separate checks are described in Methods. External scientific validation, such as comparison with an independent data source, was not part of this study.</li>
+</ul></article>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) to help with coding, analysis and manuscript preparation. I take responsibility for the work.</p></section></main>
+<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251. I calculated these estimates. AHRQ has not endorsed them.</footer>
+</body>
+</html>
