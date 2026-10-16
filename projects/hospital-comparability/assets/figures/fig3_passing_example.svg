@@ -696,7 +696,7 @@ L 387.00306 314.02734
 z
 " style="fill: #fcfcfb"/>
     </g>
-    <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="388.50306" y="322.66734" transform="rotate(-0 388.50306 322.66734)">030006  14.6% [12.1, 17.5]</text>
+    <text xml:space="preserve" style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="388.50306" y="322.66734" transform="rotate(-0 388.50306 322.66734)">030006  14.6% [12.1, 17.5]</text>
    </g>
    <g id="text_12">
     <g id="patch_6">
@@ -707,7 +707,7 @@ L 174.845107 12.865122
 z
 " style="fill: #fcfcfb"/>
     </g>
-    <text style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="176.345107" y="21.505122" transform="rotate(-0 176.345107 21.505122)">030119  7.8% [6.0, 10.2]</text>
+    <text xml:space="preserve" style="font-size: 7.5px; font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="176.345107" y="21.505122" transform="rotate(-0 176.345107 21.505122)">030119  7.8% [6.0, 10.2]</text>
    </g>
   </g>
  </g>

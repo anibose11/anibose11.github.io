@@ -47,3 +47,18 @@ body.portfolio-page{max-width:none!important;padding:0!important}
 
 /* A table already inside its own frame does not need the shared frame margin. */
 .portfolio-page :is(.table-wrap,.tablewrap)>.portfolio-table{margin:0}
+
+/* Author line: one style on every page. */
+.portfolio-page .portfolio-byline{font-size:15px!important;line-height:1.5!important;font-weight:400!important;color:#a2a2a2!important;background:none!important;border:0!important;padding:0!important;margin-top:0!important;letter-spacing:0!important;text-transform:none!important;font-style:normal!important}
+
+/* Quarto pages (project 4): the content grid is centred like the other reports, without doubled side padding. */
+@media (min-width:992px){body.portfolio-page #quarto-content{margin-left:auto;margin-right:auto}body.portfolio-page #quarto-content main.content{padding-left:0!important;padding-right:0!important}}
+
+/* Code copy buttons have a visible label (their icon font is not loaded). */
+.portfolio-page .code-copy-button .bi{display:none}.portfolio-page .code-copy-button{min-width:52px;height:auto!important;padding:4px 8px!important;border:1px solid rgba(255,255,255,.24)!important;border-radius:6px!important;background:#181818!important;color:#c4c4c4!important;font:600 12px/1.2 'Instrument Sans',Helvetica,Arial,sans-serif!important;opacity:1!important}.portfolio-page .code-copy-button::after{content:"Copy"}.portfolio-page .code-copy-button.code-copy-button-checked::after{content:"Copied"}
+
+/* Headings break into even lines instead of leaving one word alone. */
+.portfolio-page h1,.portfolio-page h2,.portfolio-page h3{text-wrap:balance}
+
+/* File names and field names inside tables break only when they must, not letter by letter. */
+.portfolio-page td code,.portfolio-page th code{overflow-wrap:break-word;word-break:normal}

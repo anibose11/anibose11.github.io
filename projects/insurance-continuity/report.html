@@ -6,7 +6,7 @@
 <title>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</title>
 <meta name="description" content="Full scientific report: within-year coverage gaps and prescription spending among US adults with diabetes, MEPS 2024.">
 <link rel="stylesheet" href="assets/site.css?v=2f9db82a5a">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
 </head>
 <body class="portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -14,7 +14,7 @@
 
 <main id="main">
 <article><h1>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</h1>
-<p class="note">Animesh Bose, Norlowe Research<br>Data: AHRQ MEPS HC-256 (2024), HC-254A (2024), HC-251 (2023).</p>
+<p class="note portfolio-byline">Animesh Bose, Norlowe Research<br>Data: AHRQ MEPS HC-256 (2024), HC-254A (2024), HC-251 (2023).</p>
 <nav class="toc" aria-label="Report contents"><strong>Contents:</strong> <a href="#abstract">Abstract</a> | <a href="#introduction">Introduction</a> | <a href="#methods">Methods</a> | <a href="#results">Results</a> | <a href="#discussion">Discussion</a> | <a href="#references">References</a> | <a href="#tables">Tables</a> | <a href="#supplementary-material">Supplementary material</a> | <a href="#reproducibility">Reproducibility</a></nav>
 <h2 id="abstract">Abstract</h2>
 <p><strong>Background:</strong> Annual spending analyses often classify insurance by year-end status, although people insured on December 31 may have been uninsured earlier that year.</p>
@@ -456,7 +456,7 @@
 </tbody>
 </table></div></div>
 <h2 id="supplementary-material">Supplementary material</h2>
-<h1 id="supplemental-digital-content-1">Supplemental Digital Content 1</h1>
+<h3 id="supplemental-digital-content-1">Supplemental Digital Content 1</h3>
 <p>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</p>
 <h2 id="section-s1-methods-details">Section S1. Methods details</h2>
 <h3 id="s11-data-releases-and-verification">S1.1 Data releases and verification</h3>
@@ -1946,229 +1946,229 @@
 </thead>
 <tbody>
 <tr>
-<td>person id</td>
+<td><code>person_id</code></td>
 <td>DUPERSID</td>
 <td>Copied. Unique key; uniqueness asserted in build.</td>
 <td>No reserved codes.</td>
 </tr>
 <tr>
-<td>panel</td>
+<td><code>panel</code></td>
 <td>PANEL</td>
 <td>Copied.</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>weight</td>
+<td><code>weight</code></td>
 <td>PERWT24F</td>
 <td>Copied. Full-year person weight.</td>
 <td>Zero weight kept in the design frame, excluded from frames by pos_weight.</td>
 </tr>
 <tr>
-<td>stratum</td>
+<td><code>stratum</code></td>
 <td>VARSTR</td>
 <td>Copied.</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>psu</td>
+<td><code>psu</code></td>
 <td>VARPSU</td>
 <td>Copied. Nested within stratum (nest = TRUE).</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>age</td>
+<td><code>age</code></td>
 <td>AGE24X</td>
 <td>Copied. Age on 12/31 of the data year.</td>
 <td>−1 (not in scope 12/31) fails the 18 to 64 filter.</td>
 </tr>
 <tr>
-<td>diabetes</td>
+<td><code>diabetes</code></td>
 <td>DIABDX_M18</td>
 <td>1 = ever told had diabetes (excluding gestational).</td>
 <td>−7, −8, −1 are not 'no'; counted in cohort exclusions and excluded from the cohort.</td>
 </tr>
 <tr>
-<td>inscope 1231</td>
+<td><code>inscope_1231</code></td>
 <td>INSC1231</td>
 <td>1 = in scope on 12/31.</td>
 <td>2 = not in scope; excluded from frame Y.</td>
 </tr>
 <tr>
-<td>end ref month</td>
+<td><code>end_ref_month</code></td>
 <td>ENDRFM24</td>
 <td>Reference period end month.</td>
 <td>Must equal 12 for domain C.</td>
 </tr>
 <tr>
-<td>inscop r31 / inscop r42 / inscop yy</td>
+<td><code>inscop_r31</code> / <code>inscop_r42</code> / <code>inscop_yy</code></td>
 <td>INSCOP31 / INSCOP42 / INSCOP24</td>
 <td>Round-level scope status.</td>
 <td>Used only in the scope agreement audit, not as a filter.</td>
 </tr>
 <tr>
-<td>ins 1231</td>
+<td><code>ins_1231</code></td>
 <td>INS24X</td>
 <td>Year-end coverage (covered on 12/31, or on the date the person left the RU).</td>
 <td>−1 = not eligible on 12/31; excluded from frame Y.</td>
 </tr>
 <tr>
-<td>ins dec</td>
+<td><code>ins_dec</code></td>
 <td>INSDE24X</td>
 <td>Any coverage at any time in December.</td>
 <td>−1 = out of scope in December.</td>
 </tr>
 <tr>
-<td>any cov (month 1 to 12)</td>
+<td><code>any_cov</code> (month 1 to 12)</td>
 <td>INSJA24X .. INSDE24X</td>
 <td>Monthly any hospital/physician coverage (TRICARE/CHAMPVA, Medicare, Medicaid/CHIP, other public, private incl. Medigap, VA). IHS not counted.</td>
 <td>−1 = out of scope that month: never counted as uninsured; defines scope. Other negative codes or nulls = missing.</td>
 </tr>
 <tr>
-<td>private cov</td>
+<td><code>private_cov</code></td>
 <td>PRIJA24 .. PRIDE24</td>
 <td>Monthly any private hospital/physician coverage.</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>public cov</td>
+<td><code>public_cov</code></td>
 <td>PUBJA24X .. PUBDE24X</td>
 <td>Monthly any public coverage (TRICARE/CHAMPVA, Medicare, Medicaid/CHIP, other public, VA).</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>medicare cov</td>
+<td><code>medicare_cov</code></td>
 <td>MCRJA24X .. MCRDE24X</td>
 <td>Monthly Medicare (edited).</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>medicaid cov</td>
+<td><code>medicaid_cov</code></td>
 <td>MCDJA24X .. MCDDE24X</td>
 <td>Monthly Medicaid/CHIP (edited).</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>tricare cov</td>
+<td><code>tricare_cov</code></td>
 <td>TRIJA24X .. TRIDE24X</td>
 <td>Monthly TRICARE/CHAMPVA (edited).</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>va cov</td>
+<td><code>va_cov</code></td>
 <td>VAPJA24 .. VAPDE24</td>
 <td>Monthly VA coverage.</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>other public cov</td>
+<td><code>other_public_cov</code></td>
 <td>GVAJA24 .. GVADE24</td>
 <td>Monthly other public hospital/physician coverage (AHRQ: editing aid only).</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>ihs cov</td>
+<td><code>ihs_cov</code></td>
 <td>IHSJA24 .. IHSDE24</td>
 <td>Monthly Indian Health Service. Not counted as coverage by AHRQ.</td>
 <td>−1 out of scope.</td>
 </tr>
 <tr>
-<td>coverage state</td>
+<td><code>coverage_state</code></td>
 <td>INSJA24X .. INSDE24X / PRIJA24 .. PRIDE24 / PUBJA24X .. PUBDE24X</td>
 <td>private_only, public_only, private_and_public, uninsured, not_in_scope, missing.</td>
 <td>Out of scope and missing kept as their own states.</td>
 </tr>
 <tr>
-<td>continuity class</td>
+<td><code>continuity_class</code></td>
 <td>INS24X / INSJA24X .. INSDE24X</td>
 <td>inscont.continuity.classify_continuity rules 1 to 5.</td>
 <td>Unobserved months make continuity indeterminate unless a gap is observed.</td>
 </tr>
 <tr>
-<td>continuity class alt</td>
+<td><code>continuity_class_alt</code></td>
 <td>INS24X / INSJA24X .. INSDE24X</td>
 <td>As continuity_class, but a gap requires 3 or more consecutive uncovered months; 'insured_year_end_continuous' then means no such run.</td>
 <td>As above.</td>
 </tr>
 <tr>
-<td>n months uncovered</td>
+<td><code>n_months_uncovered</code></td>
 <td>INSJA24X .. INSDE24X</td>
 <td>Count of months with code 2.</td>
 <td>Out-of-scope and missing months not counted.</td>
 </tr>
 <tr>
-<td>unins year</td>
+<td><code>unins_year</code></td>
 <td>UNINS24</td>
 <td>AHRQ annual indicator: uninsured all in-scope months.</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>inscov year</td>
+<td><code>inscov_year</code></td>
 <td>INSCOV24</td>
 <td>AHRQ annual coverage indicator (TRICARE grouped with private).</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>rx fills</td>
+<td><code>rx_fills</code></td>
 <td>RXTOT24</td>
 <td>Count of prescribed medicine fills and refills in the year.</td>
 <td>No reserved codes expected; checked.</td>
 </tr>
 <tr>
-<td>rx oop</td>
+<td><code>rx_oop</code></td>
 <td>RXSLF24</td>
 <td>Self/family prescription payments, nominal dollars of the data year.</td>
 <td>Negative or null would be 'missing_expenditure' (none expected: AHRQ imputes).</td>
 </tr>
 <tr>
-<td>rx total exp</td>
+<td><code>rx_total_exp</code></td>
 <td>RXEXP24</td>
 <td>Total prescription payments from all sources.</td>
 <td>As above.</td>
 </tr>
 <tr>
-<td>rx state</td>
+<td><code>rx_state</code></td>
 <td>RXTOT24 / RXSLF24</td>
 <td>no_recorded_fill, fills_zero_oop, fills_positive_oop, missing_expenditure.</td>
 <td>Keeps no-fill, zero-OOP, and missing distinct.</td>
 </tr>
 <tr>
-<td>rx records fully imputed / partially imputed / complete pc</td>
+<td><code>rx_records_fully_imputed</code> / <code>partially_imputed</code> / <code>complete_pc</code></td>
 <td>IMPFLAG [HC-254A]</td>
 <td>Fill-level method of expenditure data creation, summed per person.</td>
 <td>2024 only; persons without fills get 0.</td>
 </tr>
 <tr>
-<td>rx oop event sum</td>
+<td><code>rx_oop_event_sum</code></td>
 <td>RXSF24X [HC-254A]</td>
 <td>Sum of fill-level OOP per person.</td>
 <td>2024 only.</td>
 </tr>
 <tr>
-<td>age group</td>
+<td><code>age_group</code></td>
 <td>AGE24X</td>
 <td>18-44, 45-64.</td>
 <td>None in frame.</td>
 </tr>
 <tr>
-<td>sex label</td>
+<td><code>sex_label</code></td>
 <td>SEX</td>
 <td>Male, Female.</td>
 <td>None.</td>
 </tr>
 <tr>
-<td>race eth4</td>
+<td><code>race_eth4</code></td>
 <td>RACETHX</td>
 <td>Hispanic; NH White; NH Black; NH Asian, other, or multiple (codes 4 and 5 combined).</td>
 <td>None (edited/imputed by AHRQ).</td>
 </tr>
 <tr>
-<td>income2</td>
+<td><code>income2</code></td>
 <td>POVCAT24</td>
 <td>Below 200% FPL (codes 1 to 3) versus 200% or more (codes 4 to 5).</td>
 <td>None (imputed by AHRQ).</td>
 </tr>
 <tr>
-<td>region label</td>
+<td><code>region_label</code></td>
 <td>REGION24</td>
 <td>Census region on 12/31.</td>
 <td>−1 inapplicable.</td>

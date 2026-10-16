@@ -6,7 +6,7 @@
 <title>Trial results denominator audit</title>
 <meta name="description" content="A PostgreSQL warehouse for ClinicalTrials.gov results and a measured audit of which participant count belongs with each posted value, compared with a declared one-row-per-value flat export.">
 <link rel="stylesheet" href="assets/style.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -15,8 +15,8 @@
 <main id="main"><div class="inner">
 
 <h1>Which participant count belongs with each posted trial result?</h1>
-<p class="meta">Animesh Bose, Norlowe Research</p>
-<p class="lede">Evidence tables built from ClinicalTrials.gov need the number of people behind every value. The registry records counts at the outcome and table-row levels and sometimes in other units. The comparison export used here keeps one count per arm and outcome. I built a PostgreSQL warehouse that keeps every level, and measured how often the right count can be attached by written rules in 1,961 cardiometabolic trials. For 22,505 of 97,756 measurements (23.0%), a one-row-per-value export attaches the outcome-level count although the table row reports its own, different number analyzed.</p>
+<p class="meta portfolio-byline">Animesh Bose, Norlowe Research</p>
+<p class="lede">Evidence tables built from ClinicalTrials.gov need the number of people behind every value. The registry records counts at the outcome and table-row levels and sometimes in other units. The comparison export used here keeps one count per arm and outcome. I built a PostgreSQL warehouse that keeps every level, and measured how often the right count can be attached by written rules in 1,961 cardiometabolic trials. In the held-out trials, the flat export attached the wrong denominator to 23.0% of 97,756 measurements.</p>
 
 <p class="question"><strong>Question.</strong> Among interventional diabetes, heart failure and obesity trials with results first posted from 2020 to September 2026, how often can a documented participant denominator be kept and attached to each reported value without guessing, and what does a one-row-per-value flat export lose or attach instead?</p>
 

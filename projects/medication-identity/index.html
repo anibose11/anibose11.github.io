@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity from labels to FHIR</title>
 <meta name="description" content="Which drug-label identity and strength details survive FHIR R4 and common shortcuts, measured on 1,475 DailyMed prescription labels."><link rel="stylesheet" href="assets/style.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -9,7 +9,7 @@
 <main id="content">
 <p class="muted small">This research project uses public drug-label and terminology data and no patient records.</p>
 <h1>What survives when drug labels are turned into FHIR medication records?</h1>
-<p class="muted small">Animesh Bose, Norlowe Research</p>
+<p class="muted small portfolio-byline">Animesh Bose, Norlowe Research</p>
 <p class="lede">Research teams and drug-dictionary maintainers copy product identity from DailyMed labels and RxNorm into analysis tables and HL7 FHIR (Fast Healthcare Interoperability Resources) records. I measured, field by field, which identity and strength details survive that conversion for 1,475 current prescription labels for selected cardiometabolic drugs, and what common shortcuts lose.</p>
 <figure><picture><source media="(max-width: 640px)" srcset="assets/fig1_representations-narrow.svg"><img src="assets/fig1_representations.svg" alt="Dot chart of fields preserved: FHIR R4 + sidecar 100.0%; FHIR R4 core only 87.6%; RxCUI only (current RxNorm) 20.9% exact, 50.3% with conversion; DailyMed packaging service 37.2%; Flat export shortcut 24.2% exact, 32.2% with conversion; Latest label version only 98.6%." width="760" loading="lazy"></picture>
 <figcaption>Figure 1. Share of applicable identity and strength fields preserved, held-out records: 1,965 product-version records from 1,036 labels; 1,662 current-version records for RxCUI only and the DailyMed packaging service; 303 preceding-version records for the latest version only. Values are listed in the table below.</figcaption></figure>

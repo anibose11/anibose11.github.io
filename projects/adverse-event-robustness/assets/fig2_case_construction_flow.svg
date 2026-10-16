@@ -229,8 +229,8 @@ z
     <text style="font-weight: 700; font-size: 8.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="222.1416" y="281.96512" transform="rotate(-0 222.1416 281.96512)">Two-by-two table per association</text>
    </g>
    <g id="text_16">
-    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 297.898432)">a: exposed with event   b: exposed without</text>
-    <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 307.48267)">c: background with event   d: background without</text>
+    <text xml:space="preserve" style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 297.898432)">a: exposed with event   b: exposed without</text>
+    <text xml:space="preserve" style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 307.48267)">c: background with event   d: background without</text>
     <text style="font-size: 7.6px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans'; fill: #52514e" transform="translate(222.1416 317.111439)">every retained case in exactly one cell</text>
    </g>
   </g>
