@@ -11,8 +11,10 @@
 .report article img{width:100%;max-width:960px;height:auto;border:1px solid var(--rule);background:#fcfcfb}
 .report article p,.report article li{text-wrap:pretty}.report article h1{font-size:clamp(1.5rem,3vw,2rem)}
 .report nav.toc{font-size:.92rem;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px 0;margin:16px 0}
+.report article>.fig-scroll{margin:0 0 48px}
+.report article .table-wrap.table-wide{width:min(960px,calc(100vw - 2*clamp(16px,4.5vw,64px)));max-width:none}
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="report portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -21,8 +23,7 @@
 <main id="main">
 <article>
 <h1 id="verbatim-evidence-quotes-and-answer-correctness-an-evaluation-of-small-local-language-models-extracting-clinical-trial-results">Verbatim evidence quotes and answer correctness: an evaluation of small local language models extracting clinical trial results</h1>
-<p><strong>Animesh Bose</strong></p>
-<p>Norlowe Research</p>
+<p class="muted">Animesh Bose, Norlowe Research</p>
 
 <p>Article type: Research and Applications. Keywords: large language models; evidence synthesis; randomized controlled trials; information extraction; selective prediction.</p>
 <h2 id="abstract">Abstract</h2>
@@ -64,7 +65,7 @@
 <h3 id="output-validity-and-evidence-availability">Output validity and evidence availability</h3>
 <p>The test split contains 1,252 prompts in 334 articles; 1,209 prompts in 332 articles met the eligibility rule after the exclusions listed in Supplementary S1. In the retrieved context, 1,205 of 1,209 responses parsed under the schema and 9 of 1,209 abstained, leaving 1,196 answered prompts (Table 1). The retrieved passages overlapped annotated evidence for 916 of 1,202 prompts with locatable evidence (76.2%, 95% CI 72.4% to 79.9%); the title and abstract did so for 581 of 1,158 (50.2%, 95% CI 45.8% to 54.5%).</p>
 <p><strong>Table 1.</strong> Separated validity checks by context and system, eligible test prompts. Percentages for quote existence, locator validity, and label correctness are of answered prompts; task success is of all prompts. Baselines return the top-ranked passage as their quote.</p>
-<div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<div class="table-wrap table-wide" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
 <th>Context</th>
@@ -2377,6 +2378,6 @@
 </table></div></div>
 </article>
 <section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) to help with coding, analysis and manuscript preparation. I take responsibility for the work. I recall using Opus models in Claude Code and models from the GPT-5 and GPT-6 families in ChatGPT and Codex. Exact model version records are unavailable.</p></section></main>
-<footer>Downloads: <a href="downloads/manuscript-draft.docx">manuscript draft (DOCX)</a>, <a href="downloads/evidence-model-audit-source.zip">source archive (ZIP, 9.3 MB)</a>, <a href="downloads/README.txt">all files</a>. <a href="index.html">Back to the project page</a>.</footer>
+<footer>Downloads: <a href="downloads/manuscript-draft.docx">manuscript draft (DOCX)</a>, <a href="downloads/evidence-model-audit-source.zip">source code archive (ZIP, 9.3 MB)</a>, <a href="downloads/README.txt">all files</a>. <a href="index.html">Back to the project page</a>.</footer>
 </body>
 </html>

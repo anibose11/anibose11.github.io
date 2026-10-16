@@ -6,10 +6,11 @@
 <title>Adverse-event reporting odds ratios under alternative case definitions</title>
 <meta name="description" content="Processing-sensitivity study of reporting odds ratios in FDA quarterly adverse event files, 2024Q3 to 2026Q2.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<style>ul.files .meta{white-space:nowrap}</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a><a href="https://github.com/anibose11/adverse-event-robustness">Code on GitHub</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -17,10 +18,11 @@
 <section>
 <p class="eyebrow">Pharmacovigilance methods study</p>
 <h1>Adverse-event reporting odds ratios under alternative case definitions</h1>
+<p class="note">Animesh Bose, Norlowe Research</p>
 <p class="lede">For DPP-4 inhibitors and arthralgia, counting secondary-suspect drug listings changed the reporting odds ratio from below 1 to above 1. I traced that change to the underlying reports, then compared drug-role, name-matching and counting rules across five drug-class and reaction pairs.</p>
 <div class="question"><p><strong>Question.</strong> For five drug-class and reaction pairs that FDA has already communicated (SGLT2 inhibitors with ketoacidosis and Fournier's gangrene; DPP-4 inhibitors with pemphigoid, arthralgia and pancreatitis), how far do reporting odds ratios move across eight prespecified ways of processing the same eight quarterly files? The configurations vary the counting unit, the reporter-designated drug role, and how drug names are matched to ingredients. The arthralgia definition is broader than the label warning about severe, disabling joint pain; severity was not assessed.</p></div>
 <figure>
-<div class="figscroll"><img src="assets/fig1_ror_by_configuration.svg" width="2068" height="3373" alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188."></div>
+<div class="figscroll"><div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_ror_by_configuration.svg" width="2068" height="3373" alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188."></div></div>
 <figcaption>Reporting odds ratios and Woolf 95% confidence intervals under eight configurations. Blue: any suspect role; orange: primary suspect only. Circles: expanded matching; squares: strict matching. Hollow markers and shaded rows identify report-version analyses, used as diagnostic comparisons. Each panel has its own logarithmic scale; the reference value of 1 is shown where it lies in range. The tables below give the counts and estimates. <a href="assets/fig1_ror_by_configuration.png">PNG version</a>.</figcaption>
 </figure>
 </section>
@@ -76,14 +78,14 @@
 <p>The input is the eight most recent FDA quarterly ASCII extracts on the retrieval date (2024Q3 to 2026Q2; 514 MB compressed, 15,069,684 drug rows and 11,287,724 reaction rows). Parsed counts matched raw line counts for all 40 member files. They also matched FDA's printed totals for the 32 files that supplied them; the eight deletion lists had no printed total. Reports were collapsed to cases using FDA's documented case and version keys: the latest available version of each CASEID within these eight files, after removing 12,912 cases on FDA's deletion lists. "Latest" means latest in the acquired files, not latest at FDA.</p>
 <p>Drug classes came from FDA label classes and MED-RT mechanisms via RxClass, giving six SGLT2 inhibitors and four DPP-4 inhibitors. Reaction terms are exact MedDRA preferred-term strings fixed in the analysis plan before any count was computed. The principal configurations use a database-wide background built before restriction to a drug class. In secondary analysis S3, the comparator is the other study drug class, with cases listing both classes excluded. The measure is the reporting odds ratio with a Woolf interval; estimates need at least 3 exposed cases with the event and no empty cell.</p>
 <figure>
-<div class="figscroll"><img src="assets/fig2_case_construction_flow.svg" width="1734" height="1492" alt="Flow diagram from report rows to report versions, cases, retained cases, and the exposed groups used in the two-by-two tables."></div>
+<div class="figscroll"><div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_case_construction_flow.svg" width="1734" height="1492" alt="Flow diagram from report rows to report versions, cases, retained cases, and the exposed groups used in the two-by-two tables."></div></div>
 <figcaption>Case construction from the eight quarterly files to the retained cases. The principal analyses use the database-wide background; S3 restricts the comparator to the other study drug class.</figcaption>
 </figure>
 <h3>Drug roles and name matching</h3>
 <p><strong>Which drug roles count as exposure.</strong> FDA's files mark each drug as primary suspect, secondary suspect, concomitant, interacting, or (from the 2024Q4 file onward) not administered. A secondary-suspect listing is part of the reporter's suspicion, but some reports list dozens of suspect drugs. The primary configuration counts both suspect roles; the primary-suspect configurations show what that inclusion contributes.</p>
 <p><strong>How strictly names are matched.</strong> FDA's ingredient field often carries salt forms, and some reports give only a brand name. The strict rule requires the exact ingredient name. The expanded rule adds salt forms and brand names that RxNav relates to a class member. Strings that match neither stay unmapped and are listed for review.</p>
 <figure>
-<div class="figscroll"><img src="assets/fig3_cell_a_composition.svg" alt="Stacked bars showing, for each association, the share of exposed cases with the event that qualify as primary suspect versus only secondary suspect, and by ingredient name versus salt or brand name. Arthralgia is mostly secondary-suspect-only." width="2543" height="1016"></div>
+<div class="figscroll"><div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_cell_a_composition.svg" alt="Stacked bars showing, for each association, the share of exposed cases with the event that qualify as primary suspect versus only secondary suspect, and by ingredient name versus salt or brand name. Arthralgia is mostly secondary-suspect-only." width="2543" height="1016"></div></div>
 <figcaption>How the primary-configuration exposed cases with the event (cell a) qualified. For arthralgia, 80% qualified only through a secondary-suspect listing.</figcaption>
 </figure>
 </section>
@@ -110,9 +112,9 @@
 </section>
 
 <section aria-labelledby="downloads">
-<h2 id="downloads">Report and downloads</h2>
+<h2 id="downloads">Report, code and data</h2>
 <p><a href="report.html">Read the full report</a>.</p>
-<ul class="files"><li><a href="downloads/adverse-event-robustness-source.zip">Source archive (code, SQL, configuration, tests, documentation)</a><span class="meta">ZIP, 1.1 MB</span></li><li><a href="downloads/adverse-event-robustness-results.xlsx">Aggregate results workbook with definitions sheet</a><span class="meta">Excel, 32 KB</span></li><li><a href="downloads/association_configurations_long.csv">All configurations, long format (one row per association and configuration)</a><span class="meta">CSV, 16 KB</span></li><li><a href="downloads/analysis_plan.md">Analysis plan with dated amendments</a><span class="meta">Markdown, 13 KB</span></li><li><a href="downloads/term_provenance.csv">Reaction term provenance</a><span class="meta">CSV, 4 KB</span></li><li><a href="downloads/verified_drug_names.csv">Verified drug names (RxNav snapshot)</a><span class="meta">CSV, 3 KB</span></li><li><a href="downloads/data_dictionary.csv">Data dictionary</a><span class="meta">CSV, 4 KB</span></li><li><a href="downloads/transition_table.csv">Release compatibility table</a><span class="meta">CSV, 2 KB</span></li><li><a href="downloads/supplementary_material.html">Supplementary material (tables S1 to S8)</a><span class="meta">HTML, 162 KB</span></li></ul>
+<ul class="files"><li><a href="downloads/adverse-event-robustness-source.zip">Source code (full pipeline, SQL, configuration, tests, documentation)</a><span class="meta">ZIP, 1.1 MB</span></li><li><a href="downloads/adverse-event-robustness-results.xlsx">Aggregate results workbook with definitions sheet</a><span class="meta">Excel, 32 KB</span></li><li><a href="downloads/association_configurations_long.csv">All configurations, long format (one row per association and configuration)</a><span class="meta">CSV, 16 KB</span></li><li><a href="downloads/analysis_plan.md">Analysis plan with dated amendments</a><span class="meta">Markdown, 13 KB</span></li><li><a href="downloads/term_provenance.csv">Reaction term provenance</a><span class="meta">CSV, 4 KB</span></li><li><a href="downloads/verified_drug_names.csv">Verified drug names (RxNav snapshot)</a><span class="meta">CSV, 3 KB</span></li><li><a href="downloads/data_dictionary.csv">Data dictionary</a><span class="meta">CSV, 4 KB</span></li><li><a href="downloads/transition_table.csv">Release compatibility table</a><span class="meta">CSV, 2 KB</span></li><li><a href="downloads/supplementary_material.html">Supplementary material (tables S1 to S8)</a><span class="meta">HTML, 162 KB</span></li></ul>
 </section>
 
 </main>

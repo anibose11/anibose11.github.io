@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Diabetes Estimates Under Different Definitions and Laboratory Denominators</title>
+  <title>Diabetes estimates under different definitions and laboratory denominators</title>
   <meta name="description" content="An NHANES August 2021 to August 2023 audit that separates the effect of the diabetes biomarker definition from the effect of the laboratory sample and survey weight, with a checker that refuses invalid comparisons.">
   <link rel="stylesheet" href="assets/site.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a><a href="https://github.com/anibose11/diabetes-definition-audit">Code on GitHub</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
   <div class="page">
   <header>
     <p class="eyebrow">Survey methods audit, CDC NHANES August 2021 to August 2023</p>
-    <h1>Diabetes Estimates Under Different Definitions and Laboratory Denominators</h1>
-    <p class="lede">HbA1c and fasting glucose can give different estimates of diabetes prevalence because they measure different things and are collected in different laboratory samples. I separated the definition difference from the combined sample and weight difference in NHANES, estimated the uncertainty in each, and repeated the analysis in the 2017 to March 2020 release. The accompanying checker refuses comparisons across mismatched denominators. All percentages are weighted survey estimates.</p>
+    <h1>Diabetes estimates under different definitions and laboratory denominators</h1>
+    <p class="meta">Animesh Bose, Norlowe Research</p>
+    <p class="lede">HbA1c and fasting glucose can give different estimates of diabetes prevalence because they measure different things and are collected in different laboratory samples. I separated the definition difference from the combined sample and weight difference in NHANES, estimated the uncertainty in each, and repeated the analysis in the 2017 to March 2020 release. The accompanying checker refuses comparisons across mismatched denominators. All percentages are weighted survey estimates. Among 2,938 adults with both tests in August 2021 to August 2023, 10.8% (95% CI 9.1 to 12.7) had HbA1c at or above 6.5% and 11.2% (9.5 to 13.1) had fasting glucose at or above 126 mg/dL.</p>
     <nav class="links" aria-label="Project files">
       <a href="report.html">Read the report</a>
-      <a href="downloads/diabetes-definition-audit-source.zip">Download source</a>
+      <a href="downloads/diabetes-definition-audit-source.zip">Source code</a>
       <a href="downloads/supplementary.html">Supplementary tables</a>
       <a href="#files">Result tables and workbook</a>
     </nav>
@@ -28,8 +29,8 @@
     <section id="paired" aria-labelledby="paired-h">
       <h2 id="paired-h">Comparing the two tests in the same adults</h2>
       <figure>
-        <img src="assets/fig1_paired_common_denominator.png" width="1840" height="680"
-             alt="Dot plot with 95% intervals. Left: HbA1c at or above 6.5% and fasting glucose at or above 126 mg/dL in the common paired domain, 10.8% and 11.2% for August 2021 to August 2023 and 10.3% and 11.8% for 2017 to March 2020. Right: paired differences of −0.41 and −1.54 percentage points.">
+        <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_paired_common_denominator.png" width="1840" height="680"
+             alt="Dot plot with 95% intervals. Left: HbA1c at or above 6.5% and fasting glucose at or above 126 mg/dL in the common paired domain, 10.8% and 11.2% for August 2021 to August 2023 and 10.3% and 11.8% for 2017 to March 2020. Right: paired differences of −0.41 and −1.54 percentage points."></div>
         <figcaption>Threshold prevalence in the common paired domain (adults 20+, not pregnant, valid fasting glucose and HbA1c), fasting subsample weight, with 95% Korn-Graubard intervals; paired differences use t intervals with design degrees of freedom. n = 2,938 (2021 to 2023) and 3,757 (2017 to March 2020).</figcaption>
       </figure>
       <p>Among 2,938 adults with both tests in August 2021 to August 2023, 10.8% (95% CI 9.1 to 12.7) had HbA1c at or above 6.5% and 11.2% (9.5 to 13.1) had fasting glucose at or above 126 mg/dL. The paired difference was −0.41 percentage points (−1.15 to +0.33). In the 2017 to March 2020 release the difference was −1.54 points (−2.71 to −0.37), with glucose higher.</p>
@@ -40,8 +41,8 @@
     <section id="sample" aria-labelledby="sample-h">
       <h2 id="sample-h">How much the laboratory sample and weight changed the estimate</h2>
       <figure>
-        <img src="assets/fig2_sample_and_definition_parts.png" width="1840" height="780"
-             alt="Left: HbA1c prevalence in its laboratory domain and in the paired domain for both releases, 10.5% versus 10.8% and 10.4% versus 10.3%. Right: the naive cross-domain difference split into a definition part and a sample and weight part, with 95% intervals.">
+        <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_sample_and_definition_parts.png" width="1840" height="780"
+             alt="Left: HbA1c prevalence in its laboratory domain and in the paired domain for both releases, 10.5% versus 10.8% and 10.4% versus 10.3%. Right: the naive cross-domain difference split into a definition part and a sample and weight part, with 95% intervals."></div>
         <figcaption>Left: HbA1c at or above 6.5% in the HbA1c laboratory domain (phlebotomy weight in 2021 to 2023, examination weight in 2017 to March 2020) and in the paired domain. Right: the naive difference between HbA1c in its laboratory domain and glucose in the paired domain equals the definition part plus the sample and weight part exactly.</figcaption>
       </figure>
       <p>In the HbA1c laboratory domain (5,729 adults, phlebotomy weight WTPH2YR) the HbA1c estimate was 10.5% (9.2 to 12.0), −0.24 points (−1.44 to +0.96) from the paired-domain value. In 2017 to March 2020 the same comparison gave +0.07 points (−1.32 to +1.47). Both intervals include zero but also allow shifts of up to about 1.5 points, so the data exclude only differences larger than about 1.5 points rather than show that there is none. This part is a descriptive comparison of two documented estimators, not a causal effect.</p>
@@ -62,8 +63,8 @@
       <h2 id="overlap-h">Similar totals hide different people</h2>
       <p>The tests agreed for 95.0% of adults in the paired domain (kappa 0.74, 95% CI 0.70 to 0.79). Of adults above either threshold, 17.0% were above the HbA1c threshold only and 20.1% were above the glucose threshold only. Among adults who reported diagnosed diabetes, 20.3% (16.0 to 25.3) had both values below threshold, as did 16.3% of those reporting insulin or diabetes pills, so a definition built only on biomarkers misses many treated people.</p>
       <figure>
-        <img src="assets/fig3_overlap_of_definitions.png" width="1720" height="680" loading="lazy"
-             alt="Horizontal bar chart of the weighted share of adults in each combination of self-reported diagnosis, HbA1c, and glucose classification. The largest group with any positive is diagnosed with both biomarkers high at 6.7%; diagnosed with both below threshold is 2.3%.">
+        <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_overlap_of_definitions.png" width="1720" height="680" loading="lazy"
+             alt="Horizontal bar chart of the weighted share of adults in each combination of self-reported diagnosis, HbA1c, and glucose classification. The largest group with any positive is diagnosed with both biomarkers high at 6.7%; diagnosed with both below threshold is 2.3%."></div>
         <figcaption>Overlap of self-reported diagnosis, HbA1c at or above 6.5%, and fasting glucose at or above 126 mg/dL in the paired domain, August 2021 to August 2023 (n = 2,938, WTSAF2YR). The diagnosis-negative, both-below group (84.2%) is not drawn.</figcaption>
       </figure>
     </section>
@@ -126,9 +127,9 @@ make repro-check</code></pre>
     </section>
 
     <section id="files" aria-labelledby="files-h">
-      <h2 id="files-h">Report, tables, and files</h2>
+      <h2 id="files-h">Report, code and data</h2>
       <ul class="files">
-        <li><a href="downloads/diabetes-definition-audit-source.zip">Source archive</a> <span class="meta">(ZIP, 998 KB): code, SQL, R, configuration, tests, fixture, documentation, and result tables</span></li>
+        <li><a href="downloads/diabetes-definition-audit-source.zip">Source code</a> <span class="meta">(ZIP, 999 KB): code, SQL, R, configuration, tests, fixture, documentation, and result tables</span></li>
         <li><a href="downloads/manuscript.pdf">Download manuscript (PDF)</a> <span class="meta">(404 KB)</span></li>
         <li><a href="downloads/manuscript.docx">Download manuscript (Word)</a> <span class="meta">(39 KB)</span></li>
         <li><a href="downloads/supplementary.html">Supplementary material (HTML)</a> <span class="meta">(1.3 MB): participant flow, validation, group tables and additional analyses</span></li>
@@ -153,7 +154,7 @@ make repro-check</code></pre>
     </section>
   </main>
 
-  <footer>
+  <footer style="padding-left:0;padding-right:0">
     <p>Data: CDC National Center for Health Statistics, National Health and Nutrition Examination Survey, August 2021 to August 2023 and 2017 to March 2020 public-use files, available at no charge from the <a href="https://wwwn.cdc.gov/nchs/nhanes/">NHANES website</a>. Use of these data does not imply endorsement by NCHS or CDC. Results on this page come from pipeline run 20261007T212439Z.</p>
   </footer>
   </div>

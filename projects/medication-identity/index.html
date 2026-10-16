@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity from labels to FHIR</title>
 <meta name="description" content="Which drug-label identity and strength details survive FHIR R4 and common shortcuts, measured on 1,475 DailyMed prescription labels."><link rel="stylesheet" href="assets/style.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -9,6 +9,7 @@
 <main id="content">
 <p class="muted small">This research project uses public drug-label and terminology data and no patient records.</p>
 <h1>What survives when drug labels are turned into FHIR medication records?</h1>
+<p class="muted small">Animesh Bose, Norlowe Research</p>
 <p class="lede">Research teams and drug-dictionary maintainers copy product identity from DailyMed labels and RxNorm into analysis tables and HL7 FHIR (Fast Healthcare Interoperability Resources) records. I measured, field by field, which identity and strength details survive that conversion for 1,475 current prescription labels for selected cardiometabolic drugs, and what common shortcuts lose.</p>
 <figure><picture><source media="(max-width: 640px)" srcset="assets/fig1_representations-narrow.svg"><img src="assets/fig1_representations.svg" alt="Dot chart of fields preserved: FHIR R4 + sidecar 100.0%; FHIR R4 core only 87.6%; RxCUI only (current RxNorm) 20.9% exact, 50.3% with conversion; DailyMed packaging service 37.2%; Flat export shortcut 24.2% exact, 32.2% with conversion; Latest label version only 98.6%." width="760" loading="lazy"></picture>
 <figcaption>Figure 1. Share of applicable identity and strength fields preserved, held-out records: 1,965 product-version records from 1,036 labels; 1,662 current-version records for RxCUI only and the DailyMed packaging service; 303 preceding-version records for the latest version only. Values are listed in the table below.</figcaption></figure>
@@ -56,11 +57,11 @@ python3 -m venv .venv && .venv/bin/pip install --require-hashes -r requirements.
 .venv/bin/medid scope && .venv/bin/medid acquire && .venv/bin/medid pipeline   # full study</code></pre>
 <p class="small muted">Needs Python 3.11 or later, PostgreSQL 16 or 17 server binaries on PATH (the pipeline runs its own cluster), and Java 17 or later with the HL7 validator jar (see the README's validator section). The full run downloads about 530 MB from DailyMed and RxNav.</p>
 
-<h2>Files</h2>
+<h2>Report, code and data</h2>
 <ul class="files"><li><a href="report.html">Full report</a> <span class="muted small">Methods, results and references.</span></li>
-<li><a href="downloads/medication-identity-source.zip">Source archive (ZIP)</a> <span class="muted small">Code, SQL, schemas, configuration, tests, demo fixture, documentation and results tables.</span></li>
+<li><a href="downloads/medication-identity-source.zip">Source code (ZIP)</a> <span class="muted small">Code, SQL, schemas, configuration, tests, demo fixture, documentation and results tables.</span></li>
 <li><a href="downloads/medication_dictionary.zip">Medication dictionary (CSV in ZIP)</a> <span class="muted small">One row per package NDC in each current label (6,349 rows for 6,316 distinct package NDCs), with label provenance, attributes as labeled, RxNorm status, crosswalk results and review reasons.</span></li><li><a href="downloads/roundtrip_field_status.csv">Round-trip field statuses (CSV)</a> <span class="muted small">Representation x attribute x split counts by status, with applicable denominators.</span></li><li><a href="downloads/roundtrip_record_outcomes.csv">Round-trip record outcomes (CSV)</a> <span class="muted small">Records with all critical attributes preserved, by representation and split, with exploratory intervals.</span></li><li><a href="downloads/matching_outcomes.csv">Matching outcomes (CSV)</a> <span class="muted small">Approaches A, A2, B and C by split and outcome.</span></li><li><a href="downloads/version_changes_by_set.csv">Label version changes (CSV)</a> <span class="muted small">One row per label with a retrieved preceding version.</span></li><li><a href="downloads/medication_identity_results.xlsx">Results workbook (Excel)</a> <span class="muted small">Summary tables, per-label version changes and removed package NDCs, with a definitions sheet.</span></li><li><a href="downloads/medication_sidecar.schema.json">Companion record schema (JSON Schema)</a> <span class="muted small">The local schema every sidecar validates against.</span></li><li><a href="downloads/fhir_examples.zip">FHIR examples (ZIP)</a> <span class="muted small">The two Bundles and sidecars shown in the comparison viewer.</span></li></ul>
-</main><footer><div class="inner">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
-Medicine (DailyMed, RxNorm API), retrieved 2026-10-07; no patient records. This product uses publicly available data from the U.S. National Library of
+</main><footer><div class="inner" style="padding-left:0;padding-right:0">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+Medicine (DailyMed, RxNorm API), retrieved <span style="white-space:nowrap">2026-10-07</span>; no patient records. This product uses publicly available data from the U.S. National Library of
 Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
 recommend this or any other product.</div></footer></body></html>

@@ -33,3 +33,17 @@ body.portfolio-page main,body.portfolio-page>.page{width:100%;max-width:1088px!i
 /* Pages with their own centred body rule use the shared full-width layout. */
 body.portfolio-page{max-width:none!important;padding:0!important}
 .portfolio-nav .portfolio-links{align-items:center}
+/* Phones: figure images scroll sideways inside their frame at a readable width; the caption stays below. */
+@media(max-width:640px){.portfolio-page .portfolio-fig{display:block;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain}.portfolio-page .portfolio-fig img{min-width:640px}}
+
+/* Download lists on project pages share one layout: ruled rows, the link first, file details below in smaller text. */
+.portfolio-page ul:is(.files,.downloads){list-style:none;max-width:680px;margin:16px 0 24px;padding:0}.portfolio-page ul:is(.files,.downloads)>li{display:block;margin:0;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14);color:#c4c4c4}.portfolio-page ul:is(.files,.downloads)>li>:is(.meta,.note,.size,small,.small){display:block;margin:2px 0 0;font-size:14px;line-height:1.5;color:#a2a2a2}
+
+/* Home page previews: the empty space around a chart matches the chart's own background. */
+.portfolio-preview img{background:#fcfcfb}
+
+/* The unavailable-page notice uses the home page's header, gutter and type. */
+.portfolio-empty{max-width:1440px;margin:0 auto;padding:48px clamp(16px,4.5vw,64px) 64px}.portfolio-nav+.portfolio-empty{padding-top:24px}.portfolio-empty h1{margin:0 0 12px;font-size:28px;line-height:1.25;font-weight:400;letter-spacing:-.01em;color:#ededed}.portfolio-empty p{margin:0;font-size:17px;line-height:1.55;color:#a2a2a2}
+
+/* A table already inside its own frame does not need the shared frame margin. */
+.portfolio-page :is(.table-wrap,.tablewrap)>.portfolio-table{margin:0}

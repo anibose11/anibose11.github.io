@@ -56,7 +56,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 @media (max-width: 480px) { body { font-size: 16px; } .facts strong { font-size: 1.35rem; } .flow { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -66,11 +66,12 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <article>
 <div class="prose">
 <h1>Retraction checks depended more on the status source than on identifier crosswalks</h1>
+<p class="muted">Animesh Bose, Norlowe Research</p>
 <p class="question">An analyst checking a systematic review's references for retractions, corrections and expressions of concern needs to know how much of the list can be checked, how much the result depends on the status source, and whether each notice came before or after the review. I measured all three in 1,000 open-access reviews of diabetes, obesity and heart failure, covering 62,740 reference occurrences.</p>
 </div>
 
 <figure>
-<img src="assets/fig2_source_overlap.svg" width="1200" height="480" alt="Stacked bars by claim type showing which source recorded the claim. Retraction: 35 both sources, 4 Retraction Watch only, 7 PubMed only (n = 46). Expression of concern: 10 both, 4 Retraction Watch only, 10 PubMed only (n = 24). Correction: 7 both and 2,162 PubMed only (n = 2,169).">
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_source_overlap.svg" width="1200" height="480" alt="Stacked bars by claim type showing which source recorded the claim. Retraction: 35 both sources, 4 Retraction Watch only, 7 PubMed only (n = 46). Expression of concern: 10 both, 4 Retraction Watch only, 10 PubMed only (n = 24). Correction: 7 both and 2,162 PubMed only (n = 2,169)."></div>
 <figcaption>Which source recorded each claim, by claim type. Counts are reference occurrences after PubMed relations were added to Retraction Watch (arm C). Retraction Watch data are for 2026-10-06, and PubMed records were retrieved on 2026-10-07.</figcaption>
 </figure>
 
@@ -108,7 +109,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <h2>Coverage was high and PubMed supplied most correction claims</h2>
 </div>
 <figure>
-<img src="assets/fig1_coverage_ledger.svg" width="1200" height="440" alt="Horizontal bars of the coverage ledger: 55,792 one verified PubMed record, 4,911 no identifier, 1,715 DOI only and not in PubMed, 321 ambiguous, 1 malformed.">
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_coverage_ledger.svg" width="1200" height="440" alt="Horizontal bars of the coverage ledger: 55,792 one verified PubMed record, 4,911 no identifier, 1,715 DOI only and not in PubMed, 321 ambiguous, 1 malformed."></div>
 <figcaption>Coverage ledger. Every reference occurrence falls into exactly one category. No lookup failed, and every cited PMID resolved.</figcaption>
 </figure>
 <div class="table-wrap">
@@ -126,7 +127,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 </table></div>
 </div>
 <figure>
-<img src="assets/fig3_timing.svg" width="1200" height="560" alt="Stacked bars of claim timing by claim type and source. Retraction, Retraction Watch: 15 before and 24 after. Retraction, PubMed: 15 before, 27 after, 1 indeterminate. Correction, PubMed: 787 indeterminate, mostly because the erratum relation names no notice record.">
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_timing.svg" width="1200" height="560" alt="Stacked bars of claim timing by claim type and source. Retraction, Retraction Watch: 15 before and 24 after. Retraction, PubMed: 15 before, 27 after, 1 indeterminate. Correction, PubMed: 787 indeterminate, mostly because the erratum relation names no notice record."></div>
 <figcaption>Timing of each claim against the review's first online date. Most indeterminate correction timing comes from PubMed erratum relations without a notice record. A post hoc check dated all 783 of them from PubMed's citation string, and all fell before the review.</figcaption>
 </figure>
 
@@ -144,14 +145,14 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 .venv/bin/rae build &amp;&amp; .venv/bin/rae analyze &amp;&amp; .venv/bin/rae validate
 .venv/bin/rae audit my_refs.csv --review-date 2025-06-01</code></pre>
 
-<h2>Report and downloads</h2>
+<h2>Report, code and data</h2>
 <ul class="downloads">
 <li><a href="report.html">Full report</a><small>Methods, results and limitations (HTML)</small></li>
-<li><a href="downloads/retraction-aware-evidence-source.zip">Source archive</a><small>Code, SQL, configuration, tests, docs, frozen manifests and result tables (3.0 MB)</small></li>
+<li><a href="downloads/retraction-aware-evidence-source.zip">Source code (ZIP)</a><small>Code, SQL, configuration, tests, docs, frozen manifests and result tables (3.0 MB)</small></li>
 <li><a href="downloads/review_queue.xlsx">Review queue workbook</a><small>Every flagged reference with identifiers, claims, dates, timing and source links (861 KB)</small></li>
 <li><a href="downloads/aggregate_results.xlsx">Aggregate results workbook</a><small>All result tables with a definitions sheet, units and intervals (29 KB)</small></li>
 <li><a href="downloads/result_tables.zip">Result tables (CSV)</a><small>Result tables, Tableau-ready exports and the claims ledger (833 KB)</small></li>
-<li><a href="downloads/analysis_plan_with_amendments.md">Analysis plan</a><small>Timestamped plan with three dated amendments (Markdown) (14 KB)</small></li>
+<li><a href="downloads/analysis_plan_with_amendments.md">Analysis plan</a><small>Timestamped plan with three dated amendments (Markdown, 14 KB)</small></li>
 </ul>
 </div>
 </article>

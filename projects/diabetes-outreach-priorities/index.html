@@ -43,7 +43,7 @@ nav.crumbs{font-size:14px;color:var(--muted);margin-bottom:8px}
 .stat span{font-size:14px;color:var(--ink2)}
 ul.files{padding-left:20px}
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -51,11 +51,12 @@ ul.files{padding-left:20px}
 <main id="main">
 
 <h1>How outreach priorities change which counties are selected</h1>
-<p class="meta">Animesh Bose. County planning study using CDC PLACES 2025 estimates and Census Bureau data, October 2026.</p>
+<p class="meta" style="margin-bottom:4px">Animesh Bose, Norlowe Research</p>
+<p class="meta">County planning study using CDC PLACES 2025 estimates and Census Bureau data, October 2026.</p>
 
 <p><strong>Research question.</strong> A program can prioritize places where diabetes is most common or places where the most affected adults live. I compared those choices, a poverty-based rule, and the uncertainty around each resulting county list.</p>
 <figure>
-<a href="assets/fig2_capacity_envelope.png"><img src="assets/fig2_capacity_envelope.svg" alt="Horizontal bars for three rules at capacities 10, 25 and 50. Under prevalence, 0, 0 and 1 counties are core and 180, 346 and 563 are boundary. Under estimated burden, 5, 17 and 29 are core and 12, 18 and 50 boundary. Under high-poverty prevalence, 0, 0 and 1 are core and 200, 366 and 547 boundary." width="2288" height="1280"></a>
+<div class="portfolio-fig"><a href="assets/fig2_capacity_envelope.png"><img src="assets/fig2_capacity_envelope.svg" alt="Horizontal bars for three rules at capacities 10, 25 and 50. Under prevalence, 0, 0 and 1 counties are core and 180, 346 and 563 are boundary. Under estimated burden, 5, 17 and 29 are core and 12, 18 and 50 boundary. Under high-poverty prevalence, 0, 0 and 1 are core and 200, 366 and 547 boundary." width="2288" height="1280"></a></div>
 <figcaption>Counties that stay selected wherever every value falls within the bounds used for the rule (core) and counties whose selection depends on where values fall (boundary), by rule and capacity. Bounds are the published PLACES 95% limits and, for estimated burden, scenario bounds that also span the adult population range. For high-poverty prevalence, eligibility also spans the ACS 95% poverty bounds. A county whose upper bound reaches 20% can be boundary, and only a county whose lower bound reaches 20% can be core. The same numbers are in <a href="report.html#table-2">Table 2</a> and <a href="report.html#figure-2">Figure 2</a> of the report.</figcaption>
 </figure>
 
@@ -104,7 +105,7 @@ pytest
 dop acquire && dop build && dop analyze && dop validate && dop render</code></pre>
 
 <p><code>dop demo</code> runs the same code on a small synthetic fixture in under a second, and <code>scripts/run_all.sh</code> runs every step in order. Every run is identified by a hash of the configuration, the analysis code and the source files. The run reported here is a944852459ca.</p>
-<h2>Files</h2>
+<h2>Report, code and data</h2>
 <ul class="files">
 <li><a href="report.html">Full report</a> and <a href="supplement.html">supplementary methods and tables</a></li>
 <li><a href="dashboard.html">County priority tables</a>: filter by rule, capacity, state and status</li>
@@ -112,7 +113,7 @@ dop acquire && dop build && dop analyze && dop validate && dop render</code></pr
 <li><a href="downloads/county_priority_table.csv">County priority table</a> (CSV, one row per county, with source and measure columns)</li>
 <li><a href="downloads/summary_tables.zip">Summary tables</a> (ZIP of CSV files with a data dictionary)</li>
 <li><a href="downloads/planning-brief.html">One-page planning brief</a></li>
-<li><a href="downloads/diabetes-outreach-priorities-source.zip">Source archive</a> (code, configuration, tests, source manifest and derived tables)</li>
+<li><a href="downloads/diabetes-outreach-priorities-source.zip">Source code archive</a> (ZIP, with configuration, tests, source manifest and derived tables)</li>
 </ul>
 </main>
 </body>

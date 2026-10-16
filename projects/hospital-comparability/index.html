@@ -7,15 +7,20 @@
 <meta name="description" content="A release-aware check of CMS hospital outcome files that rejects comparisons the data cannot support and measures how much of a within-state hospital ordering the published intervals support.">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/viewer.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=6290ca3448cc">
+<style>
+.portfolio-page .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.portfolio-page .page-footer p{margin-left:0}
+.portfolio-page .hc-table-wrap+.hc-sub{margin-top:16px}
+</style>
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=72e535797c73">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main" class="page-main">
-<p class="kicker">Animesh Bose. Health services research using public CMS data.</p>
 <h1>When hospital quality comparisons are not comparable</h1>
+<p class="kicker">Animesh Bose, Norlowe Research<br>Health services research using public CMS data.</p>
 <p class="lede">In Arizona, the hospital ranked first for heart-failure readmission could occupy any rank from 1 to 52 within the published intervals. I built a check that first establishes whether CMS records can be compared, then shows how much of their apparent ordering those intervals support.</p>
 
 <div class="question">
@@ -23,7 +28,7 @@
 </div>
 
 <figure>
-  <img src="assets/figures/fig2_lead_example.svg" width="721" height="570" alt="Two-panel chart for Arizona. Left: 52 hospitals' heart-failure readmission rates with published 95% intervals, all overlapping. Right: each hospital's point rank and interval-compatible rank range; the first-ranked hospital's range spans ranks 1 to 52.">
+  <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/figures/fig2_lead_example.svg" width="721" height="570" alt="Two-panel chart for Arizona. Left: 52 hospitals' heart-failure readmission rates with published 95% intervals, all overlapping. Right: each hospital's point rank and interval-compatible rank range; the first-ranked hospital's range spans ranks 1 to 52."></div>
   <figcaption>Heart-failure readmission in Arizona, April 2026 refresh (released 2026-05-13). The hospital ranked first on its point estimate (17.5%, interval 14.6 to 21.0) could hold any rank from 1 to 52. None of the state's 1,299 point orderings is separated by the published intervals. The state was chosen by a rule fixed before the analysis; the report explains how a four-way tie at the median count was resolved.</figcaption>
 </figure>
 
@@ -71,14 +76,14 @@
 <p>In the primary release, 2,975 of 4,792 requested heart-failure readmission records passed every gate. Too few cases removed 1,118, and 59 records with valid-looking numbers failed because CMS marked them as covering only part of the performance period.</p>
 </div>
 <figure>
-  <img src="assets/figures/fig1_gate_flow.svg" width="728" height="272" alt="Bar charts of heart-failure readmission records remaining after each gate. Primary release: 4,792 requested, 2,975 compatible. Flagged and current releases: zero records pass the release gate.">
+  <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/figures/fig1_gate_flow.svg" width="728" height="272" alt="Bar charts of heart-failure readmission records remaining after each gate. Primary release: 4,792 requested, 2,975 compatible. Flagged and current releases: zero records pass the release gate."></div>
   <figcaption>Records remaining after each gate in the three releases.</figcaption>
 </figure>
 <div class="prose">
 <p>Among compatible hospitals in the same state, the intervals separated about one heart-failure readmission ordering in 257, and 87.3% of hospitals were separated from none of their peers. For mortality the intervals separated about one ordering in 34, and 54.2% of hospitals were separated from none. Excess days separated hospitals far more often, which matches earlier work comparing that measure with readmission. Weighting each state equally instead of each pair gave the same picture.</p>
 </div>
 <figure>
-  <img src="assets/figures/fig4_separation.svg" width="723" height="298" alt="Dot chart of the share of point-ordered same-state pairs not separated, by measure and rule. Readmission and mortality measures sit close to 100 percent; the excess days measures sit near two thirds.">
+  <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/figures/fig4_separation.svg" width="723" height="298" alt="Dot chart of the share of point-ordered same-state pairs not separated, by measure and rule. Readmission and mortality measures sit close to 100 percent; the excess days measures sit near two thirds."></div>
   <figcaption>Share of point orderings not separated, by measure, under the primary rule (R1), a rounding-robust rule (R2) and a lenient rule (R3), with the median and interquartile range across states.</figcaption>
 </figure>
 <div class="prose">
@@ -86,7 +91,7 @@
 <p>Between releases, the readmission Measure ID kept its name but moved from a 36-month to a 24-month window and, under the FY 2026 final rule, added Medicare Advantage beneficiaries. The mortality and excess-days measures kept their identifiers too, but from the Summer 2026 refresh every study measure includes patients admitted with COVID-19 and uses updated risk adjustment. A comparison across those releases would mix definitions under one identifier.</p>
 </div>
 <figure>
-  <img src="assets/figures/fig6_windows.svg" width="721" height="323" alt="Timeline of observation windows for heart-failure measures in three releases; the readmission window shortens from 36 to 24 months.">
+  <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/figures/fig6_windows.svg" width="721" height="323" alt="Timeline of observation windows for heart-failure measures in three releases; the readmission window shortens from 36 to 24 months."></div>
   <figcaption>Observation windows of the same Measure IDs across the three releases.</figcaption>
 </figure>
 </section>
@@ -129,11 +134,11 @@
 </section>
 
 <section class="prose" aria-labelledby="files">
-<h2 id="files">Report and files</h2>
+<h2 id="files">Report, code and data</h2>
 <ul class="files">
 <li><a href="report.html">Full report and references</a><span class="meta">HTML</span></li>
 <li><a href="supplement.html">Supplementary tables S1 to S12</a><span class="meta">HTML</span></li>
-<li><a href="downloads/hospital-comparability-source.zip">Source archive (code, SQL, configuration, plan, tests, demo)</a><span class="meta">2.1 MB</span></li>
+<li><a href="downloads/hospital-comparability-source.zip">Source code archive (SQL, configuration, plan, tests, demo)</a><span class="meta">2.1 MB</span></li>
 <li><a href="downloads/hospital-comparability-review.xlsx">Review workbook (original fields, gate decisions, source evidence)</a><span class="meta">7.0 MB</span></li>
 <li><a href="downloads/hospital-comparability-tables.zip">Output tables (CSV) and evidence map</a><span class="meta">729.4 KB</span></li>
 <li><a href="downloads/analysis_plan.md">Analysis plan with lock history and amendments</a><span class="meta">22.8 KB</span></li>
