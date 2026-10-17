@@ -10,7 +10,7 @@ evidence-model-audit-results.xlsx  the same aggregates with a definitions sheet
 data-dictionary.html        source-to-analysis fields and metric definitions
 tableau-spec.html           Tableau import and interaction specification
 prediction-viewer.html      examples from CC BY or CC0 articles with highlighted quotes
-manuscript-draft.docx       manuscript draft generated from the results
+manuscript-draft.docx       the manuscript (Word), same text as the full report
 supplementary-material.html supplementary tables and methods detail
 claims.json                 headline numbers mapped to output files and keys
 evidence-model-audit-source.zip  code, tests, configuration, predictions, results
