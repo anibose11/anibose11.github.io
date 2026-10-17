@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Full report: Adverse-event reporting odds ratios under alternative case definitions</title>
+<title>Adverse event robustness: full report</title>
 <meta name="description" content="Complete scientific report with methods, results, discussion, limitations and references.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>.report th:not([style]),.report td:not([style]){text-align:left}@media (min-width:700px){.report thead th{white-space:normal}}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -16,6 +16,7 @@
 <main id="main">
 <article class="report"><h1>Processing choices and reporting odds ratios in the FDA quarterly adverse event files: a disproportionality analysis of five SGLT2 and DPP-4 inhibitor associations, 2024 to 2026</h1>
 <p class="portfolio-byline">Animesh Bose, Norlowe Research</p>
+<p class="portfolio-status">This report has not been peer reviewed.</p>
 <section id="abstract" class="level2">
 <h2>Abstract</h2>
 <p><strong>Introduction</strong> Disproportionality analyses of the US
@@ -1473,7 +1474,7 @@ secondary analyses, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
 </section>
 <section id="figure-legends" class="level2">
 <h2>Figure legends</h2>
-<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_case_construction_flow.svg"
+<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Flow diagram from report rows to report versions, cases, retained cases, and the exposed groups used in the two-by-two tables." src="assets/fig2_case_construction_flow.svg"
 style="width:100.0%" /></span></p>
 <p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. Counts are from the full run; "latest version"
 refers to the acquired files only. <em>CASEID</em> case identifier,
@@ -1481,10 +1482,10 @@ refers to the acquired files only. <em>CASEID</em> case identifier,
 identifier, <em>PT</em> preferred term, <em>S2</em> secondary analysis
 2, <em>V1</em> primary configuration, <em>V5 to V8</em> report-version
 configurations</p>
-<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_ror_by_configuration.svg"
+<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188." src="assets/fig1_ror_by_configuration.svg"
 style="width:100.0%" /></span></p>
 <p><strong>Fig. 2</strong> Reporting odds ratios and Woolf 95% confidence intervals under the eight principal configurations. Blue: any suspect role; orange: primary suspect only. Circles: expanded matching; squares: strict matching. Hollow markers and shaded rows identify report-version analyses (V5–V8), which are diagnostic comparators. Each panel has its own logarithmic scale; the reference value of 1 appears only where it lies within the displayed range. Table 2 gives all counts and estimates. <em>CI</em> confidence interval, <em>DPP-4</em> dipeptidyl peptidase-4, <em>ROR</em> reporting odds ratio, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
-<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_cell_a_composition.svg"
+<p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Stacked bars showing, for each association, the share of exposed cases with the event that qualify as primary suspect versus only secondary suspect, and by ingredient name versus salt or brand name. Arthralgia is mostly secondary-suspect-only." src="assets/fig3_cell_a_composition.svg"
 style="width:100.0%" /></span></p>
 <p><strong>Fig. 3</strong> How the exposed cases with the event under
 the primary configuration (cell a) qualified: as primary suspect or only
@@ -1495,15 +1496,14 @@ cotransporter-2</p>
 </section>
 <section id="electronic-supplementary-material" class="level2">
 <h2>Electronic Supplementary Material</h2>
-<p><strong>ESM 1</strong> Analysis plan with dated amendments, plan
-checksums, and the issue and decision log.</p>
-<p><strong>ESM 2</strong> Supplementary Tables S1 to S8 and
-Supplementary Fig. S1: release compatibility (S1), source reconciliation
+<p><strong>ESM 1</strong> <a href="downloads/analysis_plan.md">Analysis plan with dated amendments</a>. The plan checksums and the issue and decision log are in the <a href="downloads/adverse-event-robustness-source.zip">source archive</a>.</p>
+<p><strong>ESM 2</strong> <a href="downloads/supplementary_material.html">Supplementary Tables S1 to S8 and
+Supplementary Fig. S1</a>: release compatibility (S1), source reconciliation
 (S2), reaction term provenance and occurrence (S3), verified drug names
 and ingredient counts (S4), drug-name match basis (S5), count
 decomposition between configurations (S6), post hoc profiles of moved
 units (S7), and overlap between pairs (S8); READUS-PV checklist.</p>
-<p><strong>ESM 3</strong> Source archive: pipeline code (Python and
+<p><strong>ESM 3</strong> <a href="downloads/adverse-event-robustness-source.zip">Source archive</a>: pipeline code (Python and
 SQL), configuration, frozen RxNav responses, tests with synthetic
 fixtures, aggregate outputs, and the results workbook.</p>
 </section>

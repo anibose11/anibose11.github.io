@@ -6,7 +6,7 @@
 <title>What summed Medicare Part D detail leaves out</title>
 <meta name="description" content="How much of each published Medicare Part D claim total is in the public prescriber-drug file, measured for cardiometabolic drugs by label and state, 2022 to 2024.">
 <link rel="stylesheet" href="assets/page.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -31,7 +31,7 @@
 </div>
 
 <h2>The summary files include claims omitted from public detail</h2>
-<p>CMS publishes three Part D prescriber files each year. The Provider and Drug file has one row per prescriber, brand name and generic name, and leaves out any pair with 10 or fewer claims. The Geography and Drug file gives national and state totals for each drug label, and CMS builds it from all Part D prescription drug events, not from the trimmed detail. That makes it a reference built from the same source records for the detail sums.</p>
+<p>CMS publishes three Part D prescriber files each year. The Provider and Drug file has one row per prescriber, brand name and generic name, and leaves out any pair with 10 or fewer claims. The Geography and Drug file gives national and state totals for each drug label, and CMS builds it from all Part D prescription drug events, not from the trimmed detail. That makes it a same-source reference against which the detail sums can be checked.</p>
 <p>The study used the 2024 files (28,023,892 detail rows, 1,139,455 prescribers) and repeated everything on 2023 and 2022. The eligibility rule was fixed before any comparison: diabetes drugs, renin-angiotensin agents and lipid modifying agents in Anatomical Therapeutic Chemical (ATC) groups A10, C09 and C10, mapped through the National Library of Medicine RxClass service. The final set contained 259 labels after a device label mapped in error was removed. That correction and the reruns are recorded in the analysis plan.</p>
 
 <h2>Each gap was checked against the rule that should explain it</h2>
@@ -51,7 +51,7 @@
 <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig4_a10a_share_2024.svg" alt="Dumbbell chart for the 50 states and DC. In every state, the insulin share of diabetes-drug claims computed from public detail is lower than the share from published totals, by 3.1 to 6.4 percentage points." width="720" height="960"></div>
 <figcaption><strong>Insulin share of diabetes-drug claims by state, 2024.</strong> Filled points use published totals; open points use summed detail for the same labels. Insulins are shown because they changed the most among groups with at least 1% of their class's claims; the full report shows every group.</figcaption>
 </figure>
-<p>Because insulins lose more claims than metformin does, the insulin share computed from detail was 14.7% instead of 18.6% nationally, and lower in every state. The state ordering by insulin share changed enough that 25 of 51 jurisdictions moved five or more places and only 7 states stayed in both top-10 lists. Orderings for SGLT2 inhibitors, statins, metformin and ACE inhibitors barely moved. A few very small groups reordered more, but each holds under 0.5% of its class's claims. The 2023 and 2022 files showed a similar pattern (90.6% and 90.4% retained overall).</p>
+<p>Because insulins lose more claims than metformin does, the insulin share computed from detail was 14.7% instead of 18.6% nationally, and lower in every state. The state ordering by insulin share changed enough that 25 of 51 jurisdictions moved five or more places and only 7 states stayed in both top-10 lists. Orderings for SGLT2 inhibitors, statins, metformin and ACE inhibitors barely moved. Two very small groups, renin inhibitors and other RAS agents, reordered more, but each holds under 0.1% of its class's claims. The 2023 and 2022 files showed a similar pattern (90.6% and 90.4% retained overall).</p>
 
 <h2>What the gap means, and what it does not</h2>
 <p>The gap measures how many claims are absent from the summed public detail. Every observed gap is consistent with omission of prescriber-drug rows with 10 or fewer claims, but that check cannot prove the rule is the only cause. It does not identify any prescriber or patient, and nothing here recovers a suppressed row. It says nothing about whether any drug is over- or under-prescribed, and gross drug cost is before rebates and is not what patients pay. For a drug or state total, the published Geography and Drug file answers the question directly. When prescriber detail is needed, report the retained fraction beside the estimate, and never sum beneficiary counts across prescribers.</p>

@@ -7,7 +7,7 @@
 <meta name="description" content="Processing-sensitivity study of reporting odds ratios in FDA quarterly adverse event files, 2024Q3 to 2026Q2.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>ul.files .meta{white-space:nowrap}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -103,11 +103,14 @@
 
 <section aria-labelledby="reproduce">
 <h2 id="reproduce">Reproduce</h2>
-<p>The source archive contains the pipeline (Python and DuckDB SQL), configuration, frozen RxNav responses, tests, and documentation. On macOS or Linux with Python 3.11 or later:</p>
+<p>The source archive contains the pipeline (Python and DuckDB SQL), configuration, frozen RxNav responses, tests, and documentation. On macOS or Linux with Python 3.12 or later:</p>
 <pre><code>python3 -m venv .venv &amp;&amp; .venv/bin/pip install -r requirements.lock &amp;&amp; .venv/bin/pip install -e .
 .venv/bin/python -m pytest -q          # software tests on synthetic fixtures
-.venv/bin/aesens demo                  # fast end-to-end run on the synthetic fixture
-.venv/bin/aesens all                   # full study: downloads about 514 MB from FDA</code></pre>
+.venv/bin/aesens demo                  # build and analyze stages on the synthetic fixture
+.venv/bin/aesens acquire               # full study: downloads about 514 MB from FDA
+.venv/bin/aesens build
+.venv/bin/aesens analyze
+.venv/bin/aesens validate</code></pre>
 <p class="note">The demo uses invented records to show the pipeline works; it is not evidence about any drug. On the test machine the full build took about a minute and the analysis a few seconds; see the runtime manifest in the archive.</p>
 </section>
 

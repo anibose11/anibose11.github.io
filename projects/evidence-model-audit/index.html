@@ -6,7 +6,7 @@
 <title>Clinical evidence models: citation validity versus answer correctness</title>
 <meta name="description" content="How often small local language models quote the trial report correctly but report the wrong result, measured on every eligible question of the Evidence Inference 2.0 test split.">
 <link rel="stylesheet" href="assets/site.css?v=0d74ad063e">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
@@ -32,7 +32,7 @@
 
 <figure>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig1_quote_valid_wrong.svg" alt="Dot and interval chart of the share of quote-valid answers with the wrong label. Qwen3-1.7B with retrieved passages: 45.6%. With the annotated evidence supplied, the share falls but stays above one in five for every system."></div>
-<figcaption>Figure 1. Share of answers with an existing quote whose label disagrees with the benchmark, by model and context. Lines are 95% intervals from resampling articles. <a href="downloads/system-metrics.csv">Data (CSV)</a></figcaption>
+<figcaption>Share of answers with an existing quote whose label disagrees with the benchmark, by model and context. Lines are 95% intervals from resampling articles. <a href="downloads/system-metrics.csv">Data (CSV)</a></figcaption>
 </figure>
 
 <div class="measure">
@@ -44,7 +44,7 @@
 
 <figure>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig2_answer_outcomes.svg" alt="Stacked bars showing, for each model and context, the share of questions where the quote was valid and the label right, the quote valid and the label wrong, no valid quote, abstained, or invalid output."></div>
-<figcaption>Figure 2. What happened to every eligible question, by model and context. The orange segment is the case this project is about: a quote that checks out next to a wrong label. <a href="downloads/system-metrics.csv">Data (CSV)</a></figcaption>
+<figcaption>What happened to every eligible question, by model and context. The orange segment is the case this project is about: a quote that checks out next to a wrong label. <a href="downloads/system-metrics.csv">Data (CSV)</a></figcaption>
 </figure>
 
 <h2>Copying, source location and answer correctness were checked separately</h2>
@@ -58,7 +58,7 @@
 <p>A natural safeguard is to keep only answers whose quote checks out and points to the passage it came from. For Qwen3-1.7B with retrieved passages, that rule set aside 325 answers, 178 of them correct, and moved the error among the answers it kept from 45.6% to 45.7%. Setting aside the same number of answers at random, 2,000 times, gave a mean error of 45.6%. The rule cost about a quarter of the answers, and discarding the same number at random did as well. The same held for Qwen3-4B-Instruct-2507 and for the other contexts, with one exception: when Qwen3-0.6B was handed the physicians' evidence sentences, the rule lowered its error from 34.8% to 29.8%, more than random discarding achieved.</p>
 <figure>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig3_rejection_rule.svg" alt="Dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the grey band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)."></div>
-<figcaption>Figure 3. Error among kept answers with all answers (ring) and after the quote rule (triangle), against random rejection at the same coverage (grey band). <a href="downloads/rejection-rule.csv">Data (CSV)</a></figcaption>
+<figcaption>Error among kept answers with all answers (ring) and after the quote rule (triangle), against random rejection at the same coverage (grey band). <a href="downloads/rejection-rule.csv">Data (CSV)</a></figcaption>
 </figure>
 <p>Other signals carried some information. A simple scoring rule fitted on the validation answers, using six features of each answer such as how many outcome words the quote contains and whether its significance wording agrees with the label, ranked the test answers better than chance (area under the risk and coverage curve 0.337 against 0.450 for random order). That rule is exploratory, and its scores are not probabilities.</p>
 

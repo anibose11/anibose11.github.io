@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</title>
+<title>Insurance continuity: full report</title>
 <meta name="description" content="Full scientific report: within-year coverage gaps and prescription spending among US adults with diabetes, MEPS 2024.">
 <link rel="stylesheet" href="assets/site.css?v=2f9db82a5a">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -15,6 +15,7 @@
 <main id="main">
 <article><h1>Insured on December 31, Uninsured Earlier in the Year: Within-Year Coverage Gaps and Prescription Spending Among US Adults With Diabetes</h1>
 <p class="note portfolio-byline">Animesh Bose, Norlowe Research<br>Data: AHRQ MEPS HC-256 (2024), HC-254A (2024), HC-251 (2023).</p>
+<p class="portfolio-status">Draft report, posted for review and comment. It has not been peer reviewed.</p>
 <nav class="toc" aria-label="Report contents"><strong>Contents:</strong> <a href="#abstract">Abstract</a> | <a href="#introduction">Introduction</a> | <a href="#methods">Methods</a> | <a href="#results">Results</a> | <a href="#discussion">Discussion</a> | <a href="#references">References</a> | <a href="#tables">Tables</a> | <a href="#supplementary-material">Supplementary material</a> | <a href="#reproducibility">Reproducibility</a></nav>
 <h2 id="abstract">Abstract</h2>
 <p><strong>Background:</strong> Annual spending analyses often classify insurance by year-end status, although people insured on December 31 may have been uninsured earlier that year.</p>
@@ -45,7 +46,7 @@
 <h3 id="prescription-measures">Prescription Measures</h3>
 <p>Outcomes were any prescription fill in 2024, the number of fills including refills, and self or family out-of-pocket payments for all prescribed medicines, in nominal 2024 dollars. These cover all prescriptions and the diabetic supplies recorded in the MEPS prescribed medicines component, not only glucose-lowering drugs. No recorded fill, fills with zero out-of-pocket payment, and missing expenditure were kept as separate states. Total payments from all sources gave context. MEPS imputes missing payments,<sup>5</sup> so the share of fills with fully or partially imputed payments was summarized from fill-level flags.<sup>19</sup> Out-of-pocket spending describes payments made; it does not measure affordability, unmet need, or access to every prescribed treatment.</p>
 <h3 id="statistical-analysis">Statistical Analysis</h3>
-<p>Estimates used R version 4.5.1 (R Foundation for Statistical Computing, Vienna, Austria) with the survey package version 4.5,<sup>22</sup> with Taylor series linearization, the full-year weight, variance strata, and primary sampling units. The full file stayed in the design and domains were taken as subsets, so variance estimation used all 105 strata and 264 primary sampling units in 2024 (262 in 2023). No stratum had a single primary sampling unit in the full file. Proportions have logit-transformed 95% CIs. Proportions were flagged with the National Center for Health Statistics presentation standards using Korn-Graubard intervals<sup>23</sup>; estimates that met the standard but called for review (fewer than 8 design degrees of freedom, or a complementary proportion that would not meet it) are marked. </p>
+<p>Estimates used R version 4.5.1 (R Foundation for Statistical Computing, Vienna, Austria) with the survey package version 4.5,<sup>22</sup> with Taylor series linearization, the full-year weight, variance strata, and primary sampling units. The full file stayed in the design and domains were taken as subsets, so variance estimation used all 105 strata and 264 primary sampling units in 2024 (262 in 2023). No stratum had a single primary sampling unit in the full file. Proportions have logit-transformed 95% confidence intervals (CIs). Proportions were flagged with the National Center for Health Statistics presentation standards using Korn-Graubard intervals<sup>23</sup>; estimates that met the standard but called for review (fewer than 8 design degrees of freedom, or a complementary proportion that would not meet it) are marked. </p>
 <p>Means and quantiles were flagged when the relative standard error exceeded 30% or could not be estimated, or when the group had fewer than 30 people. Medians and 90th percentiles used survey quantiles with Woodruff intervals.<sup>24</sup> Differences between classes in any fill, number of fills, and mean spending are design-based contrasts. A post hoc diagnostic described how concentrated out-of-pocket spending was.</p>
 <p>Summaries are shown 2 ways: on a common denominator, the primary domain split by class, and on classification-specific denominators, year-end status among everyone in scope on December 31. This keeps differences in scope or missing information from being read as coverage effects.</p>
 <p>A prespecified adjustment set (age group, sex, race and ethnicity, and family income below or above 200% of the federal poverty level) was used to standardize out-of-pocket spending across classes A, B, and C with a two-part model: a survey-weighted logistic model for any out-of-pocket spending and a gamma model with log link for positive amounts. Standardized means set every domain member to each class in turn. Uncertainty came from jackknife replicate weights built from the design (264 in 2024 and 262 in 2023), refitting both parts in every replicate. The model was fit only if a prespecified rule on event counts, positive spending observations, and design degrees of freedom was met; it was met in both years. No stepwise selection was used, and the model is descriptive.</p>
@@ -951,7 +952,7 @@
 <li>After estimates were seen. The month-by-month uninsured shares in the gap group (n = 70) do not meet the NCHS presentation standard for proportions, so that figure was moved from the main text to the supplement, with the caveat printed on it.</li>
 <li>After estimates were seen (post hoc, descriptive). Because the 2024 class A mean had a relative standard error near 30%, a diagnostic of spending concentration was added: the weighted share of out-of-pocket dollars from the top 1% and 5% of persons, and the maximum annual out-of-pocket amount in each class. It is reported as a diagnostic with no inference and was not used to trim or recode any value.</li>
 <li>Before the first analysis run, with no estimates seen. Design-based contrasts between classes for any fill and for mean fills were added to the analysis code alongside the prespecified contrasts for mean out-of-pocket spending. They are reported as descriptive differences.</li>
-<li>Clarification, no change to the analysis. The plan described part 1 of the two-part model as "any fill" in one sentence and as P(OOP &gt; 0) in another. The analysis used P(OOP &gt; 0), consistent with modelling out-of-pocket spending, and the support rule was evaluated on that outcome.</li>
+<li>Clarification, no change to the analysis. The plan described part 1 of the two-part model as "any fill" in one sentence and as P(OOP &gt; 0) in another. The analysis used P(OOP &gt; 0), consistent with modeling out-of-pocket spending, and the support rule was evaluated on that outcome.</li>
 <li>After estimates were seen. The reliability flags were completed to match this plan and the NCHS standard: quantiles are now flagged by the 30% relative standard error rule (the first implementation checked only n &lt; 30), and proportions whose complementary proportion would fail the relative width rule are marked for review. This changes footnotes only; no estimate changed.</li>
 <li>After estimates were seen. (a) The plan listed fewer than 8 design degrees of freedom among the criteria for flagging a proportion as unreliable; following the NCHS standard, such proportions are marked for review rather than suppressed, and means and quantiles whose standard error cannot be estimated are also flagged. (b) The code now computes the primary proportion on the complete-information denominator whenever anyone in it is indeterminate, as this plan specified; no one was indeterminate, so no estimate changed. (c) The post hoc spending diagnostic (amendment 4) also reports class means excluding the top 1% of the domain. These changes affect footnotes and descriptive diagnostics only.</li>
 </ol>
@@ -984,7 +985,7 @@
 </tr>
 <tr>
 <td>In scope all 12 months (monthly rule)</td>
-<td>1001</td>
+<td>1,001</td>
 <td>0</td>
 </tr>
 </tbody>
@@ -1540,7 +1541,7 @@
 <tr>
 <td>DIABDX_M18</td>
 <td>−8</td>
-<td>Don'T Know</td>
+<td>Don't know</td>
 <td>14</td>
 <td>14</td>
 <td>153,954</td>
@@ -1948,7 +1949,7 @@
 <tr>
 <td><code>person_id</code></td>
 <td>DUPERSID</td>
-<td>Copied. Unique key; uniqueness asserted in build.</td>
+<td>Copied. Unique key; uniqueness was checked when the analysis file was built.</td>
 <td>No reserved codes.</td>
 </tr>
 <tr>
@@ -1961,7 +1962,7 @@
 <td><code>weight</code></td>
 <td>PERWT24F</td>
 <td>Copied. Full-year person weight.</td>
-<td>Zero weight kept in the design frame, excluded from frames by pos_weight.</td>
+<td>Zero-weight records stay in the survey design but are excluded from all estimates by the positive-weight filter.</td>
 </tr>
 <tr>
 <td><code>stratum</code></td>
@@ -1991,13 +1992,13 @@
 <td><code>inscope_1231</code></td>
 <td>INSC1231</td>
 <td>1 = in scope on 12/31.</td>
-<td>2 = not in scope; excluded from frame Y.</td>
+<td>2 = not in scope; excluded from the denominator of adults in scope on 12/31 with a year-end coverage value.</td>
 </tr>
 <tr>
 <td><code>end_ref_month</code></td>
 <td>ENDRFM24</td>
 <td>Reference period end month.</td>
-<td>Must equal 12 for domain C.</td>
+<td>Must equal 12 for the primary domain.</td>
 </tr>
 <tr>
 <td><code>inscop_r31</code> / <code>inscop_r42</code> / <code>inscop_yy</code></td>
@@ -2008,8 +2009,8 @@
 <tr>
 <td><code>ins_1231</code></td>
 <td>INS24X</td>
-<td>Year-end coverage (covered on 12/31, or on the date the person left the RU).</td>
-<td>−1 = not eligible on 12/31; excluded from frame Y.</td>
+<td>Year-end coverage (covered on 12/31, or on the date the person left the MEPS reporting unit (RU)).</td>
+<td>−1 = not eligible on 12/31; excluded from the denominator of adults in scope on 12/31 with a year-end coverage value.</td>
 </tr>
 <tr>
 <td><code>ins_dec</code></td>
@@ -2080,13 +2081,13 @@
 <tr>
 <td><code>continuity_class</code></td>
 <td>INS24X / INSJA24X .. INSDE24X</td>
-<td>inscont.continuity.classify_continuity rules 1 to 5.</td>
+<td>Classification rules 1 to 5 (Section S1.3).</td>
 <td>Unobserved months make continuity indeterminate unless a gap is observed.</td>
 </tr>
 <tr>
 <td><code>continuity_class_alt</code></td>
 <td>INS24X / INSJA24X .. INSDE24X</td>
-<td>As continuity_class, but a gap requires 3 or more consecutive uncovered months; 'insured_year_end_continuous' then means no such run.</td>
+<td>As continuity_class, but a gap requires 3 or more consecutive uncovered months; class A then means no such run.</td>
 <td>As above.</td>
 </tr>
 <tr>
@@ -2147,7 +2148,7 @@
 <td><code>age_group</code></td>
 <td>AGE24X</td>
 <td>18-44, 45-64.</td>
-<td>None in frame.</td>
+<td>None among the adults analyzed.</td>
 </tr>
 <tr>
 <td><code>sex_label</code></td>

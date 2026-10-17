@@ -1,12 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity: full report</title>
 <meta name="description" content="Version-aware medication identity from DailyMed labels to FHIR R4: attribute-level round-trip fidelity and the cost of common shortcuts"><link rel="stylesheet" href="assets/style.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=d9550b993312">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head><body class="report portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
 <a class="skip" href="#content">Skip to content</a>
 <main id="content"><h1 id="version-aware-medication-identity-from-dailymed-labels-to-fhir-r4-attribute-level-round-trip-fidelity-and-the-cost-of-common-shortcuts">Version-aware medication identity from DailyMed labels to FHIR R4: attribute-level round-trip fidelity and the cost of common shortcuts</h1>
 <p class="portfolio-byline">Animesh Bose, Norlowe Research</p>
+<p class="portfolio-status">This report has not been peer reviewed.</p>
 <nav class="toc" aria-label="Contents" style="padding-left:0"><a href="#abstract">Abstract</a> | <a href="#materials-and-methods">Methods</a> | <a href="#results">Results</a> | <a href="#discussion">Discussion</a> | <a href="#references">References</a> | <a href="#supplements">Appendices</a></nav><h2 id="abstract">Abstract</h2>
 <p><strong>Objectives:</strong> To measure which identity and strength attributes of US prescription drug labels are preserved when the labels are converted to Fast Healthcare Interoperability Resources Release 4 (FHIR R4) Medication resources or handled with common shortcuts, how name-based matching agrees with a National Drug Code (NDC) crosswalk to RxNorm, and how often label versions change product identity.</p>
 <p><strong>Materials and Methods:</strong> All 1,475 current DailyMed prescription labels containing metformin, empagliflozin, dapagliflozin, semaglutide, liraglutide, one of seven insulins, atorvastatin or lisinopril were retrieved with the preceding version of 218 labels (2,803 product-version records). Labels were parsed into a lossless PostgreSQL layer, written as FHIR R4 resources with a schema-validated companion record, validated, and read back against a separate parse of the source XML on 1,036 held-out labels.</p>

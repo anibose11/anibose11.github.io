@@ -62,3 +62,4 @@ body.portfolio-page{max-width:none!important;padding:0!important}
 
 /* File names and field names inside tables break only when they must, not letter by letter. */
 .portfolio-page td code,.portfolio-page th code{overflow-wrap:break-word;word-break:normal}
+.portfolio-page .portfolio-status{font-size:15px;line-height:1.5;color:#6f6f6f;margin:2px 0 0;padding:0;background:none;border:0;font-style:italic}
