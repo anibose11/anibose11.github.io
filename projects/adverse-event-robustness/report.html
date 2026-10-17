@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adverse event robustness: full report</title>
-<meta name="description" content="Complete scientific report with methods, results, discussion, limitations and references.">
+<title>Adverse event robustness: full report | Animesh Bose</title>
+<meta name="description" content="Full report: a disproportionality analysis of how processing choices affect reporting odds ratios for five SGLT2 and DPP-4 inhibitor associations in FDA quarterly adverse event files, 2024 to 2026.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>.report th:not([style]),.report td:not([style]){text-align:left}@media (min-width:700px){.report thead th{white-space:normal}}</style>
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page portfolio-report">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -332,7 +332,7 @@ overlap (77.4 to 87.2 against 47.9 to 54.6).</p>
 arthralgia. The version-level RORs were lower than the matching
 case-level RORs for ketoacidosis (69.5 against 82.2), Fournier’s
 gangrene, pemphigoid, and pancreatitis, and slightly higher for
-arthralgia (1.93 against 1.81); no version-level estimate changed side
+arthralgia with any suspect role (1.93 against 1.81); no version-level estimate changed side
 of 1 relative to its case-level counterpart.</p>
 </section>
 <section id="what-moved-between-configurations" class="level3">
@@ -602,7 +602,7 @@ https://doi.org/10.1007/s40264-023-01391-4.</li>
 the FDA Adverse Event Reporting System (FAERS) to RxNorm and Anatomical
 Therapeutic Chemical (ATC) codes. Pharmacoepidemiol Drug Saf.
 2025;34(9):e70216. https://doi.org/10.1002/pds.70216.</li>
-<li>Fusaroli M, Salvo F, Begaud B, et al. The reporting of a
+<li>Fusaroli M, Salvo F, Bégaud B, et al. The reporting of a
 disproportionality analysis for drug safety signal detection using
 individual case safety reports in pharmacovigilance (READUS-PV):
 development and statement. Drug Saf. 2024;47(6):575–84.
@@ -1478,9 +1478,9 @@ secondary analyses, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
 style="width:100.0%" /></span></p>
 <p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. Counts are from the full run; “latest version”
 refers to the acquired files only. <em>CASEID</em> case identifier,
-<em>DEMO</em> demographic file, <em>PRIMARYID</em> report version
+<em>DEMO</em> demographic file, <em>DPP-4</em> dipeptidyl peptidase-4, <em>PRIMARYID</em> report version
 identifier, <em>PT</em> preferred term, <em>S2</em> secondary analysis
-2, <em>V1</em> primary configuration, <em>V5 to V8</em> report-version
+2, <em>SGLT2</em> sodium-glucose cotransporter-2, <em>V1</em> primary configuration, <em>V5 to V8</em> report-version
 configurations</p>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188." src="assets/fig1_ror_by_configuration.svg"
 style="width:100.0%" /></span></p>
@@ -1508,7 +1508,7 @@ SQL), configuration, frozen RxNav responses, tests with synthetic
 fixtures, aggregate outputs, and the results workbook.</p>
 </section>
 </article>
-<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic) and ChatGPT (OpenAI) for software development, data analysis, literature searching, and manuscript drafting and formatting, and Codex (OpenAI) for language editing, document formatting and reproducibility checks. I take responsibility for the work.</p></section></main>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic) and ChatGPT (OpenAI) for coding, data analysis, literature searching, and manuscript drafting and formatting, and Codex (OpenAI) for language editing, document formatting and reproducibility checks. I take responsibility for the work.</p></section></main>
 <footer><div class="inner">
 
 <p>Data: FDA quarterly adverse event data extract files (FAERS, now hosted on the FDA Adverse Event Monitoring System pages), 2024Q3 to 2026Q2. FDA does not endorse this analysis. Reporting odds ratios describe reporting patterns, not risk.</p>

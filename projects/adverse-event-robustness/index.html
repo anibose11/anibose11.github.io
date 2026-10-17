@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Adverse-event reporting odds ratios under alternative case definitions</title>
+<title>Adverse-event reporting odds ratios under alternative case definitions | Animesh Bose</title>
 <meta name="description" content="Processing-sensitivity study of reporting odds ratios in FDA quarterly adverse event files, 2024Q3 to 2026Q2.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>ul.files .meta{white-space:nowrap}</style>
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -20,7 +20,7 @@
 <h1>Adverse-event reporting odds ratios under alternative case definitions</h1>
 <p class="note portfolio-byline">Animesh Bose, Norlowe Research</p>
 <p class="lede">For DPP-4 inhibitors and arthralgia, counting secondary-suspect drug listings changed the reporting odds ratio from below 1 to above 1. I compared drug-role, name-matching and counting rules across five drug-class and reaction pairs, then traced changes like this one to the underlying reports.</p>
-<div class="question"><p><strong>Question.</strong> For five drug-class and reaction pairs that FDA has already communicated (SGLT2 inhibitors with ketoacidosis and Fournier's gangrene; DPP-4 inhibitors with pemphigoid, arthralgia and pancreatitis), how far do reporting odds ratios move across eight prespecified ways of processing the same eight quarterly files? The configurations vary the counting unit, the reporter-designated drug role, and how drug names are matched to ingredients. The arthralgia definition is broader than the label warning about severe, disabling joint pain; severity was not assessed. The arthralgia definition is broader than the label warning about severe, disabling joint pain, and I did not assess severity.</p></div>
+<div class="question"><p><strong>Research question.</strong> For five drug-class and reaction pairs that FDA has already communicated (SGLT2 inhibitors with ketoacidosis and Fournier's gangrene; DPP-4 inhibitors with pemphigoid, arthralgia and pancreatitis), how far do reporting odds ratios move across eight prespecified ways of processing the same eight quarterly files? The configurations vary the counting unit, the reporter-designated drug role, and how drug names are matched to ingredients. The arthralgia definition is broader than the label warning about severe, disabling joint pain, and I did not assess severity.</p></div>
 <figure>
 <div class="figscroll"><div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_ror_by_configuration.svg" width="2068" height="3373" alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188."></div></div>
 <figcaption>Reporting odds ratios and Woolf 95% confidence intervals under eight configurations. Blue: any suspect role; orange: primary suspect only. Circles: expanded matching; squares: strict matching. Hollow markers and shaded rows identify report-version analyses, used as diagnostic comparisons. Each panel has its own logarithmic scale; the reference value of 1 is shown where it lies in range. The tables below give the counts and estimates. <a href="assets/fig1_ror_by_configuration.png">PNG version</a>.</figcaption>
@@ -102,7 +102,7 @@
 </section>
 
 <section aria-labelledby="reproduce">
-<h2 id="reproduce">Reproduce</h2>
+<h2 id="reproduce">Reproduce the analysis</h2>
 <p>The source archive contains the pipeline (Python and DuckDB SQL), configuration, frozen RxNav responses, tests, and documentation. On macOS or Linux with Python 3.12 or later:</p>
 <pre><code>python3 -m venv .venv &amp;&amp; .venv/bin/pip install -r requirements.lock &amp;&amp; .venv/bin/pip install -e .
 .venv/bin/python -m pytest -q          # software tests on synthetic fixtures

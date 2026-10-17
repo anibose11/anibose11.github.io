@@ -49,7 +49,7 @@ Year-end frame (Y): common conditions plus in scope on 12/31/2024 (`INSC1231 = 1
 
 Primary domain (C): frame Y plus in scope for all 12 months of 2024. A month is in scope when the monthly any-coverage indicator `INSmm24X` holds a substantive value (1 or 2); AHRQ codes months outside the person's in-scope period as -1. The rule also requires the 2024 reference period to end in December (`ENDRFM24 = 12`). Agreement between this rule and the round-level scope variables (`INSCOP31`, `INSCOP42`, `INSCOP24`) is reported in an audit table rather than used as a filter.
 
-Persons in frame Y but outside domain C (part-year in scope) are described in a supplementary table with their own classification, where months outside scope are labeled "not in scope".
+Persons in frame Y but outside domain C (part-year in scope) are described in a supplementary table with their own classification, where months outside scope are labelled "not in scope".
 
 ## Coverage construction
 
@@ -99,7 +99,7 @@ Two-part model, fit only if the support rule below is met:
 
 - Part 1: survey-weighted logistic model (`svyglm`, quasibinomial) for any fill.
 - Part 2: survey-weighted gamma model with log link for OOP among persons with positive OOP.
-- Standardized (predictive margin) mean OOP for each continuity group: set every domain member to that group, compute P(OOP > 0) times E(OOP | OOP > 0), and take the weighted mean over the domain. Part 1 for the two-part model is modeled as P(OOP > 0), not P(fill > 0).
+- Standardized (predictive margin) mean OOP for each continuity group: set every domain member to that group, compute P(OOP > 0) times E(OOP | OOP > 0), and take the weighted mean over the domain. Part 1 for the two-part model is modelled as P(OOP > 0), not P(fill > 0).
 - Uncertainty: jackknife replicate weights built from the design (`as.svrepdesign(type = "JKn")`), refitting both parts in every replicate, so the uncertainty of both parts propagates to the margins. This resamples PSUs within strata; it is not an ordinary bootstrap across persons.
 
 Support rule (8 non-intercept parameters: 2 coverage contrasts plus 6 covariate terms): the less common outcome of part 1 has at least 80 unweighted persons; at least 80 persons have positive OOP overall; each continuity group has at least 25 persons with positive OOP; the domain has at least 30 design degrees of freedom. If part 1 fails and part 2 passes, the two-part model is not fit and part 2 is reported alone as a conditional comparison among persons with positive OOP. If both fail, only descriptive comparisons are reported, with the reason.
@@ -107,7 +107,7 @@ Support rule (8 non-intercept parameters: 2 coverage contrasts plus 6 covariate 
 ## Comparisons and denominators
 
 - Common-denominator comparison in domain C: summaries for all year-end insured (classes 1 and 2 pooled), class 1 alone, class 2 alone, and class 3.
-- Classification-specific summaries: year-end status in frame Y (which includes part-year in-scope persons) and continuity classes in domain C, labeled with their own denominators so that differences in scope or missingness are not read as coverage effects.
+- Classification-specific summaries: year-end status in frame Y (which includes part-year in-scope persons) and continuity classes in domain C, labelled with their own denominators so that differences in scope or missingness are not read as coverage effects.
 
 ## Robustness checks (exactly three)
 
@@ -144,7 +144,7 @@ All four amendments were made on 2026-10-07 between the contribution decision (0
 Amendments 5 to 7 were written down at 2026-10-07T10:40:43Z, after an internal review of the completed analysis.
 
 5. Before the first analysis run, with no estimates seen. Design-based contrasts between classes for any fill and for mean fills were added to the analysis code alongside the prespecified contrasts for mean out-of-pocket spending. They are reported as descriptive differences.
-6. Clarification, no change to the analysis. The plan described part 1 of the two-part model as "any fill" in one sentence and as P(OOP > 0) in another. The analysis used P(OOP > 0), consistent with modeling out-of-pocket spending, and the support rule was evaluated on that outcome.
+6. Clarification, no change to the analysis. The plan described part 1 of the two-part model as "any fill" in one sentence and as P(OOP > 0) in another. The analysis used P(OOP > 0), consistent with modelling out-of-pocket spending, and the support rule was evaluated on that outcome.
 7. After estimates were seen. The reliability flags were completed to match this plan and the NCHS standard: quantiles are now flagged by the 30% relative standard error rule (the first implementation checked only n < 30), and proportions whose complementary proportion would fail the relative width rule are marked for review. This changes footnotes only; no estimate changed.
 
 Amendment 8 was written down at 2026-10-07T21:16:55Z, after a final review of the completed analysis.

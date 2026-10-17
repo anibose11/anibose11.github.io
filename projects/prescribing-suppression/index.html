@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What summed Medicare Part D detail leaves out</title>
+<title>What summed Medicare Part D detail leaves out | Animesh Bose</title>
 <meta name="description" content="How much of each published Medicare Part D claim total is in the public prescriber-drug file, measured for cardiometabolic drugs by label and state, 2022 to 2024.">
 <link rel="stylesheet" href="assets/page.css">
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#content">Skip to content</a>
 
 <main id="content">
 
 <h1>What summed Medicare Part D detail leaves out</h1>
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="lede">Researchers often add up the public Medicare Part D prescriber-drug rows to compare drugs and states. That file drops every prescriber-drug pair with 10 or fewer claims. How much of each published total is left, and does the shortfall change the comparisons people report?</p>
+<p class="lede">Researchers often add up the rows of the public Medicare Part D prescriber-drug file to compare drugs and states. That file drops every prescriber-drug pair with 10 or fewer claims. How much of each published total is left, and does the shortfall change the comparisons people report?</p>
 
 <figure>
 <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_retained_vs_volume_2024.svg" alt="Scatter plot of 258 cardiometabolic drug labels. Labels with more published claims keep a larger share in the public detail file; most labels with fewer than 100,000 claims keep under half." width="720" height="440"></div>
@@ -42,7 +42,7 @@
 <h3>Use the summary built from all claims as the denominator</h3>
 <p>The By Provider summary also comes from all claims, but it has no drug detail, so it cannot serve as a drug-level denominator. I used it only for a separate all-drug check, which found that 95.0% of the national gap sits in dropped rows of prescribers who do appear in the detail file, not in whole missing prescribers.</p>
 <h3>Keep combination products whole, and hold back small residuals</h3>
-<p>A combination such as sitagliptin and metformin is one label with one claim total, so I never split it into its two ingredients. A gap can reveal the values of suppressed rows when only one or two rows are missing, when it is 1 to 10 claims, or when it sits at either end of the allowed range. For that reason, the public tables give drug-by-state cells only as bands and withhold even the band in those cases (230 state cells in 2024). Aggregate tables withhold a second row wherever subtraction could otherwise recover a withheld one. I computed the summaries before applying that rule.</p>
+<p>A combination such as sitagliptin and metformin is one label with one claim total, so I never split it into its two ingredients. A gap can reveal the values of suppressed rows when only one or two rows are missing, when it is 1 to 10 claims, or when it sits at either end of the allowed range. For that reason, the public tables give drug-by-state cells only as bands and withhold even the band in those cases (230 state cells in 2024). The public output rule also rounds all other detail sums to the nearest 10 claims, and I checked that no withheld value can be worked out exactly from the published tables. I computed the summaries before applying that rule.</p>
 
 <h2>High overall completeness hides large gaps for individual drugs</h2>
 <p>Nationally, the detail held 91.0% of in-scope claims but only 84.2% of gross drug cost. The weighted figure is driven by a few high-volume generics: the 43 labels with at least 1,000,000 claims retained 93.5%, while the 88 labels with fewer than 10,000 claims retained 21.5%. Statins (97.3%) and metformin (96.1%) were nearly complete. Insulins (68.2%), diabetes combination products (60.2%) and fibrates (68.5%) were not. State completeness ranged from 83.8% in the District of Columbia to 92.5% in Missouri.</p>

@@ -1,10 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity from labels to FHIR</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Medication identity from labels to FHIR | Animesh Bose</title>
 <meta name="description" content="Which drug-label identity and strength details survive FHIR R4 and common shortcuts, measured on 1,475 DailyMed prescription labels."><link rel="stylesheet" href="assets/style.css">
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#content">Skip to content</a>
 <main id="content">
 <p class="muted small">This research project uses public drug-label and terminology data and no patient records.</p>
@@ -47,7 +47,7 @@
 </ul>
 <p>Two worked cases show the detail: a <a href="viewer-preserved.html">combination tablet preserved in full</a> and an <a href="viewer-ambiguous.html">insulin pen that neither name-based approach matched to the crosswalk concept</a>.</p>
 
-<h2>Limits</h2>
+<h2>Limitations</h2>
 <p>The study covers six ingredient groups at one retrieval date, with one preceding version per label for 218 sampled labels, and RxNorm only as its current release plus the dated NDC history it publishes. The crosswalk is a terminology reference with its own errors. The companion record was designed to hold what the round trip measures, so its complete preservation is partly by construction; the informative numbers are the losses without it. None of this speaks to the clinical correctness of any label.</p>
 
 <h2>Reproduce the analysis</h2>
@@ -61,7 +61,7 @@ python3 -m venv .venv && .venv/bin/pip install --require-hashes -r requirements.
 <ul class="files"><li><a href="report.html">Full report</a> <span class="muted small">Methods, results and references.</span></li>
 <li><a href="downloads/medication-identity-source.zip">Source code (ZIP)</a> <span class="muted small">Code, SQL, schemas, configuration, tests, demo fixture, documentation and results tables.</span></li>
 <li><a href="downloads/medication_dictionary.zip">Medication dictionary (CSV in ZIP)</a> <span class="muted small">One row per package NDC in each current label (6,349 rows for 6,316 distinct package NDCs), with label provenance, attributes as labeled, RxNorm status, crosswalk results and review reasons.</span></li><li><a href="downloads/roundtrip_field_status.csv">Round-trip field statuses (CSV)</a> <span class="muted small">Field counts by representation, attribute, split and status, with applicable denominators.</span></li><li><a href="downloads/roundtrip_record_outcomes.csv">Round-trip record outcomes (CSV)</a> <span class="muted small">Records with all critical attributes preserved, by representation and split, with exploratory intervals.</span></li><li><a href="downloads/matching_outcomes.csv">Matching outcomes (CSV)</a> <span class="muted small">Outcomes of matching approaches A, A2, B and C, by split.</span></li><li><a href="downloads/version_changes_by_set.csv">Label version changes (CSV)</a> <span class="muted small">One row per label with a retrieved preceding version.</span></li><li><a href="downloads/medication_identity_results.xlsx">Results workbook (Excel)</a> <span class="muted small">Summary tables, per-label version changes and removed package NDCs, with a definitions sheet.</span></li><li><a href="downloads/medication_sidecar.schema.json">Companion record schema (JSON Schema)</a> <span class="muted small">The local schema every sidecar validates against.</span></li><li><a href="downloads/fhir_examples.zip">FHIR examples (ZIP)</a> <span class="muted small">The two Bundles and sidecars shown in the worked cases.</span></li></ul>
-</main><footer><div class="inner" style="padding-left:0;padding-right:0">Animesh Bose, Norlowe Research. Drug-label and terminology data from the U.S. National Library of
+</main><footer><div class="inner" style="padding-left:0;padding-right:0">Drug-label and terminology data from the U.S. National Library of
 Medicine (DailyMed, RxNorm API), retrieved <span style="white-space:nowrap">2026-10-07</span>; no patient records. This product uses publicly available data from the U.S. National Library of
 Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
 recommend this or any other product.</div></footer></body></html>

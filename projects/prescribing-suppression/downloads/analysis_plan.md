@@ -24,7 +24,7 @@ For a fixed set of cardiometabolic medicines, how much of each published Medicar
 - Replications: data years 2023 and 2022, each analyzed on its own with its own label mapping.
 - Supplementary, 2024 only: Medicare Part D Prescribers by Provider, used for a documented provider-level reconciliation of all drugs together. It is not used as a denominator for any drug-level fraction.
 
-Exact URLs, catalog identifiers, sizes and SHA-256 checksums are in `data/manifest/source_manifest.json`.
+Exact URLs, catalogue identifiers, sizes and SHA-256 checksums are in `data/manifest/source_manifest.json`.
 
 ## Why the Geography and Drug file is a valid reference
 
@@ -40,7 +40,7 @@ Key uniqueness is asserted for (level, code, brand, generic) in the reference an
 
 ## Drug scope (fixed before outcomes)
 
-Scope is the three ATC level-2 groups commonly grouped as cardiometabolic medicines:
+Scope is the three ATC level-2/3 groups commonly grouped as cardiometabolic medicines:
 
 - A10 Drugs used in diabetes
 - C09 Agents acting on the renin-angiotensin system
@@ -107,11 +107,11 @@ All retained fractions near 1 with no rank changes would mean that, for this sco
 
 ## Amendments
 
-None at the time of writing. Later amendments follow.
+None yet.
 
 ### Amendment 1 (2026-10-07, before any outcome was computed): suppression bound check
 
-Reason: the literature review and the journal-fit review both raised the possibility that a gap between a published total and a detail sum could come from causes other than the 10-claim rule (attribution, scope, label differences). The Geography and Drug file publishes the number of prescribers for each cell, and the detail file has one row per prescriber per label, so the number of prescribers whose rows are missing is m = `Tot_Prscrbrs` minus the number of detail rows. If the 10-claim rule is the only cause, each missing row holds 1 to 10 claims, so m <= G <= 10m (and G = 0 when m = 0). Every evaluable cell is tested against this bound. Cells outside it are written to the exception ledger with the reason "outside suppression bounds". The check uses only cell totals and does not infer any individual row.
+Reason: the literature review and the journal-fit review both raised that a gap between a published total and a detail sum could come from causes other than the 10-claim rule (attribution, scope, label differences). The Geography and Drug file publishes the number of prescribers for each cell, and the detail file has one row per prescriber per label, so the number of prescribers whose rows are missing is m = `Tot_Prscrbrs` minus the number of detail rows. If the 10-claim rule is the only cause, each missing row holds 1 to 10 claims, so m <= G <= 10m (and G = 0 when m = 0). Every evaluable cell is tested against this bound. Cells outside it are written to the exception ledger with the reason "outside suppression bounds". The check uses only cell totals and does not infer any individual row.
 
 ### Amendment 2 (2026-10-07, before any outcome was computed): public output rule
 
@@ -131,7 +131,7 @@ Added after the results showed that completeness rises with claim volume. The pu
 
 ### Amendment 6 (2026-10-07, after the primary results, before any release): output rule for aggregate rows
 
-While checking the public tables, I found that a state's therapeutic group can contain a single drug label, so a group-level detail sum would repeat a cell-level value that amendment 2 withholds. The public output rule is therefore applied to every row of the aggregate tables as well (group shares, state summaries, other geographies, national group and volume-band tables), using that row's own count of missing prescriber rows and its own residual. No analysis result changes; only what is printed in public tables.
+While checking the public tables, a state's therapeutic group can contain a single drug label, so a group-level detail sum would repeat a cell-level value that amendment 2 withholds. The public output rule is therefore applied to every row of the aggregate tables as well (group shares, state summaries, other geographies, national group and volume-band tables), using that row's own count of missing prescriber rows and its own residual. No analysis result changes; only what is printed in public tables.
 
 ### Amendment 7 (2026-10-07, after the primary results, found in review): device label excluded
 

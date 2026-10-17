@@ -48,7 +48,7 @@ ul.files{padding-left:20px}
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 <main id="main">
 <nav class="crumbs"><a href="./index.html">Project overview</a> / Supplementary material</nav>
@@ -84,7 +84,7 @@ ul.files{padding-left:20px}
 <h3>Capacities</h3>
 <ul>
 <li>National capacities: 10, 25 and 50 counties. The primary capacity is 25; 10 and 50 form the alternate-capacity robustness check. These are illustrative, not organizational budgets.</li>
-<li>Within-state capacity: 5 counties per state. Where a state or DC has 5 or fewer frame counties, all of its units are shown and labelled "all units, no selection" and the state is excluded from within-state stability summaries. Where fewer than 5 counties in a state meet the poverty criterion, all eligible counties are selected under EQUITY and the shortfall is reported.</li>
+<li>Within-state capacity: 5 counties per state. Where a state or DC has 5 or fewer frame counties, all of its units are shown and labeled "all units, no selection" and the state is excluded from within-state stability summaries. Where fewer than 5 counties in a state meet the poverty criterion, all eligible counties are selected under EQUITY and the shortfall is reported.</li>
 </ul>
 <h3>Uncertainty: deterministic envelopes, not probabilities</h3>
 <p>PLACES publishes marginal 95% intervals per county. There is no joint distribution, and county estimates share model structure and covariates. No independent draws are simulated, and no county is assigned a probability of belonging to a top group.</p>
@@ -94,7 +94,7 @@ ul.files{padding-left:20px}
 <li>Worst-case rank w_i = 1 + #{j != i : U_j &gt; L_i}.</li>
 <li>At capacity K: core if w_i &lt;= K (selected wherever every county falls inside its bounds); boundary if b_i &lt;= K &lt; w_i; outside if b_i &gt; K.</li>
 </ul>
-<p>The worst case places every other county at its upper bound and county i at its lower bound at the same time. Such combinations are not jointly attainable confidence statements, so the envelope is labelled a sensitivity envelope.</p>
+<p>The worst case places every other county at its upper bound and county i at its lower bound at the same time. Such combinations are not jointly attainable confidence statements, so the envelope is labeled a sensitivity envelope.</p>
 <p>Bounds per rule:</p>
 <ul>
 <li>PREV: PLACES 95% lower and upper limits.</li>
@@ -118,7 +118,7 @@ ul.files{padding-left:20px}
 <p>Optional descriptive comparison: the PLACES 2024 county release (BRFSS 2022), which includes Kentucky and Pennsylvania, ranked by the same PREV and BURDEN rules. Report (a) overlap with the 2025 selected sets among counties present in both releases, and (b) how many Kentucky and Pennsylvania counties the 2024 release would place in the national top K. This describes the consequence of the 2025 coverage gap. It is not validation against outcomes, and the two releases differ in survey year and model inputs.</p>
 <h3>Validation and checks</h3>
 <ul>
-<li>Software tests on small synthetic fixtures (ranking with ties, envelopes, eligibility logic, acquisition guards, build checks). Fixtures are labelled synthetic and never mixed with study data.</li>
+<li>Software tests on small synthetic fixtures (ranking with ties, envelopes, eligibility logic, acquisition guards, build checks). Fixtures are labeled synthetic and never mixed with study data.</li>
 <li>Source reconciliation: PLACES adult population against the Census Vintage 2023 file (expected to match exactly); ACS adult estimate against the PLACES adult population (expected close but not identical because of reference period and sampling).</li>
 <li>Build checks that fail loudly: one row per county, measure and value type; DIABETES rows from a single year; crude and age-adjusted labels mapped one to one; confidence limits bracket the estimate; 5-digit string FIPS with leading zeros; one ACS row per county and line; no Puerto Rico or other territories in the frame.</li>
 <li>Invariants: core is a subset of the point-selected set, which is a subset of core plus boundary.</li>

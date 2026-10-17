@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hospital comparability</title>
+<title>Hospital comparability | Animesh Bose</title>
 <meta name="description" content="A release-aware check of CMS hospital outcome files that rejects comparisons the data cannot support and measures how much of a within-state hospital ordering the published intervals separate.">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/viewer.css">
@@ -15,7 +15,7 @@
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main" class="page-main">
@@ -99,7 +99,7 @@
 
 <section aria-labelledby="explore">
 <h2 id="explore">Explore the frozen snapshot</h2>
-<p class="prose">Pick a release, measure and state to see each hospital's published score and interval, its interval-compatible rank range, and every record that was not compared, with the reason. The controls only filter precomputed rows from run hc-20261007T214017-783661a110; nothing is recalculated in the browser, and nothing here recommends a hospital.</p>
+<p class="prose">Pick a release, measure and state to see each hospital's published score and interval, its interval-compatible rank range, and every record that was not compared, with the reason. The controls only filter precomputed rows; nothing is recalculated in the browser, and nothing here recommends a hospital.</p>
 <section id="viewer" class="hc-viewer" data-base="assets/data/" aria-label="Records by release, measure and state">
   <noscript>
     <p>The interactive views of the records need JavaScript. The review workbook in the downloads lists every primary-release record and every current heart-failure record with the gate it fails and the source text.</p>
@@ -110,7 +110,7 @@
 
 
 <section class="prose" aria-labelledby="limits">
-<h2 id="limits">Limits</h2>
+<h2 id="limits">Limitations</h2>
 <ul>
 <li>The primary release is not the newest; it is the newest whose intervals are not covered by a CMS notice, and its window ends in June 2024.</li>
 <li>Separation is judged from marginal 95% intervals published to one decimal, without covariance. Overlap does not show that two hospitals perform the same, and non-overlap is not a formal test.</li>
@@ -141,7 +141,7 @@
 <li><a href="downloads/hospital-comparability-source.zip">Source code archive (SQL, configuration, plan, tests, demo)</a><span class="meta">2.1 MB</span></li>
 <li><a href="downloads/hospital-comparability-review.xlsx">Review workbook (original fields, gate decisions, source evidence)</a><span class="meta">7.0 MB</span></li>
 <li><a href="downloads/hospital-comparability-tables.zip">Output tables (CSV) and evidence map</a><span class="meta">729.4 KB</span></li>
-<li><a href="downloads/analysis_plan.md">Analysis plan with lock history and amendments</a><span class="meta">22.8 KB</span></li>
+<li><a href="downloads/analysis_plan.md">Analysis plan with dated amendments and notes on the record</a><span class="meta">22.8 KB</span></li>
 <li><a href="downloads/source_manifest.json">Source manifest (URLs, release dates, SHA-256)</a><span class="meta">48.5 KB</span></li>
 <li><a href="downloads/strobe_record_checklist.md">STROBE checklist with applicable RECORD items</a><span class="meta">5.1 KB</span></li>
 <li><a href="downloads/hospital-comparability-supplement.docx">Supplementary tables S1 to S12 (Word)</a><span class="meta">49.4 KB</span></li>
@@ -149,7 +149,7 @@
 </section>
 </main>
 <footer class="page-footer">
-<p>Data: CMS Provider Data Catalog, U.S. federal public data, retrieved 2026-10-07. Code: MIT license. Run hc-20261007T214017-783661a110. This page describes a public measure population and does not rate or recommend hospitals.</p>
+<p>Data: CMS Provider Data Catalog, U.S. federal public data, retrieved 2026-10-07. Code: MIT License. This page describes a public measure population and does not rate or recommend hospitals.</p>
 </footer>
 <script src="assets/viewer.js" defer></script>
 </body>

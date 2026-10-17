@@ -99,6 +99,10 @@ I reran the software tests and fixture demonstration from a clean extraction of 
 
 The pipeline (Python 3.13, PostgreSQL 17.11, R 4.5.1) runs as stages: acquire, freeze, build, analyze, validate, a post hoc stage, render and package. Software tests use seven synthetic studies with unused identifiers and are never mixed with registry data. Repeat loading, an independent rebuild into a second database and a rerun of the held-out analysis were each compared with the original outputs (Additional file 3).
 
+### Use of AI tools
+
+I conceived and designed the study, reviewed the literature, defined the denominator tiers, developed the code, conducted the analyses, verified the results, performed the checks described under "Manual verification", and reviewed and revised the manuscript. Claude Code (Anthropic) and ChatGPT (OpenAI) were used as tools for coding, data analysis, literature searching, and manuscript drafting and formatting. Codex (OpenAI) assisted with editorial revision and document formatting.
+
 ## Results
 
 ### Cohort
@@ -328,7 +332,7 @@ In this cohort of interventional diabetes, heart failure and obesity trials with
 
 ## List of abbreviations
 
-AACT: Aggregate Analysis of ClinicalTrials.gov; API: application programming interface; ASCII: American Standard Code for Information Interchange; CRediT: Contributor Roles Taxonomy; CSV: comma-separated values; DOI: digital object identifier; EXACT: EXtracting Accurate efficacy and safety information from ClinicalTrials.gov; FDA: U.S. Food and Drug Administration; JSON: JavaScript Object Notation; MeSH: Medical Subject Headings; NCT: National Clinical Trial (the ClinicalTrials.gov identifier); REDCap: Research Electronic Data Capture; SA: sensitivity analysis; SHA-256: Secure Hash Algorithm 256-bit; SQL: Structured Query Language; UTC: Coordinated Universal Time.
+AACT: Aggregate Analysis of ClinicalTrials.gov; AI: artificial intelligence; API: application programming interface; ASCII: American Standard Code for Information Interchange; CRediT: Contributor Roles Taxonomy; CSV: comma-separated values; DOI: digital object identifier; EXACT: EXtracting Accurate efficacy and safety information from ClinicalTrials.gov; FDA: U.S. Food and Drug Administration; JSON: JavaScript Object Notation; MeSH: Medical Subject Headings; NCT: National Clinical Trial (the ClinicalTrials.gov identifier); REDCap: Research Electronic Data Capture; SA: sensitivity analysis; SHA-256: Secure Hash Algorithm 256-bit; SQL: Structured Query Language; UTC: Coordinated Universal Time.
 
 ## Declarations
 
@@ -344,7 +348,7 @@ Not applicable.
 
 The ClinicalTrials.gov records analyzed in this study are publicly available from ClinicalTrials.gov through its public API [23]. The exact API requests, retrieval times, API version, data timestamp, study identifiers and SHA-256 hashes of the pages analyzed are listed in the source manifest in Additional file 3, and the pipeline retrieves the same records again from the API. The registry offers no programmatic access to earlier record versions, so a later retrieval reflects the registry on that day. Raw registry pages are not redistributed. ClinicalTrials.gov data are used under its terms and conditions [29], and all modifications are described in Additional files 1 and 2. The datasets supporting the conclusions of this article are included within the article and its additional files (Additional files 2 to 4).
 
-Project name: trial-results-audit. Project home page: not applicable. Archived version: Additional file 3. Operating system: macOS (tested); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.
+Project name: trial-results-audit. Project home page: https://anibose11.github.io/projects/trial-results-audit/. Archived version: Additional file 3. Operating system: macOS (tested); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.
 
 ### Competing interests
 

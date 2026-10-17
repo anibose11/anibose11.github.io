@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clinical evidence models: quote validity versus answer correctness</title>
+<title>Clinical evidence models: quote validity versus answer correctness | Animesh Bose</title>
 <meta name="description" content="How often small local language models quote the trial report correctly but give the wrong result, measured on every eligible question of the Evidence Inference 2.0 test split.">
 <link rel="stylesheet" href="assets/site.css?v=0d74ad063e">
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Portfolio</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -57,8 +57,8 @@
 <h2>Throwing out answers without a valid quote left the error rate where it was</h2>
 <p>A natural safeguard is to keep only answers whose quote checks out and points to the passage it came from. For Qwen3-1.7B with retrieved passages, that rule set aside 325 answers, 178 of them correct, and moved the error among the answers it kept from 45.6% to 45.7%. Setting aside the same number of answers at random, 2,000 times, gave a mean error of 45.6%. The rule cost about a quarter of the answers and did no better than discarding the same number at random. The same held for Qwen3-4B-Instruct-2507 and for the other contexts, with one exception: when Qwen3-0.6B was handed the physicians' evidence sentences, the rule lowered its error from 34.8% to 29.8%, more than random discarding achieved.</p>
 <figure>
-<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig3_rejection_rule.svg" alt="Dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the grey band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)."></div>
-<figcaption>Error among kept answers with all answers (ring) and after the quote rule (triangle), against random rejection at the same coverage (grey band). <a href="downloads/rejection-rule.csv">Data (CSV)</a></figcaption>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig3_rejection_rule.svg" alt="Dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the gray band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)."></div>
+<figcaption>Error among kept answers with all answers (ring) and after the quote rule (triangle), against random rejection at the same coverage (gray band). <a href="downloads/rejection-rule.csv">Data (CSV)</a></figcaption>
 </figure>
 <p>Other signals carried some information. A simple scoring rule fitted on the validation answers, using six features of each answer such as how many outcome words the quote contains and whether its significance wording agrees with the label, ranked the test answers better than chance (area under the risk-coverage curve 0.337 against 0.450 for random order; lower is better). That rule is exploratory, and its scores are not probabilities.</p>
 
