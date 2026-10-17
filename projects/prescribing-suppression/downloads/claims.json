@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-10-07T21:17:24Z",
-  "run_id": "20261007T104804Z",
-  "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+  "generated_at_utc": "2026-10-17T17:43:36Z",
+  "run_id": "20261017T171031Z",
+  "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
   "source_sha256": {
     "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
     "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
@@ -10,15 +10,15 @@
   "claims": {
     "run_id_text": {
       "id": "run_id_text",
-      "text": "20261007T104804Z",
+      "text": "20261017T171031Z",
       "output_path": "results/dy2024/summary.json",
       "selector": "run_id",
       "numerator": null,
       "denominator": null,
       "scope": "analysis run ID",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "primary_year": {
       "id": "primary_year",
@@ -28,9 +28,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "configuration",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "rep_years": {
       "id": "rep_years",
@@ -40,9 +40,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "configuration",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_rows": {
       "id": "detail_rows",
@@ -52,13 +52,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "all rows of the 2024 Provider and Drug file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_npis": {
       "id": "detail_npis",
@@ -68,13 +68,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "distinct prescriber NPIs in the 2024 Provider and Drug file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_labels": {
       "id": "detail_labels",
@@ -84,13 +84,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "distinct (brand, generic) labels in the detail file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "geo_rows": {
       "id": "geo_rows",
@@ -100,13 +100,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "all rows of the 2024 Geography and Drug file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ref_labels": {
       "id": "ref_labels",
@@ -116,13 +116,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "national drug labels in the Geography and Drug file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ref_labels_without_detail": {
       "id": "ref_labels_without_detail",
@@ -132,13 +132,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "national labels (all drugs) with no row in the detail file",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_labels_missing_ref": {
       "id": "detail_labels_missing_ref",
@@ -148,9 +148,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "detail labels absent from the national reference",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_labels": {
       "id": "scope_labels",
@@ -160,13 +160,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels mapped to ATC A10, C09 or C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_labels_A10": {
       "id": "scope_labels_A10",
@@ -176,9 +176,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels in A10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_labels_C09": {
       "id": "scope_labels_C09",
@@ -188,9 +188,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels in C09",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_labels_C10": {
       "id": "scope_labels_C10",
@@ -200,9 +200,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels in C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ingredients": {
       "id": "ingredients",
@@ -212,9 +212,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "RxClass ATC ingredients defining scope",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ingredients_A10": {
       "id": "ingredients_A10",
@@ -224,9 +224,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "ingredients in A10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ingredients_C09": {
       "id": "ingredients_C09",
@@ -236,9 +236,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "ingredients in C09",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ingredients_C10": {
       "id": "ingredients_C10",
@@ -248,9 +248,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "ingredients in C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "rxnav_version": {
       "id": "rxnav_version",
@@ -260,9 +260,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "RxNav data version at retrieval",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_combos": {
       "id": "scope_combos",
@@ -272,9 +272,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels whose generic name has more than one component",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "scope_combos_noninsulin": {
       "id": "scope_combos_noninsulin",
@@ -284,9 +284,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope non-insulin fixed-dose combination labels",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "map_exact": {
       "id": "map_exact",
@@ -296,9 +296,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component matches by exact",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "map_token": {
       "id": "map_token",
@@ -308,9 +308,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component matches by token",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "map_prefix": {
       "id": "map_prefix",
@@ -320,9 +320,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component matches by prefix",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "map_insulin_rule": {
       "id": "map_insulin_rule",
@@ -332,9 +332,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component matches by insulin rule",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "map_override": {
       "id": "map_override",
@@ -344,9 +344,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component matches by override",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ref_state_supp_labels": {
       "id": "ref_state_supp_labels",
@@ -356,9 +356,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels whose state rows sum below the national total",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_A": {
       "id": "nat_A",
@@ -368,13 +368,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "sum of published national claims, in-scope labels",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_D": {
       "id": "nat_D",
@@ -384,13 +384,13 @@
       "numerator": null,
       "denominator": null,
       "scope": "sum of public detail claims, in-scope labels",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_gap": {
       "id": "nat_gap",
@@ -400,9 +400,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "published minus detail claims, in-scope",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_R": {
       "id": "nat_R",
@@ -412,13 +412,13 @@
       "numerator": "national.d_clms",
       "denominator": "national.a_clms",
       "scope": "claim-weighted retained fraction, in-scope labels, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": {
         "geography_drug": "c84a834ffb34fa1e46c6b8566d1e89d87f40390120393342e050f7203ef3ed68",
         "provider_drug": "45387cb165f8c7a6a69adc832044d9af4a5655a38c77089571bbb0483e278ca1",
         "provider": "5fbaf1a24f5c54bfd61719f7910fe6cc31cefc388ba9e3159d611f1810e30166"
       },
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_missing_share": {
       "id": "nat_missing_share",
@@ -428,9 +428,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "share of published in-scope claims absent from public detail",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "nat_Rcost": {
       "id": "nat_Rcost",
@@ -440,9 +440,9 @@
       "numerator": "sum d_cost",
       "denominator": "sum a_cost",
       "scope": "gross drug cost retained fraction, in-scope labels, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "label_R_median": {
       "id": "label_R_median",
@@ -452,9 +452,9 @@
       "numerator": null,
       "denominator": "259 labels",
       "scope": "distribution of label-level retained fractions (unweighted), national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "label_R_q1": {
       "id": "label_R_q1",
@@ -464,9 +464,9 @@
       "numerator": null,
       "denominator": "259 labels",
       "scope": "distribution of label-level retained fractions (unweighted), national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "label_R_q3": {
       "id": "label_R_q3",
@@ -476,9 +476,9 @@
       "numerator": null,
       "denominator": "259 labels",
       "scope": "distribution of label-level retained fractions (unweighted), national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_R0": {
       "id": "labels_R0",
@@ -488,9 +488,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels with a published national total and no public detail row",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_lt50": {
       "id": "labels_lt50",
@@ -500,9 +500,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels retaining under half of their published claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_lt50_share": {
       "id": "labels_lt50_share",
@@ -512,9 +512,9 @@
       "numerator": 164,
       "denominator": 259,
       "scope": "share of in-scope labels",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_ge95": {
       "id": "labels_ge95",
@@ -524,9 +524,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels retaining at least 95%",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "presc_cov_median": {
       "id": "presc_cov_median",
@@ -536,9 +536,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median over labels of detail rows / published prescribers",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ref_state_supp": {
       "id": "ref_state_supp",
@@ -548,9 +548,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national total minus sum of published state rows, in-scope",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_R_A10": {
       "id": "class_R_A10",
@@ -560,9 +560,9 @@
       "numerator": 104237673.0,
       "denominator": 121138410.0,
       "scope": "claim-weighted retained, A10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_Rcost_A10": {
       "id": "class_Rcost_A10",
@@ -572,9 +572,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, A10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_median_A10": {
       "id": "class_median_A10",
@@ -584,9 +584,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median label retained, A10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_R_C09": {
       "id": "class_R_C09",
@@ -596,9 +596,9 @@
       "numerator": 102698322.0,
       "denominator": 113118958.0,
       "scope": "claim-weighted retained, C09",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_Rcost_C09": {
       "id": "class_Rcost_C09",
@@ -608,9 +608,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, C09",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_median_C09": {
       "id": "class_median_C09",
@@ -620,9 +620,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median label retained, C09",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_R_C10": {
       "id": "class_R_C10",
@@ -632,9 +632,9 @@
       "numerator": 142832184.0,
       "denominator": 150013964.0,
       "scope": "claim-weighted retained, C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_Rcost_C10": {
       "id": "class_Rcost_C10",
@@ -644,9 +644,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "class_median_C10": {
       "id": "class_median_C10",
@@ -656,9 +656,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median label retained, C10",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10_FDC": {
       "id": "group_R_A10_FDC",
@@ -668,9 +668,9 @@
       "numerator": 1580139,
       "denominator": 2625471,
       "scope": "claim-weighted retained, A10 fixed-dose combination, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10_FDC": {
       "id": "group_labels_A10_FDC",
@@ -680,9 +680,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10A": {
       "id": "group_R_A10A",
@@ -692,9 +692,9 @@
       "numerator": 15346833,
       "denominator": 22507345,
       "scope": "claim-weighted retained, A10A, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10A": {
       "id": "group_labels_A10A",
@@ -704,9 +704,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BA": {
       "id": "group_R_A10BA",
@@ -716,9 +716,9 @@
       "numerator": 33008405,
       "denominator": 34363296,
       "scope": "claim-weighted retained, A10BA, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BA": {
       "id": "group_labels_A10BA",
@@ -728,9 +728,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BB": {
       "id": "group_R_A10BB",
@@ -740,9 +740,9 @@
       "numerator": 10865356,
       "denominator": 12608880,
       "scope": "claim-weighted retained, A10BB, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BB": {
       "id": "group_labels_A10BB",
@@ -752,9 +752,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BB",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BF": {
       "id": "group_R_A10BF",
@@ -764,9 +764,9 @@
       "numerator": 102501,
       "denominator": 176445,
       "scope": "claim-weighted retained, A10BF, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BF": {
       "id": "group_labels_A10BF",
@@ -776,9 +776,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BF",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BG": {
       "id": "group_R_A10BG",
@@ -788,9 +788,9 @@
       "numerator": 2760442,
       "denominator": 3217580,
       "scope": "claim-weighted retained, A10BG, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BG": {
       "id": "group_labels_A10BG",
@@ -800,9 +800,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BG",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BH": {
       "id": "group_R_A10BH",
@@ -812,9 +812,9 @@
       "numerator": 4652762,
       "denominator": 5611903,
       "scope": "claim-weighted retained, A10BH, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BH": {
       "id": "group_labels_A10BH",
@@ -824,9 +824,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BH",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BJ": {
       "id": "group_R_A10BJ",
@@ -836,9 +836,9 @@
       "numerator": 14896579,
       "denominator": 16721924,
       "scope": "claim-weighted retained, A10BJ, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BJ": {
       "id": "group_labels_A10BJ",
@@ -848,9 +848,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BK": {
       "id": "group_R_A10BK",
@@ -860,9 +860,9 @@
       "numerator": 15990480,
       "denominator": 17690362,
       "scope": "claim-weighted retained, A10BK, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BK": {
       "id": "group_labels_A10BK",
@@ -872,9 +872,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_A10BX": {
       "id": "group_R_A10BX",
@@ -884,9 +884,9 @@
       "numerator": 5034176,
       "denominator": 5615204,
       "scope": "claim-weighted retained, A10BX, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_A10BX": {
       "id": "group_labels_A10BX",
@@ -896,9 +896,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in A10BX",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C09_FDC": {
       "id": "group_R_C09_FDC",
@@ -908,9 +908,9 @@
       "numerator": 17510850,
       "denominator": 21878088,
       "scope": "claim-weighted retained, C09 fixed-dose combination, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C09_FDC": {
       "id": "group_labels_C09_FDC",
@@ -920,9 +920,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C09AA": {
       "id": "group_R_C09AA",
@@ -932,9 +932,9 @@
       "numerator": 39586434,
       "denominator": 42293899,
       "scope": "claim-weighted retained, C09AA, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C09AA": {
       "id": "group_labels_C09AA",
@@ -944,9 +944,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C09AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C09CA": {
       "id": "group_R_C09CA",
@@ -956,9 +956,9 @@
       "numerator": 45592556,
       "denominator": 48913838,
       "scope": "claim-weighted retained, C09CA, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C09CA": {
       "id": "group_labels_C09CA",
@@ -968,9 +968,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C09CA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C09XA": {
       "id": "group_R_C09XA",
@@ -980,9 +980,9 @@
       "numerator": 7307,
       "denominator": 31059,
       "scope": "claim-weighted retained, C09XA, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C09XA": {
       "id": "group_labels_C09XA",
@@ -992,9 +992,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C09XA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C09XX": {
       "id": "group_R_C09XX",
@@ -1004,9 +1004,9 @@
       "numerator": 1175,
       "denominator": 2074,
       "scope": "claim-weighted retained, C09XX, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C09XX": {
       "id": "group_labels_C09XX",
@@ -1016,9 +1016,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C09XX",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10_FDC": {
       "id": "group_R_C10_FDC",
@@ -1028,9 +1028,9 @@
       "numerator": 168138,
       "denominator": 472629,
       "scope": "claim-weighted retained, C10 fixed-dose combination, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10_FDC": {
       "id": "group_labels_C10_FDC",
@@ -1040,9 +1040,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10AA": {
       "id": "group_R_C10AA",
@@ -1052,9 +1052,9 @@
       "numerator": 127992661,
       "denominator": 131548302,
       "scope": "claim-weighted retained, C10AA, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10AA": {
       "id": "group_labels_C10AA",
@@ -1064,9 +1064,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10AB": {
       "id": "group_R_C10AB",
@@ -1076,9 +1076,9 @@
       "numerator": 3765688,
       "denominator": 5494476,
       "scope": "claim-weighted retained, C10AB, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10AB": {
       "id": "group_labels_C10AB",
@@ -1088,9 +1088,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10AB",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10AC": {
       "id": "group_R_C10AC",
@@ -1100,9 +1100,9 @@
       "numerator": 477123,
       "denominator": 795264,
       "scope": "claim-weighted retained, C10AC, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10AC": {
       "id": "group_labels_C10AC",
@@ -1112,9 +1112,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10AC",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10AD": {
       "id": "group_R_C10AD",
@@ -1124,9 +1124,9 @@
       "numerator": 55314,
       "denominator": 158394,
       "scope": "claim-weighted retained, C10AD, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10AD": {
       "id": "group_labels_C10AD",
@@ -1136,9 +1136,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10AD",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_R_C10AX": {
       "id": "group_R_C10AX",
@@ -1148,9 +1148,9 @@
       "numerator": 10373260,
       "denominator": 11544899,
       "scope": "claim-weighted retained, C10AX, national",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "group_labels_C10AX": {
       "id": "group_labels_C10AX",
@@ -1160,9 +1160,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in C10AX",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_top_band": {
       "id": "vol_top_band",
@@ -1172,9 +1172,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest claim-volume band",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_top_labels": {
       "id": "vol_top_labels",
@@ -1184,9 +1184,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels in the highest volume band",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_top_R": {
       "id": "vol_top_R",
@@ -1196,9 +1196,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "weighted retained, labels with at least 1,000,000 published claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_top_share_of_A": {
       "id": "vol_top_share_of_A",
@@ -1208,9 +1208,9 @@
       "numerator": 360488487.0,
       "denominator": 384271332.0,
       "scope": "share of in-scope published claims in the highest band",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_low_labels": {
       "id": "vol_low_labels",
@@ -1220,9 +1220,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "labels with fewer than 10,000 published claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "vol_low_R": {
       "id": "vol_low_R",
@@ -1232,9 +1232,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "weighted retained, labels under 10,000 claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "well_matched_n": {
       "id": "well_matched_n",
@@ -1244,9 +1244,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "50 states and DC passing the well-matched check",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_cells": {
       "id": "state_cells",
@@ -1256,9 +1256,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "evaluable label-state cells, 50 states and DC",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_cells_nodetail": {
       "id": "state_cells_nodetail",
@@ -1268,9 +1268,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "label-state cells with a published total and no public detail",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_cells_nodetail_share": {
       "id": "state_cells_nodetail_share",
@@ -1280,9 +1280,9 @@
       "numerator": 1810,
       "denominator": 10747,
       "scope": "share of label-state cells",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_cell_R_median": {
       "id": "state_cell_R_median",
@@ -1292,9 +1292,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median label-state retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_R_min": {
       "id": "state_R_min",
@@ -1304,9 +1304,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "lowest state-level weighted retained fraction (all in-scope claims)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_R_max": {
       "id": "state_R_max",
@@ -1316,9 +1316,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest state-level weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_R_median": {
       "id": "state_R_median",
@@ -1328,9 +1328,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "median state-level weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low_names": {
       "id": "state_low_names",
@@ -1340,9 +1340,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions with the lowest retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_high_name": {
       "id": "state_high_name",
@@ -1352,9 +1352,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest jurisdiction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low1_name": {
       "id": "state_low1_name",
@@ -1364,9 +1364,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdiction with low retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low1_R": {
       "id": "state_low1_R",
@@ -1376,9 +1376,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "its weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low2_name": {
       "id": "state_low2_name",
@@ -1388,9 +1388,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdiction with low retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low2_R": {
       "id": "state_low2_R",
@@ -1400,9 +1400,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "its weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low3_name": {
       "id": "state_low3_name",
@@ -1412,9 +1412,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdiction with low retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_low3_R": {
       "id": "state_low3_R",
@@ -1424,9 +1424,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "its weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_high_R": {
       "id": "state_high_R",
@@ -1436,9 +1436,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest state weighted retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_A10_min": {
       "id": "state_A10_min",
@@ -1448,9 +1448,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "lowest state diabetes-class fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_A10_max": {
       "id": "state_A10_max",
@@ -1460,9 +1460,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest state diabetes-class fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_cells": {
       "id": "bound_cells",
@@ -1472,9 +1472,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national and state-level cells tested against m <= G <= 10m",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_within": {
       "id": "bound_within",
@@ -1484,9 +1484,9 @@
       "numerator": 11663,
       "denominator": 11663,
       "scope": "cells within the bound",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_state_cells": {
       "id": "bound_state_cells",
@@ -1496,9 +1496,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "state-level cells (all geographies) tested",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_upper_testable": {
       "id": "bound_upper_testable",
@@ -1508,9 +1508,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells whose published total exceeds ten times the missing rows, so the upper bound could fail",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_upper_testable_share": {
       "id": "bound_upper_testable_share",
@@ -1520,9 +1520,9 @@
       "numerator": 2879,
       "denominator": 11663,
       "scope": "share of cells",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_lower_testable": {
       "id": "bound_lower_testable",
@@ -1532,9 +1532,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells with detail rows and missing rows, where the lower bound could fail",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_share_pub": {
       "id": "ins_share_pub",
@@ -1544,9 +1544,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10A share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_share_det": {
       "id": "ins_share_det",
@@ -1556,9 +1556,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10A share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_share_diff": {
       "id": "ins_share_diff",
@@ -1568,9 +1568,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10A share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_state_diff_min": {
       "id": "ins_state_diff_min",
@@ -1580,9 +1580,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_state_diff_max": {
       "id": "ins_state_diff_max",
@@ -1592,9 +1592,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_tau": {
       "id": "ins_tau",
@@ -1604,9 +1604,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of A10A share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_rho": {
       "id": "ins_rho",
@@ -1616,9 +1616,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_shift5": {
       "id": "ins_shift5",
@@ -1628,9 +1628,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_maxshift": {
       "id": "ins_maxshift",
@@ -1640,9 +1640,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_top10": {
       "id": "ins_top10",
@@ -1652,9 +1652,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_share_pub": {
       "id": "met_share_pub",
@@ -1664,9 +1664,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BA share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_share_det": {
       "id": "met_share_det",
@@ -1676,9 +1676,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BA share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_share_diff": {
       "id": "met_share_diff",
@@ -1688,9 +1688,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BA share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_state_diff_min": {
       "id": "met_state_diff_min",
@@ -1700,9 +1700,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_state_diff_max": {
       "id": "met_state_diff_max",
@@ -1712,9 +1712,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_tau": {
       "id": "met_tau",
@@ -1724,9 +1724,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of A10BA share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_rho": {
       "id": "met_rho",
@@ -1736,9 +1736,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_shift5": {
       "id": "met_shift5",
@@ -1748,9 +1748,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_maxshift": {
       "id": "met_maxshift",
@@ -1760,9 +1760,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_top10": {
       "id": "met_top10",
@@ -1772,9 +1772,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_share_pub": {
       "id": "sglt2_share_pub",
@@ -1784,9 +1784,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BK share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_share_det": {
       "id": "sglt2_share_det",
@@ -1796,9 +1796,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BK share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_share_diff": {
       "id": "sglt2_share_diff",
@@ -1808,9 +1808,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BK share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_state_diff_min": {
       "id": "sglt2_state_diff_min",
@@ -1820,9 +1820,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_state_diff_max": {
       "id": "sglt2_state_diff_max",
@@ -1832,9 +1832,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_tau": {
       "id": "sglt2_tau",
@@ -1844,9 +1844,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of A10BK share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_rho": {
       "id": "sglt2_rho",
@@ -1856,9 +1856,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_shift5": {
       "id": "sglt2_shift5",
@@ -1868,9 +1868,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_maxshift": {
       "id": "sglt2_maxshift",
@@ -1880,9 +1880,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "sglt2_top10": {
       "id": "sglt2_top10",
@@ -1892,9 +1892,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, A10BK",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_share_pub": {
       "id": "glp1_share_pub",
@@ -1904,9 +1904,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BJ share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_share_det": {
       "id": "glp1_share_det",
@@ -1916,9 +1916,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BJ share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_share_diff": {
       "id": "glp1_share_diff",
@@ -1928,9 +1928,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10BJ share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_state_diff_min": {
       "id": "glp1_state_diff_min",
@@ -1940,9 +1940,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_state_diff_max": {
       "id": "glp1_state_diff_max",
@@ -1952,9 +1952,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_tau": {
       "id": "glp1_tau",
@@ -1964,9 +1964,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of A10BJ share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_rho": {
       "id": "glp1_rho",
@@ -1976,9 +1976,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_shift5": {
       "id": "glp1_shift5",
@@ -1988,9 +1988,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_maxshift": {
       "id": "glp1_maxshift",
@@ -2000,9 +2000,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "glp1_top10": {
       "id": "glp1_top10",
@@ -2012,9 +2012,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, A10BJ",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_share_pub": {
       "id": "statin_share_pub",
@@ -2024,9 +2024,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10AA share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_share_det": {
       "id": "statin_share_det",
@@ -2036,9 +2036,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10AA share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_share_diff": {
       "id": "statin_share_diff",
@@ -2048,9 +2048,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10AA share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_state_diff_min": {
       "id": "statin_state_diff_min",
@@ -2060,9 +2060,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_state_diff_max": {
       "id": "statin_state_diff_max",
@@ -2072,9 +2072,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_tau": {
       "id": "statin_tau",
@@ -2084,9 +2084,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of C10AA share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_rho": {
       "id": "statin_rho",
@@ -2096,9 +2096,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_shift5": {
       "id": "statin_shift5",
@@ -2108,9 +2108,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_maxshift": {
       "id": "statin_maxshift",
@@ -2120,9 +2120,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_top10": {
       "id": "statin_top10",
@@ -2132,9 +2132,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_share_pub": {
       "id": "c09fdc_share_pub",
@@ -2144,9 +2144,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 fixed-dose combination share of class claims, published totals",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_share_det": {
       "id": "c09fdc_share_det",
@@ -2156,9 +2156,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 fixed-dose combination share of class claims, detail sums",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_share_diff": {
       "id": "c09fdc_share_diff",
@@ -2168,9 +2168,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 fixed-dose combination share difference, percentage points (abs)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_state_diff_min": {
       "id": "c09fdc_state_diff_min",
@@ -2180,9 +2180,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "smallest absolute state share difference, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_state_diff_max": {
       "id": "c09fdc_state_diff_max",
@@ -2192,9 +2192,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute state share difference, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_tau": {
       "id": "c09fdc_tau",
@@ -2204,9 +2204,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of C09 fixed-dose combination share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_rho": {
       "id": "c09fdc_rho",
@@ -2216,9 +2216,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Spearman, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_shift5": {
       "id": "c09fdc_shift5",
@@ -2228,9 +2228,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "jurisdictions moving 5+ places, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_maxshift": {
       "id": "c09fdc_maxshift",
@@ -2240,9 +2240,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "largest rank change, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_top10": {
       "id": "c09fdc_top10",
@@ -2252,9 +2252,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "states in both top-10 lists, C09 fixed-dose combination",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_lowest_big_2024": {
       "id": "ins_lowest_big_2024",
@@ -2264,9 +2264,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin ordering least stable among groups with at least 1% of class claims, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_lowest_big_2023": {
       "id": "ins_lowest_big_2023",
@@ -2276,9 +2276,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin ordering least stable among groups with at least 1% of class claims, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_lowest_big_2022": {
       "id": "ins_lowest_big_2022",
@@ -2288,9 +2288,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin ordering least stable among groups with at least 1% of class claims, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "big_group_threshold": {
       "id": "big_group_threshold",
@@ -2300,9 +2300,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "threshold for 'large' groups",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09xa_tau": {
       "id": "c09xa_tau",
@@ -2312,9 +2312,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of C09XA share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09xx_tau": {
       "id": "c09xx_tau",
@@ -2324,9 +2324,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Kendall tau-b, state order of C09XX share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_share_diff_round": {
       "id": "ins_share_diff_round",
@@ -2336,9 +2336,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "share difference rounded to whole points",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "c09fdc_share_diff_round": {
       "id": "c09fdc_share_diff_round",
@@ -2348,9 +2348,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "share difference rounded to whole points",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "groups_ranked": {
       "id": "groups_ranked",
@@ -2360,9 +2360,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "groups with state orderings",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "groups_stable": {
       "id": "groups_stable",
@@ -2372,9 +2372,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "groups whose state ordering is essentially unchanged",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "all_geo": {
       "id": "all_geo",
@@ -2384,9 +2384,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "published national claims, all labels",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "all_prov": {
       "id": "all_prov",
@@ -2396,9 +2396,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "By Provider claims, all NPIs",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "all_detail": {
       "id": "all_detail",
@@ -2408,9 +2408,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "Provider and Drug claims, all rows",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "all_R": {
       "id": "all_R",
@@ -2420,9 +2420,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "all drugs, national retained fraction",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "all_gap": {
       "id": "all_gap",
@@ -2432,9 +2432,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "all drugs, national gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_rows": {
       "id": "decomp_rows",
@@ -2444,9 +2444,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component of the all-drug national gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_rows_share": {
       "id": "decomp_rows_share",
@@ -2456,9 +2456,9 @@
       "numerator": 219758829.0,
       "denominator": 231442664.0,
       "scope": "share of the all-drug gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_npis": {
       "id": "decomp_npis",
@@ -2468,9 +2468,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component of the all-drug national gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_npis_share": {
       "id": "decomp_npis_share",
@@ -2480,9 +2480,9 @@
       "numerator": 10440635.0,
       "denominator": 231442664.0,
       "scope": "share of the all-drug gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_outside": {
       "id": "decomp_outside",
@@ -2492,9 +2492,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "component of the all-drug national gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "decomp_outside_share": {
       "id": "decomp_outside_share",
@@ -2504,9 +2504,9 @@
       "numerator": 1243200.0,
       "denominator": 231442664.0,
       "scope": "share of the all-drug gap",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "npis_no_detail": {
       "id": "npis_no_detail",
@@ -2516,9 +2516,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "NPIs in By Provider with no Provider and Drug row",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "org_npis": {
       "id": "org_npis",
@@ -2528,9 +2528,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "organizational NPIs in By Provider",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "org_claims": {
       "id": "org_claims",
@@ -2540,9 +2540,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "their claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "org_detail_claims": {
       "id": "org_detail_claims",
@@ -2552,9 +2552,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "their detail claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "npis_no_detail_share": {
       "id": "npis_no_detail_share",
@@ -2564,9 +2564,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "share of By Provider NPIs",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ex_rho_cpp": {
       "id": "ex_rho_cpp",
@@ -2576,9 +2576,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "post hoc: label-level rank correlation",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ex_rho_volume": {
       "id": "ex_rho_volume",
@@ -2588,9 +2588,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "post hoc: label-level rank correlation with total claims",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_cpp": {
       "id": "ins_cpp",
@@ -2600,9 +2600,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "post hoc: published claims per published prescriber, A10A",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "statin_cpp": {
       "id": "statin_cpp",
@@ -2612,9 +2612,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "post hoc: published claims per published prescriber, C10AA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "met_cpp": {
       "id": "met_cpp",
@@ -2624,9 +2624,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "post hoc: published claims per published prescriber, A10BA",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "unmatched_all_years_text": {
       "id": "unmatched_all_years_text",
@@ -2636,9 +2636,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "detail labels without an exact national reference label, all years",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "rep_outside_text": {
       "id": "rep_outside_text",
@@ -2648,9 +2648,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells outside the bound in 2023 and 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_labels_missing_ref_2024": {
       "id": "detail_labels_missing_ref_2024",
@@ -2660,9 +2660,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "unmatched detail labels, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_labels_missing_ref_2023": {
       "id": "detail_labels_missing_ref_2023",
@@ -2672,9 +2672,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "unmatched detail labels, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "detail_labels_missing_ref_2022": {
       "id": "detail_labels_missing_ref_2022",
@@ -2684,9 +2684,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "unmatched detail labels, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2022": {
       "id": "R_2022",
@@ -2696,9 +2696,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national weighted retained, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2022_A10": {
       "id": "R_2022_A10",
@@ -2708,9 +2708,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10 weighted retained, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2022_C09": {
       "id": "R_2022_C09",
@@ -2720,9 +2720,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 weighted retained, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2022_C10": {
       "id": "R_2022_C10",
@@ -2732,9 +2732,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10 weighted retained, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "Rcost_2022": {
       "id": "Rcost_2022",
@@ -2744,9 +2744,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_2022": {
       "id": "labels_2022",
@@ -2756,9 +2756,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_ok_2022": {
       "id": "bound_ok_2022",
@@ -2768,9 +2768,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells outside bounds, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_tau_2022": {
       "id": "ins_tau_2022",
@@ -2780,9 +2780,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin state-order tau, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_shift5_2022": {
       "id": "ins_shift5_2022",
@@ -2792,9 +2792,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin jurisdictions moving 5+, 2022",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2023": {
       "id": "R_2023",
@@ -2804,9 +2804,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national weighted retained, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2023_A10": {
       "id": "R_2023_A10",
@@ -2816,9 +2816,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10 weighted retained, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2023_C09": {
       "id": "R_2023_C09",
@@ -2828,9 +2828,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 weighted retained, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2023_C10": {
       "id": "R_2023_C10",
@@ -2840,9 +2840,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10 weighted retained, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "Rcost_2023": {
       "id": "Rcost_2023",
@@ -2852,21 +2852,21 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_2023": {
       "id": "labels_2023",
-      "text": "257",
+      "text": "256",
       "output_path": "results/dy2023/summary.json",
       "selector": "scope.labels_in_scope",
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_ok_2023": {
       "id": "bound_ok_2023",
@@ -2876,9 +2876,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells outside bounds, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_tau_2023": {
       "id": "ins_tau_2023",
@@ -2888,9 +2888,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin state-order tau, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_shift5_2023": {
       "id": "ins_shift5_2023",
@@ -2900,9 +2900,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin jurisdictions moving 5+, 2023",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2024": {
       "id": "R_2024",
@@ -2912,9 +2912,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national weighted retained, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2024_A10": {
       "id": "R_2024_A10",
@@ -2924,9 +2924,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "A10 weighted retained, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2024_C09": {
       "id": "R_2024_C09",
@@ -2936,9 +2936,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C09 weighted retained, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "R_2024_C10": {
       "id": "R_2024_C10",
@@ -2948,9 +2948,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "C10 weighted retained, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "Rcost_2024": {
       "id": "Rcost_2024",
@@ -2960,9 +2960,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cost retained, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_2024": {
       "id": "labels_2024",
@@ -2972,9 +2972,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "bound_ok_2024": {
       "id": "bound_ok_2024",
@@ -2984,9 +2984,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "cells outside bounds, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_tau_2024": {
       "id": "ins_tau_2024",
@@ -2996,9 +2996,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin state-order tau, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "ins_shift5_2024": {
       "id": "ins_shift5_2024",
@@ -3008,9 +3008,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "insulin jurisdictions moving 5+, 2024",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_all_years": {
       "id": "labels_all_years",
@@ -3020,9 +3020,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels present in all three years",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "rep_rho_min": {
       "id": "rep_rho_min",
@@ -3032,9 +3032,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "lowest between-year rank correlation of label retained fractions",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "rep_rho_max": {
       "id": "rep_rho_max",
@@ -3044,33 +3044,33 @@
       "numerator": null,
       "denominator": null,
       "scope": "highest between-year rank correlation",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "labels_changed": {
       "id": "labels_changed",
-      "text": "43",
+      "text": "42",
       "output_path": "results/replication/replication_summary.json",
       "selector": "labels_by_presence excluding all-year labels",
       "numerator": null,
       "denominator": null,
       "scope": "in-scope labels not present in every year",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "second_values": {
       "id": "second_values",
-      "text": "310,464",
+      "text": "310,437",
       "output_path": "results/dy2024/second_implementation_check.json",
       "selector": "values_compared summed over years",
       "numerator": null,
       "denominator": null,
       "scope": "values compared by the second implementation",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "second_mismatches": {
       "id": "second_mismatches",
@@ -3080,9 +3080,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "mismatches",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "repro_files": {
       "id": "repro_files",
@@ -3092,33 +3092,33 @@
       "numerator": null,
       "denominator": null,
       "scope": "result files compared in the clean rerun",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "repro_values": {
       "id": "repro_values",
-      "text": "1,122,666",
+      "text": "1,122,578",
       "output_path": "results/repro_check.json",
       "selector": "values_compared",
       "numerator": null,
       "denominator": null,
       "scope": "values compared in the clean rerun",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "repro_maxdiff": {
       "id": "repro_maxdiff",
-      "text": "5.9952e-15",
+      "text": "4.996e-15",
       "output_path": "results/repro_check.json",
       "selector": "max_abs_numeric_difference",
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute difference",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "repro_maxdiff_where": {
       "id": "repro_maxdiff_where",
@@ -3128,21 +3128,21 @@
       "numerator": null,
       "denominator": null,
       "scope": "where the largest rerun difference occurred",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "repro_maxdiff_text": {
       "id": "repro_maxdiff_text",
-      "text": "6.0e-15",
+      "text": "5.0e-15",
       "output_path": "results/repro_check.json",
       "selector": "max_abs_numeric_difference (formatted)",
       "numerator": null,
       "denominator": null,
       "scope": "largest absolute difference",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "withheld_state": {
       "id": "withheld_state",
@@ -3152,9 +3152,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "label-state cells whose retained band is withheld",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "withheld_state_share": {
       "id": "withheld_state_share",
@@ -3164,9 +3164,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "share",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "state_cells_all": {
       "id": "state_cells_all",
@@ -3176,9 +3176,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "state-level cells, all geographies",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "audit_withheld_checked": {
       "id": "audit_withheld_checked",
@@ -3188,9 +3188,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "withheld values checked by the public-file interval audit",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "withheld_national": {
       "id": "withheld_national",
@@ -3200,9 +3200,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "national label rows withheld (rule and complement)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "withheld_group_state": {
       "id": "withheld_group_state",
@@ -3212,9 +3212,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "group-by-state rows withheld (rule and complement)",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "withheld_other_agg": {
       "id": "withheld_other_agg",
@@ -3224,9 +3224,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "other aggregate rows withheld",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     },
     "tests_passed": {
       "id": "tests_passed",
@@ -3236,9 +3236,9 @@
       "numerator": null,
       "denominator": null,
       "scope": "pytest tests passed",
-      "config_sha256": "a41ac676632c154bc8bf7a5ab11e8d3a7d229806b4b81194ff8321b2b9a77b40",
+      "config_sha256": "3fbdb2bfc6b0974e09bfbecee30befdafd985cf7b4cd6525f401db4fd82220af",
       "source_sha256": null,
-      "run_id": "20261007T104804Z"
+      "run_id": "20261017T171031Z"
     }
   },
   "note": "Values are given as printed in the paper; full-precision values are regenerated by the pipeline."
