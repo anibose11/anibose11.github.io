@@ -1,6 +1,6 @@
 # Tableau import and interaction specification
 
-No Tableau workbook is supplied, and none was built or tested. This file specifies how to use the precomputed CSV files in `outputs/tableau/` (also in the site downloads) so that a dashboard never recomputes survey statistics.
+No Tableau workbook is supplied, and none was built or tested. This file specifies how to use the precomputed CSV files in `outputs/tableau/` (also in the site downloads, with a `tableau_` prefix on each file name) so that a dashboard never recomputes survey statistics.
 
 ## Files
 
@@ -19,7 +19,7 @@ No Tableau workbook is supplied, and none was built or tested. This file specifi
 
 ## Required display rules
 
-1. Hide rows where `suppress` is TRUE, or show them greyed with the label "does not meet NCHS presentation standard".
+1. Hide rows where `suppress` is TRUE, or show them grayed with the label "does not meet NCHS presentation standard".
 2. Mark rows where `imprecise_flag` is TRUE (relative standard error above 30% or fewer than 30 people) and rows where `review_flag` is TRUE (fewer than 8 design degrees of freedom, or the complementary proportion would not meet the NCHS standard).
 3. Always show the confidence interval with the estimate, and show `n_unweighted` in the tooltip.
 4. Show the denominator: primary-domain groups (prefix C) share one denominator; frame Y groups (prefix Y) use a classification-specific denominator; groups with prefix R2 use the alternative gap definition.

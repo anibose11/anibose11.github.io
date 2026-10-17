@@ -78,7 +78,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <li><strong>92.2%</strong><span>of reference occurrences carried a usable DOI, PMID or PMCID, and 7.8% had none</span></li>
 <li><strong>2</strong><span>extra links from verified identifier crosswalks beyond exact DOI matching, both in references with conflicting identifiers</span></li>
 <li><strong>46 in 41 reviews</strong><span>reference occurrences citing 44 works with a retraction claim. PubMed alone recorded 7 and Retraction Watch alone 4</span></li>
-<li><strong>16 before, 28 after</strong><span>retraction notices relative to the review's first online date, with 2 that could not be placed</span></li>
+<li><strong>16 before, 28 after</strong><span>of 46 retraction-flagged occurrences, by notice date relative to the review's first online date. The other 2 could not be placed</span></li>
 </ul>
 
 <div class="prose">
@@ -92,17 +92,17 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <ol class="flow" aria-label="Linkage workflow">
 <li><b>Parse references</b>One row per citation in the review's JATS reference list, with every DOI, PMID and PMCID and where each one came from.</li>
 <li><b>Arm A</b>Exact DOI matching against Retraction Watch.</li>
-<li><b>Arm B</b>DOI, PMID and NCBI-verified crosswalks against Retraction Watch. Conflicting identifiers go to manual review.</li>
+<li><b>Arm B</b>DOI, PMID, PMCID and NCBI-verified crosswalks against Retraction Watch. Conflicting identifiers go to manual review.</li>
 <li><b>Arm C</b>Adds PubMed retraction, correction and concern relations, each kept as its own claim with its own date.</li>
 <li><b>Dates as intervals</b>A notice counts as before or after the review only when the date intervals do not overlap.</li>
 <li><b>Review queue</b>A spreadsheet with identifiers, claims, dates, timing, match confidence and source links.</li>
 </ol>
 
 <div class="prose">
-<h2>Why claims and dates remain separate</h2>
+<h2>How the audit handles disagreements</h2>
 <h3>Each source keeps its own claim and date</h3>
 <p>A review of obesity and COVID-19 mortality (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7901910/">PMC7901910</a>) first appeared online on 5 February 2021 and cites a meta-analysis that both sources record as retracted. Retraction Watch dates the notice 6 February 2021, a day after the review. PubMed's notice record carries only its January 2021 issue date, which falls before the review. A single "cited after retraction" label would hide that disagreement, so I kept both claims and marked the timing as indeterminate. Of 46 retraction-flagged occurrences, 2 ended up indeterminate.</p>
-<h3>Conflicting identifiers go to a person</h3>
+<h3>Conflicting identifiers go to manual review</h3>
 <p>The identifier crosswalk added only 2 links, both corrections, and both came from references whose identifiers disagreed. One reference used the article's Crossref-registered DOI, while Retraction Watch and PubMed list an alias that Crossref redirects to it. The other paired the article's PMID with the DOI of its correction notice. I labeled both as ambiguous and sent them to manual review. In total, 321 reference occurrences (0.5%) had identifiers pointing to different records.</p>
 
 <h2>Coverage was high and PubMed supplied most correction claims</h2>
@@ -134,8 +134,8 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <h2>What the results do not show</h2>
 <p>The cohort is a deterministic sample of PMC open-access reviews selected through PubMed indexing and is not a census. A match means agreement with two sources at their snapshot dates, which is different from sensitivity to every real retraction. Retraction Watch and PubMed also share upstream notices, so their agreement is not independent confirmation. The flagged counts are small. A citation does not show that a review used the study's data, and no pooled result was re-analyzed.</p>
 
-<h2>Checks</h2>
-<p>55 tests passed on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. A separate routine confirmed 2,522 of 2,522 status claims against the raw source records, and an offline rerun reproduced all 36 output tables exactly. I also checked every retraction, concern and reinstatement claim and a stratified sample of 100 parsed references against the original records by hand, and all were consistent.</p>
+<h2>How the results were checked</h2>
+<p>All 55 tests passed on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. A separate routine confirmed 2,522 of 2,522 status claims against the raw source records, and an offline rerun reproduced all 36 output tables exactly. I also checked every retraction, expression of concern and reinstatement claim and a stratified sample of 100 parsed references against the original records by hand, and all were consistent.</p>
 
 <h2>Reproduce the analysis</h2>
 <pre><code>python3 -m venv .venv &amp;&amp; .venv/bin/pip install -e ".[test,report]"

@@ -552,7 +552,7 @@ figure { margin: 1.25rem 0; }
 .csl-entry { overflow-wrap: anywhere; margin-bottom: 0.5rem; }
 .csl-bib-body { max-width: 680px; }
 </style>
-<meta name="description" content="A reproducible audit of 1,000 reviews, linking references to retraction, correction and expression-of-concern records.">
+<meta name="description" content="An audit of 1,000 systematic reviews, linking references to retraction, correction and expression-of-concern records.">
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
 </head>
 
@@ -701,7 +701,7 @@ Table 2: Identifier coverage (reference occurrences, all identifiers)
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">any usable DOI, PMID or PMCID</td>
+<td style="text-align: left;">Any usable DOI, PMID or PMCID</td>
 <td style="text-align: right;">57,828</td>
 <td style="text-align: left;">92.2 (91.5 to 92.8)</td>
 </tr>
@@ -1136,9 +1136,9 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 </figure>
 </div>
 <h3 id="references-that-cite-a-notice-and-the-title-queue" class="anchored">References that cite a notice, and the title queue</h3>
-<p>52 occurrence and notice pairs cited a notice itself (43 published errata and 3 retraction notices in PubMed, and 5 retraction and 1 correction notice DOIs in Retraction Watch). The prespecified title matcher produced 0 candidates among references without an identifier link.</p>
+<p>In 52 occurrence and notice pairs, the reference cited the notice itself (43 published errata and 3 retraction notices in PubMed, and 5 retraction and 1 correction notice DOIs in Retraction Watch). The prespecified title matcher produced 0 candidates among references without an identifier link.</p>
 <h2 id="validation" class="anchored">Validation</h2>
-<p>Three kinds of checks were run and are reported separately.</p>
+<p>Five kinds of checks were run and are reported separately.</p>
 <ul>
 <li><p><strong>Software tests.</strong> 55 tests passed on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. Fixtures use the test DOI prefix 10.5555 and never enter study tables.</p></li>
 <li><p><strong>Source reconciliation.</strong> A separate routine re-read every arm C claim from the raw Retraction Watch CSV (Python <code>csv</code>) and the raw cached PubMed XML (<code>xml.etree</code>): 2,522 of 2,522 confirmed. Count reconciliation across stages and MD5 checks of all review XML passed. SQL timing matched a separate Python implementation on every claim.</p></li>
@@ -1172,7 +1172,7 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 4. Sayers E. A general introduction to the E-utilities. In: Entrez Programming Utilities Help. National Center for Biotechnology Information. 2022. <a href="https://www.ncbi.nlm.nih.gov/books/NBK25497/">https://www.ncbi.nlm.nih.gov/books/NBK25497/</a>. Accessed 7 Oct 2026.
 </div>
 <div id="ref-field2007" class="csl-entry" role="listitem">
-5. Field CA, Welsh AH. Bootstrapping Clustered Data. Journal of the Royal Statistical Society Series B: Statistical Methodology. 2007;69:369–90. <a href="https://doi.org/10.1111/j.1467-9868.2007.00593.x">https://doi.org/10.1111/j.1467-9868.2007.00593.x</a>.
+5. Field CA, Welsh AH. Bootstrapping clustered data. Journal of the Royal Statistical Society Series B: Statistical Methodology. 2007;69:369–90. <a href="https://doi.org/10.1111/j.1467-9868.2007.00593.x">https://doi.org/10.1111/j.1467-9868.2007.00593.x</a>.
 </div>
 </div>
 

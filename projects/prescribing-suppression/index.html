@@ -19,7 +19,7 @@
 <p class="lede">Researchers often add up the public Medicare Part D prescriber-drug rows to compare drugs and states. That file drops every prescriber-drug pair with 10 or fewer claims. How much of each published total is left, and does the shortfall change the comparisons people report?</p>
 
 <figure>
-<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_retained_vs_volume_2024.svg" alt="Scatter plot of 259 cardiometabolic drug labels. Labels with more published claims keep a larger share in the public detail file; most labels with fewer than 100,000 claims keep under half." width="720" height="440"></div>
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_retained_vs_volume_2024.svg" alt="Scatter plot of 258 cardiometabolic drug labels. Labels with more published claims keep a larger share in the public detail file; most labels with fewer than 100,000 claims keep under half." width="720" height="440"></div>
 <figcaption><strong>Share of each label's published 2024 claims found in the public detail file.</strong> One point per drug label, by national claim volume (log scale). The line marks the share for all in-scope claims together, 91.0%. Shape and color show the drug class. Labels withheld under the public output rule are not plotted.</figcaption>
 </figure>
 
@@ -27,39 +27,39 @@
 <div class="stat" role="listitem"><b>91.0%</b><span>of published cardiometabolic claims are in the public detail, 2024</span></div>
 <div class="stat" role="listitem"><b>35.5%</b><span>retained by the median drug label</span></div>
 <div class="stat" role="listitem"><b>25 of 51</b><span>jurisdictions (50 states and DC) move five or more places when insulin share is computed from detail</span></div>
-<div class="stat" role="listitem"><b>11,663 of 11,663</b><span>national and state cells in 2024 are consistent with the 10-claim rule</span></div>
+<div class="stat" role="listitem"><b>All 11,663</b><span>national and state cells in 2024 are consistent with the 10-claim rule</span></div>
 </div>
 
 <h2>The summary files include claims omitted from public detail</h2>
-<p>CMS publishes three Part D prescriber files each year. The Provider and Drug file has one row per prescriber, brand name and generic name, and leaves out any pair with 10 or fewer claims. The Geography and Drug file gives national and state totals for each drug label, and CMS builds it from all Part D prescription drug events, not from the trimmed detail. That makes it a same-source reference against which the detail sums can be checked.</p>
-<p>The study used the 2024 files (28,023,892 detail rows, 1,139,455 prescribers) and repeated everything on 2023 and 2022. The eligibility rule was fixed before any comparison: diabetes drugs, renin-angiotensin agents and lipid modifying agents in Anatomical Therapeutic Chemical (ATC) groups A10, C09 and C10, mapped through the National Library of Medicine RxClass service. The final set contained 259 labels after a device label mapped in error was removed. That correction and the reruns are recorded in the analysis plan.</p>
+<p>CMS publishes three Part D prescriber files each year. The Provider and Drug file has one row per prescriber, brand name and generic name, and leaves out any pair with 10 or fewer claims. The Geography and Drug file gives national and state totals for each drug label, and CMS builds it from all Part D prescription drug events, not from the trimmed detail. That makes it a same-source reference for checking the detail sums.</p>
+<p>I used the 2024 files (28,023,892 detail rows, 1,139,455 prescribers) and repeated the full analysis on the 2023 and 2022 files. I set the eligibility rule before making any comparison: diabetes drugs, renin-angiotensin agents and lipid modifying agents in Anatomical Therapeutic Chemical (ATC) groups A10, C09 and C10, mapped through the National Library of Medicine RxClass service. The final set has 259 labels, after I removed a device label that had been mapped in error. That correction and the reruns are recorded in the analysis plan.</p>
 
-<h2>Each gap was checked against the rule that should explain it</h2>
-<p>For every drug label, nationally and in each state, the detail sum D was divided by the published total A. The Geography and Drug file also publishes how many prescribers stand behind each total, and the detail file has one row per prescriber per label, so the number of prescribers whose rows are missing is known. If the 10-claim rule is the only cause, each missing row holds 1 to 10 claims, which bounds the gap. All 11,663 cells in 2024 fell inside that range, as did every cell in 2023 and 2022. A gap inside the range is consistent with the rule; it does not prove that nothing else contributes.</p>
-<p>A second program, written with the Python standard library only, recomputed every cell's sums, status and bound check from the raw files (310,464 values, 0 mismatches), and a clean rebuild reproduced 1,122,666 values within tolerance.</p>
+<h2>I checked each gap against the rule that should explain it</h2>
+<p>For every drug label, nationally and in each state, I divided the detail sum D by the published total A. The Geography and Drug file also publishes how many prescribers stand behind each total, and the detail file has one row per prescriber per label, so the number of prescribers whose rows are missing is known. If the 10-claim rule is the only cause, each missing row holds 1 to 10 claims, which bounds the gap. All 11,663 cells in 2024 fell inside that range, as did every cell in 2023 and 2022. A gap inside the range is consistent with the rule; it does not prove that nothing else contributes.</p>
+<p>I wrote a second program using only the Python standard library. It recomputed every cell's sums, status and bound check from the raw files for all three years (310,464 values, 0 mismatches), and a clean rebuild reproduced 1,122,666 values within tolerance.</p>
 
-<h2>Checking what the omitted detail can explain</h2>
+<h2>Design choices behind the analysis</h2>
 <h3>Use the summary built from all claims as the denominator</h3>
-<p>The By Provider summary also comes from all claims, but it has no drug detail, so it cannot serve as a drug-level denominator. It was used only for a separate all-drug check, which found that 95.0% of the national gap sits in dropped rows of prescribers who do appear in the detail file, not in whole missing prescribers.</p>
+<p>The By Provider summary also comes from all claims, but it has no drug detail, so it cannot serve as a drug-level denominator. I used it only for a separate all-drug check, which found that 95.0% of the national gap sits in dropped rows of prescribers who do appear in the detail file, not in whole missing prescribers.</p>
 <h3>Keep combination products whole, and hold back small residuals</h3>
-<p>A combination such as sitagliptin and metformin is one label with one claim total, so it was never split into two ingredients. And because a gap can reveal the values of suppressed rows when only one or two rows are missing, when it is 1 to 10 claims, or when it sits at either end of the allowed range, the public tables give drug-by-state cells only as bands and withhold even the band in those cases (230 state cells in 2024). Aggregate tables withhold a second row wherever subtraction could otherwise recover a withheld one. Summaries were computed before that rule was applied.</p>
+<p>A combination such as sitagliptin and metformin is one label with one claim total, so I never split it into its two ingredients. A gap can reveal the values of suppressed rows when only one or two rows are missing, when it is 1 to 10 claims, or when it sits at either end of the allowed range. For that reason, the public tables give drug-by-state cells only as bands and withhold even the band in those cases (230 state cells in 2024). Aggregate tables withhold a second row wherever subtraction could otherwise recover a withheld one. I computed the summaries before applying that rule.</p>
 
 <h2>High overall completeness hides large gaps for individual drugs</h2>
-<p>Nationally the detail held 91.0% of in-scope claims but only 84.2% of gross drug cost. The weighted figure is driven by a few high-volume generics: the 43 labels with at least 1,000,000 claims retained 93.5%, while the 88 labels with fewer than 10,000 claims retained 21.5%. Statins (97.3%) and metformin (96.1%) were nearly complete. Insulins (68.2%), diabetes combination products (60.2%) and fibrates (68.5%) were not. State completeness ranged from 83.8% in the District of Columbia to 92.5% in Missouri.</p>
+<p>Nationally, the detail held 91.0% of in-scope claims but only 84.2% of gross drug cost. The weighted figure is driven by a few high-volume generics: the 43 labels with at least 1,000,000 claims retained 93.5%, while the 88 labels with fewer than 10,000 claims retained 21.5%. Statins (97.3%) and metformin (96.1%) were nearly complete. Insulins (68.2%), diabetes combination products (60.2%) and fibrates (68.5%) were not. State completeness ranged from 83.8% in the District of Columbia to 92.5% in Missouri.</p>
 
 <figure>
 <div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig4_a10a_share_2024.svg" alt="Dumbbell chart for the 50 states and DC. In every state, the insulin share of diabetes-drug claims computed from public detail is lower than the share from published totals, by 3.1 to 6.4 percentage points." width="720" height="960"></div>
-<figcaption><strong>Insulin share of diabetes-drug claims by state, 2024.</strong> Filled points use published totals; open points use summed detail for the same labels. Insulins are shown because they changed the most among groups with at least 1% of their class's claims; the full report shows every group.</figcaption>
+<figcaption><strong>Insulin share of diabetes-drug claims by state, 2024.</strong> Filled points use published totals; open points use summed detail for the same labels. Insulins are shown because they had the largest change in state ordering among groups with at least 1% of their class's claims; the full report shows every group.</figcaption>
 </figure>
-<p>Because insulins lose more claims than metformin does, the insulin share computed from detail was 14.7% instead of 18.6% nationally, and lower in every state. The state ordering by insulin share changed enough that 25 of 51 jurisdictions moved five or more places and only 7 states stayed in both top-10 lists. Orderings for SGLT2 inhibitors, statins, metformin and ACE inhibitors barely moved. Two very small groups, renin inhibitors and other RAS agents, reordered more, but each holds under 0.1% of its class's claims. The 2023 and 2022 files showed a similar pattern (90.6% and 90.4% retained overall).</p>
+<p>Because insulins lose more claims than metformin does, the insulin share computed from detail was 14.7% instead of 18.6% nationally, and lower in every state. The state ordering by insulin share changed enough that 25 of 51 jurisdictions moved five or more places and only 7 states appeared in both top-10 lists. Orderings for SGLT2 inhibitors, statins, metformin and ACE inhibitors barely moved. Two very small groups, renin inhibitors and other renin-angiotensin agents, reordered more, but each holds under 0.1% of its class's claims. The 2023 and 2022 files showed a similar pattern (90.6% and 90.4% retained overall).</p>
 
 <h2>What the gap means, and what it does not</h2>
-<p>The gap measures how many claims are absent from the summed public detail. Every observed gap is consistent with omission of prescriber-drug rows with 10 or fewer claims, but that check cannot prove the rule is the only cause. It does not identify any prescriber or patient, and nothing here recovers a suppressed row. It says nothing about whether any drug is over- or under-prescribed, and gross drug cost is before rebates and is not what patients pay. For a drug or state total, the published Geography and Drug file answers the question directly. When prescriber detail is needed, report the retained fraction beside the estimate, and never sum beneficiary counts across prescribers.</p>
+<p>The gap measures how many claims are absent from the summed public detail. Every observed gap is consistent with omission of prescriber-drug rows with 10 or fewer claims, but that check cannot prove the rule is the only cause. It does not identify any prescriber or patient, and nothing here recovers a suppressed row. It says nothing about whether any drug is over- or under-prescribed. Gross drug cost is before rebates and is not what patients pay. For a drug or state total, the published Geography and Drug file answers the question directly. When prescriber detail is needed, report the retained fraction beside the estimate, and never sum beneficiary counts across prescribers.</p>
 
 <h2>Limitations</h2>
 <ul>
 <li>The reference comes from the same claims and prescriber attribution as the detail file, so the fractions measure agreement between two CMS products, not completeness against all prescribing.</li>
-<li>Scope is three ATC classes as RxClass lists them. Omega-3 esters and icosapent ethyl are not listed there and were left out.</li>
+<li>The scope is the three ATC groups as RxClass lists them. Omega-3 fatty acid esters and icosapent ethyl are not listed there and were left out.</li>
 <li>Geography is the prescriber's address in NPPES, not where patients live.</li>
 <li>The reference also drops state rows below 11 claims (7,158 in-scope claims nationally).</li>
 <li>The files are full administrative totals, so there are no sampling confidence intervals; rank changes are descriptive.</li>
@@ -67,7 +67,7 @@
 </ul>
 
 <h2>Reproduce the analysis</h2>
-<p>The source archive runs on Python 3.13 with locked dependencies and needs about 13 GB of disk for the three years of CMS files.</p>
+<p>The source archive runs on Python 3.13 with locked dependencies and needs about 13 GB of disk space for the three years of CMS files.</p>
 <pre><code>make setup
 make test
 make demo        # synthetic fixture, a software check only
@@ -80,7 +80,7 @@ make all         # acquire, build, analyze, validate, render, package</code></pr
 
 <h2>Report, code and data</h2>
 <ul class="files">
-<li><a href="report.html">Full report</a>, tables and references</li>
+<li><a href="report.html">Full report</a> with tables and references</li>
 <li><a href="downloads/prescribing_suppression_reconciliation_2024.xlsx">Reconciliation workbook (XLSX)</a> with definitions and sources</li>
 <li><a href="downloads/reconciliation_ledger_2024.csv">Match and exception ledger, 2024 (CSV)</a></li>
 <li><a href="downloads/national_reconciliation_2024.csv">National results by drug label (CSV)</a> and <a href="downloads/state_summary_2024.csv">state summary (CSV)</a></li>

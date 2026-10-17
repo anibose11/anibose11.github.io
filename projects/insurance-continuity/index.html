@@ -17,7 +17,7 @@
 <article>
 <h1>Year-end coverage misses within-year gaps</h1>
 <p class="note portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="lede">About one in twelve US adults aged 18 to 64 with diagnosed diabetes who were insured on December 31, 2024, had been uninsured earlier that year. I used the Medical Expenditure Panel Survey to compare their prescription use and spending with those insured all year.</p>
+<p class="lede">About one in twelve US adults aged 18 to 64 with diagnosed diabetes who were insured on December 31, 2024, had been uninsured earlier that year. I used the Medical Expenditure Panel Survey to compare their prescription use and spending with those of adults insured all year.</p>
 <div class="question"><strong>Research question.</strong> Among US adults aged 18 to 64 with diagnosed diabetes who were insured on December 31, 2024, what share had at least one fully uninsured month that year, and how do annual prescription summaries change when monthly continuity is kept?</div>
 
 <figure><img src="assets/fig1_yearend_vs_continuity_2024.png" alt="Two stacked bars. Left: by the year-end indicator, 87.9 percent insured and 12.1 percent uninsured. Right: by monthly continuity, 80.4 percent insured all 12 months, 7.5 percent insured on December 31 after at least one uninsured month, and 12.1 percent uninsured on December 31." loading="lazy" width="1800"><figcaption>The same 1,001 adults under two coverage measures. Among those insured on December 31, 8.5% (95% CI, 6.3% to 11.4%) had at least one fully uninsured month. Weighted shares; labels give unweighted counts.</figcaption></figure>
@@ -32,14 +32,14 @@
 <h2>Out-of-scope and missing months are never counted as uninsured</h2>
 <div class="prose">
 <p>The analysis uses the AHRQ MEPS 2024 Full Year Consolidated file (HC-256, released August 2026), the 2024 Prescribed Medicines file for imputation flags, and the 2023 file for replication. MEPS records coverage on December 31 and, separately, any coverage in each calendar month. The primary domain is the 1,001 adults aged 18 to 64 who reported ever being told they had diabetes and who were in scope for all 12 months, representing 16.6 million people.</p>
-<p>Two decisions shaped the results. First, months when a person was outside the civilian noninstitutionalized population, and any month without usable information, are never counted as uninsured; they make continuity indeterminate unless a gap is observed. In the 2024 domain no month was missing, so the indeterminate class is empty, but the rule matters for anyone applying the classification to other data. Second, spending summaries are shown on a common denominator (the same people split by class) and on classification-specific denominators, so differences in who is in scope are not mistaken for coverage effects.</p>
-<p>Estimates are design-based (Taylor linearization with the MEPS strata, primary sampling units, and full-year weight), with the whole file kept in the design and domains taken as subsets. A survey-weighted two-part model, fit only after a prespecified support rule was met, standardized spending for age, sex, race and ethnicity, and income, with jackknife replicate intervals.</p>
+<p>Two decisions shaped the results. First, I never counted a month as uninsured if the person was outside the civilian noninstitutionalized population or the month had no usable information; such months make continuity indeterminate unless a gap is observed. In the 2024 domain no month was missing, so the indeterminate class is empty, but the rule matters for anyone applying the classification to other data. Second, I show spending summaries on a common denominator (the same people split by class) and on classification-specific denominators, so differences in who is in scope are not mistaken for coverage effects.</p>
+<p>Estimates are design-based (Taylor linearization with the MEPS strata, primary sampling units, and full-year weight), with the whole file kept in the design and domains taken as subsets. I standardized spending for age, sex, race and ethnicity, and income with a survey-weighted two-part model and jackknife replicate intervals, fitting the model only after a prespecified support rule was met.</p>
 </div>
 
 <h2>People with a gap filled fewer prescriptions, and their median spending was similar</h2>
 <figure><img src="assets/fig2_oop_spending_2024.png" alt="Dot and interval chart of annual out-of-pocket prescription spending for three groups: mean including zeros, mean among users, and median among users." loading="lazy" width="1800"><figcaption>Annual out-of-pocket prescription spending by continuity class, 2024 dollars, with 95% CIs. Group sizes are unweighted; user subgroups are smaller.</figcaption></figure>
 <div class="prose">
-<p>Adults insured on December 31 after a gap filled any prescription less often than the continuously insured (78.8% vs 92.6%) and had fewer fills (20.1 vs 30.4). Their median out-of-pocket spending among users was about the same ($154 vs $152). Their unadjusted mean was lower ($240 vs $642), a difference partly driven by a few very large amounts among the continuously insured; the top 1% of people accounted for 42% of 2024 out-of-pocket dollars, and without them the means were $383 and $240. Because the gap group is small, the summary for everyone insured on December 31 barely moved, with mean out-of-pocket spending of $608 against $642 for the continuously insured. After adjustment the difference was −$238 (95% CI, −$536 to $59) in 2024 and $105 (95% CI, −$215 to $425) in 2023, so the adjusted difference was imprecise and changed sign between years.</p>
+<p>Adults insured on December 31 after a gap filled any prescription less often than the continuously insured (78.8% vs 92.6%) and had fewer fills (20.1 vs 30.4). Their median out-of-pocket spending among users was about the same ($154 vs $152). Their unadjusted mean including zeros was lower ($240 vs $642), a difference partly driven by a few very large amounts among the continuously insured; the top 1% of people accounted for 42% of 2024 out-of-pocket dollars, and without them the means were $240 and $383. Because the gap group is small, the summary for everyone insured on December 31 barely moved, with mean out-of-pocket spending of $608 against $642 for the continuously insured. After adjustment, the difference was −$238 (95% CI, −$536 to $59) in 2024 and $105 (95% CI, −$215 to $425) in 2023, so it was imprecise and changed sign between years.</p>
 </div>
 
 <h2>The estimate is a lower bound and supports description only</h2>
@@ -54,9 +54,9 @@
 </ul>
 </div>
 
-<h2>How the results were checked</h2>
+<h2>How I checked the results</h2>
 <div class="prose">
-<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and matches fill counts and out-of-pocket totals between the prescription and person files. An independent SQL classification and a separately written variance calculation agree with the main implementation. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
+<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and, for 2024, matches fill counts and out-of-pocket totals between the prescription and person files. An independent SQL classification and a separately written variance calculation agree with the main implementation. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
 <pre><code>./setup.sh
 ./icont all      # acquire, build, analyze, validate, render, package
 ./icont test     # unit tests on synthetic fixtures
@@ -71,9 +71,9 @@
 <li><a href="downloads/tableau_estimates_long.csv">Tableau-ready estimates with grain, units, CIs, and suppression flags (CSV)</a> <span class="note">(124 KB)</span></li>
 <li><a href="downloads/tableau_monthly_transitions.csv">Month-to-month coverage transitions (CSV)</a> <span class="note">(8 KB)</span></li>
 <li><a href="downloads/tableau_cohort_flow.csv">Cohort flow counts (CSV)</a> <span class="note">(2 KB)</span></li>
-<li><a href="downloads/tableau_spec.md">Tableau import and filtering specification (Markdown)</a> <span class="note">(3 KB)</span></li>
+<li><a href="downloads/tableau_spec.md">Tableau import and interaction specification (Markdown)</a> <span class="note">(3 KB)</span></li>
 <li><a href="downloads/data_dictionary.csv">Source-to-analysis data dictionary (CSV)</a> <span class="note">(18 KB)</span></li>
-<li><a href="downloads/analysis_plan.md">Time-stamped analysis plan with amendments (Markdown)</a> <span class="note">(18 KB)</span></li>
+<li><a href="downloads/analysis_plan.md">Timestamped analysis plan with amendments (Markdown)</a> <span class="note">(18 KB)</span></li>
 <li><a href="downloads/prior_art.csv">Related studies and tools (CSV)</a> <span class="note">(16 KB)</span></li>
 <li><a href="downloads/claims.json">Reported values and source tables (JSON)</a> <span class="note">(208 KB)</span></li>
 </ul>

@@ -130,7 +130,7 @@ structure, and member checksums, and its SHA-256 hash was recorded. All
 eight releases had identical file headers and layout. The documentation
 shipped from 2024Q4 onward added one role code, DN (drug not
 administered) (ESM 2, Table S1). Files were streamed into column-limited
-Parquet tables without extraction, and parsed row counts for all 40 member files were compared with raw line counts. For the 32 files with a total in FDA's statistics report, parsed counts were also compared with that total. The eight deletion lists had no printed total.</p>
+Parquet tables without extraction, and parsed row counts for all 40 member files were compared with raw line counts. For the 32 files with a total in FDA’s statistics report, parsed counts were also compared with that total. The eight deletion lists had no printed total.</p>
 </section>
 <section id="case-construction" class="level3">
 <h3>2.3 Case construction</h3>
@@ -156,7 +156,7 @@ resolved, and no probabilistic duplicate detection was attempted.</p>
 National Library of Medicine [24]: ingredients assigned the FDA
 Established Pharmacologic Class (from DailyMed labeling) or the
 Medication Reference Terminology (MED-RT) mechanism of action for
-sodium-glucose cotransporter 2 (SGLT2) inhibition and dipeptidyl
+sodium-glucose cotransporter-2 (SGLT2) inhibition and dipeptidyl
 peptidase-4 (DPP-4) inhibition. Neither source alone listed every
 member: ertugliflozin appeared only in MED-RT and bexagliflozin only in
 the labeling class. The union gave six SGLT2 inhibitors (bexagliflozin,
@@ -167,9 +167,9 @@ were saved with checksums and reused for every run.</p>
 <p>Two matching rules were defined. Under <strong>strict</strong>
 matching, a drug row matched when a component of the active-ingredient
 field (PROD_AI, with multi-ingredient products split on the backslash
-delimiter) equalled the RxNorm ingredient name. Under
+delimiter) equaled the RxNorm ingredient name. Under
 <strong>expanded</strong> matching, a row also matched when a PROD_AI
-component equalled an RxNorm precise-ingredient name of a member (salt
+component equaled an RxNorm precise-ingredient name of a member (salt
 or hydrate forms such as dapagliflozin propanediol or sitagliptin
 phosphate), or when the drug-name field contained, as whole words, a
 member’s ingredient name, precise-ingredient name, or a brand name that
@@ -415,7 +415,7 @@ name rules did. In this window the deletion lists mattered little.</p>
 notes that duplicate reports inflate counts and can create or mask
 signals [5]; in an FDA sample, 39% of reports were duplicates, more
 often foreign or literature-derived [7]; literature reports can be
-repeated across many cases [8, 9]; and FDA's network-based deduplication
+repeated across many cases [8, 9]; and FDA’s network-based deduplication
 of the full database flagged about 5 million of 29 million reports as
 duplicates [30]. </p><p>These results agree that counting report versions
 inflates counts but suggest that, for these pairs, it is not the largest
@@ -438,7 +438,7 @@ secondary-suspect listings counted.</p>
 recoding [13], curated databases [14, 15], and open dictionaries and
 RxNorm mappings [16, 17]. The authors of the AEOLUS resource noted that
 cleaning and normalization choices can change analysis results without
-quantifying it [14], and the DiAna authors suggested comparing
+quantifying the effect [14], and the DiAna authors suggested comparing
 disproportionality results across standardization strategies [16]. For
 the ten ingredients studied, the difference between exact and
 RxNorm-informed matching was mainly salt-form coding in the ingredient
@@ -447,7 +447,7 @@ Exact matching therefore did not lose cases at random; it changed which
 reports formed the exposed group.</p>
 <p>The four labeled associations other than arthralgia were above 1 in
 every case-level configuration, as in earlier analyses: ketoacidosis
-with SGLT2 inhibitors in FAERS [31, 32], Fournier's gangrene in an FDA
+with SGLT2 inhibitors in FAERS [31, 32], Fournier’s gangrene in an FDA
 case series and in FAERS [33, 34], pemphigoid with DPP-4 inhibitors in
 French and FAERS data [35, 36], and pancreatitis with sitagliptin in the
 earlier Adverse Event Reporting System (AERS) [37, 38], an association
@@ -1476,7 +1476,7 @@ secondary analyses, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
 <h2>Figure legends</h2>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Flow diagram from report rows to report versions, cases, retained cases, and the exposed groups used in the two-by-two tables." src="assets/fig2_case_construction_flow.svg"
 style="width:100.0%" /></span></p>
-<p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. Counts are from the full run; "latest version"
+<p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. Counts are from the full run; “latest version”
 refers to the acquired files only. <em>CASEID</em> case identifier,
 <em>DEMO</em> demographic file, <em>PRIMARYID</em> report version
 identifier, <em>PT</em> preferred term, <em>S2</em> secondary analysis
@@ -1484,7 +1484,7 @@ identifier, <em>PT</em> preferred term, <em>S2</em> secondary analysis
 configurations</p>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188." src="assets/fig1_ror_by_configuration.svg"
 style="width:100.0%" /></span></p>
-<p><strong>Fig. 2</strong> Reporting odds ratios and Woolf 95% confidence intervals under the eight principal configurations. Blue: any suspect role; orange: primary suspect only. Circles: expanded matching; squares: strict matching. Hollow markers and shaded rows identify report-version analyses (V5–V8), which are diagnostic comparators. Each panel has its own logarithmic scale; the reference value of 1 appears only where it lies within the displayed range. Table 2 gives all counts and estimates. <em>CI</em> confidence interval, <em>DPP-4</em> dipeptidyl peptidase-4, <em>ROR</em> reporting odds ratio, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
+<p><strong>Fig. 2</strong> Reporting odds ratios and Woolf 95% confidence intervals under the eight principal configurations. Blue: any suspect role; orange: primary suspect only. Circles: expanded matching; squares: strict matching. Hollow markers and shaded rows identify report-version analyses (V5 to V8), which are diagnostic comparators. Each panel has its own logarithmic scale; the reference value of 1 appears only where it lies within the displayed range. Table 2 gives all counts and estimates. <em>CI</em> confidence interval, <em>DPP-4</em> dipeptidyl peptidase-4, <em>ROR</em> reporting odds ratio, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Stacked bars showing, for each association, the share of exposed cases with the event that qualify as primary suspect versus only secondary suspect, and by ingredient name versus salt or brand name. Arthralgia is mostly secondary-suspect-only." src="assets/fig3_cell_a_composition.svg"
 style="width:100.0%" /></span></p>
 <p><strong>Fig. 3</strong> How the exposed cases with the event under
