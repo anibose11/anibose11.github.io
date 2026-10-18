@@ -348,7 +348,7 @@ Not applicable.
 
 The ClinicalTrials.gov records analyzed in this study are publicly available from ClinicalTrials.gov through its public API [23]. The exact API requests, retrieval times, API version, data timestamp, study identifiers and SHA-256 hashes of the pages analyzed are listed in the source manifest in Additional file 3, and the pipeline retrieves the same records again from the API. The registry offers no programmatic access to earlier record versions, so a later retrieval reflects the registry on that day. Raw registry pages are not redistributed. ClinicalTrials.gov data are used under its terms and conditions [29], and all modifications are described in Additional files 1 and 2. The datasets supporting the conclusions of this article are included within the article and its additional files (Additional files 2 to 4).
 
-Project name: trial-results-audit. Project home page: https://anibose11.github.io/projects/trial-results-audit/. Archived version: Additional file 3. Operating system: macOS (tested); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.
+Project name: trial-results-audit. Project home page: https://anibose11.github.io/projects/trial-results-audit/. Archived version: https://doi.org/10.5281/zenodo.23450150 (also Additional file 3). Operating system: macOS (tested); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.
 
 ### Competing interests
 
