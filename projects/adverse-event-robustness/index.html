@@ -95,7 +95,7 @@
 <ul>
 <li>Spontaneous reports have no exposure denominator, are affected by stimulated and selective reporting, and cannot show that a drug caused an event. None of the estimates is a risk, an incidence, or a ranking of drugs.</li>
 <li>Collapsing by CASEID does not remove duplicates that FDA has not linked, such as a direct report and a manufacturer report of the same patient. I did not attempt probabilistic duplicate detection.</li>
-<li>The window holds only versions received in eight quarters. For 667,511 retained cases, the version used is a follow-up whose earlier versions predate the window; secondary analysis S2 keeps only cases first received in the window.</li>
+<li>The window holds only versions received in eight quarters. For 667,511 cases (counted before deletions), the version used is a follow-up and version 1 is not in the files; most of these cases were first received within the window, so their version 1 had been superseded before the quarterly extract was produced. Secondary analysis S2 keeps only cases first received in the window.</li>
 <li>Reaction terms are exact preferred-term strings without the MedDRA hierarchy, so related terms outside the lists are not counted. I fixed the lists before seeing any results and did not change them.</li>
 <li>I added the descriptive profiles that explain the role and mapping effects after seeing the first results, so they are labeled post hoc.</li>
 </ul>
