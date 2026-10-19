@@ -1,6 +1,6 @@
 # STROBE checklist with applicable RECORD items
 
-Manuscript: "When hospital quality comparisons are not comparable: a release-aware audit of CMS heart-failure outcome measures and their published intervals". Target: BMC Health Services Research, Research article. Section names refer to the manuscript headings. The unit of observation is a hospital-measure-release record built from published hospital-level aggregates; items written for individual-level data are marked as not applicable with the reason.
+Manuscript: "When hospital quality comparisons are not comparable: a release-aware audit of CMS heart-failure outcome measures and their published intervals". Section names refer to the manuscript headings. The unit of observation is a hospital-measure-release record built from published hospital-level aggregates; items written for individual-level data are marked as not applicable with the reason.
 
 | Item | Recommendation (short form) | Where addressed |
 |---|---|---|

@@ -4,7 +4,7 @@ main{max-width:760px;margin:0 auto;padding:32px 16px 80px}h1{font-size:1.6rem;li
 table{border-collapse:collapse;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:1em 0;display:block;overflow-x:auto}
 th,td{border-bottom:1px solid #d9d8d3;padding:4px 8px;text-align:left;vertical-align:top}td{font-variant-numeric:tabular-nums}
 img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0 3px}a{color:#1f5fae}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=da8366a049b5">
+<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="../index.html">Project</a><a href="../report.html">Full report</a></div></nav>
@@ -53,7 +53,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 </tbody>
 </table></div>
 <p>All models were loaded from local snapshots at these revisions with Hugging Face Transformers 5.19.0 and PyTorch 2.14.1, in float32, on an Apple M5 Pro (Metal Performance Shaders). Chat templates came from each repository; the two hybrid models received <code>enable_thinking=False</code>. Decoding was greedy with at most 256 new tokens and no repetition penalty. Prompts were not batched. Development parity between the GPU and CPU paths: same label for 40 of 40 prompts, identical responses for 40 of 40.</p>
-<p>Runs on the frozen test sample: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
+<p>Runs on the full test split: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
 <h2 id="s4-baseline-training">S4. Baseline training</h2>
 <div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
@@ -604,7 +604,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 </tbody>
 </table></div>
 <h2 id="s7-sensitivity-analyses">S7. Sensitivity analyses</h2>
-<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately as "quote exists (strict, any length)".</p>
+<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately in the analysis archive (column quote_exists_strict of results/tables/system_metrics.csv).</p>
 <div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -619,7 +619,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">423 of 928</td>
 <td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
 </tr>
@@ -661,7 +661,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">331 of 773</td>
 <td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
 </tr>
@@ -703,7 +703,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-4B-Instruct-2507</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">213 of 1,039</td>
 <td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
 </tr>
@@ -745,7 +745,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Abstract</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">504 of 1,026</td>
 <td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
 </tr>
@@ -780,7 +780,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Abstract</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">352 of 725</td>
 <td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
 </tr>
@@ -815,7 +815,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Oracle</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">286 of 980</td>
 <td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
 </tr>
@@ -850,7 +850,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Oracle</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">120 of 406</td>
 <td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
 </tr>
@@ -885,7 +885,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 </tbody>
 </table></div>
 <h2 id="s8-paired-comparisons">S8. Paired comparisons</h2>
-<p>Differences are on the prompts both systems had, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
+<p>Differences are on the prompts both systems had and were computed before rounding, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
 <div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -1242,74 +1242,53 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 </thead>
 <tbody>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
 <td>quote outside benchmark evidence</td>
-<td style="text-align: right;">105</td>
+<td style="text-align: right;">218</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">80</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">76</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>direction reversal</td>
 <td>quote outside benchmark evidence</td>
-<td style="text-align: right;">66</td>
+<td style="text-align: right;">74</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>direction reversal</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">52</td>
+<td style="text-align: right;">47</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said not significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">35</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">6</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">13</td>
-</tr>
-<tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said significant)</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
 <td>benchmark evidence not located</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
-<td>direction reversal</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">80</td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said not significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">26</td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">14</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr>
 <td>Retrieved</td>
@@ -1356,6 +1335,62 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
 <td>direction reversal</td>
 <td>benchmark evidence not located</td>
 <td style="text-align: right;">1</td>
@@ -1417,6 +1452,55 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">105</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
 <td>Oracle</td>
 <td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
@@ -1438,109 +1522,25 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">218</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">76</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>direction reversal</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">74</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>direction reversal</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">47</td>
+<td style="text-align: right;">80</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>direction reversal</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">58</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">48</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">39</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">32</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">30</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>significance error (model said not significant)</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">26</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>significance error (model said significant)</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">14</td>
 </tr>
 </tbody>
 </table></div>

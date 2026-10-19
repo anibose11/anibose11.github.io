@@ -14,7 +14,7 @@
 .report article>.fig-scroll{margin:0 0 48px}
 .report article .table-wrap.table-wide{width:min(960px,calc(100vw - 2*clamp(16px,4.5vw,64px)));max-width:none}
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="report portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -26,21 +26,21 @@
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
 <p class="portfolio-status">This report has not been peer reviewed.</p>
 
-<p>Article type: Research and Applications. Keywords: large language models; evidence synthesis; randomized controlled trials; information extraction; selective prediction.</p>
+<p>Keywords: large language models; evidence synthesis; randomized controlled trials; information extraction; selective prediction.</p>
 <h2 id="abstract">Abstract</h2>
 <p><strong>Objectives:</strong> Language-model tools that extract trial results can be checked by confirming that a quoted sentence appears in the source. This study measured how often small local models give a genuine quote with a wrong result and whether rejecting failed checks reduces error.</p>
 <p><strong>Materials and Methods:</strong> Qwen3-1.7B and Qwen3-0.6B, run locally, answered 1,209 eligible Evidence Inference 2.0 test prompts from retrieved passages (1,024 tokens) and, where available, the abstract and annotated evidence; Qwen3-4B-Instruct-2507 used retrieved passages. Answers gave a direction label, a verbatim quote, and a passage identifier. Parse validity, quote existence, locator validity, evidence overlap, and label correctness were scored separately.</p>
-<p><strong>Results:</strong> For Qwen3-1.7B with retrieved passages, 928 of 1,196 answers quoted the source verbatim; 423 of these (45.6%; 95% CI 41.8% to 49.3%) had the wrong label, mostly reporting significance the trial did not find. With annotated evidence, 29.2% were wrong. With retrieved passages, the rate was 42.8% for Qwen3-0.6B and 20.5% for Qwen3-4B-Instruct-2507. Keeping only answers with a valid quote and passage identifier changed error by +0.1 percentage points (95% CI -1.6 to +1.9) as coverage fell from 98.9% to 72.0%, no better than random rejection (45.6%).</p>
+<p><strong>Results:</strong> For Qwen3-1.7B with retrieved passages, 928 of 1,196 answers quoted the source verbatim; 423 of these (45.6%; 95% CI 41.8% to 49.3%) had the wrong label, mostly reporting significance the trial did not find. With annotated evidence, 29.2% were wrong. With retrieved passages, the rate was 42.8% for Qwen3-0.6B and 20.5% for Qwen3-4B-Instruct-2507. Keeping only answers with a valid quote and passage identifier changed error by +0.1 percentage points (95% CI -1.6 to +1.9) as coverage fell from 98.9% to 72.0%, no better than random rejection (mean error 45.6%).</p>
 <p><strong>Discussion:</strong> A present quote confirmed copying but did not show that the label followed from the text. Qwen3-4B-Instruct-2507, a later release, erred less overall, yet the rule again did no better than random.</p>
 <p><strong>Conclusion:</strong> For these small models, passing a quote-presence check did not show that an extracted trial result was correct; the label needs a separate check.</p>
 <h2 id="lay-summary">Lay summary</h2>
-<p>Artificial intelligence tools that read clinical trial reports often show a quotation beside each answer. A program can confirm that the quotation appears in the report, but does that mean the answer is right? Small language models running locally answered 1,209 questions about published trials. Each question asked whether an outcome was significantly higher, significantly lower, or not significantly different with one treatment than with another. Experts had already answered the questions. Among answers with a quotation found in the article, close to half were wrong for the main model and about one in five for the largest model. The most common mistake was reporting a statistically significant difference when the trial found none. For the main model, discarding answers whose quotations could not be found removed many answers without making those retained more accurate. A quotation's presence confirms copying, not that the answer follows from the text. People using these tools still need to check what the quoted evidence supports.</p>
+<p>Artificial intelligence tools that read clinical trial reports often show a quotation beside each answer. A program can confirm that the quotation appears in the report. This study asked how often answers with a matching quotation are still wrong. Small language models running locally answered 1,209 questions about published trials. Each question asked whether an outcome was significantly higher, significantly lower, or not significantly different with one treatment than with another. Experts had already answered the questions. Among answers with a quotation found in the article, close to half were wrong for the main model and about one in five for the largest model. The most common mistake was reporting a statistically significant difference when the trial found none. For the main model, discarding answers whose quotations could not be found removed many answers without making those retained more accurate. A matching quotation shows only that the text was copied correctly. People using these tools still need to check what the quoted evidence supports.</p>
 <h2 id="background-and-significance">Background and Significance</h2>
 <p>Systematic reviewers spend much of their time reading trial reports to find out what happened to an outcome under one treatment compared with another. Language models are now being used to draft these extractions,[1] and one proposed safeguard is to have the model quote its evidence and then check mechanically that the quote appears in the source.[2] A quote that matches the article is easy to verify and looks reassuring. It does not show that the model read the sentence correctly.</p>
 <p>Evidence Inference formalized this task. Given a trial report and a prompt naming an intervention, a comparator, and an outcome, a system must say whether the intervention significantly increased, did not significantly change, or significantly decreased the outcome relative to the comparator, and identify supporting evidence.[3] In the first release, logistic regression over a bag of words reached a macro-F1 of 0.388 on full articles and 0.731 when given the annotated evidence span, which located much of the difficulty in finding evidence. Evidence Inference 2.0 added prompts, released an abstract-only version, and reported that most evidence for the newly collected prompts lay outside the abstract.[4]</p>
 <p>Work on attributed generation has shown that support and correctness are different properties. Frameworks for attribution deliberately make no factuality judgment.[5] Human-rated attribution correlated only modestly with exact-match accuracy in attributed question answering,[6] and an audit of generative search engines found about half of generated sentences fully supported by their citations, without judging whether statements were true.[7] A model trained to support answers with verbatim quotes produced false answers that raters judged supported.[8] In medicine, an automated framework for checking whether cited sources support claims warns that verbatim quoting can satisfy source checks trivially.[9]</p>
 <p>Three studies come closest to the present question. Elbakian and Carton asked GPT-4 and Gemini 1.5 Pro for a structured label with quoted spans on five datasets including Evidence Inference, checked quotes by substring match, and found that a quarter or more of Evidence Inference errors with valid quotes were misreadings of evidence that overlapped the human rationale.[10] Their analysis used 300 development items and frontier models. Windisch and colleagues required verbatim quotes for classifying oncology trial eligibility criteria and reported that keeping only mechanically valid outputs left macro-F1 essentially unchanged.[2] Buchmann and colleagues included Evidence Inference in a long-document benchmark and showed that ordering answers by an attributability score based on natural language inference improved selective prediction over a random order.[11] None of these studies evaluated models below about 3 billion parameters, reported the joint rate of valid quotes and wrong labels over a full test split, or compared a fixed quote-validity rule with random rejection at the same coverage.</p>
-<p>Small local models matter because restricted documents often cannot be sent to remote services and local tools are cheap to run at scale. The selective prediction literature supplies the frame for asking whether a check is worth applying: a rejection rule is judged by the error it leaves and the coverage it costs.[12,13] This study adds a comparison with random rejection at the same coverage, so that any drop in error can be separated from the effect of simply answering fewer questions.</p>
+<p>Small local models matter because restricted documents often cannot be sent to remote services and local tools are cheap to run at scale. In the selective prediction literature, a rejection rule is judged by the error among the answers it keeps and by its coverage, the share of questions it still answers.[12,13] This study adds a comparison with random rejection at the same coverage, so that any drop in error can be separated from the effect of simply answering fewer questions.</p>
 <h2 id="objective">Objective</h2>
 <p>This study measured how often small local instruction models answer Evidence Inference 2.0 prompts with a quote that is present in the supplied source while the direction label is wrong, with each validity check reported separately, across a retrieved context, an abstract-only context, and an annotated-evidence oracle. It also tested whether rejecting answers whose quote fails the check lowers error more than rejecting the same number of answers at random. It extends earlier frontier-model analyses to models of 0.6 to 4 billion parameters and to the full official test split, and it releases the evaluation harness.</p>
 <h2 id="materials-and-methods">Materials and Methods</h2>
@@ -54,18 +54,18 @@
 <p>Three settings were fixed on 347 development prompts from 100 validation articles before any language-model test prediction, by rules written in advance. The prompt without a worked example was kept (45.8% versus 43.2% end-to-end success with the example); greedy decoding was kept because the model card's recommended sampling did not reduce invalid outputs (0.3% with both); and GPU inference was kept because it matched CPU inference on 40 of 40 prompts, with identical responses. Output was limited to 256 new tokens.</p>
 <p>All test articles with an eligible prompt were evaluated, with no subset drawn; every call was cached with its prompt hash, token counts, latency, and raw response.</p>
 <h3 id="baselines">Baselines</h3>
-<p>A majority-class reference predicted the most frequent training label. For each context, a logistic regression on TF-IDF features of the passages and prompt text was trained on training prompts built with the same context procedure, with settings chosen on validation macro-F1; it is a variant of the original bag-of-words baselines,[3] not a replication. Both baselines returned the top-ranked passage as their quote, so their quote is always an exact copy of a supplied passage and fails the quote check only when that passage is shorter than four words.</p>
+<p>A majority-class reference predicted the most frequent training label. For each context, a logistic regression on term frequency-inverse document frequency (TF-IDF) features of the passages and prompt text was trained on training prompts built with the same context procedure, with settings chosen on validation macro-F1; it is a variant of the original bag-of-words baselines,[3] not a replication. Both baselines returned the top-ranked passage as their quote, so their quote is always an exact copy of a supplied passage and fails the quote check only when that passage is shorter than four words.</p>
 <h3 id="separated-validity-checks">Separated validity checks</h3>
 <p>Parse validity required the first JSON object in the response to match the schema after markdown fences were removed; no other repair was made, and text after the object was tolerated (this affected 8 of 8,428 recorded test responses). An answer abstained if its label was "cannot determine" and was answered otherwise. The quote existed if, after collapsing whitespace, it was a substring of one supplied passage and had at least four words. The locator was valid if the returned identifier named the passage holding the quote. Evidence overlap required the located quote to share at least one character with an accepted evidence span. End-to-end task success required an answer, an existing quote, a valid locator, and the correct label, with every eligible prompt in the denominator, including invalid outputs. A present quote is a syntactic check, not a test of entailment, and annotated spans can miss other valid evidence.</p>
 <h3 id="estimand-and-statistical-analysis">Estimand and statistical analysis</h3>
 <p>The primary estimand, fixed in a timestamped internal analysis plan before any test prediction, was the label-error rate among quote-valid answers: the proportion of answered prompts with an existing quote whose label was wrong, for Qwen3-1.7B in the retrieved context. All intervals are 95% percentile intervals from 10,000 bootstrap resamples of articles. Secondary measures included macro-F1 (abstentions and invalid outputs counted as wrong), per-class precision and recall, coverage, and evidence recall at the token budget.</p>
-<p>The quote check was tested as a rejection rule by comparing, on the same predictions, acceptance of every answer with acceptance of only answers with an existing quote and valid locator (retained error, coverage, paired bootstrap difference), against rejecting the same number of answers uniformly at random 2,000 times. Contexts and models were compared on unconditional quantities (task success, correct labels over all prompts) with paired article-bootstrap intervals on shared prompts. A logistic scoring rule on six observable answer features (Supplementary S13) was fitted on development predictions only and applied to test answers for a risk-coverage curve. Five sensitivity analyses were fixed in advance: exact rather than normalized quote matching, with the same four-word minimum; inclusion of prompts with disagreeing accepted labels; exclusion of prompts flagged as questionable or malformed (none in the test split); a one-word minimum; and restriction to prompts whose retrieved passages overlapped annotated evidence. Quote-valid wrong answers were sorted by fixed rules into significance errors and direction reversals, crossed with evidence overlap; these categories are automated, not expert labels.</p>
+<p>The quote check was tested as a rejection rule by comparing, on the same predictions, acceptance of every answer with acceptance of only answers with an existing quote and valid locator (retained error, coverage, paired bootstrap difference), against rejecting the same number of answers uniformly at random 2,000 times. Contexts and models were compared on unconditional quantities (task success, correct labels over all prompts) with paired article-bootstrap intervals on shared prompts (Supplementary S8). A logistic scoring rule on six observable answer features (Supplementary S13) was fitted on development predictions only and applied to test answers for a risk-coverage curve. Five sensitivity analyses were fixed in advance: exact rather than normalized quote matching (four-word minimum added by amendment); inclusion of prompts with disagreeing accepted labels; exclusion of prompts flagged as questionable or malformed (none in the test split); a one-word minimum; and restriction to prompts whose retrieved passages overlapped annotated evidence. Quote-valid wrong answers were sorted by fixed rules into significance errors and direction reversals, crossed with evidence overlap; these categories are automated, not expert labels.</p>
 <h3 id="software-checks-and-reproducibility">Software checks and reproducibility</h3>
 <p>Unit tests on synthetic fixtures covered parsing, quote location, the label contract, chunking, and the statistics. A validation stage rebuilt all outputs from cached inputs and compared 4,809 reported numbers with the stored results, recounted the headline aggregates in base R from the item-level files, and regenerated a sample of test calls (40 of 40 identical responses); the final archive was then installed in an empty directory, where its tests passed and its demonstration ran (Supplementary S11). Three amendments to the analysis plan were recorded after test outputs had been generated: the four-word minimum in the exact-match sensitivity analysis, exclusion of the 6 prompts of one test article whose text file is empty, and HTML-entity-aware location of evidence spans, after which the oracle condition was rerun for the 13 prompts per model whose passages changed. None changed the primary estimate (Supplementary S1, S3, and S7). I also checked the primary result and its inputs by hand. I recounted the primary counts (423 of 928) from the item-level file. I compared 20 quote-valid wrong answers, drawn at random with a fixed seed (20261007), with the source articles; every quote appeared, and the benchmark label matched the reported result for 16 of 20 (Supplementary S11). I checked the label codes of five sampled prompts against the raw annotation file, confirmed that the analysis plan and frozen configuration predated the first language-model test prediction, and checked the descriptions of the closest prior studies against the papers. A completed TRIPOD-LLM checklist is in Supplementary S12.</p>
 <h2 id="results">Results</h2>
 <h3 id="output-validity-and-evidence-availability">Output validity and evidence availability</h3>
 <p>The test split contains 1,252 prompts in 334 articles; 1,209 prompts in 332 articles met the eligibility rule after the exclusions listed in Supplementary S1. In the retrieved context, 1,205 of 1,209 responses parsed under the schema and 9 of 1,209 abstained, leaving 1,196 answered prompts (Table 1). The retrieved passages overlapped annotated evidence for 916 of 1,202 prompts with locatable evidence (76.2%, 95% CI 72.4% to 79.9%); the title and abstract did so for 581 of 1,158 (50.2%, 95% CI 45.8% to 54.5%).</p>
-<p><strong>Table 1.</strong> Separated validity checks by context and system, eligible test prompts. Percentages for quote existence, locator validity, and label correctness are of answered prompts; task success is of all prompts. Baselines return the top-ranked passage as their quote.</p>
+<p><strong>Table 1.</strong> Separated validity checks by context and system, eligible test prompts. Percentages for quote existence, locator validity, and label correctness are of answered prompts; task success is of all prompts. The abstract context covers the 1,165 prompts with a delimitable title and abstract of at least 200 characters, and the oracle context the 1,202 prompts with located annotated evidence. Baseline settings, parse status, and evidence availability are in Supplementary S4, S5, and S9. TF-IDF + LR, logistic regression on TF-IDF features. Baselines return the top-ranked passage as their quote.</p>
 <div class="table-wrap table-wide" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -266,7 +266,7 @@
 <p>For Qwen3-1.7B with retrieved passages, accepting every answer gave a retained error of 45.6% at 98.9% coverage. Keeping only answers with an existing quote and a valid locator gave 45.7% at 72.0% coverage, a difference of +0.1 percentage points, 95% CI -1.6 to +1.9 (Table 2, Figure 3). The rule rejected 325 answers, 178 of which had the correct label. Random rejection of the same number of answers gave a mean retained error of 45.6% (middle 95% of draws 44.0% to 47.3%). The same held with the abstract (+0.5 percentage points, 95% CI -0.8 to +1.8) and with annotated evidence (+0.3 percentage points, 95% CI -0.8 to +1.4).</p>
 <p>For Qwen3-0.6B the rule did not detectably beat random rejection with retrieved passages (-0.1 percentage points, 95% CI -4.1 to +3.9, coverage falling to 37.6%) or with the abstract (+2.2 percentage points, 95% CI -2.8 to +7.1). The one exception was Qwen3-0.6B with annotated evidence, where the rule lowered retained error from 34.8% to 29.8% (-5.1 percentage points, 95% CI -8.6 to -1.6), below the middle 95% of random rejections (31.3% to 38.4%; 0.2% of draws at or below the rule), at 32.7% coverage. For Qwen3-4B-Instruct-2507 the rule changed retained error by -0.2 percentage points (95% CI -1.1 to +0.7) as coverage fell from 95.9% to 85.1%, again within the random-rejection range (19.8% to 21.5%).</p>
 <p>A logistic scoring rule fitted on development predictions from six observable answer features (Supplementary S13) ordered test answers better than random (area under the risk-coverage curve 0.337 against 0.450; Figure 4).</p>
-<p><strong>Table 2.</strong> Retained error with all answers and with only answers whose quote exists and whose passage identifier is valid, against random rejection keeping the same number of answers (2,000 draws), with the share of random draws whose error was at or below the rule's. Differences are in percentage points with paired article-bootstrap 95% intervals.</p>
+<p><strong>Table 2.</strong> Retained error with all answers and with only answers whose quote exists and whose passage identifier is valid, against random rejection keeping the same number of answers (2,000 draws), with the share of random draws whose error was at or below the rule's. Differences are in percentage points, computed before rounding, with paired article-bootstrap 95% intervals.</p>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -354,15 +354,15 @@
 </tbody>
 </table></div></div>
 <h2 id="discussion">Discussion</h2>
-<p>For a small local model answering questions about trial reports, a quote that genuinely appeared in the source was attached to a wrong answer close to half the time. Rejecting answers without such a quote removed about a quarter of the primary model's answers without lowering the error of the rest, and in 6 of the 7 model and context combinations the rule did no better than random rejection at the same coverage. Qwen3-4B-Instruct-2507, a later and larger release, gave more correct labels than Qwen3-1.7B (+22.2 percentage points, 95% CI +18.5 to +26.0, 1,209 prompts) and about half as many quote-valid wrong answers (213 against 423), yet about one in five of its quote-valid answers was still wrong, and quote validity again did not say which. In the primary condition, quote presence did not distinguish correct from incorrect labels. </p>
-<p>The finding matches earlier observations on frontier models, where a substantial share of errors with valid quotes were misreadings of the right evidence [10] and filtering on mechanical quote validity left macro-F1 essentially unchanged.[2] Here the joint rate covers a full test split and laptop-sized models, and the rule is compared with random rejection.</p>
-<p>Most quote-valid wrong answers reported a statistically significant effect where the trial reported none, and the model rarely chose "no significant difference" (recall 0.219 for that class, against precision 0.918). A sentence describing a numerical difference can be quoted correctly while its p-value or confidence interval is ignored. About three in ten errors reversed the direction of a significant effect, and most of these answered an increase where the benchmark recorded a decrease (106 of 122), in line with the model's preference for that label (recall 0.926, precision 0.488). Confusing the intervention with the comparator may also contribute: a fine-tuned 4-billion-parameter classifier on the same benchmark kept about a third of its direction answers when the two were exchanged.[15] </p>
+<p>For a small local model answering questions about trial reports, a quote that genuinely appeared in the source was attached to a wrong answer close to half the time. Keeping only answers with such a quote and a valid passage identifier removed about a quarter of the primary model's answers without lowering the error of the rest, and in 6 of the 7 model and context combinations the rule did no better than random rejection at the same coverage. Qwen3-4B-Instruct-2507, a later and larger release, gave more correct labels than Qwen3-1.7B (+22.2 percentage points, 95% CI +18.5 to +26.0, 1,209 prompts) and about half as many quote-valid wrong answers (213 against 423), yet about one in five of its quote-valid answers was still wrong, and quote validity again did not say which. In the primary condition, quote presence did not distinguish correct from incorrect labels. </p>
+<p>The finding matches earlier observations on frontier models, where a quarter or more of Evidence Inference errors with valid quotes misread evidence that overlapped the human rationale[10] and filtering on mechanical quote validity left macro-F1 essentially unchanged.[2] Here the joint rate covers a full test split and small local models, and the rule is compared with random rejection.</p>
+<p>Most quote-valid wrong answers reported a statistically significant effect where the trial reported none, and the model rarely chose "no significant difference" (recall 0.219 for that class, against precision 0.918; Supplementary S6). A sentence describing a numerical difference can be quoted correctly while its p-value or confidence interval is ignored. About three in ten errors reversed the direction of a significant effect, and most of these answered an increase where the benchmark recorded a decrease (106 of 122), in line with the model's preference for that label (recall 0.926, precision 0.488). Confusing the intervention with the comparator may also contribute: a fine-tuned 4-billion-parameter classifier on the same benchmark kept about a third of its direction answers when the two were exchanged.[15] </p>
 <p>Retrieval failure explains only part of the errors. In 123 (29.1%) of the quote-valid wrong answers the quote overlapped the annotators' evidence, and in the oracle condition, where the model was handed the annotated evidence, it still erred on 29.2% of quote-valid answers.</p>
-<p>The baselines illustrate the limits of a presence check. An extractive system passes it almost automatically: a majority-class guess with a retrieved passage attached passed it for 1,209 of 1,209 prompts. Quote presence can therefore be satisfied without reading the evidence at all, and in these results it carried little information about whether the answer was right. Work on attribution treats support as separate from correctness,[5-7] and medical citation checking has warned that verbatim quoting can satisfy source checks trivially.[9] </p>
-<p>The development-fitted scoring rule ordered test answers better than random, which suggests that cheap observable signals beyond quote presence carry some information about correctness, but it was exploratory, was not designed to show which signals matter, and does not give calibrated probabilities. Semantic checks with natural language inference models [16,17] or human review are candidates for tools that inform clinical or review decisions, but neither was tested here, and both deserve the same comparison with random rejection.</p>
+<p>The baselines illustrate the limits of a presence check. An extractive system passes it almost automatically: a majority-class guess with a retrieved passage attached passed it for 1,209 of 1,209 prompts without reading the evidence. In these results, quote presence carried little information about whether the answer was right. Work on attribution treats support as separate from correctness,[5-7] and the automated framework for medical citation checking flags the same weakness of verbatim quotes.[9] </p>
+<p>The development-fitted scoring rule ordered test answers better than random, which suggests that cheap observable signals beyond quote presence carry some information about correctness. The scoring rule was exploratory, was not designed to show which signals matter, and does not give calibrated probabilities. Semantic checks with natural language inference models[16,17] or human review are candidates for tools that inform clinical or review decisions, but neither was tested here, and both deserve the same comparison with random rejection.</p>
 <p>For developers and reviewers of evidence tools, the practical implication is to report quote validity and answer correctness as separate quantities and to test any validity-based filter against random rejection at the same coverage before relying on it. The released harness supports models that return its specified answer schema.</p>
 <h3 id="limitations">Limitations</h3>
-<p>Evidence Inference 2.0 is public and may be in the pretraining data of the evaluated models; a clean train and test split does not rule this out. Only models of 0.6 to 4 billion parameters from one family were evaluated, with one prompt, greedy decoding, thinking mode disabled for the two hybrid models, and a lexical retriever at one token budget, so the estimates do not describe larger, proprietary, or task-fine-tuned models, reasoning modes, or better retrieval. Qwen3-4B-Instruct-2507 also differs from the other two models in release and post-training, so comparisons with it do not isolate model size. The estimate is sensitive to the prompt: on development data, a variant with a worked example gave a lower label-error rate among quote-valid answers, 35.3% (83 of 235) against 41.7% (120 of 288), but fewer existing quotes, and it lost on the prespecified success rule. </p>
+<p>Evidence Inference 2.0 is public and may be in the pretraining data of the evaluated models; a clean train and test split does not rule this out. Only models of 0.6 to 4 billion parameters from one family were evaluated, with one prompt, greedy decoding, thinking mode disabled for the two hybrid models, and a lexical retriever at one token budget, so the estimates do not describe larger, proprietary, or task-fine-tuned models, reasoning modes, or better retrieval. Qwen3-4B-Instruct-2507 also differs from the other two models in release and post-training, so comparisons with it do not isolate model size. The estimate is sensitive to the prompt: on development data, a variant with a worked example gave a lower label-error rate among quote-valid answers, 35.3% (83 of 235) against 41.7% (120 of 288), but fewer existing quotes and lower end-to-end success, the prespecified selection criterion (43.2% against 45.8%). </p>
 <p>Benchmark labels come from physicians with verification, but they contain known noise (2 of the 20 checked answers counted as wrong were right), and annotators marked one or two evidence spans, so a quote outside them may still be valid evidence. Error categories are rule-based, not expert judgments. The pooled rate depends on the benchmark's mix of labels, so it will differ where null results are more or less common. </p>
 <p>The test articles were published between 1993 and 2018, so the benchmark is an older expert-annotated sample, not a sample of current literature. Finally, the benchmark asks for statistical significance in one comparison, which is narrower than the judgments evidence reviewers make.</p>
 <h2 id="conclusion">Conclusion</h2>
@@ -383,8 +383,8 @@
 <li>Windisch P, Weyrich J, Dennstädt F, et al. Show Your Work: Verbatim Evidence Requirements and Automated Assessment of Large Language Models for Biomedical Text Processing of Trial Eligibility Criteria. Cureus. 2026;18(5):e108666. doi:10.7759/cureus.108666</li>
 <li>Lehman E, DeYoung J, Barzilay R, et al. Inferring Which Medical Treatments Work from Reports of Clinical Trials. In: Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers). 2019:3705-3717. doi:10.18653/v1/N19-1371</li>
 <li>DeYoung J, Lehman E, Nye B, et al. Evidence Inference 2.0: More Data, Better Models. In: Proceedings of the 19th SIGBioMed Workshop on Biomedical Language Processing. 2020:123-132. doi:10.18653/v1/2020.bionlp-1.13</li>
-<li>Rashkin H, Nikolaev V, Lamm M, et al. Measuring Attribution in Natural Language Generation Models. Comput Linguist. 2023;49(4):777-840. doi:10.1162/coli_a_00486</li>
-<li>Bohnet B, Tran VQ, Verga P, et al. Attributed Question Answering: Evaluation and Modeling for Attributed Large Language Models. arXiv:2212.08037. Preprint posted 2022. https://arxiv.org/abs/2212.08037</li>
+<li>Rashkin H, Nikolaev V, Lamm M, et al. Measuring Attribution in Natural Language Generation Models. Computational Linguistics. 2023;49(4):777-840. doi:10.1162/coli_a_00486</li>
+<li>Bohnet B, Tran VQ, Verga P, et al. Attributed Question Answering: Evaluation and Modeling for Attributed Large Language Models. arXiv:2212.08037. Preprint posted 2022. doi:10.48550/arXiv.2212.08037</li>
 <li>Liu NF, Zhang T, Liang P. Evaluating Verifiability in Generative Search Engines. In: Findings of the Association for Computational Linguistics: EMNLP 2023. 2023:7001-7025. doi:10.18653/v1/2023.findings-emnlp.467</li>
 <li>Menick J, Trebacz M, Mikulik V, et al. Teaching language models to support answers with verified quotes. arXiv:2203.11147. Preprint posted 2022. doi:10.48550/arXiv.2203.11147</li>
 <li>Wu K, Wu E, Wei K, et al. An automated framework for assessing how well LLMs cite relevant medical references. Nat Commun. 2025;16(1):3615. doi:10.1038/s41467-025-58551-6</li>
@@ -393,14 +393,14 @@
 <li>Geifman Y, El-Yaniv R. Selective Classification for Deep Neural Networks. In: Advances in Neural Information Processing Systems. 2017;30. https://proceedings.neurips.cc/paper_files/paper/2017/file/4a8423d5e91fda00bb7e46540e2b0cf1-Paper.pdf</li>
 <li>Kamath A, Jia R, Liang P. Selective Question Answering under Domain Shift. In: Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. 2020:5684-5696. doi:10.18653/v1/2020.acl-main.503</li>
 <li>Yang A, Li A, Yang B, et al. Qwen3 Technical Report. arXiv:2505.09388. Preprint posted 2025. doi:10.48550/arXiv.2505.09388</li>
-<li>Li JE. Calibrated Answers About Randomized Trials From a 4-Billion-Parameter Open Model: A Registered Test and a License-Clean Release. arXiv:2610.07019v1. Preprint posted 2026. https://arxiv.org/abs/2610.07019v1</li>
+<li>Li JE. Calibrated Evidence Inference With a Small, Permissively Licensed Open Model. arXiv:2610.07019v2. Preprint posted 2026. doi:10.48550/arXiv.2610.07019</li>
 <li>Honovich O, Aharoni R, Herzig J, et al. TRUE: Re-evaluating Factual Consistency Evaluation. In: Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. 2022:3905-3920. doi:10.18653/v1/2022.naacl-main.287</li>
 <li>Zha Y, Yang Y, Li R, et al. AlignScore: Evaluating Factual Consistency with A Unified Alignment Function. In: Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2023:11328-11348. doi:10.18653/v1/2023.acl-long.634</li>
 </ol>
 <h2 id="figure-legends">Figure legends</h2>
 <p><strong>Figure 1.</strong> Outcome of every eligible test prompt by model and context: quote valid and label right, quote valid and label wrong, no valid quote with the label right or wrong, abstained, and invalid output.</p>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 1, scrollable"><img alt="Figure 1. Stacked bars; the segment with a valid quote and a wrong label ranges from 10.0% of prompts (Qwen3-0.6B with annotated evidence) to 43.3% (Qwen3-1.7B with the title and abstract)." src="assets/figures/fig2_answer_outcomes.svg" /></div>
-<p><strong>Figure 2.</strong> Share of quote-valid answers with the wrong label, by context and system. Dots are point estimates and lines are 95% intervals from 10,000 bootstrap resamples of articles; numbers at right are wrong answers out of quote-valid answers.</p>
+<p><strong>Figure 2.</strong> Share of quote-valid answers with the wrong label, by context and system. Markers are point estimates and lines are 95% intervals from 10,000 bootstrap resamples of articles; numbers at right are wrong answers out of quote-valid answers.</p>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 2, scrollable"><img alt="Figure 2. Dot and interval chart; the share of quote-valid answers with a wrong label ranges from 20.5% (Qwen3-4B-Instruct-2507 with retrieved passages) to 49.1% (Qwen3-1.7B with the title and abstract), and each system run with annotated evidence has its lowest share in that context." src="assets/figures/fig1_quote_valid_wrong.svg" /></div>
 <p><strong>Figure 3.</strong> Retained error for each model and context with all answers (ring) and with only answers whose quote exists and whose passage identifier is valid (triangle), against the middle 95% of 2,000 random rejections at the same coverage (gray band).</p>
 <div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 3, scrollable"><img alt="Figure 3. Dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the gray band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)." src="assets/figures/fig3_rejection_rule.svg" /></div>
@@ -451,7 +451,7 @@
 </tbody>
 </table></div></div>
 <p>All models were loaded from local snapshots at these revisions with Hugging Face Transformers 5.19.0 and PyTorch 2.14.1, in float32, on an Apple M5 Pro (Metal Performance Shaders). Chat templates came from each repository; the two hybrid models received <code>enable_thinking=False</code>. Decoding was greedy with at most 256 new tokens and no repetition penalty. Prompts were not batched. Development parity between the GPU and CPU paths: same label for 40 of 40 prompts, identical responses for 40 of 40.</p>
-<p>Runs on the frozen test sample: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
+<p>Runs on the full test split: Qwen3-1.7B completed 333 articles in 2.7 hours (3,592 calls across three contexts); Qwen3-0.6B completed 333 articles in 1.2 hours (3,592 calls); Qwen3-4B-Instruct-2507 completed 333 articles in 2.4 hours (1,218 calls, retrieved context only). After amendment A3, the oracle condition was run again with Qwen3-1.7B and Qwen3-0.6B for the 13 prompts per model whose evidence passages had changed (26 calls; every other response was reused from the cache), so the prediction files hold 8,428 recorded test responses, including the superseded original oracle responses for those prompts.</p>
 <h2 id="s4-baseline-training">S4. Baseline training</h2>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
@@ -1002,7 +1002,7 @@
 </tbody>
 </table></div></div>
 <h2 id="s7-sensitivity-analyses">S7. Sensitivity analyses</h2>
-<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately as "quote exists (strict, any length)".</p>
+<p>Analysis S1 uses exact substring matching with the same four-word minimum as the primary definition. The minimum was added by amendment A1, recorded after the primary model's test outputs were scored: as first coded, S1 had no length minimum, so short exact quotes made the stricter count larger than the primary count in the oracle condition. The count of exact quotes of any length is reported separately in the analysis archive (column quote_exists_strict of results/tables/system_metrics.csv).</p>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -1017,7 +1017,7 @@
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">423 of 928</td>
 <td style="text-align: right;">45.6%, 95% CI 41.8% to 49.3%</td>
 </tr>
@@ -1059,7 +1059,7 @@
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">331 of 773</td>
 <td style="text-align: right;">42.8%, 95% CI 38.5% to 47.3%</td>
 </tr>
@@ -1101,7 +1101,7 @@
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-4B-Instruct-2507</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">213 of 1,039</td>
 <td style="text-align: right;">20.5%, 95% CI 17.4% to 23.7%</td>
 </tr>
@@ -1143,7 +1143,7 @@
 <tr>
 <td>Abstract</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">504 of 1,026</td>
 <td style="text-align: right;">49.1%, 95% CI 45.1% to 53.2%</td>
 </tr>
@@ -1178,7 +1178,7 @@
 <tr>
 <td>Abstract</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">352 of 725</td>
 <td style="text-align: right;">48.6%, 95% CI 43.9% to 53.3%</td>
 </tr>
@@ -1213,7 +1213,7 @@
 <tr>
 <td>Oracle</td>
 <td>Qwen3-1.7B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">286 of 980</td>
 <td style="text-align: right;">29.2%, 95% CI 25.7% to 32.9%</td>
 </tr>
@@ -1248,7 +1248,7 @@
 <tr>
 <td>Oracle</td>
 <td>Qwen3-0.6B</td>
-<td>Primary (definition Q)</td>
+<td>Primary (whitespace-normalized match)</td>
 <td style="text-align: right;">120 of 406</td>
 <td style="text-align: right;">29.6%, 95% CI 24.9% to 34.2%</td>
 </tr>
@@ -1283,7 +1283,7 @@
 </tbody>
 </table></div></div>
 <h2 id="s8-paired-comparisons">S8. Paired comparisons</h2>
-<p>Differences are on the prompts both systems had, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
+<p>Differences are on the prompts both systems had and were computed before rounding, with 95% intervals from 10,000 paired bootstrap resamples of articles.</p>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table, scrollable"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -1640,74 +1640,53 @@
 </thead>
 <tbody>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
 <td>quote outside benchmark evidence</td>
-<td style="text-align: right;">105</td>
+<td style="text-align: right;">218</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">80</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">76</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>direction reversal</td>
 <td>quote outside benchmark evidence</td>
-<td style="text-align: right;">66</td>
+<td style="text-align: right;">74</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>direction reversal</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">52</td>
+<td style="text-align: right;">47</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said not significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">35</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">6</td>
 </tr>
 <tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">13</td>
-</tr>
-<tr>
-<td>Abstract</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said significant)</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
+<td>direction reversal</td>
 <td>benchmark evidence not located</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
-<td>direction reversal</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">80</td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
-<td>significance error (model said not significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">26</td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>Qwen3-0.6B</td>
+<td>Retrieved</td>
+<td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">14</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr>
 <td>Retrieved</td>
@@ -1754,6 +1733,62 @@
 <tr>
 <td>Retrieved</td>
 <td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Retrieved</td>
+<td>Qwen3-4B-Instruct-2507</td>
 <td>direction reversal</td>
 <td>benchmark evidence not located</td>
 <td style="text-align: right;">1</td>
@@ -1815,6 +1850,55 @@
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">105</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote outside benchmark evidence</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>direction reversal</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said not significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td>Abstract</td>
+<td>Qwen3-0.6B</td>
+<td>significance error (model said significant)</td>
+<td>benchmark evidence not located</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
 <td>Oracle</td>
 <td>Qwen3-1.7B</td>
 <td>significance error (model said significant)</td>
@@ -1836,109 +1920,25 @@
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">218</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">76</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>direction reversal</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">74</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>direction reversal</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">47</td>
+<td style="text-align: right;">80</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>direction reversal</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-1.7B</td>
-<td>significance error (model said significant)</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">58</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">48</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">39</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said significant)</td>
-<td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">32</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>significance error (model said not significant)</td>
-<td>quote outside benchmark evidence</td>
-<td style="text-align: right;">30</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>significance error (model said not significant)</td>
 <td>quote overlaps benchmark evidence</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">26</td>
 </tr>
 <tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
+<td>Oracle</td>
+<td>Qwen3-0.6B</td>
 <td>significance error (model said significant)</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr>
-<td>Retrieved</td>
-<td>Qwen3-4B-Instruct-2507</td>
-<td>direction reversal</td>
-<td>benchmark evidence not located</td>
-<td style="text-align: right;">1</td>
+<td>quote overlaps benchmark evidence</td>
+<td style="text-align: right;">14</td>
 </tr>
 </tbody>
 </table></div></div>

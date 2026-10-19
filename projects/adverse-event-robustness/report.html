@@ -7,7 +7,7 @@
 <meta name="description" content="Full report: a disproportionality analysis of how processing choices affect reporting odds ratios for five SGLT2 and DPP-4 inhibitor associations in FDA quarterly adverse event files, 2024 to 2026.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>.report th:not([style]),.report td:not([style]){text-align:left}@media (min-width:700px){.report thead th{white-space:normal}}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=da8366a049b5">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
@@ -32,18 +32,18 @@ move.</p>
 ingredient matching (exact or RxNorm-verified expanded) for
 sodium-glucose cotransporter-2 (SGLT2) inhibitors with ketoacidosis and
 Fournier’s gangrene, and dipeptidyl peptidase-4 (DPP-4) inhibitors with
-pemphigoid, arthralgia, and pancreatitis.</p>
+pemphigoid, arthralgia, and pancreatitis. No clinical case-by-case assessment was performed.</p>
 <p><strong>Results</strong> The files yielded 2,858,073 cases. Across
-case-level configurations, RORs were 330.3 to 386.9 for Fournier’s
-gangrene, 51.1 to 90.8 for ketoacidosis, 7.5 to 12.3 for pancreatitis,
-and 72.3 to 188.5 for pemphigoid. For arthralgia, the ROR was 1.81 (95%
+case-level configurations, RORs were 330.34 to 386.95 for Fournier’s
+gangrene, 51.15 to 90.75 for ketoacidosis, 7.48 to 12.26 for pancreatitis,
+and 72.27 to 188.47 for pemphigoid. For arthralgia, the ROR was 1.81 (95%
 confidence interval [CI] 1.55 to 2.12) with any suspect role and 0.66
 (95% CI 0.47 to 0.94) with primary suspect only; 80% of exposed
 arthralgia cases qualified only as secondary suspect, mostly in long
 multi-drug reports (median 41 drugs). Exact matching missed 3,821 SGLT2
 and 1,798 DPP-4 inhibitor cases coded under salt or brand names.</p>
-<p><strong>Conclusions</strong> Some between-configuration differences exceeded a within-configuration CI width; one estimate crossed 1. Analyses should
-report and test these rules. The estimates describe reporting, not
+<p><strong>Conclusions</strong> Some between-configuration differences exceeded within-configuration CI widths; the arthralgia estimate crossed 1. Analyses should
+report and test these choices. The estimates describe reporting, not
 risk.</p>
 </section>
 <section id="introduction" class="level2">
@@ -51,7 +51,7 @@ risk.</p>
 <p>The US Food and Drug Administration (FDA) publishes the contents of
 its adverse event reporting database for drugs and therapeutic biologics
 as quarterly data extract files. The files are now listed on FDA’s
-Adverse Event Monitoring System (AEMS) pages and are still described as
+Adverse Event Monitoring System (AEMS) pages and their archives are still named and documented as
 FDA Adverse Event Reporting System (FAERS) quarterly data [1]. They are
 a common source for case/non-case disproportionality analyses, in which
 the proportion of reports of an event among reports of a drug is
@@ -235,7 +235,7 @@ point estimates and lower confidence limits stayed on the same side of
 1, and a decomposition of the units that moved between adjacent
 configurations. The width of a confidence interval within a
 configuration (precision) and the spread across configurations
-(robustness) are reported separately. After the first results I added
+(robustness) are reported separately. Because the configurations share most of their units, differences between them are described, not tested statistically. After the first results I added
 descriptive profiles of the moved units (number of drug and reaction
 rows per report, literature reference, report type, reporter, and
 ingredient mix); these are labeled post hoc.</p>
@@ -277,7 +277,7 @@ and text with the run outputs.</p>
 over Parquet. It runs as six resumable stages (acquire, build, analyze,
 validate, render, package) on a laptop: on the full input, the build
 stage took 70 s with a peak resident memory of 2.7 GB, and the analysis
-stage took 4 s. Figures were drawn with matplotlib and documents
+stage took under 5 s. Figures were drawn with matplotlib and documents
 rendered with pandoc.</p>
 </section>
 </section>
@@ -287,15 +287,15 @@ rendered with pandoc.</p>
 <h3>3.1 Case construction</h3>
 <p>The eight files contained 3,253,489 report rows, 15,069,684 drug
 rows, and 11,287,724 reaction rows. Every parsed count matched the raw
-line count and, where FDA printed a total (32 files), that total; no
-line was rejected. A total of 131 PRIMARYIDs appeared in two extracts,
+line count (excluding header lines) and, where FDA printed a total (32 files), that total; no
+line was rejected (ESM 2, Table S2). A total of 131 PRIMARYIDs appeared in two extracts,
 leaving 3,253,358 report versions from 2,870,985 cases (Fig. 1, Table
 1). Removing 12,912 cases on deletion lists left 2,858,073 cases, and
 3,238,049 report versions for the diagnostic unit. In all, 314,495 cases
 had more than one version in the window. For 667,511 cases (counted before deletions) the selected version was a follow-up and version 1 was not in the acquired files. Most of these cases were first received within the window (S2 cohort, Table 1), so their version 1 had been superseded before the quarterly extract was produced [4]. No version ties or ordering conflicts occurred among real
 cases.</p>
 <p>Under V1, 26,199 cases were exposed to an SGLT2 inhibitor and 3,919
-to a DPP-4 inhibitor (ESM 2, Table S4). Exact matching identified 22,378
+to a DPP-4 inhibitor (Fig. 1); the counts by ingredient in ESM 2, Table S4 sum to more because some cases list more than one ingredient. Exact matching identified 22,378
 and 2,121 of these; the remaining 3,821 and 1,798 were found only
 through salt-form or brand names. Restricting to primary-suspect
 listings left 21,573 and 2,076 exposed cases.</p>
@@ -308,7 +308,7 @@ listings left 21,573 and 2,076 exposed cases.</p>
 86.42), a = 136; arthralgia 1.81 (95% CI 1.55 to 2.12), a = 161; and
 pancreatitis 8.21 (95% CI 6.77 to 9.96), a = 107. The cases in cell a
 overlapped little between pairs: the largest overlap was 16 cases
-counted in cell a of both the ketoacidosis and pancreatitis pairs.</p>
+counted in cell a of both the ketoacidosis and pancreatitis pairs (ESM 2, Table S8).</p>
 </section>
 <section id="sensitivity-across-configurations" class="level3">
 <h3>3.3 Sensitivity across configurations</h3>
@@ -353,13 +353,13 @@ matching (V1 to V2) removed 3,821 SGLT2 and 1,798 DPP-4 inhibitor cases
 from the exposed group. Almost all were coded under a salt name in
 PROD_AI; cases identified only from the drug-name field were few (2
 DPP-4 inhibitor cases and 0 SGLT2 inhibitor cases under the suspect
-rule). The cases found only by expanded matching reported the target
+rule; ESM 2, Tables S5 and S6). The cases found only by expanded matching reported the target
 events less often than the strictly matched cases (post hoc; ESM 2,
 Table S7): ketoacidosis 2.1% against 8.4%, and pemphigoid 1.3% against
 5.3%. The two groups differed in ingredient mix: for DPP-4 inhibitors,
 strictly matched cases were split between sitagliptin and linagliptin,
 whereas expanded-only cases were mostly sitagliptin coded as sitagliptin
-phosphate. Including them therefore lowered the pemphigoid ROR from
+phosphate. Because these cases reported the events less often, including them lowered the pemphigoid ROR from
 110.3 (V2) to 72.3 (V1) and the ketoacidosis ROR from 90.8 to 82.2.</p>
 <p><strong>Non-qualifying listings.</strong> Under V1, 25,352 cases
 listed an SGLT2 inhibitor and 9,379 listed a DPP-4 inhibitor only as
@@ -387,7 +387,7 @@ RORs were 5.12 (95% CI 3.75 to 7.00) for ketoacidosis, 26.84 (95% CI
 <p>All 40 member files reconciled, every structural check passed, and
 the pandas implementation reproduced all 20 case-level tables exactly.
 The rerun from cached inputs reproduced every count and estimate
-exactly. All 18 software tests passed. A naive join of drug and reaction
+exactly. All 18 software tests passed. Without unit-level indicators, a naive join of drug and reaction
 rows would have produced 2,114 rows for the 1,950 ketoacidosis cases in
 cell a under V1.</p>
 </section>
@@ -408,9 +408,8 @@ name rules did. In this window the deletion lists mattered little.</p>
 </section>
 <section id="comparison-with-previous-work" class="level3">
 <h3>4.2 Comparison with previous work</h3>
-<p>Most attention in FAERS data preparation has gone to duplicates. FDA
-notes that duplicate reports inflate counts and can create or mask
-signals [5]; in an FDA sample, 39% of reports were duplicates, more
+<p>Most attention in FAERS data preparation has gone to duplicates. In a
+convenience sample reviewed at FDA, 39% of reports were duplicates, more
 often foreign or literature-derived [7]; literature reports can be
 repeated across many cases [8, 9]; and FDA’s network-based deduplication
 of the full database flagged about 5 million of 29 million reports as
@@ -418,30 +417,27 @@ duplicates [30]. </p><p>These results agree that counting report versions
 inflates counts but suggest that, for these pairs, it is not the largest
 source of variation. CASEID collapsing cannot detect duplicates that FDA
 has not linked [12], and the secondary-suspect arthralgia reports, with
-a median of 41 drugs each, resemble the long multi-drug reports
-described in the extreme-duplication work; I did not test whether they
+a median of 41 drugs per report, resemble the long multi-drug reports
+described in the extreme-duplication work [8, 9]; I did not test whether they
 duplicate one another.</p>
-<p>The drug-role result has close precedents. In VigiBase, varying
-analytic choices including role restriction produced both positive and
-negative signals for most pairs in a reference set [20]. In FAERS,
+<p>The drug-role result has close precedents. In VigiBase, role restriction was among the
+analytic choices that changed signal status for reference pairs [20]. In FAERS,
 primary-suspect stratification identified 9 of the 30 highest-ranked
 glucagon-like peptide-1 (GLP-1) receptor agonist signals as driven by
 secondary-suspect reports [22], and an analysis of the 2025 releases
 used a primary-suspect cohort with a secondary-suspect sensitivity
 cohort [21]. The arthralgia result here is a further example, for an
-event named in US labeling: its estimate was above 1 only when
-secondary-suspect listings counted.</p>
-<p>Drug-name standardization for FAERS has been approached by manual
-recoding [13], curated databases [14, 15], and open dictionaries and
-RxNorm mappings [16, 17]. The authors of the AEOLUS resource noted that
+event named in US labeling.</p>
+<p>Among the FAERS drug-name standardization studies [13–17], the authors
+of the AEOLUS resource noted that
 cleaning and normalization choices can change analysis results without
 quantifying the effect [14], and the DiAna authors suggested comparing
 disproportionality results across standardization strategies [16]. For
 the ten ingredients studied, the difference between exact and
 RxNorm-informed matching was mainly salt-form coding in the ingredient
 field, and the salt-coded reports had a different reaction profile.
-Exact matching therefore did not lose cases at random; it changed which
-reports formed the exposed group.</p>
+The cases lost to exact matching were therefore not a random subset, and
+leaving them out changed which reports formed the exposed group.</p>
 <p>The four labeled associations other than arthralgia were above 1 in
 every case-level configuration, as in earlier analyses: ketoacidosis
 with SGLT2 inhibitors in FAERS [31, 32], Fournier’s gangrene in an FDA
@@ -462,8 +458,8 @@ disproportionality estimate for the broad arthralgia term in a recent
 window does not test the severe, disabling joint pain described in the
 labeling [29].</p>
 <p>The class-against-class comparison (S3) answered a different
-question, because both classes are used for type 2 diabetes. Its lower
-RORs are consistent with part of the database-wide contrast reflecting
+question, because both classes are used for type 2 diabetes. Its RORs were lower than the database-wide estimates for every pair except arthralgia (2.12 against 1.81),
+consistent with part of the database-wide contrast reflecting
 the indication rather than the drug, but they are still reporting
 associations.</p>
 </section>
@@ -476,7 +472,7 @@ rule and test the alternative; include precise-ingredient (salt) names
 when matching the ingredient field, or use a published standardization;
 and show the four cells, not only the ROR, so readers can see which
 counts drive an estimate. When a role or name rule changes the
-conclusion, the units responsible can usually be characterized, as here,
+conclusion, the units responsible can be characterized, as they were here,
 and should be described. The pipeline used here runs these comparisons
 from configuration files and can be pointed at other quarters, drugs, or
 event lists.</p>
@@ -487,7 +483,7 @@ event lists.</p>
 stimulated reporting after safety communications, by selective
 reporting, and by the indication; the RORs here are reporting
 associations and cannot be read as risks, incidence, or causal effects.
-</p><p>CASEID collapsing does not remove duplicates that FDA has not linked,
+No clinical case-by-case assessment of the reports was performed.</p><p>CASEID collapsing does not remove duplicates that FDA has not linked,
 such as a direct report and a manufacturer report of the same patient.
 The window contained only the versions received in eight quarters, and each quarterly extract usually holds only the latest version of a case available when it was produced [4], so case histories are incomplete; 667,511 cases (counted before deletions) were represented by a follow-up with no version 1 in the files, and the receipt-date cohort (S2) addresses this only partly. </p><p>The event lists
 were exact preferred-term strings without the MedDRA hierarchy, so
@@ -525,6 +521,7 @@ are publicly available from the FDA [1]; their checksums and the
 workflow that reproduces every result are in the source archive linked
 from the project page. Code (MIT License), configuration, tests, and run
 records are in the same archive.</p>
+<p><strong>Ethics approval.</strong> Not applicable. This study is a secondary analysis of publicly available, de-identified adverse event reports released by the US Food and Drug Administration. No new participants were recruited and no identifiable information was accessed.</p>
 </section>
 <section id="references" class="level2">
 <h2>References</h2>
@@ -552,7 +549,7 @@ interpreting adverse event data reported to FAERS. Clin Pharmacol Ther.
 2025;118(3):567–82. https://doi.org/10.1002/cpt.3701.</li>
 <li>U.S. Food and Drug Administration. ASC_NTS file for the quarterly
 data extract from the FDA Adverse Event Reporting System (FAERS), last
-revised January 2025 (distributed in each quarterly ASCII archive).
+revised January 2025 (distributed in the quarterly ASCII archives from 2024Q4 onward).
 2025. https://fis.fda.gov/content/Exports/faers_ascii_2026q2.zip.
 Accessed 7 Oct 2026.</li>
 <li>Janiczak S, Tanveer S, Tom K, et al. An evaluation of duplicate
@@ -626,7 +623,7 @@ https://fis.fda.gov/content/Exports/faers_ascii_2026q2.zip. Accessed 7
 Oct 2026.</li>
 <li>U.S. National Library of Medicine. RxNorm and RxClass application
 programming interfaces (RxNav), data version 05-Oct-2026. 2026.
-https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html. Accessed 7 Oct
+https://lhncbc.nlm.nih.gov/RxNav/APIs/index.html. Accessed 7 Oct
 2026.</li>
 <li>AstraZeneca. Farxiga (dapagliflozin) tablets: prescribing
 information. Revised 06/2024. 2024.
@@ -1470,11 +1467,11 @@ secondary analyses, <em>SGLT2</em> sodium-glucose cotransporter-2</p>
 <h2>Figure legends</h2>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Flow diagram from report rows to report versions, cases, retained cases, and the exposed groups used in the two-by-two tables." src="assets/fig2_case_construction_flow.svg"
 style="width:100.0%" /></span></p>
-<p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. Counts are from the full run; “latest version”
+<p><strong>Fig. 1</strong> Case construction from the eight quarterly files to the retained cases used in the two-by-two tables. The principal analyses use a database-wide background; S3 restricts the comparator to the other study drug class. “Latest version”
 refers to the acquired files only. <em>CASEID</em> case identifier,
 <em>DEMO</em> demographic file, <em>DPP-4</em> dipeptidyl peptidase-4, <em>PRIMARYID</em> report version
 identifier, <em>PT</em> preferred term, <em>S2</em> secondary analysis
-2, <em>SGLT2</em> sodium-glucose cotransporter-2, <em>V1</em> primary configuration, <em>V5 to V8</em> report-version
+restricted to cases first received in the window, <em>SGLT2</em> sodium-glucose cotransporter-2, <em>V1</em> primary configuration, <em>V5 to V8</em> report-version
 configurations</p>
 <p><span class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img alt="Dot-and-interval plot with five panels, one per drug-class and reaction pair. Each panel shows the reporting odds ratio and 95% interval under eight processing configurations. For DPP-4 inhibitors and arthralgia, the estimates are above 1 when any suspect role counts and below 1 when only the primary suspect counts. The other four pairs stay above 1 in every configuration; the case-level pemphigoid estimates range from 72 to 188." src="assets/fig1_ror_by_configuration.svg"
 style="width:100.0%" /></span></p>
