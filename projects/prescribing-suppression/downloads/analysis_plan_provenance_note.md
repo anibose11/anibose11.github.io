@@ -28,4 +28,4 @@ Amendments 1–10 are dated 7 October 2026 and Amendment 11 is dated 17 October 
 
 Amendments 12 (20 October 2026) and 13 (24 October 2026) were written by Claude Code running Claude Opus 5.5 (claude-opus-5-5) after the original results were known, and Amendment 13 also after the Amendment 12 results, so both are post hoc. Their SHA-256 values are entries 2 and 3 of the internally time-stamped ledger (recorded 2026-10-20T19:01:41Z and 2026-10-24T15:46:10Z); the ledger records that each was hashed before any analysis it defines was run. The plan was not registered with any external registry.
 
-The plan file beside this note (analysis_plan.md) is unchanged; its SHA-256 can be checked against the lock record in the source archive. Amendments 12 and 13 and the ledger are not posted here; they belong to an upgraded manuscript in preparation.
+The plan file beside this note (analysis_plan.md) is unchanged; its SHA-256 can be checked against the lock record in the source archive. Amendments 12 and 13 and the ledger are not posted here; they belong to a revised manuscript in preparation.

@@ -1,6 +1,6 @@
 # Tableau import and interaction specification
 
-No Tableau workbook was built or tested for this project. This document specifies how the verified aggregate tables can be imported and which interactions are valid. Every table below is produced by `python -m tra analyze --split heldout` and is included in `results/tables/heldout/` and in the Excel workbook `trial_results_audit_tables.xlsx`.
+No Tableau workbook was built or tested for this project. This document specifies how the aggregate tables, which pass the pipeline's validate stage, can be imported and which interactions are valid. Every table below is produced by `python -m tra analyze --split heldout` and is included in `results/tables/heldout/` and in the Excel workbook `trial_results_audit_tables.xlsx`.
 
 ## General rules
 
