@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trial results audit: full report | Animesh Bose</title>
-<meta name="description" content="Full report: attaching participant denominators to ClinicalTrials.gov results, a methods evaluation of a relational warehouse and a flat export in cardiometabolic trials.">
+<meta name="description" content="Full report: row-level and unit-level participant counts in ClinicalTrials.gov results, what one-count-per-arm extraction attaches instead, and how much that changes two-arm comparisons.">
 <link rel="stylesheet" href="assets/style.css">
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
@@ -13,63 +13,73 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main"><div class="inner report-body">
-<h1 id="attaching-participant-denominators-to-clinicaltrialsgov-results-a-cross-sectional-methods-evaluation-of-a-relational-warehouse-and-a-flat-export-in-cardiometabolic-trials">Attaching participant denominators to ClinicalTrials.gov results: a cross-sectional methods evaluation of a relational warehouse and a flat export in cardiometabolic trials</h1>
+<h1 id="row-level-and-unit-level-participant-counts-in-clinicaltrials.gov-results-and-what-one-count-per-arm-extraction-attaches-instead-a-cross-sectional-study-of-cardiometabolic-trials">Row-level and unit-level participant counts in ClinicalTrials.gov results and what one-count-per-arm extraction attaches instead: a cross-sectional study of cardiometabolic trials</h1>
 <p class="meta portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="portfolio-status">This report has not been peer reviewed.</p>
-<p class="note">Supplementary material: <a href="downloads/analysis_plan.md">analysis plan</a> and <a href="downloads/rules.md">rules</a> (Additional file 1), <a href="downloads/data_dictionary.csv">data dictionary</a> (Additional file 2), <a href="downloads/trial-results-audit-source.zip">source archive</a> (Additional file 3), <a href="downloads/trial_results_audit_tables.xlsx">result tables workbook</a> (Additional file 4), <a href="downloads/issue_ledger.csv">issue ledger</a>, <a href="downloads/claims.json">claims map</a>.</p>
+<p class="portfolio-status">This report has not been peer reviewed. Corrected and extended on 25 October 2026: it now follows the revised manuscript, which corrects the descriptions of the checks and of the use of AI tools and adds a post hoc analysis of two-arm comparisons.</p>
+<p class="note">Supplementary material: <a href="downloads/analysis_plan.md">analysis plan</a>, <a href="downloads/rules.md">rules</a>, <a href="downloads/amendment_A4_2026-10-24.md">amendment 4</a> and <a href="downloads/amendment_A4_run_record_2026-10-24.md">its run record</a> (Additional file 1), <a href="downloads/data_dictionary.csv">data dictionary</a> (Additional file 2), <a href="downloads/trial-results-audit-source.zip">source archive, version 1.0.0</a> (Additional file 3 of the manuscript is version 1.1.0, which adds amendment 4 and its analysis), <a href="downloads/trial_results_audit_tables.xlsx">result tables workbook</a> (Additional file 4), <a href="downloads/issue_ledger.csv">issue ledger</a>, <a href="downloads/claims.json">claims map</a>.</p>
 
 <h2 id="abstract">Abstract</h2>
-<p><strong>Background.</strong> Evidence tables built from ClinicalTrials.gov posted results need the number of participants behind each reported value. The registry records this at several levels (per outcome, per table row, and in units other than participants), which a flat export with one count per arm and outcome cannot hold. I measured how often written rules alone can attach a participant denominator to each posted value, and what a flat export loses or attaches instead.</p>
-<p><strong>Methods.</strong> I retrieved from ClinicalTrials.gov all interventional studies returned by its condition search for diabetes mellitus, heart failure or obesity with results first posted from January 2020 to September 2026. Of these, 2,469 met a condition vocabulary rule and were split by identifier cluster into development (508) and held-out (1,961) portions. Rules and code were frozen after development and run once on the held-out portion. Results were loaded into a typed PostgreSQL warehouse that keeps each value's source location. Each outcome group was classed as directly structured (A), needing an explicit rule (B), not safely resolvable (C) or not applicable (D). A separately written R program checked every warehouse value against the raw records. A declared one-row-per-value flat export served as comparator. Analyses were descriptive.</p>
-<p><strong>Results.</strong> Of 43,715 applicable held-out outcome groups, 37,592 (86.0%) had a directly structured denominator, 6,118 (14.0%) needed an explicit rule, mostly for row-level numbers analyzed, and 5 (0.01%) were not safely resolvable. For 22,505 of 97,756 measurements (23.0%), the flat export attached the outcome-level count where the row reported a different number analyzed. The warehouse reproduced all 2,502,817 in-scope source values exactly, and the R reference agreed with it on the tier and denominator of every measurement.</p>
-<p><strong>Conclusions.</strong> In this cohort almost every posted value could be given a participant count by written rules. About one outcome group in seven needed row-level or unit-specific handling, and for nearly a quarter of measurements a flat export with one count per arm and outcome attached the outcome-level count where the row reported a different number analyzed. Pipelines that build evidence tables from registry results should keep every denominator level with its provenance.</p>
-<p><strong>Keywords:</strong> ClinicalTrials.gov; trial results; denominators; analysis population; data provenance; relational database; evidence synthesis; research methodology</p>
+<p><strong>Background.</strong> Evidence tables from ClinicalTrials.gov results need the participant count behind each value. The registry may give it per outcome, per table row or beside a count of other units; one-count-per-arm extraction holds only the first. I measured how often written rules can attach the applicable count, what such an extraction attaches instead, and what that does to two-arm comparisons.</p>
+<p><strong>Methods.</strong> Interventional diabetes, heart failure and obesity trials with results first posted January 2020 to September 2026 were retrieved by condition search. Of these, 2,469 met a condition vocabulary rule and were split by identifier cluster into development (508) and held-out (1,961) portions; rules and code were frozen by hash and run once on the held-out portion. Outcome groups were classed as directly structured, needing an explicit rule, or not safely resolvable. The comparator was a declared flat export carrying each arm's outcome-level count; a post hoc amendment recomputed affected two-arm comparisons with those counts. A second R implementation, written with the same artificial intelligence coding assistants, checked every value.</p>
+<p><strong>Results.</strong> Of 43,715 applicable held-out outcome groups, 43,710 (99.99%) could be given a participant count: 37,592 (86.0%) directly and 6,118 (14.0%) by an explicit rule, mostly for row-level numbers analyzed. For 22,505 of 97,756 measurements (23.0%), the flat export attached the outcome-level count although the row reported a different number analyzed. Post hoc, these came from 385 of 1,911 studies (20.1%) and made up 11.1% of primary-outcome measurements. In 1,052 affected two-arm comparisons of proportions (post hoc), the export's counts shifted the risk difference by a median of 0.37 percentage points (over 5 points in 9.3%) and changed its 95% interval's relation to zero in 21 (2.0%). The warehouse reproduced all 2,502,817 in-scope source values; the R implementation agreed on every measurement.</p>
+<p><strong>Conclusions.</strong> Written rules attached a participant count to almost every value, but one outcome group in seven needed a row-level or unit-level rule. A one-count-per-arm export attached a different count to nearly a quarter of measurements; post hoc, most risk differences changed little. Evidence pipelines should keep every denominator level and choose among them by explicit rules.</p>
+<p><strong>Keywords:</strong> ClinicalTrials.gov; trial results; denominators; analysis population; data extraction; data provenance; evidence synthesis; research methodology</p>
 <h2 id="background">Background</h2>
-<p>ClinicalTrials.gov has accepted summary results of registered trials since 2008 [1,2], and the Final Rule extended results reporting to more trials from 2017 [3]. The results records are now reused at scale: systematic reviewers extract posted values [4], meta-researchers analyze reporting across thousands of trials [5], and tools re-publish the data in other forms. Posted results have also been used to emulate rapid safety meta-analyses [6] and to build a benchmark of 12,967 drug-versus-drug adverse event comparisons from 33,701 trial records [7]. A posted value means little without the number of participants it describes. Zarin and colleagues described the outcome measure as the "numerator" of a result and the analysis population as its "denominator", and found that the number of distinct analysis populations per study group averaged 2.5 across 700 early results records [1].</p>
+<p>ClinicalTrials.gov has accepted summary results of registered trials since 2008 [1,2], and the Final Rule extended results reporting to more trials from 2017 [3]. The results records are now reused at scale: systematic reviewers extract posted values [4], meta-researchers analyze reporting across thousands of trials [5], and tools republish the data in other forms. Posted results have also been used to emulate rapid safety meta-analyses [6] and to build a benchmark of 12,967 drug-versus-drug adverse event comparisons from 33,701 trial records [7]. A posted value means little without the number of participants it describes. Zarin and colleagues described the outcome measure as the "numerator" of a result and the analysis population as its "denominator", and found that the number of distinct analysis populations per study group averaged 2.5 across 700 early results records [1].</p>
 <p>Studies comparing registry results with other sources keep returning to the denominator. Hartung and colleagues found primary outcome results inconsistent with the publication in 20% of sampled trials, including inconsistent analysis denominators and transposed arms [8]. Comparisons with trials published in high-impact journals also found results that could not be compared directly because the two sources reported them in different forms [9,10]. Schwartz and colleagues found the number analyzed for the primary outcome discordant with U.S. Food and Drug Administration (FDA) reviews for 31% of primary outcomes, in a sample of approval trials of which 42% were for diabetes [11]. Riveros and colleagues found the number analyzed per group reported in 96% of sampled posted results but reasons for exclusion in only 8% [12], and Dechartres and colleagues could recompute effects from posted per-arm values for only 65% of trials that posted neither an estimate nor a p-value [13]. Registry staff have explained that results tables resist spreadsheet download because their rows and columns vary from record to record [14], and that internal inconsistencies between parts of a record are among the most frequent problems at results quality review [14,15].</p>
-<p>Several tools already restructure posted results. AACT (Aggregate Analysis of ClinicalTrials.gov), built by the Clinical Trials Transformation Initiative [16], now loads the whole registry into PostgreSQL every day [17]. EXACT (EXtracting Accurate efficacy and safety information from ClinicalTrials.gov) extracts results into spreadsheets for meta-analysis [18], Shi and Du built an arm-level knowledge graph of efficacy and safety results [19], and the ctrdata package stores registry records, including results, as documents for analysis in R [20]. A study of the registry's protocol metadata found untyped coded fields, values that differed from the data dictionary and condition terms outside Medical Subject Headings (MeSH); it did not examine the summary results [21]. These systems show that restructuring is feasible. None of them reports how often each posted value can be paired with its own participant count without unsupported inference, or measures what a simpler representation attaches in its place.</p>
-<p>The registry's own definitions make the question concrete. Each posted outcome has an "Overall Number of Participants Analyzed" per group; a table row can carry its own number analyzed "if different from the overall"; outcomes analyzed in eyes, clinics or other units report a unit count beside the participant count; and the analysis population description is conditionally required [22]. A representation that keeps one count per arm and outcome cannot hold these distinctions.</p>
-<p>I built a typed, provenance-preserving warehouse for a frozen cohort of cardiometabolic trials and asked: among posted results, how often can a documented participant denominator be preserved and mechanically associated with each reported value without unsupported inference, and what does a declared one-row-per-value flat export lose or attach instead? This is a study of machine-readable reporting and transformation fidelity. It does not assess treatment effects, detect misconduct or adjudicate conditions clinically.</p>
+<p>Several tools already restructure posted results. AACT (Aggregate Analysis of ClinicalTrials.gov), built by the Clinical Trials Transformation Initiative [16], now loads the whole registry into PostgreSQL every day [17]. EXACT (EXtracting Accurate efficacy and safety information from ClinicalTrials.gov) extracts results into spreadsheets for meta-analysis [18], Shi and Du built an arm-level knowledge graph of efficacy and safety results [19], and the ctrdata package stores registry records, including results, as documents for analysis in R [20]. CTG-DB (ClinicalTrials.gov Transformation Database), released as a preprint in 2026, converts the registry's archive into a relational database for cross-trial adverse event analyses and keeps one denominator per arm [21]. Others have examined the quality of the registry entries themselves. Miron and colleagues found untyped coded fields, values that differed from the data dictionary and condition terms outside Medical Subject Headings (MeSH) in the protocol metadata, without examining the summary results [22]. Iken and colleagues proposed a structured assessment of consistency, accuracy, completeness and timeliness and, in 816 knee arthroplasty trials, found inconsistent entries for up to 36% of trials, depending on the item, and no reported outcome for 61% of finished trials [23]. The tools show that restructuring is feasible; the quality studies show that registry entries need checking before reuse. None of this work reports how often each posted value can be paired with its own participant count without unsupported inference, or what a simpler representation attaches in its place.</p>
+<p>The registry's own definitions make the question concrete. Each posted outcome has an "Overall Number of Participants Analyzed" per group; a table row can carry its own number analyzed "if different from the overall"; outcomes analyzed in eyes, clinics or other units report a unit count beside the participant count; and the analysis population description is conditionally required [24]. A representation that keeps one count per arm and outcome cannot hold these distinctions.</p>
+<p>For a frozen cohort of cardiometabolic trials, loaded into a typed warehouse that keeps each value's source location, I asked: among posted results, how often can a documented participant denominator be preserved and mechanically associated with each reported value without unsupported inference, and what does a declared one-row-per-value flat export lose or attach instead? A post hoc amendment then asked how much the attached counts change comparisons between two arms. This is a study of machine-readable reporting and transformation fidelity. It does not judge whether treatments work, detect misconduct or adjudicate conditions clinically.</p>
 <h2 id="methods">Methods</h2>
 <h3 id="aim-design-and-setting">Aim, design and setting</h3>
 <p>This cross-sectional methods evaluation used one snapshot of the ClinicalTrials.gov registry (data timestamp 2026-10-06). Its aim was to measure how often written rules can attach a participant denominator to each posted results value without unsupported inference, and what a flat export attaches instead. Rules were developed on one portion of the cohort and run once on a held-out portion.</p>
 <h3 id="data-source-and-cohort">Data source and cohort</h3>
-<p>I used the ClinicalTrials.gov data application programming interface (API), version 2.0.5 [23,24]. The data timestamp was 2026-10-06T09:00:05 Coordinated Universal Time (UTC) both before and after retrieval, which began at 2026-10-07T09:33:06Z. Three condition queries were passed verbatim to the registry's condition search ("diabetes mellitus", "heart failure", "obesity") with the filter <code>AREA[StudyType]INTERVENTIONAL AND AREA[ResultsFirstPostDate]RANGE[2020-01-01,2026-09-30]</code>. The window refers to the date results were first posted after quality review, chosen before retrieval as 2020 through the last complete calendar month; it is not the study completion date. Every query was paged to the end and its identifier count checked against the API's reported total (1,511, 468 and 842 studies). The union of 2,615 studies was below the prespecified ceiling of 5,000 studies, so no sampling was needed. Full records were retrieved in batches of 100 identifiers, and every raw page was saved with its Secure Hash Algorithm 256-bit (SHA-256) hash. Responses that were not JavaScript Object Notation (JSON) were rejected.</p>
-<p>The registry's condition search also matches titles, keywords and MeSH ancestor terms. I therefore confirmed each study's condition group by a deterministic, prespecified rule: the condition MeSH or ancestor terms contained the group's descriptor (Diabetes Mellitus, Heart Failure or Obesity), or a free-text condition entry matched the group's pattern. Studies whose condition entries and condition MeSH terms did not meet the rule (146 studies; returned through titles, keywords, other MeSH terms or condition text the rule does not accept) were set aside and used only in a sensitivity analysis. This is a vocabulary rule, not clinical adjudication. No study failed the frame checks (interventional, results present, results first posted inside the window), leaving 2,469 confirmed studies (1,440 diabetes, 435 heart failure, 762 obesity; 166 in more than one group).</p>
+<p>I used the ClinicalTrials.gov data application programming interface (API), version 2.0.5 [25,26]. The data timestamp was 2026-10-06T09:00:05 Coordinated Universal Time (UTC) both before and after retrieval, which began at 2026-10-07T09:33:06Z. Three condition queries were passed verbatim to the registry's condition search ("diabetes mellitus", "heart failure", "obesity") with the filter AREA[StudyType]INTERVENTIONAL AND AREA[ResultsFirstPostDate]RANGE[2020-01-01,2026-09-30]. The window, chosen before retrieval as 2020 through the last complete calendar month, refers to the date results were first posted after quality review; it is not the study completion date. Every query was paged to the end and its identifier count checked against the API's reported total (1,511, 468 and 842 studies). The union of 2,615 studies was below the prespecified ceiling of 5,000 studies, so no sampling was needed. Full records were retrieved in batches of 100 identifiers, and every raw page was saved with its Secure Hash Algorithm 256-bit (SHA-256) hash. Responses that were not JavaScript Object Notation (JSON) were rejected.</p>
+<p>The registry's condition search also matches titles, keywords and MeSH ancestor terms. The pipeline therefore confirmed each study's condition group by a deterministic, prespecified rule: the condition MeSH or ancestor terms contained the group's descriptor (Diabetes Mellitus, Heart Failure or Obesity), or a free-text condition entry matched the group's pattern. Studies whose condition entries and condition MeSH terms did not meet the rule (146 studies; returned through titles, keywords, other MeSH terms or condition text the rule does not accept) were set aside and used only in a sensitivity analysis. This is a vocabulary rule, not clinical adjudication. No study failed the frame checks (interventional, results present, results first posted inside the window), so 2,469 confirmed studies remained (1,440 diabetes, 435 heart failure, 762 obesity; 166 in more than one group).</p>
 <h3 id="development-and-held-out-portions">Development and held-out portions</h3>
-<p>Before any results field was parsed, studies were linked into clusters when they shared an alias National Clinical Trial (NCT) number (the ClinicalTrials.gov identifier), an organization study identifier within the same organization, a secondary identifier, an identical official title, or near-identical brief titles (token Jaccard similarity of at least 0.9; 32 pairs). A first pass let bare values such as "2017", entered as secondary identifiers, join unrelated studies; identifiers with fewer than five alphanumeric characters were then ignored, and the change was recorded before any results were read. The 2,525 clusters were assigned by a salted SHA-256 hash of their smallest NCT identifier, about 20% to development: 508 confirmed studies for development and 1,961 held-out.</p>
-<p>The loader, rules, checks and analysis code were developed and reviewed on the development portion only. Rule wording and an additional check of category sums were recorded after profiling the development portion (analysis plan, amendment 2). Two further checks, of adverse event group totals and of non-zero values with zero participants analyzed, were also defined on the development portion before the freeze; a note added to the plan after the held-out run records them. The development code was then checked against the written rules in a structured review, each defect found was re-checked before it was accepted, and the resulting corrections were recorded before the freeze (amendment 3). The files that define the computation were then hashed (combined SHA-256 <code>5bd267b67dc1f28e…</code>, 2026-10-07T10:53:24Z), and the primary held-out analysis was executed once. The program refuses a second primary run and allows only a logged reproducibility rerun, which writes to a separate directory and is compared with the original tables. A timestamped analysis plan written before retrieval, with dated amendments, is given in Additional file 1. It is an internal record, not a public preregistration.</p>
+<p>Before any results field was parsed, studies were linked into clusters when they shared an alias National Clinical Trial (NCT) number (the ClinicalTrials.gov identifier), an organization study identifier within the same organization, a secondary identifier, an identical official title, or near-identical brief titles (token Jaccard similarity of at least 0.9; 32 pairs). A first pass let bare values such as "2017", entered as secondary identifiers, join unrelated studies; identifiers with fewer than five alphanumeric characters were then ignored, and the split was regenerated (2026-10-07T09:37:42Z) before any results were loaded (first load 09:41:39Z; amendment 1). The 2,525 clusters were assigned by a salted SHA-256 hash of their smallest NCT identifier, about 20% to development: 508 confirmed studies for development and 1,961 held-out.</p>
+<p>The loader, checks and analysis code were written with artificial intelligence (AI) coding assistants; the code and the written rules were developed and reviewed on the development portion only. Rule wording and an additional check of category sums were recorded after the development portion had been profiled (analysis plan, amendment 2). Two further checks, of adverse event group totals and of non-zero values with zero participants analyzed, were also defined on the development portion before the freeze; a note added to the plan after the held-out run records them. AI agents then reviewed the development code against the written rules, one agent for each part of the code, and the review workflow assigned each reported defect to a further agent to re-check. The findings file saved during the review lists 35 reported defects, of which 16 had been reproduced, 2 refuted and 17 not yet re-checked; no later findings file exists (amendment 4). The corrections were recorded before the freeze (amendment 3). No other person reviewed the code. The files that define the computation were then hashed (combined SHA-256 5bd267b67dc1f28e…, 2026-10-07T10:53:24Z), and the primary held-out analysis was run once, at 2026-10-07T11:03:34Z. The program refuses a second primary run and allows only a logged reproducibility rerun, which writes to a separate directory and is compared with the original tables.</p>
+<p>An analysis plan dated 2026-10-07T09:30Z, before retrieval began at 09:33:06Z, is given with its dated amendments in Additional file 1. These times are written in the plan itself, which was not hashed before the held-out run and received its notes and post hoc additions after that run; the cohort settings it fixes (posting window, condition rule and 5,000-study ceiling) are in config/cohort.yaml, saved at 09:30:20Z and included in the freeze hash. It is an internal record, not a public preregistration. Amendment 4, written on 24 October 2026 after all results were known, corrects how the plan describes the code review and the R reference and specifies the post hoc consequence analysis described below (Additional file 1, Part C).</p>
 <h3 id="warehouse">Warehouse</h3>
-<p>Results were loaded into native PostgreSQL 17 tables for studies and module-scoped groups; participant flow periods, milestones and reasons not completed; baseline denominators, measures, rows, categories and values; outcome measures, groups, outcome-level and row-level denominators, rows, categories and values; statistical analyses with their comparison groups; and adverse event groups, terms and counts. </p>
-<p>Group identifiers are keyed within their module, and outcome group identifiers within their outcome measure, so the same code in two outcomes is never assumed to be the same population. Every value is stored as the exact source text, with a parsed number only when the text is a plain decimal written in American Standard Code for Information Interchange (ASCII) digits; every row stores its JSON pointer into the source record. </p>
-<p>Composite keys and foreign keys enforce the nesting. A load replaces the studies in scope inside one transaction, so loading a frozen snapshot twice gives identical tables, and a failed load leaves the previous state intact. </p>
-<p>The results point-of-contact block (names, email addresses, telephone numbers) and the certain-agreement block (restrictions on investigators publishing results) were not loaded. A staging table keeps the rest of each record as retrieved, including the protocol section; the analysis does not use it. The source-to-warehouse data dictionary is given in Additional file 2.</p>
+<p>Results were loaded into native PostgreSQL 17 tables for studies and module-scoped groups; participant flow periods, milestones and reasons not completed; baseline denominators, measures, rows, categories and values; outcome measures, groups, outcome-level and row-level denominators, rows, categories and values; statistical analyses with their comparison groups; and adverse event groups, terms and counts.</p>
+<p>Group identifiers are keyed within their module, and outcome group identifiers within their outcome measure, so the same code in two outcomes is never assumed to be the same population. Every value is stored as the exact source text, with a parsed number only when the text is a plain decimal written in American Standard Code for Information Interchange (ASCII) digits; every row stores its JSON pointer into the source record.</p>
+<p>Composite keys and foreign keys enforce the nesting. A load replaces the studies in scope inside one transaction, so loading a frozen snapshot twice gives identical tables, and a failed load leaves the previous state intact.</p>
+<p>The results point-of-contact block (names, e-mail addresses, telephone numbers) and the certain-agreement block (restrictions on investigators publishing results) were not loaded. A staging table keeps the rest of each record as retrieved, including the protocol section; the analysis does not use it. The source-to-warehouse data dictionary is given in Additional file 2.</p>
 <h3 id="attaching-a-denominator">Attaching a denominator</h3>
-<p>For each posted outcome measurement I applied written rules, in a fixed order (Additional file 1). The analysis unit is the outcome's selected unit, or participants when none is given. I treated an association as made without unsupported inference when it used only counts the record states for that group, with the precedence the registry's data element definitions give: a row reports its own number analyzed only "if different from the overall" count [22], so when no row reports one the outcome-level count applies to every row, and a row's own count takes precedence where it is given. </p>
-<p>Reading a count from free text, borrowing one from another outcome or module, or converting a non-integer entry such as "NA" was treated as unsupported (tier C). When only some rows of an outcome report their own count, the convention would give the other rows the outcome-level count, but the record cannot show whether those rows were left blank on purpose, so this case was also treated as unsupported. </p>
-<p>Tier A: one usable participant count for the group at the outcome level, no row-level counts, analysis in participants. Tier B: a deterministic rule is needed, either because the outcome's rows carry their own number analyzed, which then takes precedence (B1), or because the outcome is analyzed in another unit and the participant count is held separately from the unit count (B2). Tier C: no participant count can be attached without unsupported inference. This covers no count for the group (C1), a count that is not an integer, for example "NA" (C2), more than one count (C3), row-level counts on only some rows (C4), row-level counts only in other units (C5) and no usable count in the selected unit (C6). Tier D: the outcome is not posted or the group has no values. </p>
-<p>An outcome group takes its least favorable measurement tier. The primary estimand is the distribution of held-out outcome groups across tiers A, B and C; tier D is reported separately. </p>
-<p>Whether the outcome has an analysis population description is reported alongside, as present or absent; absence is not an error, because the field is required only when the number analyzed differs from the number assigned [22]. Population labels such as "modified intention to treat" are themselves used inconsistently [25], so the rules never read the denominator from the description text.</p>
+<p>For each posted outcome measurement I applied written rules, in a fixed order (Additional file 1). The analysis unit is the outcome's selected unit, or participants when none is given. I treated an association as made without unsupported inference when it used only counts the record states for that group, with the precedence the registry's data element definitions give: a row reports its own number analyzed only "if different from the overall" count [24], so when no row reports one, the outcome-level count applies to every row, and a row's own count takes precedence where it is given.</p>
+<p>Reading a count from free text, borrowing one from another outcome or module, or converting a non-integer entry such as "NA" was treated as unsupported (tier C). When only some rows of an outcome report their own count, the convention would give the other rows the outcome-level count. The record cannot show whether those rows were left blank on purpose, so this case was also treated as unsupported.</p>
+<p>Tier A: one usable participant count for the group at the outcome level, no row-level counts, analysis in participants. Tier B: a deterministic rule is needed, either because the outcome's rows carry their own number analyzed, which then takes precedence (B1), or because the outcome is analyzed in another unit and the participant count is held separately from the unit count (B2). Tier C: no participant count can be attached without unsupported inference. This covers no count for the group (C1), a count that is not an integer, for example "NA" (C2), more than one count (C3), row-level counts on only some rows (C4), row-level counts only in other units (C5) and no usable count in the selected unit (C6). Tier D: the outcome is not posted or the group has no values.</p>
+<p>An outcome group takes its least favorable measurement tier. The primary estimand is the distribution of held-out outcome groups across tiers A, B and C; tier D is reported separately.</p>
+<p>Whether the outcome has an analysis population description is reported alongside, as present or absent; absence is not an error, because the field is required only when the number analyzed differs from the number assigned [24]. Population labels such as "modified intention to treat" are themselves used inconsistently [27], so the rules never read the denominator from the description text.</p>
 <h3 id="comparator">Comparator</h3>
-<p>The comparator is a declared flat export in the shape produced by the pandas function <code>json_normalize</code> along each module's deepest list: one comma-separated values (CSV) row per value, with every scalar of its ancestors (module, outcome or measure, group, row, category) copied down, values kept as text, and the outcome-level participant count attached to each row. A declared export was needed because the registry's own CSV download carries no posted results data, only a flag for whether results exist and the date they were first posted [26]. </p>
+<p>The comparator is a declared flat export in the shape produced by the pandas function json_normalize along each module's deepest list: one comma-separated values (CSV) row per value, with every scalar of its ancestors (module, outcome or measure, group, row, category) copied down, values kept as text, and the outcome-level participant count attached to each row. A declared export was needed because the registry's own CSV download carries no posted results data, only a flag for whether results exist and the date they were first posted [28].</p>
 <p>A source value counts as recoverable from the flat files only when exactly one row matches its full context and a cell holds the identical text. Statistical analysis rows carry no context below their outcome, so they were matched by their order within the outcome, and only when the outcome's 13 descriptive fields (type, title, description, population description, time frame, units and similar) taken together are unique in the study. Amendment 2 (item 4) of the analysis plan named only type, title and time frame. The frozen code requires all 13 fields together to be unique, so 27 outcomes with analyses in 6 held-out studies that share type, title and time frame with another outcome, but differ in other fields, were also matched by order (Additional file 1).</p>
 <h3 id="fidelity-reference">Fidelity reference</h3>
-<p>A separate program in R (version 4.5.1, jsonlite 2.0.0) read the same raw pages, enumerated every scalar under each results section with its JSON pointer, counted every array, and implemented the written tier rules on its own. Agreement between the warehouse and this reference measures transformation fidelity. Because both follow the same written rules, a shared misreading of those rules would not be detected. I also rebuilt each results module from the warehouse and compared it with the source record as canonical JSON.</p>
+<p>A second program, in R (version 4.5.1, jsonlite 2.0.0) and written with the same AI coding assistants from the written tier rules, read the same raw pages, enumerated every scalar under each results section with its JSON pointer, counted every array, and applied the tier rules in its own code. Agreement between the warehouse and this reference measures transformation fidelity. Because both follow the same written rules and came from the same assistants, a shared misreading of those rules would not be detected. Each results module was also rebuilt from the warehouse and compared with the source record as canonical JSON.</p>
 <h3 id="checks-for-possible-source-inconsistencies">Checks for possible source inconsistencies</h3>
-<p>Twelve checks (K1 to K12) were run only where units and populations permit them. They looked for participant counts above their participant denominator (K1), unit counts above their unit denominator (K2), interval limits out of order (K3), a point value outside its interval (K4) and percentages of participants outside 0 to 100 (K5). For adverse events they looked for participants affected above participants at risk (K6) or above the number of events (K7), and group totals above participants at risk (K8). They also covered baseline counts above their denominator (K9), two-sided confidence intervals of statistical analyses whose limits are reversed or exclude the estimate (K10), non-zero values with zero participants analyzed (K11), and category counts that do not add up to the participants analyzed for their row (K12; categories are defined as mutually exclusive and exhaustive [22]). </p>
+<p>Twelve checks (K1 to K12) were run only where units and populations permit them. They looked for participant counts above their participant denominator (K1), unit counts above their unit denominator (K2), interval limits out of order (K3), a point value outside its interval (K4) and percentages of participants outside 0 to 100 (K5). For adverse events they looked for participants affected above participants at risk (K6) or above the number of events (K7), and group totals above participants at risk (K8). They also covered baseline counts above their denominator (K9), two-sided confidence intervals of statistical analyses whose limits are reversed or exclude the estimate (K10), non-zero values with zero participants analyzed (K11), and category counts that do not add up to the participants analyzed for their row (K12; categories are defined as mutually exclusive and exhaustive [24]).</p>
 <p>Values that were present but not plain numbers were counted as not evaluable, as was a point value whose interval limits were out of order, since the limit-order check already reports that case. Reversed confidence limits of a statistical analysis, which the limit-order check does not cover, counted as a failure of the analysis check. A failure is a possible source inconsistency, not a confirmed error. Sums across rows, comparisons between outcome, baseline and participant-flow counts, and whether a mean, median or survival estimate should carry a binary event denominator were deliberately not checked. Every flag enters an issue ledger with its JSON pointer, the source values and the rule that fired.</p>
 <h3 id="analysis">Analysis</h3>
-<p>Counts are reported with their unit: study, study module, outcome, outcome group, measurement, source scalar, object or applicable check. The cohort is the complete set of confirmed studies among those the three queries returned, not a sample of all trials, and the held-out portion is a fixed hash partition of it. Percentages therefore describe this finite set of studies and carry no sampling intervals; a sensitivity analysis gives the shares for both portions combined. An exploratory bootstrap resampling whole trials (1,911 held-out studies with at least one applicable outcome group; 2,000 replicates, seed 20261007) shows how much the outcome-group tier shares depend on trial composition; its percentile range is not a confidence interval. </p>
-<p>Four sensitivity analyses were fixed in advance: including ambiguous condition matches (SA1), primary outcomes only (SA2), counting a group as resolvable only if its outcome also has a population description (SA3), and both portions combined (SA4). I also described how often an outcome group's title exactly matches a baseline group title in the same study, and whether matching titles carry the same participant count. Among studies that use the group code OG000 in two or more outcomes, I counted those that give it different titles in different outcomes, comparing titles after case folding and whitespace collapsing. Results labeled post hoc were added after the held-out run (analysis plan, post hoc additions); they describe the held-out results further and change no prespecified result.</p>
-<h3 id="checks-by-the-author">Manual verification</h3>
-<p>I reran the software tests and fixture demonstration from a clean extraction of the source archive. A stratified random sample of 30 held-out outcome groups was compared with the public ClinicalTrials.gov record pages: 10 in tier A, 10 using row-level counts, 5 using the unit rule and all 5 in tier C (seed 20261007). I also opened each of the 16 flagged possible source inconsistencies and the 5 unresolved outcome groups on its record page, recomputed headline counts and percentages from the exported tables, and checked each reference against its digital object identifier (DOI), PubMed record or web page.</p>
+<p>Counts are reported with their unit: study, study module, outcome, outcome group, measurement, source scalar, object or applicable check. The cohort is the complete set of confirmed studies among those the three queries returned, not a sample of all trials, and the held-out portion is a fixed hash partition of it. Percentages therefore describe this finite set of studies and carry no sampling intervals; a sensitivity analysis gives the shares for both portions combined. An exploratory bootstrap resampling whole trials (1,911 held-out studies with at least one applicable outcome group; 2,000 replicates, seed 20261007) shows how much the outcome-group tier shares depend on trial composition; its percentile range is not a confidence interval.</p>
+<p>Four sensitivity analyses were fixed in advance: including ambiguous condition matches (SA1), primary outcomes only (SA2), counting a group as resolvable only if its outcome also has a population description (SA3), and both portions combined (SA4). I also described how often an outcome group's title exactly matches a baseline group title in the same study, and whether matching titles carry the same participant count. Among studies that use the group code OG000 in two or more outcomes, I counted those that give it different titles in different outcomes, comparing titles after case folding and whitespace collapsing. Results labeled post hoc were added after the held-out run, in the plan's post hoc additions or in amendment 4; they describe the held-out results further and change no prespecified result.</p>
+<h3 id="consequence-for-two-arm-comparisons-post-hoc">Consequence for two-arm comparisons (post hoc)</h3>
+<p>Amendment 4 (Additional file 1, Part C) was written on 24 October 2026, after all held-out results were known and after AI agents had looked at rough magnitudes on 20 October. It fixed the design, and the threshold for calling the consequence material, before the analysis code was written. A cell is one row and category of an outcome. It is affected when, for at least one group, the row reports a number analyzed that differs from that group's outcome-level count, and it is a two-arm comparison when the outcome has exactly two groups. Each affected two-arm cell posted as a count of participants, that is, a proportion in each arm, was analyzed twice: with the row-level counts, and with each arm's outcome-level count, as a one-count-per-arm export would supply it. Both analyses gave the risk difference with a 95% Newcombe hybrid score interval [29] and, where both arms had at least one participant with the outcome, the risk ratio. For comparisons in which an arm had no participant with the outcome, a sensitivity analysis added 0.5 to each of the four counts of the two-by-two table. For means reported with a standard deviation, the standard error of the difference, its inverse-variance weight and the 95% interval of the mean difference were recomputed under each count. For means reported with a standard error, the interval does not depend on the count, so only the standard deviation that would be derived from the standard error was compared.</p>
+<p>The consequence was to be called material if at least 5% of affected comparisons of proportions changed their risk-difference interval's relation to zero, or if the median absolute change in the risk difference reached 1 percentage point; otherwise it was to be called small. Cells in outcomes with one group or with three or more groups, in tier C, in outcomes analyzed in other units, with values that were not plain numbers, or with zero participants in an arm were counted and excluded. Primary outcomes were summarized separately, and the analysis was repeated without the study with the most measurements whose row-level count differed (NCT02443155, the worked example below) and without the ten studies with the most. An exploratory bootstrap that resampled whole trials (2,000 replicates, seed 20261024) gave a percentile range for the share of changed intervals; as with the bootstrap above, the range is not a confidence interval. A new module, reading only the project's exported tables and frozen study list, ran the analysis on 24 October 2026, after amendment 4 had been hashed (Additional file 3). Another R program, written by a separate request to the same AI model from a written specification, read the raw registry pages and recomputed every figure reported below.</p>
+<h3 id="checks-reported-by-the-author">Checks reported by the author</h3>
+<p>On 7 October 2026, Animesh Bose recorded one summary confirmation that five checks had found no discrepancy: a rerun of the software tests and fixture demonstration from a clean extraction of the source archive as it then stood; a comparison of a stratified random sample of 30 held-out outcome groups with the public ClinicalTrials.gov record pages (10 in tier A, 10 using row-level counts, 5 using the unit rule and all 5 in tier C; seed 20261007); a look at each of the 16 flagged possible source inconsistencies and the 5 unresolved outcome groups on its record page; a recomputation of the headline counts and percentages from the exported tables; and a check of each reference against its digital object identifier (DOI), PubMed record or web page. No item-level record of these checks was kept, so they cannot be audited one by one. Automated and AI-agent records cover part of the same ground: an automated run from a clean extraction of the final 7 October archive passed all 43 software tests; the literature search and the first reference checks were done by AI agents; and an automated re-fetch of the 32 studies behind the sample and the flagged items found their results sections unchanged since the snapshot (evidence/live_recheck_review_sample.json in Additional file 3). Additional file 3 is a later version of that archive, with revised documentation and the amendment 4 module; its 18 frozen computation files are byte-identical to those hashed at the freeze. Its software tests have not been rerun from a clean extraction; the amendment 4 module was run again from one and reproduced its tables.</p>
 <h3 id="software-and-reproducibility">Software and reproducibility</h3>
-<p>The pipeline (Python 3.13, PostgreSQL 17.11, R 4.5.1) runs as stages: acquire, freeze, build, analyze, validate, a post hoc stage, render and package. Software tests use seven synthetic studies with unused identifiers and are never mixed with registry data. Repeat loading, an independent rebuild into a second database and a rerun of the held-out analysis were each compared with the original outputs (Additional file 3).</p>
+<p>The pipeline (Python 3.13, PostgreSQL 17.11, R 4.5.1) runs as stages: acquire, freeze, build, analyze, validate, a post hoc stage, render and package. Software tests use seven synthetic studies with unused identifiers and are never mixed with registry data. Repeat loading, a fresh rebuild with the same code into a second database and a rerun of the held-out analysis were each compared with the original outputs and were identical (evidence/validation_report.json in Additional file 3).</p>
+<h3 id="use-of-artificial-intelligence-ai-tools">Use of artificial intelligence (AI) tools</h3>
+<p>Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text. AI coding and writing assistants helped write code, run analyses and draft text under the author's direction. Claude Code (Anthropic) and ChatGPT (OpenAI) were used as tools for coding, code and manuscript review, data analysis, literature searching, and manuscript drafting and formatting. Codex (OpenAI) assisted with editorial revision and document formatting. The assistants wrote the Python, Structured Query Language (SQL) and R code, including the R fidelity reference, from the written rules; the pre-freeze code review recorded in amendment 3, the literature search and the first reference checks were done by AI agents, and no other person reviewed the code. Exact model versions were not recorded for that work (7–18 October 2026); the author recalls GPT-5 and GPT-6 family models for ChatGPT and Codex. For this version (20–24 October 2026), Claude Code running Claude Opus 5.5 (claude-opus-5-5) read the archived AACT source code, recounted the post hoc figures from the raw registry pages, drafted amendment 4, wrote and ran the consequence analysis, checked the four added references against PubMed, Crossref, DataCite and arXiv and every reference DOI against Crossref or DataCite, and drafted the revised text, which Animesh Bose reviewed. On 24 October 2026, a separate request to the same model through the Anthropic API wrote the R code that recomputed the consequence analysis. Animesh Bose takes full responsibility for the work.</p>
 <h2 id="results">Results</h2>
 <h3 id="cohort">Cohort</h3>
 <p>The held-out portion contained 1,961 confirmed studies (Table 1) with 19,957 outcome measures: 18,110 of 19,957 (90.7%) posted with values, 695 posted without values (all groups had zero participants analyzed or no rows) and 1,152 not yet posted. These outcomes had 43,715 applicable outcome groups and 97,756 measurements.</p>
 <p><strong>Table 1.</strong> Cohort flow from retrieval to the held-out portion</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
 <thead>
 <tr>
 <th>Step</th>
@@ -134,11 +144,57 @@
 <p>Unit: study. Condition groups overlap, because a study can be confirmed for more than one group.</p>
 <h3 id="most-outcome-groups-have-a-directly-structured-denominator-and-one-in-seven-needs-a-rule">Most outcome groups have a directly structured denominator, and one in seven needs a rule</h3>
 <p>Of 43,715 applicable outcome groups, 37,592 (86.0%) were tier A, 6,118 (14.0%) tier B and 5 (0.01%) tier C; 1,885 groups were not applicable (Figure 1, Table 2). Most of tier B came from row-level numbers analyzed: all 5,578 groups in outcomes that reported them were B1, and in 4,795 of them at least one row's count differed from the outcome-level count (post hoc). In tables with more than one row, 5,641 of 13,399 groups (42.1%) needed a rule, against 1.6% of groups in single-row outcomes. Of 582 groups in outcomes analyzed in other units (for example clinics, eyes or samples), 540 used the unit rule (B2), 37 the row-level rule (B1) and 5 were tier C. These were all the tier C groups: in 3 studies whose units were clinics or community organizations, the participant count was "NA" while the count of clinics or organizations was given.</p>
-<p>At the measurement level, 62,373 of 97,756 measurements (63.8%) used the outcome-level count, 34,579 (35.4%) a row-level count, 799 (0.8%) the participant count of an outcome analyzed in another unit, and 5 measurements could not be given one. No held-out measurement fell under the missing-count, duplicate-entry, partial-row, other-unit-row or missing-unit rules (C1 and C3 to C6).</p>
 <p><strong>Figure 1.</strong> Denominator tier of each outcome group, overall and by outcome table structure</p>
-<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 304" width="100%" role="img" aria-labelledby="fig-tiers-t fig-tiers-d" style="max-width:760px;height:auto;padding:12px;background:#fcfcfb;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"><title id="fig-tiers-t">How each outcome group gets its participant denominator</title><desc id="fig-tiers-d">Stacked bars showing the share of applicable held-out outcome groups in tiers A, B and C, overall and by outcome table structure.</desc><rect width="760" height="304" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">How each outcome group gets its participant denominator</text><text x="0" y="38" font-size="12.5" fill="#52514e">Held-out confirmed cohort, applicable outcome groups, by the structure of the outcome table.</text><rect x="250" y="52" width="12" height="12" rx="2" fill="#2a78d6"/><text x="267" y="62" font-size="12" fill="#1d1d1b">A: Directly structured</text><rect x="420" y="52" width="12" height="12" rx="2" fill="#eb6834"/><text x="437" y="62" font-size="12" fill="#1d1d1b">B: Explicit rule needed</text><rect x="590" y="52" width="12" height="12" rx="2" fill="#1baf7a"/><text x="607" y="62" font-size="12" fill="#1d1d1b">C: Not safely resolvable</text><text x="240" y="93" font-size="12" text-anchor="end" fill="#1d1d1b">All applicable outcome groups</text><text x="240" y="107" font-size="11" text-anchor="end" fill="#52514e">n = 43,715</text><g><title>All applicable outcome groups, tier A (Directly structured): 37,592 of 43,715 (85.99%)</title><rect x="250.0" y="84.0" width="410.8" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="98" font-size="11" fill="#ffffff">86.0%</text><g><title>All applicable outcome groups, tier B (Explicit rule needed): 6,118 of 43,715 (14.00%)</title><rect x="662.8" y="84.0" width="65.2" height="20.0" fill="#eb6834"/></g><text x="668.8" y="98" font-size="11" fill="#ffffff">14.0%</text><g><title>All applicable outcome groups, tier C (Not safely resolvable): 5 of 43,715 (0.01%)</title><path d="M729.9,84.0 h0.4 a0.4,0.4 0 0 1 0.4,0.4 v19.2 a0.4,0.4 0 0 1 -0.4,0.4 h-0.4 z" fill="#1baf7a"/></g><text x="730.0" y="116" font-size="10.5" text-anchor="end" fill="#52514e">C: 5</text><text x="240" y="143" font-size="12" text-anchor="end" fill="#1d1d1b">Single row</text><text x="240" y="157" font-size="11" text-anchor="end" fill="#52514e">n = 29,743</text><g><title>Single row, tier A (Directly structured): 29,267 of 29,743 (98.40%)</title><rect x="250.0" y="134.0" width="470.3" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="148" font-size="11" fill="#ffffff">98.4%</text><g><title>Single row, tier B (Explicit rule needed): 471 of 29,743 (1.58%)</title><rect x="722.3" y="134.0" width="5.6" height="20.0" fill="#eb6834"/></g><g><title>Single row, tier C (Not safely resolvable): 5 of 29,743 (0.02%)</title><path d="M729.9,134.0 h0.4 a0.4,0.4 0 0 1 0.4,0.4 v19.2 a0.4,0.4 0 0 1 -0.4,0.4 h-0.4 z" fill="#1baf7a"/></g><text x="730.0" y="166" font-size="10.5" text-anchor="end" fill="#52514e">C: 5</text><text x="240" y="193" font-size="12" text-anchor="end" fill="#1d1d1b">One row, several categories</text><text x="240" y="207" font-size="11" text-anchor="end" fill="#52514e">n = 573</text><g><title>One row, several categories, tier A (Directly structured): 567 of 573 (98.95%)</title><rect x="250.0" y="184.0" width="473.0" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="198" font-size="11" fill="#ffffff">99.0%</text><g><title>One row, several categories, tier B (Explicit rule needed): 6 of 573 (1.05%)</title><path d="M725.0,184.0 h2.5 a2.513089005235602,2.513089005235602 0 0 1 2.513089005235602,2.513089005235602 v15.0 a2.513089005235602,2.513089005235602 0 0 1 -2.513089005235602,2.513089005235602 h-2.5 z" fill="#eb6834"/></g><text x="240" y="243" font-size="12" text-anchor="end" fill="#1d1d1b">Several rows</text><text x="240" y="257" font-size="11" text-anchor="end" fill="#52514e">n = 13,399</text><g><title>Several rows, tier A (Directly structured): 7,758 of 13,399 (57.90%)</title><rect x="250.0" y="234.0" width="275.9" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="248" font-size="11" fill="#ffffff">57.9%</text><g><title>Several rows, tier B (Explicit rule needed): 5,641 of 13,399 (42.10%)</title><path d="M527.9,234.0 h198.1 a4,4 0 0 1 4,4 v12.0 a4,4 0 0 1 -4,4 h-198.1 z" fill="#eb6834"/></g><text x="533.9" y="248" font-size="11" fill="#ffffff">42.1%</text></svg></div>
-
-<p>Held-out portion; unit: applicable outcome group (n = 43,715). Tier A: one usable outcome-level participant count, no row-level counts, analysis in participants. Tier B: an explicit rule is needed, because the rows report their own numbers analyzed or the outcome is analyzed in another unit with the participant count held separately. Tier C: no participant count can be attached without unsupported inference. Tier D groups are excluded. Percentages are of the groups in each bar, and the number of tier C groups is printed beside the bars that have any. Source data: Additional file 4, sheet By structure.</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 1">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 304" width="100%" role="img" aria-labelledby="fig-tiers-t fig-tiers-d" style="max-width:760px;height:auto;font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, &#39;Helvetica Neue&#39;, Arial, sans-serif">
+<title id="fig-tiers-t">
+How each outcome group gets its participant denominator
+</title>
+<desc id="fig-tiers-d">Stacked bars showing the share of applicable held-out outcome groups in tiers A, B and C, overall and by outcome table structure.</desc><rect width="760" height="304" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">How each outcome group gets its participant denominator</text><text x="0" y="38" font-size="12.5" fill="#52514e">Held-out confirmed cohort, applicable outcome groups, by the structure of the outcome table.</text><rect x="250" y="52" width="12" height="12" rx="2" fill="#2a78d6"/><text x="267" y="62" font-size="12" fill="#1d1d1b">A: Directly structured</text><rect x="420" y="52" width="12" height="12" rx="2" fill="#eb6834"/><text x="437" y="62" font-size="12" fill="#1d1d1b">B: Explicit rule needed</text><rect x="590" y="52" width="12" height="12" rx="2" fill="#1baf7a"/><text x="607" y="62" font-size="12" fill="#1d1d1b">C: Not safely resolvable</text><text x="240" y="93" font-size="12" text-anchor="end" fill="#1d1d1b">All applicable outcome groups</text><text x="240" y="107" font-size="11" text-anchor="end" fill="#52514e">n = 43,715</text><g>
+<title>
+All applicable outcome groups, tier A (Directly structured): 37,592 of 43,715 (85.99%)
+</title>
+<rect x="250.0" y="84.0" width="410.8" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="98" font-size="11" fill="#ffffff">86.0%</text><g>
+<title>
+All applicable outcome groups, tier B (Explicit rule needed): 6,118 of 43,715 (14.00%)
+</title>
+<rect x="662.8" y="84.0" width="65.2" height="20.0" fill="#eb6834"/></g><text x="668.8" y="98" font-size="11" fill="#ffffff">14.0%</text><g>
+<title>
+All applicable outcome groups, tier C (Not safely resolvable): 5 of 43,715 (0.01%)
+</title>
+<path d="M729.9,84.0 h0.4 a0.4,0.4 0 0 1 0.4,0.4 v19.2 a0.4,0.4 0 0 1 -0.4,0.4 h-0.4 z" fill="#1baf7a"/></g><text x="730.0" y="116" font-size="10.5" text-anchor="end" fill="#52514e">C: 5</text><text x="240" y="143" font-size="12" text-anchor="end" fill="#1d1d1b">Single row</text><text x="240" y="157" font-size="11" text-anchor="end" fill="#52514e">n = 29,743</text><g>
+<title>
+Single row, tier A (Directly structured): 29,267 of 29,743 (98.40%)
+</title>
+<rect x="250.0" y="134.0" width="470.3" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="148" font-size="11" fill="#ffffff">98.4%</text><g>
+<title>
+Single row, tier B (Explicit rule needed): 471 of 29,743 (1.58%)
+</title>
+<rect x="722.3" y="134.0" width="5.6" height="20.0" fill="#eb6834"/></g><g>
+<title>
+Single row, tier C (Not safely resolvable): 5 of 29,743 (0.02%)
+</title>
+<path d="M729.9,134.0 h0.4 a0.4,0.4 0 0 1 0.4,0.4 v19.2 a0.4,0.4 0 0 1 -0.4,0.4 h-0.4 z" fill="#1baf7a"/></g><text x="730.0" y="166" font-size="10.5" text-anchor="end" fill="#52514e">C: 5</text><text x="240" y="193" font-size="12" text-anchor="end" fill="#1d1d1b">One row, several categories</text><text x="240" y="207" font-size="11" text-anchor="end" fill="#52514e">n = 573</text><g>
+<title>
+One row, several categories, tier A (Directly structured): 567 of 573 (98.95%)
+</title>
+<rect x="250.0" y="184.0" width="473.0" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="198" font-size="11" fill="#ffffff">99.0%</text><g>
+<title>
+One row, several categories, tier B (Explicit rule needed): 6 of 573 (1.05%)
+</title>
+<path d="M725.0,184.0 h2.5 a2.513089005235602,2.513089005235602 0 0 1 2.513089005235602,2.513089005235602 v15.0 a2.513089005235602,2.513089005235602 0 0 1 -2.513089005235602,2.513089005235602 h-2.5 z" fill="#eb6834"/></g><text x="240" y="243" font-size="12" text-anchor="end" fill="#1d1d1b">Several rows</text><text x="240" y="257" font-size="11" text-anchor="end" fill="#52514e">n = 13,399</text><g>
+<title>
+Several rows, tier A (Directly structured): 7,758 of 13,399 (57.90%)
+</title>
+<rect x="250.0" y="234.0" width="275.9" height="20.0" fill="#2a78d6"/></g><text x="256.0" y="248" font-size="11" fill="#ffffff">57.9%</text><g>
+<title>
+Several rows, tier B (Explicit rule needed): 5,641 of 13,399 (42.10%)
+</title>
+<path d="M527.9,234.0 h198.1 a4,4 0 0 1 4,4 v12.0 a4,4 0 0 1 -4,4 h-198.1 z" fill="#eb6834"/></g><text x="533.9" y="248" font-size="11" fill="#ffffff">42.1%</text>
+</svg>
+</div>
+<p>Held-out portion; unit: applicable outcome group (n = 43,715). Tier A: one usable outcome-level participant count, no row-level counts, analysis in participants. Tier B: an explicit rule is needed, because the rows report their own numbers analyzed or the outcome is analyzed in another unit with the participant count held separately. Tier C: no participant count can be attached without unsupported inference. Tier D groups are excluded. Percentages are of the groups in each bar, and the number of tier C groups is printed beside the bars that have any. Source data: Additional file 4, sheet By structure. Drawn by the study code (src/tra/figures.py in Additional file 3).</p>
+<p>At the measurement level, 62,373 of 97,756 measurements (63.8%) used the outcome-level count, 34,579 (35.4%) a row-level count, 799 (0.8%) the participant count of an outcome analyzed in another unit, and 5 measurements could not be given one. No held-out measurement fell under the missing-count, duplicate-entry, partial-row, other-unit-row or missing-unit rules (C1 and C3 to C6).</p>
 <p><strong>Table 2.</strong> Outcome-group tiers by outcome structure, analysis unit and condition group</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
@@ -230,19 +286,201 @@
 <p>The tier B share was 14.2% for diabetes, 14.6% for heart failure and 12.1% for obesity (Table 2) and 11.2% for primary outcomes (SA2); by results-first-posted year it ranged from 9.8% to 18.5% (Additional file 4). Resampling whole trials, an exploratory check, gave tier B shares between 11.7% and 16.3% in 95% of 2,000 replicates.</p>
 <p>Of posted outcomes, 12,978 of 18,805 (69.0%) had an analysis population description: 62.8% of primary and 71.9% of secondary outcomes.</p>
 <h3 id="what-a-flat-export-attaches">What a flat export attaches</h3>
-<p>For 62,363 of 97,756 measurements (63.8%) the flat export attached the count that applies (Figure 2). For 22,505 (23.0%) it attached the outcome-level count while the row reported a different number analyzed, and for 12,074 (12.4%) the row-level count happened to equal it. For 799 (0.8%) it attached a participant count to values reported per clinic, eye or other unit; that count is correct as a participant count, but it is not the denominator of those values. For the 5 measurements with no safe count, its count cell held the source text "NA", and 10 measurements could not be located uniquely in the flat file. In total, 23,309 measurements (23.8%) carried an entry that was not the most specific participant count, was not in the unit of the value, or was "NA". The 22,505 measurements whose row reported a different number analyzed came from 385 of the 1,911 held-out studies with posted values (20.1%); the ten studies contributing most accounted for 8,450 of them (37.5%), and among measurements of primary outcomes the share was 2,260 of 20,271 (11.1%); these three descriptions are post hoc. The flat export also had no row at all for 1,847 of 19,957 outcomes (9.3%): the 1,152 outcomes not yet posted and the 695 posted without values. No outcome with posted values lacked a row.</p>
+<p>For 62,363 of 97,756 measurements (63.8%), the flat export attached the count that applies (Figure 2). For 22,505 (23.0%) it attached the outcome-level count while the row reported a different number analyzed, and for 12,074 (12.4%) the row-level count happened to equal it. For 799 (0.8%) it attached a participant count to values reported per clinic, eye or other unit; that count is correct as a participant count, but it is not the denominator of those values. For the 5 measurements with no safe count, the export's count cell held the source text "NA", and 10 measurements could not be located uniquely in the flat file. In total, 23,309 measurements (23.8%) carried an entry that was not the most specific participant count, was not in the unit of the value, or was "NA". The 22,505 measurements whose row reported a different number analyzed came from 385 of the 1,911 held-out studies with posted values (20.1%) and 2,084 of the 18,110 outcomes with values (11.5%). The ten studies contributing most accounted for 8,450 of them (37.5%), and among measurements of primary outcomes the share was 2,260 of 20,271 (11.1%). These four descriptions are post hoc. The flat export also had no row at all for 1,847 of 19,957 outcomes (9.3%): the 1,152 outcomes not yet posted and the 695 posted without values. No outcome with posted values lacked a row.</p>
 <p><strong>Figure 2.</strong> Denominator attached by a flat export compared with the applicable participant denominator</p>
-<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="100%" role="img" aria-labelledby="fig-flatden-t fig-flatden-d" style="max-width:760px;height:auto;padding:12px;background:#fcfcfb;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"><title id="fig-flatden-t">Denominator attached by the flat export</title><desc id="fig-flatden-d">Bar chart of 97,756 held-out outcome measurements by how the denominator attached by the flat export compares with the applicable participant denominator under the written rules.</desc><rect width="760" height="460" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">Denominator attached by the flat export, per measurement</text><text x="0" y="38" font-size="12.5" fill="#52514e">Held-out confirmed cohort; n = 97,756 outcome measurements. Orange marks bars where the attached count is not, or</text><text x="0" y="54" font-size="12.5" fill="#52514e">cannot be shown to be, the denominator of the value: the row has its own, different number analyzed, the values are</text><text x="0" y="70" font-size="12.5" fill="#52514e">per another unit, no count can be attached safely, or the value cannot be located uniquely.</text><text x="290" y="102" font-size="12" text-anchor="end" fill="#1d1d1b">Outcome-level count applies, and the flat</text><text x="290" y="116" font-size="12" text-anchor="end" fill="#1d1d1b">export attaches it</text><g><title>Outcome-level count applies, and the flat export attaches it: 62,363 of 97,756 measurements (63.8%)</title><path d="M300.0,94.0 h336.0 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-336.0 z" fill="#a9a8a2"/></g><text x="646.0" y="109.0" font-size="12" fill="#1d1d1b">62,363 (63.8%)</text><text x="290" y="150" font-size="12" text-anchor="end" fill="#1d1d1b">Outcome-level count applies, but a different</text><text x="290" y="164" font-size="12" text-anchor="end" fill="#1d1d1b">count is attached</text><text x="306.0" y="157.0" font-size="12" fill="#1d1d1b">0 (0.0%)</text><text x="290" y="198" font-size="12" text-anchor="end" fill="#1d1d1b">Row-level count applies; same value as the</text><text x="290" y="212" font-size="12" text-anchor="end" fill="#1d1d1b">attached outcome-level count</text><g><title>Row-level count applies; same value as the attached outcome-level count: 12,074 of 97,756 measurements (12.4%)</title><path d="M300.0,190.0 h61.8 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-61.8 z" fill="#a9a8a2"/></g><text x="371.8" y="205.0" font-size="12" fill="#1d1d1b">12,074 (12.4%)</text><text x="290" y="246" font-size="12" text-anchor="end" fill="#1d1d1b">Row-level count applies and differs from the</text><text x="290" y="260" font-size="12" text-anchor="end" fill="#1d1d1b">attached outcome-level count</text><g><title>Row-level count applies and differs from the attached outcome-level count: 22,505 of 97,756 measurements (23.0%)</title><path d="M300.0,238.0 h118.7 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-118.7 z" fill="#eb6834"/></g><text x="428.7" y="253.0" font-size="12" fill="#1d1d1b">22,505 (23.0%)</text><text x="290" y="294" font-size="12" text-anchor="end" fill="#1d1d1b">Values are per another unit (clinics, eyes,</text><text x="290" y="308" font-size="12" text-anchor="end" fill="#1d1d1b">samples); a participant count is attached</text><g><title>Values are per another unit (clinics, eyes, samples); a participant count is attached: 799 of 97,756 measurements (0.8%)</title><path d="M300.0,286.0 h2.2 a2.178054295014672,2.178054295014672 0 0 1 2.178054295014672,2.178054295014672 v17.6 a2.178054295014672,2.178054295014672 0 0 1 -2.178054295014672,2.178054295014672 h-2.2 z" fill="#eb6834"/></g><text x="310.4" y="301.0" font-size="12" fill="#1d1d1b">799 (0.8%)</text><text x="290" y="342" font-size="12" text-anchor="end" fill="#1d1d1b">No safe participant count; the flat export</text><text x="290" y="356" font-size="12" text-anchor="end" fill="#1d1d1b">cell holds &quot;NA&quot;</text><g><title>No safe participant count; the flat export cell holds &quot;NA&quot;: 5 of 97,756 measurements (&lt;0.1%)</title><path d="M300.0,334.0 h0.0 a0.013629876689703831,0.013629876689703831 0 0 1 0.013629876689703831,0.013629876689703831 v22.0 a0.013629876689703831,0.013629876689703831 0 0 1 -0.013629876689703831,0.013629876689703831 h-0.0 z" fill="#eb6834"/></g><text x="306.0" y="349.0" font-size="12" fill="#1d1d1b">5 (&lt;0.1%)</text><text x="290" y="390" font-size="12" text-anchor="end" fill="#1d1d1b">Value cannot be located uniquely in the flat</text><text x="290" y="404" font-size="12" text-anchor="end" fill="#1d1d1b">file</text><g><title>Value cannot be located uniquely in the flat file: 10 of 97,756 measurements (&lt;0.1%)</title><path d="M300.0,382.0 h0.0 a0.027259753379407663,0.027259753379407663 0 0 1 0.027259753379407663,0.027259753379407663 v21.9 a0.027259753379407663,0.027259753379407663 0 0 1 -0.027259753379407663,0.027259753379407663 h-0.0 z" fill="#eb6834"/></g><text x="306.1" y="397.0" font-size="12" fill="#1d1d1b">10 (&lt;0.1%)</text><line x1="300" y1="88" x2="300" y2="438" stroke="#b9b8b2" stroke-width="1"/></svg></div>
-
-<p>Held-out portion; unit: measurement (n = 97,756). Each bar counts measurements by how the outcome-level participant count attached by the declared flat export compares with the most specific participant denominator under the written rules. Orange bars mark measurements for which the attached count is not, or cannot be shown to be, the applicable denominator: the row reported its own, different number analyzed, the values are per another unit, no participant count can be attached safely, or the value could not be located uniquely in the flat file (10 tier A measurements, not included in the 23,309 measurements given in the text). The second bar is empty because, wherever the outcome-level count applied and the value could be located, the flat export attached it. Source data: Additional file 4, sheet Flat denominators.</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 2">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="100%" role="img" aria-labelledby="fig-flatden-t fig-flatden-d" style="max-width:760px;height:auto;font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, &#39;Helvetica Neue&#39;, Arial, sans-serif">
+<title id="fig-flatden-t">
+Denominator attached by the flat export
+</title>
+<desc id="fig-flatden-d">Bar chart of 97,756 held-out outcome measurements by how the denominator attached by the flat export compares with the applicable participant denominator under the written rules.</desc><rect width="760" height="460" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">Denominator attached by the flat export, per measurement</text><text x="0" y="38" font-size="12.5" fill="#52514e">Held-out confirmed cohort; n = 97,756 outcome measurements. Orange marks bars where the attached count is not, or</text><text x="0" y="54" font-size="12.5" fill="#52514e">cannot be shown to be, the denominator of the value: the row has its own, different number analyzed, the values are</text><text x="0" y="70" font-size="12.5" fill="#52514e">per another unit, no count can be attached safely, or the value cannot be located uniquely.</text><text x="290" y="102" font-size="12" text-anchor="end" fill="#1d1d1b">Outcome-level count applies, and the flat</text><text x="290" y="116" font-size="12" text-anchor="end" fill="#1d1d1b">export attaches it</text><g>
+<title>
+Outcome-level count applies, and the flat export attaches it: 62,363 of 97,756 measurements (63.8%)
+</title>
+<path d="M300.0,94.0 h336.0 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-336.0 z" fill="#a9a8a2"/></g><text x="646.0" y="109.0" font-size="12" fill="#1d1d1b">62,363 (63.8%)</text><text x="290" y="150" font-size="12" text-anchor="end" fill="#1d1d1b">Outcome-level count applies, but a different</text><text x="290" y="164" font-size="12" text-anchor="end" fill="#1d1d1b">count is attached</text><text x="306.0" y="157.0" font-size="12" fill="#1d1d1b">0 (0.0%)</text><text x="290" y="198" font-size="12" text-anchor="end" fill="#1d1d1b">Row-level count applies; same value as the</text><text x="290" y="212" font-size="12" text-anchor="end" fill="#1d1d1b">attached outcome-level count</text><g>
+<title>
+Row-level count applies; same value as the attached outcome-level count: 12,074 of 97,756 measurements (12.4%)
+</title>
+<path d="M300.0,190.0 h61.8 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-61.8 z" fill="#a9a8a2"/></g><text x="371.8" y="205.0" font-size="12" fill="#1d1d1b">12,074 (12.4%)</text><text x="290" y="246" font-size="12" text-anchor="end" fill="#1d1d1b">Row-level count applies and differs from the</text><text x="290" y="260" font-size="12" text-anchor="end" fill="#1d1d1b">attached outcome-level count</text><g>
+<title>
+Row-level count applies and differs from the attached outcome-level count: 22,505 of 97,756 measurements (23.0%)
+</title>
+<path d="M300.0,238.0 h118.7 a4,4 0 0 1 4,4 v14.0 a4,4 0 0 1 -4,4 h-118.7 z" fill="#eb6834"/></g><text x="428.7" y="253.0" font-size="12" fill="#1d1d1b">22,505 (23.0%)</text><text x="290" y="294" font-size="12" text-anchor="end" fill="#1d1d1b">Values are per another unit (clinics, eyes,</text><text x="290" y="308" font-size="12" text-anchor="end" fill="#1d1d1b">samples); a participant count is attached</text><g>
+<title>
+Values are per another unit (clinics, eyes, samples); a participant count is attached: 799 of 97,756 measurements (0.8%)
+</title>
+<path d="M300.0,286.0 h2.2 a2.178054295014672,2.178054295014672 0 0 1 2.178054295014672,2.178054295014672 v17.6 a2.178054295014672,2.178054295014672 0 0 1 -2.178054295014672,2.178054295014672 h-2.2 z" fill="#eb6834"/></g><text x="310.4" y="301.0" font-size="12" fill="#1d1d1b">799 (0.8%)</text><text x="290" y="342" font-size="12" text-anchor="end" fill="#1d1d1b">No safe participant count; the flat export</text><text x="290" y="356" font-size="12" text-anchor="end" fill="#1d1d1b">cell holds "NA"</text><g>
+<title>
+No safe participant count; the flat export cell holds "NA": 5 of 97,756 measurements (&lt;0.1%)
+</title>
+<path d="M300.0,334.0 h0.0 a0.013629876689703831,0.013629876689703831 0 0 1 0.013629876689703831,0.013629876689703831 v22.0 a0.013629876689703831,0.013629876689703831 0 0 1 -0.013629876689703831,0.013629876689703831 h-0.0 z" fill="#eb6834"/></g><text x="306.0" y="349.0" font-size="12" fill="#1d1d1b">5 (&lt;0.1%)</text><text x="290" y="390" font-size="12" text-anchor="end" fill="#1d1d1b">Value cannot be located uniquely in the flat</text><text x="290" y="404" font-size="12" text-anchor="end" fill="#1d1d1b">file</text><g>
+<title>
+Value cannot be located uniquely in the flat file: 10 of 97,756 measurements (&lt;0.1%)
+</title>
+<path d="M300.0,382.0 h0.0 a0.027259753379407663,0.027259753379407663 0 0 1 0.027259753379407663,0.027259753379407663 v21.9 a0.027259753379407663,0.027259753379407663 0 0 1 -0.027259753379407663,0.027259753379407663 h-0.0 z" fill="#eb6834"/></g><text x="306.1" y="397.0" font-size="12" fill="#1d1d1b">10 (&lt;0.1%)</text><line x1="300" y1="88" x2="300" y2="438" stroke="#b9b8b2" stroke-width="1"/>
+</svg>
+</div>
+<p>Held-out portion; unit: measurement (n = 97,756). Each bar counts measurements by how the outcome-level participant count attached by the declared flat export compares with the most specific participant denominator under the written rules. Orange bars mark measurements for which the attached count is not, or cannot be shown to be, the applicable denominator: the row reports its own, different number analyzed, the values are per another unit, no participant count can be attached safely, or the value cannot be located uniquely in the flat file (10 tier A measurements, not included in the 23,309 measurements given in the text). The second bar is empty because, wherever the outcome-level count applied and the value could be located, the flat export attached it. Source data: Additional file 4, sheet Flat denominators. Drawn by the study code (src/tra/figures.py in Additional file 3).</p>
 <h3 id="information-retained-by-each-representation">Information retained by each representation</h3>
 <p>The warehouse returned every in-scope source value exactly. Of the 1,342,202 source values in the modules the flat export attempts, the flat export returned 1,162,192 (86.6%) exactly and under an unambiguous context (Figure 3, Table 3). Its losses were concentrated: it had no place for row-level denominators (78,727 values), baseline measure and row denominators (31,040), reasons participants did not complete (26,253) or outcome denominators in other units, and it lost the groups and fields of outcomes without value rows. Fields of the measurements themselves (group identifier, value, spread, limits and comments) were nearly always recoverable (&gt;99.9%), as were statistical analyses (100.0%), although 70,892 of the 101,757 analysis values (69.7%), in 1,805 outcomes with two or more analyses, could be matched only by their order (post hoc). Adverse events (1,160,134 values) are outside this flat export and were kept in full by the warehouse.</p>
 <p><strong>Figure 3.</strong> Source values returned with identical text, by field family and representation</p>
-<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 578" width="100%" role="img" aria-labelledby="fig-retention-t fig-retention-d" style="max-width:760px;height:auto;padding:12px;background:#fcfcfb;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"><title id="fig-retention-t">Source values returned exactly, by field family</title><desc id="fig-retention-d">Dot plot comparing, for each family of source fields, the percent of source values returned exactly by the relational warehouse and by the flat export.</desc><rect width="760" height="578" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">Source values each representation returns exactly, by field family</text><text x="0" y="38" font-size="12.5" fill="#52514e">Percent of source scalars in the held-out confirmed cohort. Adverse events and the more-information module are left</text><text x="0" y="54" font-size="12.5" fill="#52514e">out because the flat export does not attempt them.</text><circle cx="330" cy="78" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/><text x="340" y="82" font-size="12" fill="#1d1d1b">Relational warehouse</text><circle cx="490" cy="78" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/><text x="500" y="82" font-size="12" fill="#1d1d1b">Flat export</text><line x1="330.0" y1="88" x2="330.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="330.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">0%</text><line x1="427.5" y1="88" x2="427.5" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="427.5" y="554" font-size="11" text-anchor="middle" fill="#52514e">25%</text><line x1="525.0" y1="88" x2="525.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="525.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">50%</text><line x1="622.5" y1="88" x2="622.5" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="622.5" y="554" font-size="11" text-anchor="middle" fill="#52514e">75%</text><line x1="720.0" y1="88" x2="720.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="720.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">100%</text><text x="318" y="113.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measure and row denominators</text><line x1="330.0" y1="109.0" x2="720.0" y2="109.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: measure and row denominators, flat export: 0 of 31,040 (0.0%)</title><circle cx="330.0" cy="109.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: measure and row denominators, warehouse: 31,040 of 31,040 (100.0%)</title><circle cx="720.0" cy="109.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="102.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="139.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: row-level denominators</text><line x1="330.0" y1="135.0" x2="720.0" y2="135.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: row-level denominators, flat export: 0 of 78,727 (0.0%)</title><circle cx="330.0" cy="135.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: row-level denominators, warehouse: 78,727 of 78,727 (100.0%)</title><circle cx="720.0" cy="135.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="128.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="165.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: reasons not completed</text><line x1="330.0" y1="161.0" x2="720.0" y2="161.0" stroke="#b9b8b2" stroke-width="2"/><g><title>participant flow: reasons not completed, flat export: 0 of 26,253 (0.0%)</title><circle cx="330.0" cy="161.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>participant flow: reasons not completed, warehouse: 26,253 of 26,253 (100.0%)</title><circle cx="720.0" cy="161.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="154.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="191.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: outcome-level denominators</text><line x1="635.9" y1="187.0" x2="720.0" y2="187.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: outcome-level denominators, flat export: 87,418 of 111,467 (78.4%)</title><circle cx="635.9" cy="187.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: outcome-level denominators, warehouse: 111,467 of 111,467 (100.0%)</title><circle cx="720.0" cy="187.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="626.9" y="180.0" font-size="10.5" text-anchor="end" fill="#52514e">78.4%</text><text x="318" y="217.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: overall denominators</text><line x1="662.2" y1="213.0" x2="720.0" y2="213.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: overall denominators, flat export: 12,248 of 14,378 (85.2%)</title><circle cx="662.2" cy="213.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: overall denominators, warehouse: 14,378 of 14,378 (100.0%)</title><circle cx="720.0" cy="213.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="653.2" y="206.0" font-size="10.5" text-anchor="end" fill="#52514e">85.2%</text><text x="318" y="243.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: measure-level fields</text><line x1="693.4" y1="239.0" x2="720.0" y2="239.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: measure-level fields, flat export: 152,628 of 163,792 (93.2%)</title><circle cx="693.4" cy="239.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: measure-level fields, warehouse: 163,792 of 163,792 (100.0%)</title><circle cx="720.0" cy="239.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="684.4" y="232.0" font-size="10.5" text-anchor="end" fill="#52514e">93.2%</text><text x="318" y="269.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: groups</text><line x1="703.8" y1="265.0" x2="720.0" y2="265.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: groups, flat export: 131,117 of 136,790 (95.9%)</title><circle cx="703.8" cy="265.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: groups, warehouse: 136,790 of 136,790 (100.0%)</title><circle cx="720.0" cy="265.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="295.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: groups</text><line x1="716.8" y1="291.0" x2="720.0" y2="291.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: groups, flat export: 18,370 of 18,520 (99.2%)</title><circle cx="716.8" cy="291.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: groups, warehouse: 18,520 of 18,520 (100.0%)</title><circle cx="720.0" cy="291.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="321.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measure and module fields</text><line x1="717.4" y1="317.0" x2="720.0" y2="317.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: measure and module fields, flat export: 48,285 of 48,607 (99.3%)</title><circle cx="717.4" cy="317.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: measure and module fields, warehouse: 48,607 of 48,607 (100.0%)</title><circle cx="720.0" cy="317.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="347.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: class and category titles</text><line x1="718.2" y1="343.0" x2="720.0" y2="343.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: class and category titles, flat export: 25,645 of 25,764 (99.5%)</title><circle cx="718.2" cy="343.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: class and category titles, warehouse: 25,764 of 25,764 (100.0%)</title><circle cx="720.0" cy="343.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="373.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: class and category titles</text><line x1="719.0" y1="369.0" x2="720.0" y2="369.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: class and category titles, flat export: 28,141 of 28,212 (99.7%)</title><circle cx="719.0" cy="369.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: class and category titles, warehouse: 28,212 of 28,212 (100.0%)</title><circle cx="720.0" cy="369.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="399.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: milestone counts</text><line x1="719.2" y1="395.0" x2="720.0" y2="395.0" stroke="#b9b8b2" stroke-width="2"/><g><title>participant flow: milestone counts, flat export: 46,559 of 46,655 (99.8%)</title><circle cx="719.2" cy="395.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>participant flow: milestone counts, warehouse: 46,655 of 46,655 (100.0%)</title><circle cx="720.0" cy="395.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="425.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: periods, milestones and module fields</text><line x1="719.4" y1="421.0" x2="720.0" y2="421.0" stroke="#b9b8b2" stroke-width="2"/><g><title>participant flow: periods, milestones and module fields, flat export: 12,815 of 12,835 (99.8%)</title><circle cx="719.4" cy="421.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>participant flow: periods, milestones and module fields, warehouse: 12,835 of 12,835 (100.0%)</title><circle cx="720.0" cy="421.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="451.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measurement fields</text><line x1="719.7" y1="447.0" x2="720.0" y2="447.0" stroke="#b9b8b2" stroke-width="2"/><g><title>baseline: measurement fields, flat export: 211,608 of 211,784 (99.9%)</title><circle cx="719.7" cy="447.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>baseline: measurement fields, warehouse: 211,784 of 211,784 (100.0%)</title><circle cx="720.0" cy="447.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="477.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: measurement fields</text><line x1="720.0" y1="473.0" x2="720.0" y2="473.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: measurement fields, flat export: 270,926 of 270,946 (&gt;99.9%)</title><circle cx="720.0" cy="473.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: measurement fields, warehouse: 270,946 of 270,946 (100.0%)</title><circle cx="720.0" cy="473.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="503.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: statistical analyses</text><line x1="720.0" y1="499.0" x2="720.0" y2="499.0" stroke="#b9b8b2" stroke-width="2"/><g><title>outcome: statistical analyses, flat export: 101,757 of 101,757 (100.0%)</title><circle cx="720.0" cy="499.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>outcome: statistical analyses, warehouse: 101,757 of 101,757 (100.0%)</title><circle cx="720.0" cy="499.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="529.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: groups</text><line x1="720.0" y1="525.0" x2="720.0" y2="525.0" stroke="#b9b8b2" stroke-width="2"/><g><title>participant flow: groups, flat export: 14,675 of 14,675 (100.0%)</title><circle cx="720.0" cy="525.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g><title>participant flow: groups, warehouse: 14,675 of 14,675 (100.0%)</title><circle cx="720.0" cy="525.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g></svg></div>
-
-<p>Held-out portion; unit: source scalar. Blue: relational warehouse; orange: declared flat export. A value counts as returned when exactly one row matches its full context and a cell holds the identical text; statistical analyses, which have no context below their outcome, were matched by order within the outcome. Adverse events and the more-information module are omitted because the flat export does not attempt them. Where both representations are at or near 100% the dots overlap; exact percentages are in Table 3. Source data: Additional file 4, sheet Retention.</p>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure 3">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 578" width="100%" role="img" aria-labelledby="fig-retention-t fig-retention-d" style="max-width:760px;height:auto;font-family:-apple-system, BlinkMacSystemFont, &#39;Segoe UI&#39;, Roboto, &#39;Helvetica Neue&#39;, Arial, sans-serif">
+<title id="fig-retention-t">
+Source values returned exactly, by field family
+</title>
+<desc id="fig-retention-d">Dot plot comparing, for each family of source fields, the percent of source values returned exactly by the relational warehouse and by the flat export.</desc><rect width="760" height="578" fill="#fcfcfb"/><text x="0" y="18" font-size="15" font-weight="600" fill="#1d1d1b">Source values each representation returns exactly, by field family</text><text x="0" y="38" font-size="12.5" fill="#52514e">Percent of source scalars in the held-out confirmed cohort. Adverse events and the more-information module are left</text><text x="0" y="54" font-size="12.5" fill="#52514e">out because the flat export does not attempt them.</text><circle cx="330" cy="78" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/><text x="340" y="82" font-size="12" fill="#1d1d1b">Relational warehouse</text><circle cx="490" cy="78" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/><text x="500" y="82" font-size="12" fill="#1d1d1b">Flat export</text><line x1="330.0" y1="88" x2="330.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="330.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">0%</text><line x1="427.5" y1="88" x2="427.5" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="427.5" y="554" font-size="11" text-anchor="middle" fill="#52514e">25%</text><line x1="525.0" y1="88" x2="525.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="525.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">50%</text><line x1="622.5" y1="88" x2="622.5" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="622.5" y="554" font-size="11" text-anchor="middle" fill="#52514e">75%</text><line x1="720.0" y1="88" x2="720.0" y2="538" stroke="#e4e3df" stroke-width="1"/><text x="720.0" y="554" font-size="11" text-anchor="middle" fill="#52514e">100%</text><text x="318" y="113.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measure and row denominators</text><line x1="330.0" y1="109.0" x2="720.0" y2="109.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: measure and row denominators, flat export: 0 of 31,040 (0.0%)
+</title>
+<circle cx="330.0" cy="109.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: measure and row denominators, warehouse: 31,040 of 31,040 (100.0%)
+</title>
+<circle cx="720.0" cy="109.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="102.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="139.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: row-level denominators</text><line x1="330.0" y1="135.0" x2="720.0" y2="135.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: row-level denominators, flat export: 0 of 78,727 (0.0%)
+</title>
+<circle cx="330.0" cy="135.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: row-level denominators, warehouse: 78,727 of 78,727 (100.0%)
+</title>
+<circle cx="720.0" cy="135.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="128.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="165.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: reasons not completed</text><line x1="330.0" y1="161.0" x2="720.0" y2="161.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+participant flow: reasons not completed, flat export: 0 of 26,253 (0.0%)
+</title>
+<circle cx="330.0" cy="161.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+participant flow: reasons not completed, warehouse: 26,253 of 26,253 (100.0%)
+</title>
+<circle cx="720.0" cy="161.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="339.0" y="154.0" font-size="10.5" text-anchor="start" fill="#52514e">0.0%</text><text x="318" y="191.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: outcome-level denominators</text><line x1="635.9" y1="187.0" x2="720.0" y2="187.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: outcome-level denominators, flat export: 87,418 of 111,467 (78.4%)
+</title>
+<circle cx="635.9" cy="187.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: outcome-level denominators, warehouse: 111,467 of 111,467 (100.0%)
+</title>
+<circle cx="720.0" cy="187.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="626.9" y="180.0" font-size="10.5" text-anchor="end" fill="#52514e">78.4%</text><text x="318" y="217.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: overall denominators</text><line x1="662.2" y1="213.0" x2="720.0" y2="213.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: overall denominators, flat export: 12,248 of 14,378 (85.2%)
+</title>
+<circle cx="662.2" cy="213.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: overall denominators, warehouse: 14,378 of 14,378 (100.0%)
+</title>
+<circle cx="720.0" cy="213.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="653.2" y="206.0" font-size="10.5" text-anchor="end" fill="#52514e">85.2%</text><text x="318" y="243.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: measure-level fields</text><line x1="693.4" y1="239.0" x2="720.0" y2="239.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: measure-level fields, flat export: 152,628 of 163,792 (93.2%)
+</title>
+<circle cx="693.4" cy="239.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: measure-level fields, warehouse: 163,792 of 163,792 (100.0%)
+</title>
+<circle cx="720.0" cy="239.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="684.4" y="232.0" font-size="10.5" text-anchor="end" fill="#52514e">93.2%</text><text x="318" y="269.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: groups</text><line x1="703.8" y1="265.0" x2="720.0" y2="265.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: groups, flat export: 131,117 of 136,790 (95.9%)
+</title>
+<circle cx="703.8" cy="265.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: groups, warehouse: 136,790 of 136,790 (100.0%)
+</title>
+<circle cx="720.0" cy="265.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="295.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: groups</text><line x1="716.8" y1="291.0" x2="720.0" y2="291.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: groups, flat export: 18,370 of 18,520 (99.2%)
+</title>
+<circle cx="716.8" cy="291.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: groups, warehouse: 18,520 of 18,520 (100.0%)
+</title>
+<circle cx="720.0" cy="291.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="321.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measure and module fields</text><line x1="717.4" y1="317.0" x2="720.0" y2="317.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: measure and module fields, flat export: 48,285 of 48,607 (99.3%)
+</title>
+<circle cx="717.4" cy="317.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: measure and module fields, warehouse: 48,607 of 48,607 (100.0%)
+</title>
+<circle cx="720.0" cy="317.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="347.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: class and category titles</text><line x1="718.2" y1="343.0" x2="720.0" y2="343.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: class and category titles, flat export: 25,645 of 25,764 (99.5%)
+</title>
+<circle cx="718.2" cy="343.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: class and category titles, warehouse: 25,764 of 25,764 (100.0%)
+</title>
+<circle cx="720.0" cy="343.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="373.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: class and category titles</text><line x1="719.0" y1="369.0" x2="720.0" y2="369.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: class and category titles, flat export: 28,141 of 28,212 (99.7%)
+</title>
+<circle cx="719.0" cy="369.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: class and category titles, warehouse: 28,212 of 28,212 (100.0%)
+</title>
+<circle cx="720.0" cy="369.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="399.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: milestone counts</text><line x1="719.2" y1="395.0" x2="720.0" y2="395.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+participant flow: milestone counts, flat export: 46,559 of 46,655 (99.8%)
+</title>
+<circle cx="719.2" cy="395.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+participant flow: milestone counts, warehouse: 46,655 of 46,655 (100.0%)
+</title>
+<circle cx="720.0" cy="395.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="425.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: periods, milestones and module fields</text><line x1="719.4" y1="421.0" x2="720.0" y2="421.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+participant flow: periods, milestones and module fields, flat export: 12,815 of 12,835 (99.8%)
+</title>
+<circle cx="719.4" cy="421.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+participant flow: periods, milestones and module fields, warehouse: 12,835 of 12,835 (100.0%)
+</title>
+<circle cx="720.0" cy="421.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="451.0" font-size="12" text-anchor="end" fill="#1d1d1b">baseline: measurement fields</text><line x1="719.7" y1="447.0" x2="720.0" y2="447.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+baseline: measurement fields, flat export: 211,608 of 211,784 (99.9%)
+</title>
+<circle cx="719.7" cy="447.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+baseline: measurement fields, warehouse: 211,784 of 211,784 (100.0%)
+</title>
+<circle cx="720.0" cy="447.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="477.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: measurement fields</text><line x1="720.0" y1="473.0" x2="720.0" y2="473.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: measurement fields, flat export: 270,926 of 270,946 (&gt;99.9%)
+</title>
+<circle cx="720.0" cy="473.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: measurement fields, warehouse: 270,946 of 270,946 (100.0%)
+</title>
+<circle cx="720.0" cy="473.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="503.0" font-size="12" text-anchor="end" fill="#1d1d1b">outcome: statistical analyses</text><line x1="720.0" y1="499.0" x2="720.0" y2="499.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+outcome: statistical analyses, flat export: 101,757 of 101,757 (100.0%)
+</title>
+<circle cx="720.0" cy="499.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+outcome: statistical analyses, warehouse: 101,757 of 101,757 (100.0%)
+</title>
+<circle cx="720.0" cy="499.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g><text x="318" y="529.0" font-size="12" text-anchor="end" fill="#1d1d1b">participant flow: groups</text><line x1="720.0" y1="525.0" x2="720.0" y2="525.0" stroke="#b9b8b2" stroke-width="2"/><g>
+<title>
+participant flow: groups, flat export: 14,675 of 14,675 (100.0%)
+</title>
+<circle cx="720.0" cy="525.0" r="5" fill="#eb6834" stroke="#fcfcfb" stroke-width="2"/></g><g>
+<title>
+participant flow: groups, warehouse: 14,675 of 14,675 (100.0%)
+</title>
+<circle cx="720.0" cy="525.0" r="5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"/></g>
+</svg>
+</div>
+<p>Held-out portion; unit: source scalar. Blue: relational warehouse; orange: declared flat export. A value counts as returned when exactly one row matches its full context and a cell holds the identical text; statistical analyses, which have no context below their outcome, were matched by order within the outcome. Adverse events and the more-information module are omitted because the flat export does not attempt them. Where both representations are at or near 100% the dots overlap; exact percentages are in Table 3. Source data: Additional file 4, sheet Retention. Drawn by the study code (src/tra/figures.py in Additional file 3).</p>
 <p><strong>Table 3.</strong> Exact-text retention of source values by field family</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
 <thead>
 <tr>
 <th>Field family</th>
@@ -470,13 +708,19 @@
 </table></div></div>
 <p>Unit: source scalar. Warehouse and Flat export: percentage of in-scope source values returned with identical text under an unambiguous context. The four loss columns count the values the flat export does not return: not attempted, the module is outside the flat export (adverse events, more information); no column, the flat export has no field for the value; no row, the value's parent has no row in the flat file; ambiguous, more than one flat row matches the value's context.</p>
 <h3 id="warehouse-fidelity">Warehouse fidelity</h3>
-<p>The warehouse held every one of the 2,502,817 in-scope source scalars with identical text at the same JSON pointer, with no extra values; 11,982 source scalars in the point-of-contact and certain-agreement blocks were excluded by design. Object counts agreed for all 33 array types (924,616 objects). The R reference and the Structured Query Language (SQL) views agreed on tier, rule, participant denominator and unit denominator for all 97,756 measurements and on the tier and rules of all 45,600 outcome groups, tier D included. All 9,805 results modules rebuilt from the warehouse were identical to the source, and the evidence view returned exactly one row per measurement (Table 4). No study had to be set aside at load (Table 1). The manual verification described in Methods found no discrepancy between the warehouse outputs and the public record pages or the exported tables, and every reference matched its DOI, PubMed record or web page.</p>
+<p>The warehouse held every one of the 2,502,817 in-scope source scalars with identical text at the same JSON pointer, with no extra values; 11,982 source scalars in the point-of-contact and certain-agreement blocks were excluded by design. Object counts agreed for all 33 array types (924,616 objects). The R reference and the SQL views agreed on tier, rule, participant denominator and unit denominator for all 97,756 measurements and on the tier and rules of all 45,600 outcome groups, tier D included. All 9,805 results modules rebuilt from the warehouse were identical to the source, and the evidence view returned exactly one row per measurement (Table 4). No study had to be set aside at load (Table 1). Animesh Bose reported no discrepancy from the checks described in Methods, and the automated re-fetch found the results sections of the 32 studies involved unchanged since the snapshot.</p>
 <p><strong>Table 4.</strong> Warehouse fidelity checks in the held-out portion</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
 <thead>
 <tr>
 <th>Check</th>
-<th>Unit</th>
+<th style="text-align: right;">Unit</th>
 <th style="text-align: right;">Agreeing</th>
 <th style="text-align: right;">Total</th>
 </tr>
@@ -484,43 +728,51 @@
 <tbody>
 <tr>
 <td>Source scalars present with identical text at the same pointer</td>
-<td>source scalar</td>
+<td style="text-align: right;">source scalar</td>
 <td style="text-align: right;">2,502,817</td>
 <td style="text-align: right;">2,502,817</td>
 </tr>
 <tr>
 <td>SQL and R agree on tier, rule and denominators</td>
-<td>measurement</td>
+<td style="text-align: right;">measurement</td>
 <td style="text-align: right;">97,756</td>
 <td style="text-align: right;">97,756</td>
 </tr>
 <tr>
 <td>SQL and R agree on outcome-group tier and rules</td>
-<td>outcome group</td>
+<td style="text-align: right;">outcome group</td>
 <td style="text-align: right;">45,600</td>
 <td style="text-align: right;">45,600</td>
 </tr>
 <tr>
 <td>Results module rebuilt identically</td>
-<td>study module</td>
+<td style="text-align: right;">study module</td>
 <td style="text-align: right;">9,805</td>
 <td style="text-align: right;">9,805</td>
 </tr>
 <tr>
 <td>Evidence view rows per measurement</td>
-<td>measurement</td>
+<td style="text-align: right;">measurement</td>
 <td style="text-align: right;">97,756</td>
 <td style="text-align: right;">97,756</td>
 </tr>
 </tbody>
 </table></div></div>
-<p>The reference is a separate R program that reads the raw registry pages. Agreeing: items that match in the comparison named in each row, namely the warehouse against the reference's enumeration of the source, the SQL views against the R reference, the rebuilt module against the source record, and exactly one evidence-view row per measurement.</p>
+<p>The reference is a second implementation, in R, that reads the raw registry pages. Agreeing: items that match in the comparison named in each row, namely the warehouse against the reference's enumeration of the source, the SQL views against the R reference, the rebuilt module against the source record, and exactly one evidence-view row per measurement.</p>
 <h3 id="same-labels-across-modules-do-not-mean-the-same-population">Same labels across modules do not mean the same population</h3>
-<p>Of 43,715 outcome groups with values, 34,788 (79.6%) had exactly one baseline group with an identical title. Where both counts were usable, the outcome's participant count differed from the matching baseline group's count for 18,645 of 34,784 (53.6%) outcome groups. Within studies, the code OG000 named differently titled groups in different outcomes in 377 of 1,770 studies (21.3%) that used it in two or more outcomes. Joining modules or outcomes by group code or title would therefore often attach a count from a different group or analysis population. The same fact can also sit in more than one module, as Earley and colleagues showed for deaths [27]. The warehouse lists same-titled baseline groups for context but does not link them.</p>
+<p>Of the 43,715 applicable outcome groups, 34,788 (79.6%) had exactly one baseline group with an identical title. Where both counts were usable, the outcome's participant count differed from the matching baseline group's count for 18,645 of 34,784 (53.6%) outcome groups. Within studies, the code OG000 named differently titled groups in different outcomes in 377 of 1,770 studies (21.3%) that used it in two or more outcomes. Joining modules or outcomes by group code or title would therefore often attach a count from a different group or analysis population. The same fact can also sit in more than one module, as Earley and colleagues showed for deaths [30]. The warehouse lists same-titled baseline groups for context but does not link them.</p>
 <h3 id="possible-source-inconsistencies">Possible source inconsistencies</h3>
 <p>The twelve checks were applicable 536,743 times; 314 applicable checks were not evaluable, almost all because a value was not a plain number and the rest because an interval's limits were out of order (reported by the limit-order check instead). In total, 16 checks failed (Table 5): 13 values in 3 studies, labeled as percentages of participants, were negative and may be percentage changes reported under that unit; one confidence interval had its lower limit above its upper limit; one median lay outside its reported interquartile range; and one statistical analysis reported its confidence limits in reverse order. Category counts added up to the participants analyzed in every one of the 2,873 evaluable combinations of row and group. The issue ledger holds these 16 items, 5 unresolved outcome groups and 38 outcome values whose text was not a plain number (for example "2,137.12"), each with its JSON pointer and source values. No transformation defects were found.</p>
 <p><strong>Table 5.</strong> Checks for possible source inconsistencies in the held-out portion</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
 <thead>
 <tr>
 <th>Check</th>
@@ -635,11 +887,18 @@
 <p>The example below was chosen by a fixed rule written before the held-out run: among held-out outcomes with three to eight rows and two or three groups that use row-level counts, the one whose row-level counts spread most widely relative to its outcome-level count. The rule picks the most extreme such outcome, so the example is not typical; its study also contributed the most measurements whose row-level count differed from the outcome-level count (3,009 of 22,505, post hoc). In NCT02443155 (A Clinical Proof-of-principle Trial in Adult Subjects With Newly Diagnosed Type 1 Diabetes Mellitus Investigating the Effect of NNC0114-0006 and Liraglutide on Preservation of Beta-cell Function), the outcome "Occurrence of Anti-NNC0114-0006 Antibodies" (time frame: Week 0, week 54 and week 80) reports an outcome-level count of 77 participants in each of its 2 groups, while its rows report their own numbers analyzed, from 0 to 77 (Table 6). A flat export attaches the outcome-level count to every row, so a cross-reactivity count measured in a handful of participants is presented against the whole arm. The baseline module of the same study has groups with identical titles; they are listed in the provenance view but not linked.</p>
 <p><strong>Table 6.</strong> Values and attached participant counts in the worked example, NCT02443155</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
 <thead>
 <tr>
 <th>Row</th>
-<th>Category</th>
-<th>Group</th>
+<th style="text-align: right;">Category</th>
+<th style="text-align: right;">Group</th>
 <th style="text-align: right;">Value</th>
 <th style="text-align: right;">Row-level number analyzed</th>
 </tr>
@@ -647,169 +906,169 @@
 <tbody>
 <tr>
 <td>Week 0: Anti-NNC0114-0006 antibodies</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">68</td>
 <td style="text-align: right;">77</td>
 </tr>
 <tr>
 <td>Week 0: Anti-NNC0114-0006 antibodies</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">62</td>
 <td style="text-align: right;">76</td>
 </tr>
 <tr>
 <td>Week 0: Anti-NNC0114-0006 antibodies</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">77</td>
 </tr>
 <tr>
 <td>Week 0: Anti-NNC0114-0006 antibodies</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">76</td>
 </tr>
 <tr>
 <td>Week 0: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">9</td>
 </tr>
 <tr>
 <td>Week 0: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">14</td>
 </tr>
 <tr>
 <td>Week 0: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">9</td>
 </tr>
 <tr>
 <td>Week 0: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">14</td>
 </tr>
 <tr>
 <td>Week 54: Anti-NNC0114-0006</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">68</td>
 <td style="text-align: right;">68</td>
 </tr>
 <tr>
 <td>Week 54: Anti-NNC0114-0006</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">62</td>
 <td style="text-align: right;">65</td>
 </tr>
 <tr>
 <td>Week 54: Anti-NNC0114-0006</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">68</td>
 </tr>
 <tr>
 <td>Week 54: Anti-NNC0114-0006</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">65</td>
 </tr>
 <tr>
 <td>Week 54: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>Week 54: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">3</td>
 </tr>
 <tr>
 <td>Week 54: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>Week 54: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">3</td>
 </tr>
 <tr>
 <td>Week 80: Anti-NNC0114-0006 antibodies</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">65</td>
 <td style="text-align: right;">67</td>
 </tr>
 <tr>
 <td>Week 80: Anti-NNC0114-0006 antibodies</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">60</td>
 <td style="text-align: right;">64</td>
 </tr>
 <tr>
 <td>Week 80: Anti-NNC0114-0006 antibodies</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">67</td>
 </tr>
 <tr>
 <td>Week 80: Anti-NNC0114-0006 antibodies</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">64</td>
 </tr>
 <tr>
 <td>Week 80: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 </tr>
 <tr>
 <td>Week 80: Cross-reactivity</td>
-<td>Negative</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Negative</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
 </tr>
 <tr>
 <td>Week 80: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 + Liraglutide (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 + Liraglutide (Experimental)</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 </tr>
 <tr>
 <td>Week 80: Cross-reactivity</td>
-<td>Positive</td>
-<td>NNC0114-0006 (Experimental)</td>
+<td style="text-align: right;">Positive</td>
+<td style="text-align: right;">NNC0114-0006 (Experimental)</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
 </tr>
@@ -817,9 +1076,17 @@
 </table></div></div>
 <p>Unit: measurement. The outcome-level count was 77 participants per group; the last column is the row-level number analyzed that the warehouse attaches. Source pointers for each value are in Additional file 4.</p>
 <h3 id="sensitivity-analyses-and-runtime">Sensitivity analyses and runtime</h3>
-<p>The tier B share was 13.8% when ambiguous condition matches were included, 11.2% when only primary outcomes were analyzed and 13.7% when both portions were combined, against 14.0% in the primary analysis; tier C stayed below 0.1% in each. Requiring a population description as well left 72.4% of groups resolvable (Table 7). This composite is stricter than the registry requires [22]; it shows how much the result depends on that definition, not how many groups lack a usable count. On the build machine (Apple M5 Pro, 48 GB memory), loading all 2,615 studies took 37 seconds in one transaction; the warehouse tables, indexes and staging copy of each record occupied 557 MB against 164 MB of raw JSON, and the R reference's enumeration took 8.9 minutes.</p>
+<p>The tier B share was 13.8% when ambiguous condition matches were included, 11.2% when only primary outcomes were analyzed and 13.7% when both portions were combined, against 14.0% in the primary analysis; tier C stayed below 0.1% in each. Requiring a population description as well left 72.4% of groups resolvable (Table 7). This composite is stricter than the registry requires [24]; it shows how much the result depends on that definition, not how many groups lack a usable count. On the build machine (Apple M5 Pro, 48 GB memory), loading all 2,615 studies took 37 seconds in one transaction; the warehouse tables, indexes and staging copy of each record occupied 557 MB against 164 MB of raw JSON, and the R reference's enumeration took 8.9 minutes.</p>
 <p><strong>Table 7.</strong> Sensitivity analyses of the outcome-group tier shares</p>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
 <thead>
 <tr>
 <th>Analysis</th>
@@ -874,76 +1141,156 @@
 </tbody>
 </table></div></div>
 <p>Unit: outcome group. Percentages are of applicable groups. Resolvable: tier A or B. In SA3 a group counts as resolvable only if its outcome also has an analysis population description; its A, B and C columns follow the same composite rule.</p>
+<h3 id="two-arm-comparisons-with-the-exports-counts-post-hoc">Two-arm comparisons with the export's counts (post hoc)</h3>
+<p>The 22,505 measurements whose row reported a different number analyzed fell into 9,706 affected cells. Two-arm comparisons cover only part of them: 3,952 cells (13,307 measurements) were in outcomes with three or more groups, 1,214 in one-group outcomes, and 518 had a value for only one of two groups. Of the remaining two-arm cells, 1,052 were comparisons of proportions, 2,088 means with standard deviations and 196 means with standard errors; 637 used other parameter or dispersion types, and 49 were excluded because the outcome was analyzed in another unit (26), a value or dispersion was not a plain number (15) or an arm had zero participants (8). The full flow is in Additional file 4, sheet Post hoc A4 cell flow. No row-level count was larger than its outcome-level count; the median ratio of the two was 0.84 (interquartile range 0.66–0.92), and it was below half for 3,442 of the 22,505 measurements (15.3%).</p>
+<p>In 1,052 affected comparisons of proportions from 62 studies, the export's counts changed the risk difference by a median of 0.37 percentage points (interquartile range 0.03–1.45), by more than 1 point in 358 cells (34.0%) and by more than 5 points in 98 (9.3%; Table 8). The 95% interval changed its relation to zero in 21 cells (2.0%) from 14 studies: 11 excluded zero with the row-level counts but not with the export's, 9 the reverse, and 1 excluded zero on opposite sides. An exploratory whole-trial bootstrap put this share between 1.1% and 3.7%. Risk ratios changed by 10% or more in 141 of the 714 cells with events in both arms (19.7%), because the row-level count was a different fraction of the outcome-level count in the two arms; that fraction differed by more than 5% in 446 of the 1,052 cells (42.4%). When 0.5 was added to each count of the two-by-two table in the other 338 comparisons, which had no participant with the outcome in at least one arm, a further 94 risk ratios changed by 10% or more (235 of 1,052 in all, 22.3%). Both measures named in amendment 4 were below their thresholds (2.0% against 5%, and 0.37 against 1 percentage point), so by the amendment's rule the consequence is called small. Primary outcomes contributed 149 cells, of which 1 changed its interval's relation to zero. Excluding NCT02443155 or the ten largest contributors left the share of changed intervals at 2.0% and 2.1% (Table 8).</p>
+<p>For 2,088 mean differences reported with standard deviations (155 studies), the 95% interval changed its relation to zero in 81 (3.9%). Because the export's counts are never smaller than the rows' own, they can only shrink the standard error: the inverse-variance weight of the difference rose by a median factor of 1.12 (interquartile range 1.05–1.31), and by more than 10% in 1,157 of the 2,087 cells with a non-zero standard error (55.4%). Where only standard errors were posted (196 cells), the interval does not depend on the count, but a standard deviation derived as the standard error times √n would be too large by a median factor of 1.04 across the 392 values in these cells (interquartile range 1.01–1.09). The R recomputation agreed on all 120 figures compared; the bootstrap ranges, drawn with different random number generators, agreed within 0.1 percentage point.</p>
+<p><strong>Table 8.</strong> Two-arm comparisons of proportions recomputed with each arm's outcome-level count (post hoc, amendment 4)</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Scrollable table"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Measure</th>
+<th style="text-align: right;">All affected two-arm cells</th>
+<th style="text-align: right;">Primary outcomes</th>
+<th style="text-align: right;">Without NCT02443155</th>
+<th style="text-align: right;">Without the ten largest contributors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison cells, n</td>
+<td style="text-align: right;">1,052</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">1,034</td>
+<td style="text-align: right;">849</td>
+</tr>
+<tr>
+<td>Studies, n</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">59</td>
+</tr>
+<tr>
+<td>Absolute change in RD, pp, median (IQR)</td>
+<td style="text-align: right;">0.37 (0.03–1.45)</td>
+<td style="text-align: right;">0.09 (0.00–1.52)</td>
+<td style="text-align: right;">0.36 (0.02–1.44)</td>
+<td style="text-align: right;">0.35 (0.02–1.40)</td>
+</tr>
+<tr>
+<td>Change in RD above 1 pp, n (%)</td>
+<td style="text-align: right;">358 (34.0)</td>
+<td style="text-align: right;">58 (38.9)</td>
+<td style="text-align: right;">347 (33.6)</td>
+<td style="text-align: right;">287 (33.8)</td>
+</tr>
+<tr>
+<td>Change in RD above 5 pp, n (%)</td>
+<td style="text-align: right;">98 (9.3)</td>
+<td style="text-align: right;">14 (9.4)</td>
+<td style="text-align: right;">95 (9.2)</td>
+<td style="text-align: right;">80 (9.4)</td>
+</tr>
+<tr>
+<td>95% interval for RD changes its relation to zero, n (%)</td>
+<td style="text-align: right;">21 (2.0)</td>
+<td style="text-align: right;">1 (0.7)</td>
+<td style="text-align: right;">21 (2.0)</td>
+<td style="text-align: right;">18 (2.1)</td>
+</tr>
+<tr>
+<td>RR changes by 10% or more, n/N (%)</td>
+<td style="text-align: right;">141/714 (19.7)</td>
+<td style="text-align: right;">12/65 (18.5)</td>
+<td style="text-align: right;">136/700 (19.4)</td>
+<td style="text-align: right;">97/573 (16.9)</td>
+</tr>
+</tbody>
+</table></div></div>
+<p>Unit: comparison cell, that is, one row and category of an outcome with exactly two groups in which at least one arm's row-level number analyzed differs from its outcome-level count; outcomes posted as counts of participants only. RD: risk difference, arm 2 minus arm 1, where arm 1 is the group with the lower group code (OG000 before OG001); pp: percentage points; IQR: interquartile range; RR: risk ratio, compared in the N cells with at least one participant with the outcome in each arm; it changes by 10% or more when the risk ratio with the export's counts divided by the risk ratio with the row-level counts is at most 0.90 or at least 1.10. Interval: 95% Newcombe hybrid score interval for the risk difference; a change means that it excludes zero under one count and not under the other, or excludes it on opposite sides under the two counts. Ten largest contributors: the ten studies with the most measurements whose row-level count differs. Source data: Additional file 4, sheet Post hoc A4 consequence; results/tables/heldout_posthoc_A4/consequence/ in Additional file 3.</p>
 <h2 id="discussion">Discussion</h2>
 <p>In 1,961 held-out diabetes, heart failure and obesity trials with results first posted from 2020 to 2026, a participant denominator could be attached by written rules to 99.99% of applicable outcome groups. The difficulty lies in where the count sits: 14.0% of groups, and 36.2% of individual measurements, carried their count at row level or beside a unit count. A flat export with one count per arm and outcome attached the outcome-level count in place of a different row-level number analyzed to 23.0% of measurements, and a participant count without the unit count to another 0.8%. Once an export omits row-level counts, its users cannot recover those counts from the exported values alone.</p>
-<p>These results extend the denominator framing of Zarin and colleagues [1] from a sample of early records to every posted value in a recent cohort. Schwartz and colleagues found the number analyzed discordant with FDA reviews for about a third of primary outcomes [11]; part of such discordance may arise when one source reports a row-level count and the other an overall count, although these data cannot show how much. Dechartres and colleagues could not recompute effects from posted per-arm values for 35% of trials that posted neither an estimate nor a p-value, mainly because binary outcomes were posted only as percentages, continuous outcomes lacked a mean and standard deviation, or the data were censored or repeated over time [13]. Missing participant counts were not among the main reasons they named, and in this cohort these counts were almost always present. For 23.0% of all measurements, however, and 11.1% of measurements of primary outcomes (post hoc), the row reported its own number analyzed and it differed from the outcome-level count. An extraction that reads one count per arm and outcome would not find these row-level counts.</p>
-<p>Existing systems solve much of the restructuring. According to its archived source code, AACT keys outcome groups within each outcome, types counts as integers and derives a baseline number analyzed from row, measure or overall counts. At the archived revision I inspected, however, it did not map outcome row-level denominators or the outcome's selected analysis unit [28]. I did not run AACT, and the deployed release may differ. EXACT extracts posted results into analysis-ready spreadsheets for meta-analysis, although its users still converted some formats by hand, such as percentages to numbers of patients with events; the paper does not describe how it handles row-level or unit-specific counts [18]. Shi and Du labeled analysis groups as intervention or comparator by semantic similarity to the design arms, and matched adverse event arms to efficacy arms by exact string and then by similarity [19]. Such links identify arms, not analysis populations: in this cohort an outcome group and the identically titled baseline group had different participant counts for 53.6% of outcome groups where both counts were usable, so a link across modules should not be used to carry a denominator. ctrdata keeps each record as a document in the registry's own structure, which preserves the information; apart from one derived field that reports the number of subjects in the statistical test of the first primary endpoint, it leaves the choice of denominator to each analysis [20]. I did not run ctrdata. What this study adds is a measured account, value by value, of which denominator applies, with the rule named and the source location kept, and a separate check that the transformation kept every in-scope source value of this snapshot with identical text.</p>
-<p>For evidence-table builders, the results support the following practices. Keep row-level numbers analyzed and use them before the outcome-level count. Keep the analysis unit and its count beside the participant count. Do not join groups across modules or outcomes by code or title. Record whether an outcome has a population description, but do not treat its absence as an error, because the field is required only when the number analyzed differs from the number assigned [22]. Treat "NA" and formatted numbers as text until a person decides what they mean.</p>
+<p>These results extend the denominator framing of Zarin and colleagues [1] from a sample of early records to every posted value in a recent cohort. Schwartz and colleagues found the number analyzed discordant with FDA reviews for about a third of primary outcomes [11]; part of such discordance may arise when one source reports a row-level count and the other an overall count, although these data cannot show how much. Dechartres and colleagues could not recompute effects from posted per-arm values for 35% of trials that posted neither an estimate nor a p-value, mainly because binary outcomes were posted only as percentages, continuous outcomes lacked a mean and standard deviation, or the data were censored or repeated over time [13]. Missing participant counts were not among the main reasons they named, and in this cohort these counts were almost always present. For 23.0% of all measurements, however, and 11.1% of measurements of primary outcomes (post hoc), the row reported its own number analyzed, which differed from the outcome-level count. An extraction that reads one count per arm and outcome would not find these row-level counts.</p>
+<p>What substituting the outcome-level count does to a comparison between arms depends on how the counts differ. If a row's count is the same fraction of the outcome-level count in both arms, a risk ratio computed from either count is unchanged but a risk difference is not; if the fractions differ between arms, both change. The post hoc analysis in amendment 4 measured these changes for two-arm outcomes. For outcomes posted as counts of participants, the changes were usually small, and below the threshold that amendment 4 fixed before the analysis was run: the median shift in the risk difference was 0.37 percentage points, and 2.0% of intervals changed their relation to zero. They were not negligible everywhere: about one comparison in eleven moved by more than 5 points, and about one risk ratio in five by 10% or more. For mean differences the error runs one way. In this cohort the outcome-level count was never smaller than the row's own, so a meta-analysis that used it would give the comparison too much weight, by a median of 12%. Most affected values were in outcomes with three or more groups, which the analysis did not cover.</p>
+<p>Existing systems solve much of the restructuring. According to its archived source code at a revision of 20 October 2025 [31], AACT keys outcome groups within each outcome, stores counts as integers, and loads each outcome's type of units analyzed and its outcome-level counts with their units. For baseline measures it takes the number analyzed from the row, then the measure, then the overall count; for outcome measures nothing in its loader reads the counts that rows report. The live AACT database was not queried for this study, and the deployed release may differ. CTG-DB keeps one denominator per arm, the number of participants who started it, for its cross-trial adverse event analyses [21]. EXACT extracts posted results into analysis-ready spreadsheets for meta-analysis, although its users still converted some formats by hand, such as percentages to numbers of patients with events; the paper does not describe how it handles row-level or unit-specific counts [18]. Shi and Du labeled analysis groups as intervention or comparator by semantic similarity to the design arms, and matched adverse event arms to efficacy arms by exact string and then by similarity [19]. Such links identify arms, not analysis populations: in this cohort an outcome group and the identically titled baseline group had different participant counts for 53.6% of outcome groups where both counts were usable, so a link across modules should not be used to carry a denominator. ctrdata keeps each record as a document in the registry's own structure, which preserves the information; apart from one derived field that reports the number of subjects in the statistical test of the first primary endpoint, it leaves the choice of denominator to each analysis [20]. I did not run ctrdata. What this study adds is a measured account, value by value, of which denominator applies, with the rule named and the source location kept, and a separate check that the transformation kept every in-scope source value of this snapshot with identical text.</p>
+<p>For evidence-table builders, the results support the following practices. Keep row-level numbers analyzed and use them before the outcome-level count. Keep the analysis unit and its count beside the participant count. Do not join groups across modules or outcomes by code or title. Record whether an outcome has a population description, but do not treat its absence as an error, because the field is required only when the number analyzed differs from the number assigned [24]. Treat "NA" and formatted numbers as text until a person decides what they mean.</p>
 <h3 id="strengths-and-limitations">Strengths and limitations</h3>
-<p>The cohort is a complete frame of three condition queries over a defined posting window, analyzed with rules fixed before a single held-out run. Each value keeps its source pointer, the transformation was reconciled value by value against a separately written R program that reads the raw pages, and every module was rebuilt from the warehouse. The comparator kept values as text and copied every ancestor scalar down to each row. Its losses follow from the fields and denominator levels it omits, rather than from changes to the source text.</p>
-<p>The fidelity reference was written separately, in another language, but within the same project and following the same rules. A shared misreading of those rules would therefore remain undetected. The rules decide which count applies from the record's structure; they do not establish that the registry entry is clinically correct, and no external gold standard exists for this question. The checks flag possible inconsistencies only where units and populations permit; they are not error rates. </p>
-<p>The cohort covers three condition groups and one snapshot of a mutable registry: records change, and the API offers no programmatic access to earlier versions, so the raw pages and their hashes are the snapshot. The condition rule is a vocabulary rule, not clinical adjudication. The cohort is what the registry's condition search returned for three queries; I did not assess the search's recall, and confirmed studies include trials in which one of these conditions is listed beside another focus. </p>
-<p>The flat comparator is one declared design. Its misattachments follow from keeping one outcome-level count per arm and outcome, so they measure how often a row reports a different number analyzed; a flat export that also carried each row's number analyzed and each unit count would not show them, and other designs may lose other information. </p>
-<p>The measurements whose row reported a different number analyzed were concentrated in a minority of studies (post hoc). Results are finite-corpus descriptions of the held-out portion and should not be read as estimates for all registered trials. Free-text time frames were kept as text rather than converted into durations. The ledger includes a review instrument for future adjudication, but no item was adjudicated in this study.</p>
+<p>The cohort is a complete frame of three condition queries over a defined posting window, analyzed with rules fixed before a single held-out run. Each value keeps its source pointer, the transformation was reconciled value by value against a second implementation in R that reads the raw pages, and every module was rebuilt from the warehouse. The comparator kept values as text and copied every ancestor scalar down to each row. Its losses follow from the fields and denominator levels it omits, rather than from changes to the source text.</p>
+<p>The fidelity reference is a second implementation in another language, but it was written with the same AI coding assistants, in the same project and from the same rules, and no other person reviewed either implementation. A shared misreading of those rules would therefore remain undetected. The pre-freeze AI review reported three shared departures from the plan or the rules: both implementations omitted a tier C case, gave tiers to measurements of outcomes that were not posted, and applied an upper bound on counts that the rules did not state. All three were resolved before the freeze (amendment 3, items 1 to 3). The rules decide which count applies from the record's structure; they do not establish that the registry entry is clinically correct, and no external gold standard exists for this question. The checks flag possible inconsistencies only where units and populations permit; they are not error rates.</p>
+<p>The cohort covers three condition groups and one snapshot of a mutable registry. Records change, and the documented API serves only the most recent version of each record [25]. Earlier versions can be retrieved from the registry website, for example with the cthist R package [32], but this study did not use them; its raw pages and their hashes are the snapshot. The condition rule is a vocabulary rule, not clinical adjudication. The cohort is what the registry's condition search returned for three queries; I did not assess the search's recall, and confirmed studies include trials in which one of these conditions is listed beside another focus.</p>
+<p>The flat comparator is one declared design. Its misattachments follow from keeping one outcome-level count per arm and outcome, so they measure how often a row reports a different number analyzed; a flat export that also carried each row's number analyzed and each unit count would not show them, and other designs may lose other information.</p>
+<p>The measurements whose row reported a different number analyzed were concentrated in a minority of studies (post hoc). Results are finite-corpus descriptions of the held-out portion and should not be read as estimates for all registered trials. Free-text time frames were kept as text rather than converted into durations. The ledger includes a review instrument for future adjudication, but no item was adjudicated in this study. The consequence analysis was added after the results were known and after AI agents had seen rough magnitudes. It covers only outcomes with two groups, and its threshold for a material consequence is a judgment fixed in amendment 4, not an external standard. Its R recomputation came from the same AI model and the same written specification, so it checks the arithmetic, not the design.</p>
 <h2 id="conclusions">Conclusions</h2>
-<p>In this cohort of interventional diabetes, heart failure and obesity trials with results first posted on ClinicalTrials.gov from 2020 to 2026, almost every posted value carried a participant count that could be attached by written rules. About one outcome group in seven carried that count at row level or beside a unit count, and a flat export that keeps one count per arm and outcome attached the outcome-level count in place of a different row-level number analyzed to nearly a quarter of measurements. Registry-based evidence pipelines should keep every denominator level with its provenance and choose among them by explicit rules.</p>
+<p>In this cohort of interventional diabetes, heart failure and obesity trials with results first posted on ClinicalTrials.gov from 2020 to 2026, almost every posted value carried a participant count that could be attached by written rules. About one outcome group in seven carried that count at row level or beside a unit count, and a flat export that keeps one count per arm and outcome attached the outcome-level count in place of a different row-level number analyzed to nearly a quarter of measurements. In a post hoc analysis of two-arm comparisons, this substitution moved most risk differences little, although about one in eleven (9.3%) moved by more than 5 percentage points, and it raised the meta-analytic weight of mean differences by a median of 12%. Registry-based evidence pipelines should keep every denominator level with its provenance and choose among them by explicit rules.</p>
 <h2 id="list-of-abbreviations">List of abbreviations</h2>
-<p>AACT: Aggregate Analysis of ClinicalTrials.gov; API: application programming interface; ASCII: American Standard Code for Information Interchange; CRediT: Contributor Roles Taxonomy; CSV: comma-separated values; DOI: digital object identifier; EXACT: EXtracting Accurate efficacy and safety information from ClinicalTrials.gov; FDA: U.S. Food and Drug Administration; JSON: JavaScript Object Notation; MeSH: Medical Subject Headings; NCT: National Clinical Trial (the ClinicalTrials.gov identifier); REDCap: Research Electronic Data Capture; SA: sensitivity analysis; SHA-256: Secure Hash Algorithm 256-bit; SQL: Structured Query Language; UTC: Coordinated Universal Time.</p>
+<p>AACT: Aggregate Analysis of ClinicalTrials.gov; AI: artificial intelligence; API: application programming interface; ASCII: American Standard Code for Information Interchange; CRediT: Contributor Roles Taxonomy; CSV: comma-separated values; CTG-DB: ClinicalTrials.gov Transformation Database; DOI: digital object identifier; EXACT: EXtracting Accurate efficacy and safety information from ClinicalTrials.gov; FDA: U.S. Food and Drug Administration; JSON: JavaScript Object Notation; MeSH: Medical Subject Headings; NCT: National Clinical Trial (the ClinicalTrials.gov identifier); REDCap: Research Electronic Data Capture; SA: sensitivity analysis; SHA-256: Secure Hash Algorithm 256-bit; SQL: Structured Query Language; UTC: Coordinated Universal Time.</p>
 <h2 id="declarations">Declarations</h2>
 <h3 id="ethics-approval-and-consent-to-participate">Ethics approval and consent to participate</h3>
 <p>Not applicable. This study is a secondary analysis of aggregate summary results that are publicly posted on ClinicalTrials.gov. No participants were recruited, and no individual-level or identifiable participant data were accessed. Investigator names and study contacts published in the registry records were neither analyzed nor redistributed.</p>
 <h3 id="consent-for-publication">Consent for publication</h3>
 <p>Not applicable.</p>
 <h3 id="availability-of-data-and-materials">Availability of data and materials</h3>
-<p>The ClinicalTrials.gov records analyzed in this study are publicly available from ClinicalTrials.gov through its public API [23]. The exact API requests, retrieval times, API version, data timestamp, study identifiers and SHA-256 hashes of the pages analyzed are listed in the source manifest in Additional file 3, and the pipeline retrieves the same records again from the API. The registry offers no programmatic access to earlier record versions, so a later retrieval reflects the registry on that day. Raw registry pages are not redistributed. ClinicalTrials.gov data are used under its terms and conditions [29], and all modifications are described in Additional files 1 and 2. The datasets supporting the conclusions of this article are included within the article and its additional files (Additional files 2 to 4).</p>
-<p>Project name: trial-results-audit. Project home page: https://anibose11.github.io/projects/trial-results-audit/. Archived version: https://doi.org/10.5281/zenodo.23450150 (also Additional file 3). Operating system: macOS (tested); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.</p>
+<p>The ClinicalTrials.gov records analyzed in this study are publicly available from ClinicalTrials.gov through its public API [25]. The exact API requests, retrieval times, API version, data timestamp, study identifiers and SHA-256 hashes of the pages analyzed are listed in the source manifest in Additional file 3, and the pipeline retrieves the same records again from the API. The documented API serves only the most recent version of each record [25], so a later retrieval through it reflects the registry on that day; earlier record versions can be retrieved from the registry website [32]. Raw registry pages are not redistributed. ClinicalTrials.gov data are used under its terms and conditions [33], and all modifications are described in Additional files 1 and 2. The datasets supporting the conclusions of this article are included within the article and its additional files (Additional files 2 to 4).</p>
+<p>Project name: trial-results-audit. Project home page: https://anibose11.github.io/projects/trial-results-audit/. Archived version: version 1.0.0, https://doi.org/10.5281/zenodo.23450150 [34]; Additional file 3 is version 1.1.0, which corrects wording in the documentation and adds amendment 4, its run record and the consequence-analysis module and tables, without changing any of the 18 files that define the frozen computation. Operating system: macOS (the 43 automated tests passed there on 7 October 2026); written to run on Linux, which was not tested. Programming languages: Python, SQL and R. Other requirements: Python 3.12 or newer, PostgreSQL 17, R 4.x with the jsonlite package. License: MIT. Any restrictions to use by non-academics: none.</p>
 <h3 id="competing-interests">Competing interests</h3>
-<p>I own Norlowe Research, where I conducted this work. I have no other competing interests.</p>
+<p>The author declares no competing interests.</p>
 <h3 id="funding">Funding</h3>
-<p>I received no specific external grant funding for this work. I used internal resources of Norlowe Research.</p>
+<p>This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p>
 <h3 id="authors-contributions">Authors' contributions</h3>
-<p>I am the sole author and was responsible for conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, project administration, and writing of the original draft and its review and editing (roles from the Contributor Roles Taxonomy, CRediT). I reviewed the manuscript and take responsibility for its content.</p>
+<p>Animesh Bose is the sole author. Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text; AI coding and writing assistants helped write code, run analyses and draft text under the author's direction (see Use of artificial intelligence (AI) tools). CRediT roles: conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, project administration, writing – original draft, and writing – review and editing. Animesh Bose takes responsibility for its content.</p>
 <h3 id="acknowledgements">Acknowledgements</h3>
 <p>Not applicable.</p>
-
 <h2 id="references">References</h2>
-<ol>
-<li>Zarin DA, Tse T, Williams RJ, Califf RM, Ide NC. The ClinicalTrials.gov results database: update and key issues. N Engl J Med. 2011;364:852-60. https://doi.org/10.1056/NEJMsa1012065.</li>
-<li>Tse T, Williams RJ, Zarin DA. Reporting "basic results" in ClinicalTrials.gov. Chest. 2009;136:295-303. https://doi.org/10.1378/chest.08-3022.</li>
-<li>Zarin DA, Tse T, Williams RJ, Carr S. Trial reporting in ClinicalTrials.gov: the final rule. N Engl J Med. 2016;375:1998-2004. https://doi.org/10.1056/NEJMsr1611785.</li>
+<ol type="1">
+<li>Zarin DA, Tse T, Williams RJ, Califf RM, Ide NC. The ClinicalTrials.gov results database: update and key issues. N Engl J Med. 2011;364:852–60. https://doi.org/10.1056/NEJMsa1012065.</li>
+<li>Tse T, Williams RJ, Zarin DA. Reporting "basic results" in ClinicalTrials.gov. Chest. 2009;136:295–303. https://doi.org/10.1378/chest.08-3022.</li>
+<li>Zarin DA, Tse T, Williams RJ, Carr S. Trial reporting in ClinicalTrials.gov: the final rule. N Engl J Med. 2016;375:1998–2004. https://doi.org/10.1056/NEJMsr1611785.</li>
 <li>Baudard M, Yavchitz A, Ravaud P, Perrodeau E, Boutron I. Impact of searching clinical trial registries in systematic reviews of pharmaceutical treatments: methodological systematic review and reanalysis of meta-analyses. BMJ. 2017;356:j448. https://doi.org/10.1136/bmj.j448.</li>
-<li>DeVito NJ, Bacon S, Goldacre B. Compliance with legal requirement to report clinical trial results on ClinicalTrials.gov: a cohort study. Lancet. 2020;395:361-9. https://doi.org/10.1016/S0140-6736(19)33220-9.</li>
+<li>DeVito NJ, Bacon S, Goldacre B. Compliance with legal requirement to report clinical trial results on ClinicalTrials.gov: a cohort study. Lancet. 2020;395:361–9. https://doi.org/10.1016/S0140-6736(19)33220-9.</li>
 <li>Yu T, Yang X, Clark J, Lin L, Furuya-Kanamori L, Xu C. Accelerating evidence synthesis for safety assessment through ClinicalTrials.gov platform: a feasibility study. BMC Med Res Methodol. 2024;24:165. https://doi.org/10.1186/s12874-024-02225-2.</li>
 <li>Steinberg E, Ignatiadis N, Yadlowsky S, Xu Y, Shah N. Using public clinical trial reports to probe non-experimental causal inference methods. BMC Med Res Methodol. 2023;23:204. https://doi.org/10.1186/s12874-023-02025-0.</li>
-<li>Hartung DM, Zarin DA, Guise JM, McDonagh M, Paynter R, Helfand M. Reporting discrepancies between the ClinicalTrials.gov results database and peer-reviewed publications. Ann Intern Med. 2014;160:477-83. https://doi.org/10.7326/M13-0480.</li>
-<li>Becker JE, Krumholz HM, Ben-Josef G, Ross JS. Reporting of results in ClinicalTrials.gov and high-impact journals. JAMA. 2014;311:1063-5. https://doi.org/10.1001/jama.2013.285634.</li>
+<li>Hartung DM, Zarin DA, Guise JM, McDonagh M, Paynter R, Helfand M. Reporting discrepancies between the ClinicalTrials.gov results database and peer-reviewed publications. Ann Intern Med. 2014;160:477–83. https://doi.org/10.7326/M13-0480.</li>
+<li>Becker JE, Krumholz HM, Ben-Josef G, Ross JS. Reporting of results in ClinicalTrials.gov and high-impact journals. JAMA. 2014;311:1063–5. https://doi.org/10.1001/jama.2013.285634.</li>
 <li>Talebi R, Redberg RF, Ross JS. Consistency of trial reporting between ClinicalTrials.gov and corresponding publications: one decade after FDAAA. Trials. 2020;21:675. https://doi.org/10.1186/s13063-020-04603-9.</li>
-<li>Schwartz LM, Woloshin S, Zheng E, Tse T, Zarin DA. ClinicalTrials.gov and Drugs@FDA: a comparison of results reporting for new drug approval trials. Ann Intern Med. 2016;165:421-30. https://doi.org/10.7326/M15-2658.</li>
+<li>Schwartz LM, Woloshin S, Zheng E, Tse T, Zarin DA. ClinicalTrials.gov and Drugs@FDA: a comparison of results reporting for new drug approval trials. Ann Intern Med. 2016;165:421–30. https://doi.org/10.7326/M15-2658.</li>
 <li>Riveros C, Dechartres A, Perrodeau E, Haneef R, Boutron I, Ravaud P. Timing and completeness of trial results posted at ClinicalTrials.gov and published in journals. PLoS Med. 2013;10:e1001566. https://doi.org/10.1371/journal.pmed.1001566.</li>
 <li>Dechartres A, Bond EG, Scheer J, Riveros C, Atal I, Ravaud P. Reporting of statistically significant results at ClinicalTrials.gov for completed superiority randomized controlled trials. BMC Med. 2016;14:192. https://doi.org/10.1186/s12916-016-0740-1.</li>
 <li>Tse T, Fain KM, Zarin DA. How to avoid common problems when using ClinicalTrials.gov in research: 10 issues to consider. BMJ. 2018;361:k1452. https://doi.org/10.1136/bmj.k1452.</li>
-<li>Zarin DA, Fain KM, Dobbins HD, Tse T, Williams RJ. 10-year update on study results submitted to ClinicalTrials.gov. N Engl J Med. 2019;381:1966-74. https://doi.org/10.1056/NEJMsr1907644.</li>
+<li>Zarin DA, Fain KM, Dobbins HD, Tse T, Williams RJ. 10-year update on study results submitted to ClinicalTrials.gov. N Engl J Med. 2019;381:1966–74. https://doi.org/10.1056/NEJMsr1907644.</li>
 <li>Tasneem A, Aberle L, Ananth H, Chakraborty S, Chiswell K, McCourt BJ, et al. The database for aggregate analysis of ClinicalTrials.gov (AACT) and subsequent regrouping by clinical specialty. PLoS One. 2012;7:e33677. https://doi.org/10.1371/journal.pone.0033677.</li>
 <li>Clinical Trials Transformation Initiative. AACT: Aggregate Analysis of ClinicalTrials.gov. https://aact.ctti-clinicaltrials.org/. Accessed 7 Oct 2026.</li>
-<li>Pradhan R, Hoaglin DC, Cornell M, Liu W, Wang V, Yu H. Automatic extraction of quantitative data from ClinicalTrials.gov to conduct meta-analyses. J Clin Epidemiol. 2019;105:92-100. https://doi.org/10.1016/j.jclinepi.2018.08.023.</li>
+<li>Pradhan R, Hoaglin DC, Cornell M, Liu W, Wang V, Yu H. Automatic extraction of quantitative data from ClinicalTrials.gov to conduct meta-analyses. J Clin Epidemiol. 2019;105:92–100. https://doi.org/10.1016/j.jclinepi.2018.08.023.</li>
 <li>Shi X, Du J. Constructing a finer-grained representation of clinical trial results from ClinicalTrials.gov. Sci Data. 2024;11:41. https://doi.org/10.1038/s41597-023-02869-7.</li>
-<li>Herold R. Aggregating and analysing clinical trials data from multiple public registers using R package ctrdata. Res Synth Methods. 2026;17:624-56. https://doi.org/10.1017/rsm.2025.10061.</li>
+<li>Herold R. Aggregating and analysing clinical trials data from multiple public registers using R package ctrdata. Res Synth Methods. 2026;17:624–56. https://doi.org/10.1017/rsm.2025.10061.</li>
+<li>Painter JL, Haguinet F, Bate A. CTG-DB: an ontology-based transformation of ClinicalTrials.gov to enable cross-trial drug safety analyses. arXiv. 2026. Preprint. https://doi.org/10.48550/arXiv.2603.15936.</li>
 <li>Miron L, Gonçalves RS, Musen MA. Obstacles to the reuse of study metadata in ClinicalTrials.gov. Sci Data. 2020;7:443. https://doi.org/10.1038/s41597-020-00780-z.</li>
+<li>Iken AR, Poolman RW, Gademan MGJ. Data quality assessment of interventional trials in public trial databases. J Clin Epidemiol. 2024;175:111516. https://doi.org/10.1016/j.jclinepi.2024.111516.</li>
 <li>National Library of Medicine. ClinicalTrials.gov results data element definitions for interventional and observational studies. Last updated 31 Dec 2024. https://clinicaltrials.gov/policy/results-definitions. Accessed 7 Oct 2026.</li>
 <li>National Library of Medicine. ClinicalTrials.gov API. Last updated 26 Aug 2025. https://clinicaltrials.gov/data-api/api. Accessed 7 Oct 2026.</li>
-<li>ClinicalTrials.gov API version 2.0 now available. NLM Tech Bull. 2024 Mar-Apr;(457):e2. https://www.nlm.nih.gov/pubs/techbull/ma24/ma24_clinicaltrials_api.html. Accessed 7 Oct 2026.</li>
+<li>ClinicalTrials.gov API version 2.0 now available. NLM Tech Bull. 2024 Mar–Apr;(457):e2. https://www.nlm.nih.gov/pubs/techbull/ma24/ma24_clinicaltrials_api.html. Accessed 7 Oct 2026.</li>
 <li>Abraha I, Montedori A. Modified intention to treat reporting in randomised controlled trials: systematic review. BMJ. 2010;340:c2697. https://doi.org/10.1136/bmj.c2697.</li>
 <li>National Library of Medicine. ClinicalTrials.gov API: CSV download. Last updated 14 Aug 2026. https://clinicaltrials.gov/data-api/about-api/csv-download. Accessed 7 Oct 2026.</li>
+<li>Newcombe RG. Interval estimation for the difference between independent proportions: comparison of eleven methods. Stat Med. 1998;17:873–90. https://doi.org/10.1002/(SICI)1097-0258(19980430)17:8&lt;873::AID-SIM779&gt;3.0.CO;2-I.</li>
 <li>Earley A, Lau J, Uhlig K. Haphazard reporting of deaths in clinical trials: a review of cases of ClinicalTrials.gov records and matched publications–a cross-sectional study. BMJ Open. 2013;3:e001963. https://doi.org/10.1136/bmjopen-2012-001963.</li>
-<li>Clinical Trials Transformation Initiative. ctti-clinicaltrials/aact: source code, master branch revision 16ec282c (20 Oct 2025), archived by Software Heritage on 6 Jun 2026 as snapshot swh:1:snp:5a34a7efb3947a6d31627a3d1381ae19625df3ce. https://archive.softwareheritage.org/swh:1:snp:5a34a7efb3947a6d31627a3d1381ae19625df3ce. Accessed 7 Oct 2026.</li>
+<li>Clinical Trials Transformation Initiative. ctti-clinicaltrials/aact: source code, master branch revision 16ec282c (20 Oct 2025), archived by Software Heritage on 6 Jun 2026 as snapshot swh:1:snp:5a34a7efb3947a6d31627a3d1381ae19625df3ce. https://archive.softwareheritage.org/swh:1:snp:5a34a7efb3947a6d31627a3d1381ae19625df3ce. Accessed 24 Oct 2026.</li>
+<li>Carlisle BG. Analysis of clinical trial registry entry histories using the novel R package cthist. PLoS One. 2022;17:e0270909. https://doi.org/10.1371/journal.pone.0270909.</li>
 <li>National Library of Medicine. ClinicalTrials.gov terms and conditions. Last updated 31 Jan 2023. https://clinicaltrials.gov/about-site/terms-conditions. Accessed 7 Oct 2026.</li>
+<li>Bose A. Clinical trial results warehouse and denominator audit (trial-results-audit), version 1.0.0. Zenodo. 2026. https://doi.org/10.5281/zenodo.23450150.</li>
 </ol>
 <h2 id="additional-files">Additional files</h2>
-<p><strong>Additional file 1.</strong> Format: PDF (.pdf). Title: Analysis plan, amendments and denominator rules. Description: the timestamped analysis plan with its dated amendments, the notes and post hoc additions recorded after the held-out run, the written tier rules with their order of application, and the applicability conditions of the twelve checks.</p>
-<p><strong>Additional file 2.</strong> Format: comma-separated values (.csv). Title: Source-to-warehouse data dictionary. Description: every warehouse column with its source JSON path, data type and transformation; with Additional file 1, it describes every modification made to the registry data.</p>
-<p><strong>Additional file 3.</strong> Format: ZIP archive (.zip). Title: Source archive. Description: source code, SQL, R reference, configuration, frozen identifier manifest and split, source manifest, tests with synthetic fixtures, result tables, issue ledger, analyst exports, Research Electronic Data Capture (REDCap) review instrument, validation and rerun reports, and a claims map linking the main reported numbers to their output files.</p>
-<p><strong>Additional file 4.</strong> Format: Excel workbook (.xlsx). Title: Aggregate result tables. Description: the aggregate result tables, including breakdowns by results-first-posted year, condition group, parameter type and outcome type, population descriptions by outcome type, the worked example with source pointers, two post hoc sheets, and a definitions sheet.</p>
-</div><section id="author-and-tools"><h2>Author contribution and tools</h2><p>I designed the study, wrote and reviewed code, performed and checked analyses, and reviewed the results and manuscript. I used Claude Code (Anthropic) and ChatGPT (OpenAI) for coding, code and manuscript review, data analysis, literature searching, and manuscript drafting and formatting, and Codex (OpenAI) for editorial revision and document formatting. Exact model versions were not recorded. I take responsibility for the work.</p></section></main>
+<p><strong>Additional file 1.</strong> Format: PDF (.pdf). Title: Analysis plan, amendments and denominator rules. Description: the analysis plan with its amendments (dates written in the plan itself), the notes and post hoc additions recorded after the held-out run, the written tier rules with their order of application, the applicability conditions of the twelve checks, and amendment 4 (24 October 2026), which corrects how the plan describes the code review and the R reference and sets out two post hoc analyses, with the record of its run (the consequence analysis was run; the comparison with the live AACT database was not).</p>
+<p><strong>Additional file 2.</strong> Format: comma-separated values (.csv), supplied as a .zip file. Title: Source-to-warehouse data dictionary. Description: every warehouse column with its source JSON path, data type and transformation; with Additional file 1, it describes every modification made to the registry data.</p>
+<p><strong>Additional file 3.</strong> Format: ZIP archive (.zip). Title: Source archive, version 1.1.0. Description: source code, SQL, R reference, configuration, frozen identifier manifest and split, source manifest, tests with synthetic fixtures, result tables, issue ledger, analyst exports, Research Electronic Data Capture (REDCap) review instrument, validation and rerun reports, a claims map linking the main reported numbers to their output files, amendment 4 with its run record and hash ledger, the consequence-analysis module with its tables, the R recomputation, and the exploratory scripts AI agents ran on 20 October.</p>
+<p><strong>Additional file 4.</strong> Format: Excel workbook (.xlsx). Title: Aggregate result tables. Description: the aggregate result tables, including breakdowns by results-first-posted year, condition group, parameter type and outcome type, population descriptions by outcome type, the worked example with source pointers, four post hoc sheets (two of them for the amendment 4 consequence analysis), and a definitions sheet.</p>
+</div><section id="author-and-tools"><h2>Author contribution and tools</h2><p>I conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text. AI coding and writing assistants helped write code, run analyses and draft text under my direction: Claude Code (Anthropic), ChatGPT (OpenAI) and Codex (OpenAI) for the original work in October 2026, whose exact model versions were not recorded (I recall GPT-5 and GPT-6 family models for ChatGPT and Codex), and Claude Code running Claude Opus 5.5 (claude-opus-5-5) for the corrected and extended version of 24 October 2026. I take responsibility for the work.</p></section></main>
 <footer class="site"><div class="inner"><p>Data: ClinicalTrials.gov, U.S. National Library of Medicine; snapshot data timestamp 2026-10-06T09:00:05 UTC, not kept current. <a href="index.html">Back to the project page</a>.</p></div></footer>
 </body>
 </html>

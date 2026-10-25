@@ -2345,7 +2345,7 @@
 </tbody>
 </table></div></div>
 <h2 id="table-s9-raw-record-reconstruction">Table S9. Raw-record reconstruction</h2>
-<p>Source: outputs/validation/raw_reconstruction.csv. Each record was re-read from the raw CSV bytes with an independent parser and 14 fields were compared.</p>
+<p>Source: outputs/validation/raw_reconstruction.csv. Each record was re-read from the raw CSV bytes with a second, minimal parser that does not use the pipeline's loader, and 14 fields were compared.</p>
 <div class="table-wrap" tabindex="0"><div class="portfolio-table" tabindex="0" role="region" aria-label="Scrollable data table"><table>
 <thead>
 <tr>
@@ -2773,7 +2773,7 @@
 <tr>
 <td>check</td>
 <td>reconstruction</td>
-<td>24 prespecified records reconstructed from raw CSV bytes with an independent parser</td>
+<td>24 prespecified records reconstructed from raw CSV bytes with a second, minimal parser</td>
 <td>passed</td>
 <td>{"records": 24, "matched": 24}</td>
 </tr>

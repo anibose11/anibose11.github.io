@@ -16,12 +16,18 @@
 <div class="measure">
 <h1>A real quote can accompany a wrong trial result</h1>
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="lede">When a language model answers a question about a clinical trial and backs it with a quote that really appears in the article, how often is the answer still wrong? I measured this for small models that run on a laptop, on every eligible test question of an expert-annotated benchmark.</p>
+<p class="lede">When a language model answers a question about a clinical trial and backs it with a quote that really appears in the article, how often is the answer still wrong? The study measured this for small models that run on a laptop and, in a dated update below, for three frontier models, on every eligible test question of an expert-annotated benchmark.</p>
+</div>
+
+<div class="measure update" id="update-2026-10-24">
+<h2>Update: three frontier models, run on 24 October 2026</h2>
+<p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put more than half of the remaining errors down to mistakes in the benchmark labels, which brings their rates to 3.5% and 3.0%; those judges are AI models, not expert raters. A second model that reread the quoted passage removed most errors of the small models, but the share of questions answered fell from 81.3% to 44.8%.</p>
+<p class="muted">This comparison was added after the original results were known, in an amendment time-stamped before any frontier output existed. It has not been peer reviewed. The code and model responses are planned for the next version of the code archive.</p>
 </div>
 
 <div class="facts">
 <div><b>Benchmark</b>Evidence Inference 2.0, official test split: 1,209 eligible questions in 332 trial reports</div>
-<div><b>Models</b>Qwen3-1.7B (primary), Qwen3-0.6B, Qwen3-4B-Instruct-2507, run locally</div>
+<div><b>Models</b>Qwen3-1.7B (primary), Qwen3-0.6B, Qwen3-4B-Instruct-2507, run locally; Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol through their APIs (frontier-model update; accessed 24 October 2026)</div>
 <div><b>Comparisons</b>Majority class, TF-IDF + logistic regression, random rejection at matched coverage</div>
 <div><b>Built with</b>Python, PyTorch, Transformers, scikit-learn, R</div>
 </div>
@@ -48,11 +54,11 @@
 </figure>
 
 <h2>Copying, source location, and answer correctness were checked separately</h2>
-<p>The model returned a label, a quote, and the ID of the passage the quote came from. I scored whether the output parsed, whether the model abstained, whether the quote existed in the supplied passages (at least four words, ignoring differences in spacing), whether the passage ID pointed to the passage that held it, whether the quote overlapped the evidence the annotators marked, and whether the label matched the benchmark. End-to-end success required an answer, an existing quote, a valid passage ID, and the correct label. Every question stayed in the denominator, including unreadable outputs. I reported evidence overlap separately. A quote that exists is a check on copying. It does not establish that the sentence supports the label.</p>
+<p>The model returned a label, a quote, and the ID of the passage the quote came from. The harness scored whether the output parsed, whether the model abstained, whether the quote existed in the supplied passages (at least four words, ignoring differences in spacing), whether the passage ID pointed to the passage that held it, whether the quote overlapped the evidence the annotators marked, and whether the label matched the benchmark. End-to-end success required an answer, an existing quote, a valid passage ID, and the correct label. Every question stayed in the denominator, including unreadable outputs. Evidence overlap was reported separately. A quote that exists is a check on copying. It does not establish that the sentence supports the label.</p>
 
-<h2>Two data findings changed how I located evidence</h2>
-<p>The corpus documentation describes evidence offsets as inclusive. On 3,000 training rows, slicing with an exclusive end reproduced the annotated text for about 9 in 10 rows and an inclusive end for none, so I treated offsets as half-open. The repository's folder of abstract files was the other surprise: 2,334 of its 3,285 files contain full articles. For the abstract-only condition, I therefore used the title and abstract section of the same text the offsets refer to, which keeps every quote and every annotated span on one coordinate system.</p>
-<p>I chose the prompt wording, greedy decoding, and the device on 100 validation articles, and the 1,024-token retrieval budget from validation recall, all before any model saw a test question. The written analysis plan, its timestamp, and three dated amendments are in the archive.</p>
+<h2>Two data findings changed how evidence was located</h2>
+<p>The corpus documentation describes evidence offsets as inclusive. On 3,000 training rows, slicing with an exclusive end reproduced the annotated text for about 9 in 10 rows and an inclusive end for none, so offsets were treated as half-open. The repository's folder of abstract files was the other surprise: 2,334 of its 3,285 files contain full articles. The abstract-only condition therefore used the title and abstract section of the same text the offsets refer to, which keeps every quote and every annotated span on one coordinate system.</p>
+<p>The prompt wording, greedy decoding, and the device were chosen on 100 validation articles by rules written into the analysis plan, and the 1,024-token retrieval budget was set from validation recall, all before any language model saw a test question. The written analysis plan, its timestamp, and three dated amendments are in the archive.</p>
 
 <h2>Throwing out answers without a valid quote left the error rate where it was</h2>
 <p>A natural safeguard is to keep only answers whose quote checks out and points to the passage it came from. For Qwen3-1.7B with retrieved passages, that rule set aside 325 answers, 178 of them correct, and moved the error among the answers it kept from 45.6% to 45.7%. Setting aside the same number of answers at random, 2,000 times, gave a mean error of 45.6%. The rule cost about a quarter of the answers and did no better than discarding the same number at random. The same held for Qwen3-4B-Instruct-2507 and for the other contexts, with one exception: when Qwen3-0.6B was handed the physicians' evidence sentences, the rule lowered its error from 34.8% to 29.8%, more than random discarding achieved.</p>
@@ -65,7 +71,7 @@
 <h2>What this does not show</h2>
 <ul>
 <li>Evidence Inference 2.0 is public and may be in the models' training data. A clean train and test split does not rule that out.</li>
-<li>These are models of 0.6 to 4 billion parameters. I did not evaluate larger or commercial models.</li>
+<li>These are models of 0.6 to 4 billion parameters. Three frontier models were added later; see the frontier-model update above.</li>
 <li>The rate depends on the prompt. On validation data, a prompt with a worked example gave a lower rate of wrong quote-backed answers, 35.3% (83 of 235) against 41.7% (120 of 288), but fewer valid quotes, and the rule fixed in advance chose the other prompt.</li>
 <li>The test articles were published between 1993 and 2018. This older expert benchmark does not represent current literature.</li>
 <li>Annotators marked one or two evidence spans per question. A quote outside them can still be valid evidence, so overlap with annotated spans is a partial check.</li>
@@ -93,7 +99,6 @@
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>
 <li><a href="downloads/system-metrics.csv">System metrics (CSV)</a>, <a href="downloads/rejection-rule.csv">rejection rule (CSV)</a>, <a href="downloads/paired-comparisons.csv">paired comparisons (CSV)</a>, <a href="downloads/sensitivity-analyses.csv">sensitivity analyses (CSV)</a></li>
 <li><a href="downloads/data-dictionary.html">Data dictionary</a> and <a href="downloads/tableau-spec.html">Tableau import specification</a></li>
-<li><a href="downloads/manuscript-draft.docx">Download manuscript (Word)</a></li>
 </ul>
 </div>
 </main>

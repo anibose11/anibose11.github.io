@@ -33,7 +33,7 @@
 <div class="prose">
 <p>The analysis uses the AHRQ MEPS 2024 Full Year Consolidated file (HC-256, released August 2026), the 2024 Prescribed Medicines file for imputation flags, and the 2023 file for replication. MEPS records coverage on December 31 and, separately, any coverage in each calendar month. The primary domain is the 1,001 adults aged 18 to 64 who reported ever being told they had diabetes and who were in scope for all 12 months, representing 16.6 million people.</p>
 <p>Two decisions shaped the results. First, I never counted a month as uninsured if the person was outside the civilian noninstitutionalized population or the month had no usable information; such months make continuity indeterminate unless a gap is observed. In the 2024 domain no month was missing, so the indeterminate class is empty, but the rule matters for anyone applying the classification to other data. Second, I show spending summaries on a common denominator (the same people split by class) and on classification-specific denominators, so differences in who is in scope are not mistaken for coverage effects.</p>
-<p>Estimates are design-based (Taylor linearization with the MEPS strata, primary sampling units, and full-year weight), with the whole file kept in the design and domains taken as subsets. I standardized spending for age, sex, race and ethnicity, and income with a survey-weighted two-part model and jackknife replicate intervals, fitting the model only after a prespecified support rule was met.</p>
+<p>Estimates are design-based (Taylor linearization with the MEPS strata, primary sampling units, and full-year weight), with the whole file kept in the design and domains taken as subsets. Spending was standardized for age, sex, race and ethnicity, and income with a survey-weighted two-part model and jackknife replicate intervals; the model was fit only after a prespecified support rule was met.</p>
 </div>
 
 <h2>People with a gap filled fewer prescriptions, and their median spending was similar</h2>
@@ -55,9 +55,9 @@
 </ul>
 </div>
 
-<h2>How I checked the results</h2>
+<h2>How the results were checked</h2>
 <div class="prose">
-<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and, for 2024, matches fill counts and out-of-pocket totals between the prescription and person files. An independent SQL classification and a separately written variance calculation agree with the main implementation. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
+<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and, for 2024, matches fill counts and out-of-pocket totals between the prescription and person files. A second implementation of the classification in SQL and a second implementation of the variance formula in Python agree with the main code. Both were written in the same AI-assisted build, so they check the code's consistency rather than validate it externally. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
 <pre><code>./setup.sh
 ./icont all      # acquire, build, analyze, validate, render, package
 ./icont test     # unit tests on synthetic fixtures
@@ -74,13 +74,13 @@
 <li><a href="downloads/tableau_cohort_flow.csv">Cohort flow counts (CSV)</a> <span class="note">(2 KB)</span></li>
 <li><a href="downloads/tableau_spec.md">Tableau import and interaction specification (Markdown)</a> <span class="note">(3 KB)</span></li>
 <li><a href="downloads/data_dictionary.csv">Source-to-analysis data dictionary (CSV)</a> <span class="note">(18 KB)</span></li>
-<li><a href="downloads/analysis_plan.md">Timestamped analysis plan with amendments (Markdown)</a> <span class="note">(18 KB)</span></li>
+<li><a href="downloads/analysis_plan.md">Analysis plan and amendments, self-dated October 7, 2026 (Markdown)</a> <span class="note">(18 KB)</span></li>
 <li><a href="downloads/prior_art.csv">Related studies and tools (CSV)</a> <span class="note">(16 KB)</span></li>
 <li><a href="downloads/claims.json">Reported values and source tables (JSON)</a> <span class="note">(208 KB)</span></li>
 </ul>
 </article>
 
 </main>
-<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251. I calculated these estimates. AHRQ has not endorsed them.</footer>
+<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251. These estimates are the author's, not AHRQ's, and AHRQ has not endorsed them.</footer>
 </body>
 </html>

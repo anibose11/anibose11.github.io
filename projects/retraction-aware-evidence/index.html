@@ -64,28 +64,29 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <main id="main">
 <article>
 <div class="prose">
-<h1>Retraction checks depended more on the status source than on identifier crosswalks</h1>
+<h1>Retracted, replaced or corrected: what a reference check of 1,000 systematic reviews finds</h1>
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="question">An analyst checking a systematic review's references for retractions, corrections and expressions of concern needs to know how much of the list can be checked, how much the result depends on the status source, and whether each notice came before or after the review. I measured all three in 1,000 open-access reviews of diabetes, obesity and heart failure, covering 62,740 reference occurrences.</p>
+<p class="question">An analyst checking a systematic review's references for retractions, corrections and expressions of concern needs to know how much of the list can be checked, how much the result depends on the status source, and whether each notice came before or after the review. This study measured all three in 1,000 open-access reviews of diabetes, obesity and heart failure, covering 62,740 reference occurrences.</p>
+<p class="muted"><strong>Corrected October 2026.</strong> An item-level check by AI agents (Claude Opus 5.5 via Claude Code) on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and the counts on this page are the corrected ones; the version of 7 October 2026 reported 46 retraction-flagged occurrences in 41 reviews.</p>
 </div>
 
 <figure>
-<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_source_overlap.svg" width="1200" height="480" alt="Stacked bars by claim type showing which source recorded the claim. Retraction: 35 both sources, 4 Retraction Watch only, 7 PubMed only (n = 46). Expression of concern: 10 both, 4 Retraction Watch only, 10 PubMed only (n = 24). Correction: 7 both and 2,162 PubMed only (n = 2,169)."></div>
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig2_source_overlap.svg" width="1200" height="480" alt="Stacked bars by claim type showing which source recorded the claim. Retraction: 34 both sources, 3 Retraction Watch only, 7 PubMed only (n = 44). Expression of concern: 10 both, 4 Retraction Watch only, 10 PubMed only (n = 24). Correction: 6 both and 2,159 PubMed only (n = 2,165)."></div>
 <figcaption>Which source recorded each claim, by claim type. Counts are reference occurrences after PubMed relations were added to Retraction Watch (arm C). Retraction Watch data are for 2026-10-06, and PubMed records were retrieved on 2026-10-07.</figcaption>
 </figure>
 
 <ul class="facts" aria-label="Key results">
 <li><strong>92.2%</strong><span>of reference occurrences carried a usable DOI, PMID or PMCID, and 7.8% had none</span></li>
-<li><strong>2</strong><span>extra links from verified identifier crosswalks beyond exact DOI matching, both in references with conflicting identifiers</span></li>
-<li><strong>46 in 41 reviews</strong><span>reference occurrences citing 44 works with a retraction claim. PubMed alone recorded 7 occurrences and Retraction Watch alone 4</span></li>
-<li><strong>16 before, 28 after</strong><span>of 46 retraction-flagged occurrences, by notice date relative to the review's first online date. The other 2 could not be placed</span></li>
+<li><strong>7 in 7 reviews</strong><span>references citing a study retracted, for a reason other than replacement, at least six months before the review appeared (post hoc amendment A5)</span></li>
+<li><strong>44 in 40 reviews</strong><span>reference occurrences citing 42 works with a retraction claim. PubMed alone recorded 7 occurrences and Retraction Watch alone 3</span></li>
+<li><strong>14 before, 28 after</strong><span>of 44 retraction-flagged occurrences, by notice date relative to the review's first online date. The other 2 could not be placed</span></li>
 </ul>
 
 <div class="prose">
 <p>The audit works with metadata. A flag means that a status source records a notice for the cited work as of the snapshot date. It does not judge the study, the review or anyone's conduct, and citing a study after its notice does not show that the review relied on it.</p>
 
 <h2>Where the data come from</h2>
-<p>The review frame is one PubMed query run on 7 October 2026. It covers systematic reviews and meta-analyses on diabetes, obesity or heart failure published from 2015 to 2025 that are in the PMC Open Access Subset (7,993 records). I took the first 1,000 in order of a hash of their PMIDs, without replacement, and retrieved their JATS XML from the PMC Article Datasets on AWS. Status claims come from the Crossref Retraction Watch CSV pinned to one commit and from PubMed's own correction and retraction relations. Every response is cached with its SHA-256 hash, so the whole analysis reruns offline.</p>
+<p>The review frame is one PubMed query run on 7 October 2026. It covers systematic reviews and meta-analyses on diabetes, obesity or heart failure published from 2015 to 2025 that are in the PMC Open Access Subset (7,993 records). The first 1,000 in order of a hash of their PMIDs were taken, without replacement, and their JATS XML was retrieved from the PMC Article Datasets on AWS. Status claims come from the Crossref Retraction Watch CSV pinned to one commit and from PubMed's own correction and retraction relations. Every response is cached with its SHA-256 hash, so the whole analysis reruns offline.</p>
 
 <h2>How the audit links a reference to a status notice</h2>
 </div>
@@ -101,14 +102,14 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <div class="prose">
 <h2>How the audit handles disagreements</h2>
 <h3>Each source keeps its own claim and date</h3>
-<p>A review of obesity and COVID-19 mortality (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7901910/">PMC7901910</a>) first appeared online on 5 February 2021 and cites a meta-analysis that both sources record as retracted. Retraction Watch dates the notice 6 February 2021, a day after the review. PubMed's notice record carries only its January 2021 issue date, which falls before the review. A single "cited after retraction" label would hide that disagreement, so I kept both claims and marked the timing as indeterminate. Of 46 retraction-flagged occurrences, 2 ended up indeterminate.</p>
+<p>A review of obesity and COVID-19 mortality (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7901910/">PMC7901910</a>) first appeared online on 5 February 2021 and cites a meta-analysis that both sources record as retracted. Retraction Watch dates the notice 6 February 2021, a day after the review. PubMed's notice record carries only an issue date of January–February 2021, an interval that overlaps the review's date. A single "cited after retraction" label would hide that uncertainty, so the audit keeps both claims and marks the timing as indeterminate. Of 44 retraction-flagged occurrences, 2 were indeterminate.</p>
 <h3>Conflicting identifiers go to manual review</h3>
-<p>The identifier crosswalk added only 2 links, both corrections, and both came from references whose identifiers disagreed. One reference used the article's Crossref-registered DOI, while Retraction Watch and PubMed list an alias that Crossref redirects to it. The other paired the article's PMID with the DOI of its correction notice. I labeled both as ambiguous and sent them to manual review. In total, 321 reference occurrences (0.5%) had identifiers pointing to different records.</p>
+<p>The identifier crosswalk added only 1 link, a correction in a reference whose identifiers disagreed: it used the article's Crossref-registered DOI, while Retraction Watch and PubMed list an alias that Crossref redirects to it. The audit labeled it ambiguous and listed it for manual review. (A second link reported in the 7 October version came from a reference that cites the erratum itself; amendment A4 now treats it as a cited notice.) In total, 321 reference occurrences (0.5%) were labeled ambiguous; in a sample of 20 of them checked by AI agents, 8 were one work cited under variant DOIs.</p>
 
 <h2>Coverage was high and PubMed supplied most correction claims</h2>
 </div>
 <figure>
-<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_coverage_ledger.svg" width="1200" height="440" alt="Horizontal bars of the coverage ledger: 55,792 one verified PubMed record, 4,911 no identifier, 1,715 DOI only and not in PubMed, 321 ambiguous, 1 malformed."></div>
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig1_coverage_ledger.svg" width="1200" height="467" alt="Horizontal bars of the coverage ledger: 55,792 one verified PubMed record, 4,911 no identifier, 1,715 DOI only and not in PubMed, 321 ambiguous, 1 malformed."></div>
 <figcaption>Coverage ledger. Every reference occurrence falls into exactly one category. No lookup failed, and every cited PMID resolved.</figcaption>
 </figure>
 <div class="table-wrap">
@@ -116,26 +117,26 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <caption>Flagged reference occurrences by claim type and linkage arm</caption>
 <thead><tr><th scope="col">Claim type</th><th scope="col" class="num">Arm A</th><th scope="col" class="num">Arm B</th><th scope="col" class="num">Arm C</th><th scope="col" class="num">Reviews (C)</th><th scope="col" class="num">Unique works (C)</th></tr></thead>
 <tbody>
-<tr><th scope="row">Retraction</th><td class="num">39</td><td class="num">39</td><td class="num">46</td><td class="num">41</td><td class="num">44</td></tr>
+<tr><th scope="row">Retraction</th><td class="num">37</td><td class="num">37</td><td class="num">44</td><td class="num">40</td><td class="num">42</td></tr>
 <tr><th scope="row">Expression of concern</th><td class="num">14</td><td class="num">14</td><td class="num">24</td><td class="num">17</td><td class="num">21</td></tr>
-<tr><th scope="row">Correction</th><td class="num">5</td><td class="num">7</td><td class="num">2,169</td><td class="num">797</td><td class="num">1,408</td></tr>
+<tr><th scope="row">Correction</th><td class="num">5</td><td class="num">6</td><td class="num">2,165</td><td class="num">796</td><td class="num">1,407</td></tr>
 <tr><th scope="row">Reinstatement</th><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td><td class="num">1</td></tr>
 <tr><th scope="row">Update (PubMed only)</th><td class="num">0</td><td class="num">0</td><td class="num">40</td><td class="num">34</td><td class="num">30</td></tr>
-<tr><th scope="row">Any claim</th><td class="num">55</td><td class="num">57</td><td class="num">2,266</td><td class="num">808</td><td class="num">1,492</td></tr>
+<tr><th scope="row">Any claim</th><td class="num">53</td><td class="num">54</td><td class="num">2,260</td><td class="num">807</td><td class="num">1,489</td></tr>
 </tbody>
 </table></div>
 </div>
 <figure>
-<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_timing.svg" width="1200" height="560" alt="Stacked bars of claim timing by claim type and source. Retraction, Retraction Watch: 15 before and 24 after. Retraction, PubMed: 15 before, 27 after, 1 indeterminate. Correction, PubMed: 787 indeterminate, mostly because the erratum relation names no notice record."></div>
+<div class="portfolio-fig" tabindex="0" role="region" aria-label="Scrollable figure"><img src="assets/fig3_timing.svg" width="1200" height="560" alt="Stacked bars of claim timing by claim type and source. Retraction, Retraction Watch: 13 before and 24 after. Retraction, PubMed: 13 before, 27 after, 2 indeterminate. Correction, PubMed: 787 indeterminate, mostly because the erratum relation names no notice record."></div>
 <figcaption>Timing of each claim against the review's first online date. Most indeterminate correction timing comes from PubMed erratum relations without a notice record. A post hoc check dated all 783 of them from PubMed's citation string, and all fell before the review.</figcaption>
 </figure>
 
 <div class="prose">
 <h2>What the results do not show</h2>
-<p>The cohort is a deterministic sample of PMC open-access reviews selected through PubMed indexing and is not a census. A match means agreement with two sources at their snapshot dates, which is different from sensitivity to every real retraction. Retraction Watch and PubMed also share upstream notices, so their agreement is not independent confirmation. The flagged counts are small. A citation does not show that a review used the study's data, and no pooled result was re-analyzed.</p>
+<p>The cohort is a deterministic sample of PMC open-access reviews selected through PubMed indexing and is not a census. A match means agreement with two sources at their snapshot dates, which is different from sensitivity to every real retraction. Retraction Watch and PubMed also share upstream notices, so their agreement is not independent confirmation. The flagged counts are small, and a post hoc replication in the frame's other 6,993 records (amendment A7) found more retraction and concern flags per reference (0.104% against 0.070% for retractions), so the retraction and concern counts on this page are probably low. A citation does not show that a review used the study's data, and no pooled result was re-analyzed.</p>
 
 <h2>How the results were checked</h2>
-<p>All 55 tests passed on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. A separate routine confirmed 2,522 of 2,522 status claims against the raw source records, and an offline rerun reproduced all 36 output tables exactly. I also checked every retraction, expression of concern and reinstatement claim and a stratified sample of 100 parsed references against the original records by hand, and all were consistent.</p>
+<p>The test suite passes on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests (55 tests in the version of 7 October 2026; 81 after the October corrections). After the correction, a separate routine in the same code base confirmed 2,514 of 2,514 status claims against the raw source records, and an offline rerun reproduced every output file. A worksheet for a manual check of the flagged claims and a 100-reference sample was prepared on 7 October 2026, but no result was recorded in it. On 24 October 2026, AI agents (Claude Opus 5.5 via Claude Code) checked all 120 flagged claim rows and the 100 sampled references against the source records, with two verifiers using different methods and a third reconciling them. They found two references wrongly linked to retracted studies, one of them a 2014 conference abstract cited by the DOI of its whole abstract supplement, which Retraction Watch lists for a different, retracted abstract. Both were removed under post hoc amendment A4, and the counts on this page exclude them.</p>
 
 <h2>Reproduce the analysis</h2>
 <pre><code>python3 -m venv .venv &amp;&amp; .venv/bin/pip install -e ".[test,report]"
@@ -147,17 +148,18 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <h2>Report, code and data</h2>
 <ul class="downloads">
 <li><a href="report.html">Full report</a><small>Methods, results and limitations (HTML)</small></li>
-<li><a href="downloads/retraction-aware-evidence-source.zip">Source code (ZIP)</a><small>Code, SQL, configuration, tests, docs, frozen manifests and result tables (3.0 MB)</small></li>
-<li><a href="downloads/review_queue.xlsx">Review queue workbook</a><small>Every flagged reference with identifiers, claims, dates, timing and source links (861 KB)</small></li>
-<li><a href="downloads/aggregate_results.xlsx">Aggregate results workbook</a><small>Main result tables with a definitions sheet, units and intervals (29 KB)</small></li>
-<li><a href="downloads/result_tables.zip">Result tables (CSV)</a><small>Result tables, Tableau-ready exports and the claims ledger (833 KB)</small></li>
-<li><a href="downloads/analysis_plan_with_amendments.md">Analysis plan</a><small>Timestamped plan with three dated amendments (Markdown, 14 KB)</small></li>
+<li><a href="downloads/retraction-aware-evidence-source.zip">Source code (ZIP)</a><small>Version 1.0.0 as archived on Zenodo (doi:10.5281/zenodo.23450183), before the October 2026 correction; the corrected code is available from the author on request (3.0 MB)</small></li>
+<li><a href="downloads/review_queue.xlsx">Review queue workbook</a><small>Corrected October 2026: every flagged reference with identifiers, claims, dates, timing and source links, and the 8 links amendment A4 rejected (862 KB)</small></li>
+<li><a href="downloads/aggregate_results.xlsx">Aggregate results workbook</a><small>Corrected October 2026: main result tables with a definitions sheet, units and intervals, and the amendment A4–A7 tables (58 KB)</small></li>
+<li><a href="downloads/result_tables.zip">Result tables (CSV)</a><small>Version of 7 October 2026, before the correction; the corrected tables are in the workbooks above (833 KB)</small></li>
+<li><a href="downloads/analysis_plan_with_amendments.md">Analysis plan</a><small>Internal plan of 7 October 2026 with its self-recorded writing time and amendments A1–A3 (Markdown, 14 KB)</small></li>
+<li><a href="downloads/amendments_A4-A7.pdf">Amendments A4–A7</a><small>Post hoc amendments A4–A7 and addendum A7.1 (24–25 October 2026) with their ledger times and hashes, and the contribution decision and plan of 7 October 2026, all reproduced as written (PDF, 22 pages, 158 KB)</small></li>
 </ul>
 </div>
 </article>
 </main>
 <footer>
-<p>Data from Crossref Retraction Watch (commit fe345427, data for 2026-10-06) and from PubMed and PMC at the U.S. National Library of Medicine, retrieved 2026-10-07. This page is not endorsed by NLM and may not reflect the most current NLM data. Code is released under the MIT License.</p>
+<p>Data from Crossref Retraction Watch (commit fe345427, data for 2026-10-06) and from PubMed and PMC at the U.S. National Library of Medicine, retrieved 2026-10-07 (for the post hoc replication, 2026-10-24). This page is not endorsed by NLM and may not reflect the most current NLM data. Code is released under the MIT License.</p>
 </footer>
 </body>
 </html>
