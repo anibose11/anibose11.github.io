@@ -9,7 +9,7 @@
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Working paper</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -21,7 +21,7 @@
 
 <div class="measure update" id="update-2026-10-24">
 <h2>Update: three frontier models, run on 24 October 2026</h2>
-<p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put more than half of the remaining errors down to mistakes in the benchmark labels, which brings their rates to 3.5% and 3.0%; those judges are AI models, not expert raters. A second model that reread the quoted passage removed most errors of the small models, but the share of questions answered fell from 81.3% to 44.8%.</p>
+<p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%; those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
 <p class="muted">This comparison was added after the original results were known, in an amendment time-stamped before any frontier output existed. It has not been peer reviewed. The code and model responses are planned for the next version of the code archive.</p>
 </div>
 
@@ -93,7 +93,7 @@
 
 <h2>Report, code and data</h2>
 <ul class="files">
-<li><a href="report.html">Full report and supplementary tables</a></li>
+<li><a href="report.html">Working paper and supplementary tables</a></li>
 <li><a href="downloads/prediction-viewer.html">Prediction viewer</a>: examples with the quote highlighted and annotated evidence underlined (CC BY and CC0 articles only)</li>
 <li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a></li>
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>

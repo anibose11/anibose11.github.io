@@ -9,8 +9,8 @@
 <meta name="author" content="Animesh Bose, Norlowe Research">
 <meta name="dcterms.date" content="2026-10-07">
 
-<title>Retraction-aware evidence: full report | Animesh Bose</title>
-<meta name="description" content="Full report: identifier coverage, status sources and notice timing in the reference lists of 1,000 open-access cardiometabolic systematic reviews.">
+<title>Retraction-aware evidence: working paper | Animesh Bose</title>
+<meta name="description" content="Working paper: identifier coverage, status sources and notice timing in the reference lists of 1,000 open-access cardiometabolic systematic reviews.">
 <style>
 
 span.smallcaps{font-variant: small-caps;}
@@ -557,7 +557,7 @@ figure { margin: 1.25rem 0; }
 </head>
 
 <body class="portfolio-page portfolio-report">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Full report</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Working paper</a></div></nav>
 <main id="main">
 
 
@@ -565,7 +565,7 @@ figure { margin: 1.25rem 0; }
 <h1 class="title">Retraction-aware evidence linkage for cardiometabolic reviews</h1>
 <p class="subtitle">Technical report: identifier coverage, status sources and notice timing in 1,000 systematic review reference lists</p>
 <p class="author portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="portfolio-status">This report has not been peer reviewed.</p>
+<p class="portfolio-status">Working paper posted for comment. Not peer reviewed; subject to revision.</p>
 
 <p class="date">2026-10-07; corrected October 2026</p>
 </header>
@@ -588,7 +588,7 @@ figure { margin: 1.25rem 0; }
 <h2 id="the-question" class="anchored">The question</h2>
 <p>An analyst checking a systematic review’s reference list for retractions, corrections and expressions of concern needs to know three things. How much of the list can be checked? How much does the result depend on the status source? How often can a notice be dated before or after the review appeared? This report answers these questions for a fixed cohort of 1,000 open-access systematic reviews and meta-analyses on diabetes, obesity and heart failure, using a frozen Crossref Retraction Watch snapshot (data for 2026-10-06) and PubMed records retrieved on 2026-10-07.</p>
 <p><strong>Summary.</strong> Of 62,740 reference occurrences, 92.2% carried a usable identifier and 88.9% resolved to one PubMed record. Exact DOI matching found every unambiguous Retraction Watch link that a verified identifier crosswalk found. Adding PubMed relations changed which studies were flagged. PubMed alone recorded 7 retraction-flagged and 10 concern-flagged occurrences, Retraction Watch alone recorded 3 and 4, and nearly all corrections appeared only in PubMed. Of 44 retraction-flagged occurrences, 14 had a notice dated before the review went online, 28 after, and 2 could not be placed. Seven of the 44 were retract-and-replace notices, and only 7 occurrences, in 7 reviews, cited a study retracted for another reason at least six months before the review appeared.</p>
-<p><strong>Correction, October 2026.</strong> An item-level check by AI agents (Claude Opus 5.5 via Claude Code) on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and every count in this report is the corrected one; the version of 7 October 2026 reported 46 retraction-flagged occurrences in 41 reviews. Three later post hoc analyses are summarized under <a href="#later-analyses">Later analyses</a>.</p>
+<p><strong>Correction, October 2026.</strong> An item-level check on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and every count in this report is the corrected one; the version of 7 October 2026 reported 46 retraction-flagged occurrences in 41 reviews. Three later post hoc analyses are summarized under <a href="#later-analyses">Later analyses</a>.</p>
 <p>The audit works with metadata. It does not judge any study or review, and it does not show that any review’s conclusions changed.</p>
 <h2 id="data" class="anchored">Data</h2>
 <div id="tbl-flow" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
@@ -1140,13 +1140,13 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 <h3 id="references-that-cite-a-notice-and-the-title-queue" class="anchored">References that cite a notice, and the title queue</h3>
 <p>In 50 occurrence and notice pairs (45 reference occurrences), the reference cited the notice itself (43 published errata and 3 retraction notices in PubMed, and 3 retraction notices and 1 correction notice in Retraction Watch). The title matcher specified in the analysis plan, run against Retraction Watch original-paper titles, produced 1 candidate among references without an identifier link: the reference whose false identifier link amendment A4 removed, which has the same title as the retracted article. Candidates are listed for review and never counted.</p>
 <h2 id="later-analyses" class="anchored">Later analyses (post hoc, October 2026)</h2>
-<p>Each of the following was written after every result above was known and is filed as a separate dated amendment in <code>docs/</code>, hashed into a time-stamped project ledger.</p>
+<p>Each of the following was written after every result above was known and is filed as a separate dated amendment in <code>docs/</code>, internally time-stamped when written.</p>
 <ul>
 <li><p><strong>Notice type (A5).</strong> Seven of the 44 retraction-flagged occurrences were retract-and-replace notices, in which a corrected article replaced the retracted one (PREDIMED twice, a Cochrane review twice, and articles in JAMA Psychiatry, BJPsych Open and The Lancet). Of the 37 other retractions, 10 preceded the review, 3 of them by less than 183 days, which leaves 7 occurrences in 7 reviews that cited a study retracted for another reason at least six months before the review appeared.</p></li>
 <li><p><strong>Crossref publisher deposits (A6).</strong> Crossref was queried on 24 October 2026 for the 47,394 cited works with a DOI, using only relations that publishers had deposited before the PubMed snapshot. Of 46 works with a DOI flagged as retracted by any of the three sources, 26 were flagged by all three; Crossref alone flagged 5, and 7 retractions known to PubMed and Retraction Watch had no publisher retraction deposit.</p></li>
 <li><p><strong>Replication (A7).</strong> The unchanged pipeline was run on the frame’s other 6,993 records (6,991 with references). Identifier coverage and corrections replicated within 0.3 percentage points, but retraction and concern flags were more frequent per reference (0.104% against 0.070% for retractions), and 95 of 6,991 reviews (1.4%) cited a study retracted for a reason other than replacement at least six months earlier. The replication’s flags were not checked item by item.</p></li>
 </ul>
-<p>Another AI agent recomputed the A5–A7 figures with its own code and found no discrepancy.</p>
+<p>Recomputing the A5–A7 figures with separately written code found no discrepancy.</p>
 <h2 id="validation" class="anchored">Validation</h2>
 <p>Five kinds of checks were run and are reported separately.</p>
 <ul>
@@ -1594,4 +1594,4 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 
 
 
-<section id="author-and-tools"><h2>Author contribution and tools</h2><p>Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text. AI coding and writing assistants helped write code, run analyses and draft text under the author’s direction: Claude Code (Anthropic) and ChatGPT (OpenAI) for coding, data analysis, literature searching, and help with drafting and editing, and Codex (OpenAI) for language editing and document formatting in a 12 October 2026 revision in which no analysis was rerun. Exact model versions were not recorded for that work, except that the Claude Code session logs from 16 October 2026 record Claude Opus 5.5 (claude-opus-5-5). The October 2026 correction and later analyses were prepared with Claude Code running Claude Opus 5.5 (claude-opus-5-5). Animesh Bose takes responsibility for the work.</p><p><strong>Competing interests.</strong> The author declares no competing interests. <strong>Funding.</strong> This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p></section></main></body></html>
+<section id="author-and-tools"><h2>Author contribution and tools</h2><p>Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text. AI coding and writing assistants helped write code, run analyses and draft text under the author’s direction. The original study used Claude Code (Anthropic) and ChatGPT (OpenAI) for coding, data analysis, literature searching, and help with drafting and editing, and Codex (OpenAI) for language editing and document formatting in one revision; exact model versions were not recorded for that work, except that the Claude Code session logs from 16 October 2026 record Claude Opus 5.5 (claude-opus-5-5). Claude Code running Claude Opus 5.5 (claude-opus-5-5) was used for the October 2026 correction and the later analyses. Animesh Bose takes responsibility for the work.</p><p><strong>Competing interests.</strong> The author declares no competing interests. <strong>Funding.</strong> This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p></section></main></body></html>
