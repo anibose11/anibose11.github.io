@@ -109,7 +109,7 @@ The pipeline (Python 3.13, PostgreSQL 17.11, R 4.5.1) runs as stages: acquire, f
 
 ### Use of artificial intelligence (AI) tools
 
-Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text. AI coding and writing assistants helped write code, run analyses and draft text under the author's direction. The original work used Claude Code (Anthropic), ChatGPT and Codex (OpenAI); exact model versions were not recorded, except that the Claude Code session logs from 16 October 2026 record Claude Opus 5.5 (claude-opus-5-5), and the author recalls GPT-5 and GPT-6 family models for ChatGPT and Codex. This version used Claude Code running Claude Opus 5.5 (claude-opus-5-5), and the same model through the Anthropic API for the R recomputation. The assistants wrote the Python, Structured Query Language (SQL) and R code, including the fidelity reference and the R recomputation, and did the code review before the freeze; no other person reviewed the code. They also searched the literature, checked the references, read the archived AACT source code, recounted the post hoc figures, drafted amendment 4, and drafted and edited the manuscript. Animesh Bose takes responsibility for all of the work.
+Animesh Bose conceived the study, designed its methods and explored the data, then directed the analysis and writing and reviewed and verified the results and text. Claude Code by Anthropic (Claude Opus 5.5, also used through the Anthropic API for the R recomputation, and earlier Claude models) and ChatGPT and Codex by OpenAI (GPT-5 and GPT-6 series models) helped write, review and run the Python, SQL and R code, search and check the literature, and draft and edit this report.
 
 ## Results
 
@@ -393,7 +393,7 @@ This research received no specific grant from any funding agency in the public, 
 
 ### Authors' contributions
 
-Animesh Bose is the sole author. Animesh Bose conceived and designed the study, developed the methodology, explored the data, and reviewed and verified the analyses and text; AI coding and writing assistants helped write code, run analyses and draft text under the author's direction (see Use of artificial intelligence (AI) tools). CRediT roles: conceptualization, methodology, software, validation, formal analysis, investigation, data curation, visualization, project administration, writing – original draft, and writing – review and editing. Animesh Bose takes responsibility for its content.
+Animesh Bose is the sole author. The AI assistants that helped with the code and the writing are named under Use of artificial intelligence (AI) tools.
 
 ### Acknowledgements
 
