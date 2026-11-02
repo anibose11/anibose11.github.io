@@ -9,25 +9,25 @@
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Working paper</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
 <div class="measure">
 <h1>A real quote can accompany a wrong trial result</h1>
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
-<p class="lede">When a language model answers a question about a clinical trial and backs it with a quote that really appears in the article, how often is the answer still wrong? The study measured this for small models that run on a laptop and, in a dated update below, for three frontier models, on every eligible test question of an expert-annotated benchmark.</p>
+<p class="lede">When a language model answers a question about a clinical trial and backs it with a quote that really appears in the article, how often is the answer still wrong? The study measured this for small models that run on a laptop and, in a post hoc comparison below, for three frontier models, on every eligible test question of an expert-annotated benchmark.</p>
 </div>
 
 <div class="measure update" id="update-2026-10-24">
-<h2>Update: three frontier models, run on 24 October 2026</h2>
+<h2>Post hoc comparison: three frontier models</h2>
 <p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%; those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
-<p class="muted">This comparison was added after the original results were known, in an amendment time-stamped before any frontier output existed. It has not been peer reviewed. The code and model responses are planned for the next version of the code archive.</p>
+<p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis.</p>
 </div>
 
 <div class="facts">
 <div><b>Benchmark</b>Evidence Inference 2.0, official test split: 1,209 eligible questions in 332 trial reports</div>
-<div><b>Models</b>Qwen3-1.7B (primary), Qwen3-0.6B, Qwen3-4B-Instruct-2507, run locally; Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol through their APIs (frontier-model update; accessed 24 October 2026)</div>
+<div><b>Models</b>Qwen3-1.7B (primary), Qwen3-0.6B, Qwen3-4B-Instruct-2507, run locally; Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol through their APIs (post hoc comparison; accessed 24 October 2026)</div>
 <div><b>Comparisons</b>Majority class, TF-IDF + logistic regression, random rejection at matched coverage</div>
 <div><b>Built with</b>Python, PyTorch, Transformers, scikit-learn, R</div>
 </div>
@@ -71,7 +71,7 @@
 <h2>What this does not show</h2>
 <ul>
 <li>Evidence Inference 2.0 is public and may be in the models' training data. A clean train and test split does not rule that out.</li>
-<li>These are models of 0.6 to 4 billion parameters. Three frontier models were added later; see the frontier-model update above.</li>
+<li>These are models of 0.6 to 4 billion parameters. A post hoc comparison with three frontier models is summarized above.</li>
 <li>The rate depends on the prompt. On validation data, a prompt with a worked example gave a lower rate of wrong quote-backed answers, 35.3% (83 of 235) against 41.7% (120 of 288), but fewer valid quotes, and the rule fixed in advance chose the other prompt.</li>
 <li>The test articles were published between 1993 and 2018. This older expert benchmark does not represent current literature.</li>
 <li>Annotators marked one or two evidence spans per question. A quote outside them can still be valid evidence, so overlap with annotated spans is a partial check.</li>
@@ -93,9 +93,9 @@
 
 <h2>Report, code and data</h2>
 <ul class="files">
-<li><a href="report.html">Working paper and supplementary tables</a></li>
+<li><a href="report.html">Report and supplementary tables</a></li>
 <li><a href="downloads/prediction-viewer.html">Prediction viewer</a>: examples with the quote highlighted and annotated evidence underlined (CC BY and CC0 articles only)</li>
-<li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a></li>
+<li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a>; for how the results were checked, see the report (the archived manuscript files predate it)</li>
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>
 <li><a href="downloads/system-metrics.csv">System metrics (CSV)</a>, <a href="downloads/rejection-rule.csv">rejection rule (CSV)</a>, <a href="downloads/paired-comparisons.csv">paired comparisons (CSV)</a>, <a href="downloads/sensitivity-analyses.csv">sensitivity analyses (CSV)</a></li>
 <li><a href="downloads/data-dictionary.html">Data dictionary</a> and <a href="downloads/tableau-spec.html">Tableau import specification</a></li>

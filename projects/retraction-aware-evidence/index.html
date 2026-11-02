@@ -58,7 +58,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
 </head>
 <body class="portfolio-page">
-<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Working paper</a></div></nav>
+<nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
 <a class="skip" href="#main">Skip to content</a>
 
 <main id="main">
@@ -67,7 +67,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <h1>Retracted, replaced or corrected: what a reference check of 1,000 systematic reviews finds</h1>
 <p class="muted portfolio-byline">Animesh Bose, Norlowe Research</p>
 <p class="question">An analyst checking a systematic review's references for retractions, corrections and expressions of concern needs to know how much of the list can be checked, how much the result depends on the status source, and whether each notice came before or after the review. The audit measured all three in 1,000 open-access reviews of diabetes, obesity and heart failure, covering 62,740 reference occurrences.</p>
-<p class="muted"><strong>Corrected October 2026.</strong> An item-level check on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and the counts on this page are the corrected ones; the version of 7 October 2026 reported 46 retraction-flagged occurrences in 41 reviews.</p>
+<p class="muted"><strong>Item-level check.</strong> A post hoc item-level check on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and the counts on this page exclude them.</p>
 </div>
 
 <figure>
@@ -136,7 +136,7 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 <p>The cohort is a deterministic sample of PMC open-access reviews selected through PubMed indexing and is not a census. A match means agreement with two sources at their snapshot dates, which is different from sensitivity to every real retraction. Retraction Watch and PubMed also share upstream notices, so their agreement is not independent confirmation. The flagged counts are small, and a post hoc replication in the frame's other 6,993 records (amendment A7) found more retraction and concern flags per reference (0.104% against 0.070% for retractions), so the retraction and concern counts on this page are probably low. A citation does not show that a review used the study's data, and no pooled result was re-analyzed.</p>
 
 <h2>How the results were checked</h2>
-<p>The test suite passes on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests (55 tests in the version of 7 October 2026; 81 after the October corrections). After the correction, a separate routine in the same code base confirmed 2,514 of 2,514 status claims against the raw source records, and an offline rerun reproduced every output file. A worksheet for a manual check of the flagged claims and a 100-reference sample was prepared on 7 October 2026, but no result was recorded in it. On 24 October 2026, AI agents (Claude Opus 5.5 via Claude Code) checked all 120 flagged claim rows and the 100 sampled references against the source records, with two verifiers using different methods and a third reconciling them. They found two references wrongly linked to retracted studies, one of them a 2014 conference abstract cited by the DOI of its whole abstract supplement, which Retraction Watch lists for a different, retracted abstract. Both were removed under post hoc amendment A4, and the counts on this page exclude them.</p>
+<p>The test suite passes on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests (55 tests in the original code of 7 October 2026; 81 in the current code). After amendment A4, a separate routine in the same code base confirmed 2,514 of 2,514 status claims against the raw source records, and an offline rerun reproduced every output file. A worksheet for a manual check of the flagged claims and a 100-reference sample was prepared on 7 October 2026, but no result was recorded in it. On 24 October 2026, AI agents (Claude Opus 5.5 via Claude Code) checked all 120 flagged claim rows and the 100 sampled references against the source records, with two verifiers using different methods and a third reconciling them. They found two references wrongly linked to retracted studies, one of them a 2014 conference abstract cited by the DOI of its whole abstract supplement, which Retraction Watch lists for a different, retracted abstract. Both were removed under post hoc amendment A4, and the counts on this page exclude them.</p>
 
 <h2>Reproduce the analysis</h2>
 <pre><code>python3 -m venv .venv &amp;&amp; .venv/bin/pip install -e ".[test,report]"
@@ -147,11 +147,11 @@ footer { max-width: var(--wide); margin: 0 auto; padding: 1.5rem 16px 3rem; colo
 
 <h2>Report, code and data</h2>
 <ul class="downloads">
-<li><a href="report.html">Working paper</a><small>Methods, results and limitations (HTML)</small></li>
-<li><a href="downloads/retraction-aware-evidence-source.zip">Source code (ZIP)</a><small>Version 1.0.0 as archived on Zenodo (doi:10.5281/zenodo.23450183), before the October 2026 correction; the corrected code is available from the author on request (3.0 MB)</small></li>
-<li><a href="downloads/review_queue.xlsx">Review queue workbook</a><small>Corrected October 2026: every flagged reference with identifiers, claims, dates, timing and source links, and the 8 links amendment A4 rejected (862 KB)</small></li>
-<li><a href="downloads/aggregate_results.xlsx">Aggregate results workbook</a><small>Corrected October 2026: main result tables with a definitions sheet, units and intervals, and the amendment A4–A7 tables (58 KB)</small></li>
-<li><a href="downloads/result_tables.zip">Result tables (CSV)</a><small>Version of 7 October 2026, before the correction; the corrected tables are in the workbooks above (833 KB)</small></li>
+<li><a href="report.html">Report</a><small>Methods, results and limitations (HTML)</small></li>
+<li><a href="downloads/retraction-aware-evidence-source.zip">Source code (ZIP)</a><small>Version 1.0.0 as archived on Zenodo (doi:10.5281/zenodo.23450183), before amendments A4 to A7; the current code is available from the author on request (3.0 MB)</small></li>
+<li><a href="downloads/review_queue.xlsx">Review queue workbook</a><small>Every flagged reference with identifiers, claims, dates, timing and source links, and the 8 links amendment A4 rejected (862 KB)</small></li>
+<li><a href="downloads/aggregate_results.xlsx">Aggregate results workbook</a><small>Main result tables with a definitions sheet, units and intervals, and the amendment A4–A7 tables (58 KB)</small></li>
+<li><a href="downloads/result_tables.zip">Result tables (CSV)</a><small>Tables of 7 October 2026, before amendment A4; the current tables are in the workbooks above (833 KB)</small></li>
 <li><a href="downloads/analysis_plan_with_amendments.md">Analysis plan</a><small>Internal plan of 7 October 2026 with its self-recorded writing time and amendments A1–A3 (Markdown, 14 KB)</small></li>
 <li><a href="downloads/amendments_A4-A7.pdf">Amendments A4–A7</a><small>Post hoc amendments A4–A7 and addendum A7.1 (24–25 October 2026) with their time stamps and hashes, and the contribution decision and plan of 7 October 2026, all reproduced as written (PDF, 22 pages, 158 KB)</small></li>
 </ul>
