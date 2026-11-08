@@ -21,7 +21,7 @@
 
 <div class="measure update" id="update-2026-10-24">
 <h2>Post hoc comparison: three frontier models</h2>
-<p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%; those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
+<p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%. Those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
 <p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis.</p>
 </div>
 
@@ -44,7 +44,7 @@
 <div class="measure">
 <h2>Nearly half of the primary model's quote-backed answers were wrong</h2>
 <p>Each question names a treatment, a comparison treatment, and an outcome, and asks whether the trial found the outcome significantly higher, significantly lower, or not significantly different. Physicians answered all of them when the benchmark was built. With retrieved passages, Qwen3-1.7B parsed cleanly on 1,205 of 1,209 questions and its label matched the physicians on 651 of 1,196 answered questions (54.4%). Its quote existed in the passages for 77.6% of answers, and 45.6% of those quote-backed answers were wrong.</p>
-<p>The mistakes had a clear shape. When the physicians had recorded no significant difference, 295 of 385 quote-backed answers were wrong, and every one of those errors reported a significant effect. Another 122 (28.8%) of the 423 quote-backed errors reversed the direction, reporting higher for lower or the reverse. In 123 (29.1%) of the errors the quote overlapped the sentences the physicians had marked as evidence, so missing the evidence explains only part of the mistakes; 47 of these reversed the direction while quoting that evidence.</p>
+<p>The mistakes had a clear shape. When the physicians had recorded no significant difference, 295 of 385 quote-backed answers were wrong, and every one of those errors reported a significant effect. Another 122 (28.8%) of the 423 quote-backed errors reversed the direction, reporting higher for lower or the reverse. In 123 (29.1%) of the errors the quote overlapped the sentences the physicians had marked as evidence, so missing the evidence explains only part of the mistakes. Of these, 47 reversed the direction while quoting that evidence.</p>
 <p>Handing the model the physicians' own evidence sentences did not remove the problem: 29.2% of its quote-backed answers were still wrong. A TF-IDF classifier that simply attaches its top-ranked passage passed the quote check on all 1,209 questions. So did a majority-class guess with the same passage attached, even though it was wrong for 698 of them.</p>
 <p>A larger model from a later Qwen3 release had a lower rate but did not remove the problem. Qwen3-4B-Instruct-2507 got 79.3% of the questions it answered right and still got 213 of 1,039 quote-backed answers wrong (20.5%). Because it differs from Qwen3-1.7B in release as well as size, this does not show that size alone made the difference. With retrieved passages, the smaller Qwen3-0.6B's labels were not clearly less accurate than Qwen3-1.7B's, but it often failed to copy a quote or to point to the right passage, so only 260 of 1,209 questions (21.5%) ended with an answer that passed every check.</p>
 
@@ -63,7 +63,7 @@
 <h2>Throwing out answers without a valid quote left the error rate where it was</h2>
 <p>A natural safeguard is to keep only answers whose quote checks out and points to the passage it came from. For Qwen3-1.7B with retrieved passages, that rule set aside 325 answers, 178 of them correct, and moved the error among the answers it kept from 45.6% to 45.7%. Setting aside the same number of answers at random, 2,000 times, gave a mean error of 45.6%. The rule cost about a quarter of the answers and did no better than discarding the same number at random. The same held for Qwen3-4B-Instruct-2507 and for the other contexts, with one exception: when Qwen3-0.6B was handed the physicians' evidence sentences, the rule lowered its error from 34.8% to 29.8%, more than random discarding achieved.</p>
 <figure>
-<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig3_rejection_rule.svg" alt="Dumbbell chart; for 6 of the 7 model and context combinations the triangle lies inside the gray band, close to the ring; for Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)."></div>
+<div class="fig-scroll" tabindex="0" role="region" aria-label="Figure, scrollable"><img src="assets/figures/fig3_rejection_rule.svg" alt="Dumbbell chart. For 6 of the 7 model and context combinations the triangle lies inside the gray band, close to the ring. For Qwen3-0.6B with annotated evidence the triangle lies below the band (29.8% against 31.3% to 38.4%)."></div>
 <figcaption>Error among kept answers with all answers (ring) and after the quote rule (triangle), against random rejection at the same coverage (gray band). <a href="downloads/rejection-rule.csv">Data (CSV)</a></figcaption>
 </figure>
 <p>Other signals carried some information. A simple scoring rule fitted on the validation answers, using six features of each answer such as how many outcome words the quote contains and whether its significance wording agrees with the label, ranked the test answers better than chance (area under the risk-coverage curve 0.337 against 0.450 for random order; lower is better). That rule is exploratory, and its scores are not probabilities.</p>
@@ -80,7 +80,7 @@
 </ul>
 
 <h2>Reproduce the analysis</h2>
-<p>The source archive holds the code, tests, frozen configuration, every recorded model response, item-level scores, and the analysis plan. Model weights and article texts are not included; the acquire stage downloads them at pinned versions.</p>
+<p>The source archive holds the code, tests, frozen configuration, every recorded model response, item-level scores, and the analysis plan. Model weights and article texts are not included. The acquire stage downloads them at pinned versions.</p>
 <pre><code>python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.lock.txt
 .venv/bin/python -m pip install -e .
@@ -95,13 +95,13 @@
 <ul class="files">
 <li><a href="report.html">Report and supplementary tables</a></li>
 <li><a href="downloads/prediction-viewer.html">Prediction viewer</a>: examples with the quote highlighted and annotated evidence underlined (CC BY and CC0 articles only)</li>
-<li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a>; for how the results were checked, see the report (the archived manuscript files predate it)</li>
+<li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a>. For how the results were checked, see the report (the archived manuscript files predate it)</li>
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>
 <li><a href="downloads/system-metrics.csv">System metrics (CSV)</a>, <a href="downloads/rejection-rule.csv">rejection rule (CSV)</a>, <a href="downloads/paired-comparisons.csv">paired comparisons (CSV)</a>, <a href="downloads/sensitivity-analyses.csv">sensitivity analyses (CSV)</a></li>
 <li><a href="downloads/data-dictionary.html">Data dictionary</a> and <a href="downloads/tableau-spec.html">Tableau import specification</a></li>
 </ul>
 </div>
 </main>
-<footer>Data: Evidence Inference 2.0 (DeYoung et al., BioNLP 2020; Lehman et al., NAACL 2019), used under its authors' terms; article texts remain under their own licenses. Models: Qwen3, Apache License 2.0. Code: MIT License.</footer>
+<footer>Data: Evidence Inference 2.0 (DeYoung et al., BioNLP 2020; Lehman et al., NAACL 2019), used under its authors' terms. Article texts remain under their own licenses. Models: Qwen3, Apache License 2.0. Code: MIT License.</footer>
 </body>
 </html>
