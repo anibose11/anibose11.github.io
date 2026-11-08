@@ -57,11 +57,15 @@
 
 <h2>How the results were checked</h2>
 <div class="prose">
-<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and, for 2024, matches fill counts and out-of-pocket totals between the prescription and person files. A second implementation of the classification in SQL and a second implementation of the variance formula in Python agree with the main code. Both were written in the same build as the main code, so they check its consistency rather than validate it externally. All 28 source reconciliation checks and 4 software cross-checks passed. To reproduce:</p>
+<p>The pipeline reproduces AHRQ's annual uninsured and coverage indicators from the monthly data for every record, matches the codebook's printed weighted frequencies, and, for 2024, matches fill counts and out-of-pocket totals between the prescription and person files. A second implementation of the classification in SQL and a second implementation of the variance formula in Python agree with the main code. Both were written in the same build as the main code, so they check its consistency rather than validate it externally. All 28 source reconciliation checks and 4 software cross-checks passed.</p>
+</div>
+
+<h2>Reproduce the analysis</h2>
+<div class="prose">
 <pre><code>./setup.sh
 ./icont all      # acquire, build, analyze, validate, render, package
 ./icont test     # unit tests on synthetic fixtures
-./icont demo     # fast demo on synthetic records (not study evidence)</code></pre>
+./icont demo     # fast demo on synthetic records</code></pre>
 </div>
 
 <h2>Report, code and data</h2>
@@ -69,18 +73,18 @@
 <li><a href="report.html">Report, tables and references</a></li>
 <li><a href="downloads/insurance-continuity-source.zip">Source code (ZIP): Python, SQL, R, tests, documentation, and result tables</a> <span class="note">(1.1 MB)</span></li>
 <li><a href="downloads/insurance_continuity_results.xlsx">Results workbook with a definitions sheet (Excel, aggregates only)</a> <span class="note">(52 KB)</span></li>
-<li><a href="downloads/tableau_estimates_long.csv">Tableau-ready estimates with grain, units, CIs, and suppression flags (CSV)</a> <span class="note">(124 KB)</span></li>
+<li><a href="downloads/tableau_estimates_long.csv">Long-format estimates with units, CIs, and suppression flags (CSV)</a> <span class="note">(124 KB)</span></li>
 <li><a href="downloads/tableau_monthly_transitions.csv">Month-to-month coverage transitions (CSV)</a> <span class="note">(8 KB)</span></li>
 <li><a href="downloads/tableau_cohort_flow.csv">Cohort flow counts (CSV)</a> <span class="note">(2 KB)</span></li>
-<li><a href="downloads/tableau_spec.md">Tableau import and interaction specification (Markdown)</a> <span class="note">(3 KB)</span></li>
+<li><a href="downloads/tableau_spec.md">Units and display rules for the CSV files (Markdown)</a> <span class="note">(3 KB)</span></li>
 <li><a href="downloads/data_dictionary.csv">Source-to-analysis data dictionary (CSV)</a> <span class="note">(18 KB)</span></li>
-<li><a href="downloads/analysis_plan.md">Analysis plan and amendments, self-dated October 7, 2026 (Markdown)</a> <span class="note">(18 KB)</span></li>
+<li><a href="downloads/analysis_plan.md">Analysis plan of October 7, 2026, with dated amendments (Markdown)</a> <span class="note">(18 KB)</span></li>
 <li><a href="downloads/prior_art.csv">Related studies and tools (CSV)</a> <span class="note">(16 KB)</span></li>
 <li><a href="downloads/claims.json">Reported values and source tables (JSON)</a> <span class="note">(208 KB)</span></li>
 </ul>
 </article>
 
 </main>
-<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251. These estimates are the author's, not AHRQ's, and AHRQ has not endorsed them.</footer>
+<footer>Data: Agency for Healthcare Research and Quality, Medical Expenditure Panel Survey public-use files HC-256, HC-254A, and HC-251.</footer>
 </body>
 </html>
