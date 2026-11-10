@@ -22,7 +22,7 @@
 <div class="measure update" id="update-2026-10-24">
 <h2>Post hoc comparison: three frontier models</h2>
 <p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%. Those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
-<p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis.</p>
+<p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis. Version 1.1.0 of the archive, on Zenodo since 10 November 2026, adds this comparison.</p>
 </div>
 
 <div class="facts">
@@ -96,6 +96,7 @@
 <li><a href="report.html">Report and supplementary tables</a></li>
 <li><a href="downloads/prediction-viewer.html">Prediction viewer</a>: examples with the quote highlighted and annotated evidence underlined (CC BY and CC0 articles only)</li>
 <li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a>. For how the results were checked, see the report (the archived manuscript files predate it)</li>
+<li><a href="https://doi.org/10.5281/zenodo.24067085">Code archive version 1.1.0 on Zenodo</a> (10 November 2026), which adds the frontier-model responses, the judge and verifier replies, the amendment and its addenda, and the code that produced them. The ZIP above is <a href="https://doi.org/10.5281/zenodo.23450167">version 1.0.0</a>, for the original analysis.</li>
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>
 <li><a href="downloads/system-metrics.csv">System metrics (CSV)</a>, <a href="downloads/rejection-rule.csv">rejection rule (CSV)</a>, <a href="downloads/paired-comparisons.csv">paired comparisons (CSV)</a>, <a href="downloads/sensitivity-analyses.csv">sensitivity analyses (CSV)</a></li>
 <li><a href="downloads/data-dictionary.html">Data dictionary</a> and <a href="downloads/tableau-spec.html">rules for importing and displaying the metrics</a></li>
