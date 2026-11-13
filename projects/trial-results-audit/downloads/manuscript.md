@@ -109,7 +109,7 @@ The pipeline (Python 3.13, PostgreSQL 17.11, R 4.5.1) runs as stages: acquire, f
 
 ### Use of artificial intelligence (AI) tools
 
-Animesh Bose conceived the study, designed its methods and explored the data, then directed the analysis and writing and reviewed and verified the results and text. Claude Code by Anthropic (Claude Opus 5.5, also used through the Anthropic API for the R recomputation, and earlier Claude models) and ChatGPT and Codex by OpenAI (GPT-5 and GPT-6 series models) helped write, review and run the Python, SQL and R code, search and check the literature, and draft and edit this report.
+Animesh Bose conceived the study, designed its methods and explored the data, then directed the analysis and writing and reviewed the analyses and text. Claude Code by Anthropic and ChatGPT by OpenAI helped write, review and run the Python, SQL and R code, search and check the literature, and draft and edit the analysis plan and this report, and Codex by OpenAI helped review and edit the text and rerun the software tests. Claude Code ran Claude Opus 5.5 (claude-opus-5-5), the only Claude model its records show working on the report. ChatGPT ran GPT-5 and GPT-6 series models (exact versions not recorded), and Codex ran gpt-6-astra. Claude Opus 5.5 was also called through the Anthropic API to help write the R recomputation.
 
 ## Results
 
@@ -393,7 +393,7 @@ This research received no specific grant from any funding agency in the public, 
 
 ### Authors' contributions
 
-Animesh Bose is the sole author. The AI assistants that helped with the code and the writing are named under Use of artificial intelligence (AI) tools.
+Animesh Bose is the only author. The AI assistants that helped with the code and the writing are named under Use of artificial intelligence (AI) tools.
 
 ### Acknowledgements
 
