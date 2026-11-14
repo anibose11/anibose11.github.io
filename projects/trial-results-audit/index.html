@@ -6,7 +6,7 @@
 <title>Trial results denominator audit | Animesh Bose</title>
 <meta name="description" content="Which participant count belongs with each posted ClinicalTrials.gov result, what a one-count-per-arm export attaches instead, and how much that changes two-arm comparisons.">
 <link rel="stylesheet" href="assets/style.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
@@ -15,7 +15,6 @@
 <main id="main"><div class="inner">
 
 <h1>Which participant count belongs with each posted trial result?</h1>
-<p class="meta portfolio-byline">Animesh Bose, Norlowe Research</p>
 <p class="lede">Evidence tables built from ClinicalTrials.gov need the number of people behind every value. The registry records counts at the outcome and table-row levels and sometimes in other units. The comparison export used here keeps one count per arm and outcome. Using a PostgreSQL warehouse that keeps every level, I measured how often the right count can be attached by written rules in 1,961 cardiometabolic trials. For 23.0% of 97,756 held-out measurements, the flat export attached the outcome-level count although the table row reported a different number analyzed.</p>
 
 <p class="question"><strong>Research question.</strong> Among interventional diabetes, heart failure and obesity trials with results first posted from January 2020 to September 2026, how often can a documented participant denominator be kept and attached to each reported value without guessing, and what does a one-row-per-value flat export lose or attach instead? A later, post hoc question: how much do the attached counts change comparisons between two arms?</p>
