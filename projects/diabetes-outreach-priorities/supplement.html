@@ -45,7 +45,7 @@ nav.crumbs{font-size:14px;color:var(--muted);margin-bottom:8px}
 .stat span{font-size:14px;color:var(--ink2)}
 ul.files{padding-left:20px}
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html">Report</a></div></nav>
@@ -56,89 +56,7 @@ ul.files{padding-left:20px}
 <p>Stability of county diabetes outreach priorities under alternative need definitions and published uncertainty</p>
 <p>Run identifier a944852459ca. All tables are generated from the files named under each table.</p>
 <h2>S1. Analysis plan, exposure log and amendments</h2>
-<p>The plan below is reproduced from docs/analysis_plan.md (SHA-256 54908ffa…c141). It was drafted with Claude Code under the direction of Animesh Bose, and “I” in the plan refers to that drafting; as amendment 3 states, the structure inspection was done by script. The header gives a written time of 09:39 UTC on 7 October 2026, after the source files were downloaded (09:35–09:37 UTC) and before the first ranked outputs were saved (09:52:12 UTC). The saved plan file was created at 09:56:58 UTC, after those outputs, so file times can neither confirm nor refute the header time. No hash of the plan was recorded that day. Amendments 1 to 3 were appended after the primary results (the file was last changed at 22:20 UTC), and the first hash record of the file is dated 20 October 2026. The exposure-log entry carries a date but no time of day.</p>
-<p>Written 2026-10-07 09:39 UTC (05:39 EDT), before any county prevalence, burden or poverty value was ranked, sorted or compared. This is an internal, timestamped plan kept with the project files. It is not a formal preregistration in a public registry. Any later change is recorded in the amendments section at the end with its own timestamp and reason.</p>
-<h3>Prior exposure</h3>
-<p>Before writing this plan I had general background knowledge that diagnosed diabetes prevalence in the United States is highest in parts of the Southeast and Appalachia, and that counts of affected adults are dominated by populous counties. I inspected the structure of the acquired files only: column names, measure and value-type labels, row counts by measure and state, geography codes (Connecticut planning regions, Alaska Chugach and Copper River, the national row with LocationID 59), suppression footnotes, ACS replicate-table line titles, and which ACS cells are population-controlled. That inspection showed that the PLACES 2025 county release contains no diagnosed-diabetes estimates for Kentucky (120 counties) or Pennsylvania (67 counties) and that Loving County, Texas is suppressed. I did not look at any county's prevalence, burden or poverty value, any ranking, or any association between variables.</p>
-<h3>Question</h3>
-<p>Which U.S. counties would a community-program analyst shortlist for further investigation of diabetes outreach need under three common definitions of need, and how much of each shortlist is stable when the published uncertainty of the inputs is made explicit?</p>
-<p>The output supports a decision about where to look more closely. It does not allocate services, evaluate programs, or describe any individual's risk.</p>
-<h3>Unit, frame and sources</h3>
-<ul>
-<li>Unit: county or county equivalent in the 50 states and the District of Columbia, using the 2023 geography of the PLACES 2025 county release (Connecticut's nine planning regions, Alaska's Chugach and Copper River census areas).</li>
-<li>Prevalence: CDC PLACES County Data, 2025 release (Socrata dataset swc5-untb), measure DIABETES ("Diagnosed diabetes among adults"), value type CrdPrv ("Crude prevalence"), BRFSS 2023, with its published 95% confidence limits. Age-adjusted prevalence is carried for display only and is never multiplied by a population.</li>
-<li>Adult population (primary): TotalPop18plus in the PLACES 2025 file, documented as the Census 2023 county population estimate for ages 18 and over. It is checked against the Census Bureau Vintage 2023 county characteristics file (CC-EST2023-AGESEX, YEAR = 5, AGE18PLUS_TOT).</li>
-<li>Adult population (comparison and scenario range): ACS 2020-2024 five-year table B05003, male 18 years and over (line 8) plus female 18 years and over (line 19), with a margin of error computed from the 80 published variance replicates.</li>
-<li>Socioeconomic criterion: ACS 2020-2024 five-year table B17001, people below the poverty level (line 2) divided by the population for whom poverty status is determined (line 1), times 100, with a replicate-based margin of error.</li>
-<li>The Census Data API now requires a key, which this project does not use. ACS values therefore come from the Census Bureau's public variance replicate files, which contain the published estimates and margins of error for these lines.</li>
-</ul>
-<p>Common analysis frame: counties with a non-suppressed crude prevalence and both confidence limits, a positive PLACES adult population, an ACS adult estimate, and an ACS poverty estimate. All three rules are evaluated on this same frame so that selected sets are comparable. Every location absent from the frame is listed with a reason code.</p>
-<h3>Planning perspectives (rules)</h3>
-<p>All rankings are descending. Ties use competition ranking: a county's rank is 1 plus the number of frame counties with a strictly larger value. A county is selected at capacity K when its rank is at most K, so ties at the cutoff are all included and the selected set can exceed K. The set size is always reported.</p>
-<ol>
-<li>Prevalence rule (PREV): rank by crude prevalence.</li>
-<li>Estimated burden rule (BURDEN): rank by estimated adults with diagnosed diabetes, defined as crude prevalence / 100 times the PLACES adult population. This is a model-based estimate, not a count of identified patients.</li>
-<li>Equity-sensitive rule (EQUITY): restrict to counties with ACS poverty of at least 20.0 percent (the high-poverty county threshold used by USDA Economic Research Service), then rank by crude prevalence. Estimated burden is displayed alongside but does not enter the ranking. The 20 percent threshold is a declared planning criterion, not an empirically optimal weight.</li>
-</ol>
-<p>No composite need score is constructed. No regression of prevalence on socioeconomic variables is fitted, because the PLACES model may already use related covariates and any such association would not be an independent finding.</p>
-<h3>Capacities</h3>
-<ul>
-<li>National capacities: 10, 25 and 50 counties. The primary capacity is 25; 10 and 50 form the alternate-capacity robustness check. These are illustrative, not organizational budgets.</li>
-<li>Within-state capacity: 5 counties per state. Where a state or DC has 5 or fewer frame counties, all of its units are shown and labeled "all units, no selection" and the state is excluded from within-state stability summaries. Where fewer than 5 counties in a state meet the poverty criterion, all eligible counties are selected under EQUITY and the shortfall is reported.</li>
-</ul>
-<h3>Uncertainty: deterministic envelopes, not probabilities</h3>
-<p>PLACES publishes marginal 95% intervals per county. There is no joint distribution, and county estimates share model structure and covariates. No independent draws are simulated, and no county is assigned a probability of belonging to a top group.</p>
-<p>For a rule with value v and scenario bounds [L, U] for each county i in the ranking set:</p>
-<ul>
-<li>Best-case rank b_i = 1 + #{j : L_j &gt; U_i}.</li>
-<li>Worst-case rank w_i = 1 + #{j != i : U_j &gt; L_i}.</li>
-<li>At capacity K: core if w_i &lt;= K (selected wherever every county falls inside its bounds); boundary if b_i &lt;= K &lt; w_i; outside if b_i &gt; K.</li>
-</ul>
-<p>The worst case places every other county at its upper bound and county i at its lower bound at the same time. Such combinations are not jointly attainable confidence statements, so the envelope is labeled a sensitivity envelope.</p>
-<p>Bounds per rule:</p>
-<ul>
-<li>PREV: PLACES 95% lower and upper limits.</li>
-<li>BURDEN: lower = prevalence lower limit / 100 times the smaller of the PLACES adult population and the ACS 95% lower adult bound; upper = prevalence upper limit / 100 times the larger of the PLACES adult population and the ACS 95% upper adult bound. ACS 90% margins are rescaled to 95% (factor 1.959964 / 1.645). This product of bounds is a scenario range. It is not a confidence interval, because the covariance between the model-based prevalence and the population estimates is unknown.</li>
-<li>EQUITY: prevalence bounds as in PREV. Poverty eligibility is classified as certain (95% lower poverty bound at or above 20), point (estimate at or above 20) or possible (95% upper bound at or above 20). Best-case rank counts only certainly eligible competitors with L_j &gt; U_i; worst-case rank counts all possibly eligible competitors with U_j &gt; L_i. A county is core only if it is certainly eligible and w_i &lt;= K, boundary if it is possibly eligible with b_i &lt;= K and not core, and outside otherwise.</li>
-</ul>
-<p>Scenario rankings, also reported as selected sets: point estimates; all counties at lower bounds; all counties at upper bounds; and for EQUITY, the certain-eligibility and possible-eligibility frames ranked by point prevalence.</p>
-<h3>Primary outputs</h3>
-<ol>
-<li>Pairwise Jaccard overlap (|A and B| / |A or B|) of the point-estimate selected sets for PREV, BURDEN and EQUITY at K = 25, plus intersection counts.</li>
-<li>For each rule at K = 25: numbers of core, boundary and point-selected counties.</li>
-<li>Rule dependence for each county selected under any rule at K = 25: rule-robust if selected under all three rules, rule-dependent if selected under exactly one, and strongly rule-dependent if core under one rule and outside under another.</li>
-</ol>
-<p>The stable core is reported per rule. A cross-rule core (core under all three rules) is reported even if it is empty.</p>
-<h3>Robustness checks (fixed set of three)</h3>
-<ol>
-<li>Alternate capacity: repeat all primary outputs at K = 10 and K = 50.</li>
-<li>Point estimates versus interval-bound scenarios: Jaccard overlap between the point-estimate set and the lower-bound and upper-bound scenario sets within each rule, alongside the envelope classification.</li>
-<li>Strictly aligned geography and reference period: restrict to counties whose 5-digit FIPS codes appear in PLACES 2025, the Vintage 2023 estimates and both ACS vintages, excluding Connecticut, whose county equivalents changed after the 2020 Census tabulation geography. Use ACS 2019-2023 (the ACS vintage named in the PLACES 2025 documentation) for poverty and the ACS adult range. Report Jaccard overlap with the primary sets.</li>
-</ol>
-<p>Optional descriptive comparison: the PLACES 2024 county release (BRFSS 2022), which includes Kentucky and Pennsylvania, ranked by the same PREV and BURDEN rules. Report (a) overlap with the 2025 selected sets among counties present in both releases, and (b) how many Kentucky and Pennsylvania counties the 2024 release would place in the national top K. This describes the consequence of the 2025 coverage gap. It is not validation against outcomes, and the two releases differ in survey year and model inputs.</p>
-<h3>Validation and checks</h3>
-<ul>
-<li>Software tests on small synthetic fixtures (ranking with ties, envelopes, eligibility logic, acquisition guards, build checks). Fixtures are labeled synthetic and never mixed with study data.</li>
-<li>Source reconciliation: PLACES adult population against the Census Vintage 2023 file (expected to match exactly); ACS adult estimate against the PLACES adult population (expected close but not identical because of reference period and sampling).</li>
-<li>Build checks that fail loudly: one row per county, measure and value type; DIABETES rows from a single year; crude and age-adjusted labels mapped one to one; confidence limits bracket the estimate; 5-digit string FIPS with leading zeros; one ACS row per county and line; no Puerto Rico or other territories in the frame.</li>
-<li>Invariants: core is a subset of the point-selected set, which is a subset of core plus boundary.</li>
-<li>A second implementation in base R recomputes burden, ranks, selections and envelope ranks from the analysis frame. Agreement is a software cross-check, not independent scientific validation.</li>
-<li>Deterministic stages are rerun from cached inputs and compared with relative tolerance 1e-12 and absolute tolerance 1e-9.</li>
-</ul>
-<h3>Missing data and status vocabulary</h3>
-<p>No values are imputed. Status codes: observed; suppressed (PLACES footnote, population under 50); measure_not_released_for_state (Kentucky and Pennsylvania in the 2025 release); national_aggregate (LocationID 59); not_in_source; territory; controlled (ACS estimate with no sampling error); moe_zero_not_controlled (flagged and reported if it occurs). A zero value is never used to stand for a missing one.</p>
-<h3>What would count as a useful negative result</h3>
-<p>If the stable core at K = 25 is empty or very small for every rule, or the three rules share almost no counties, that is a reportable finding: published uncertainty and the choice of need definition would then dominate any single ranked list, and a planner should treat the boundary set, not a top-25 list, as the unit of further investigation.</p>
-<h3>Exposure log (not amendments)</h3>
-<ul>
-<li>2026-10-07, after the plan above was written and before any ranking was run: while the file formats were being documented, a few individual values were displayed (PLACES crude prevalence for Kusilvak Census Area, AK, and Kalawao County, HI; ACS B17001 counts for Montgomery and Prince George's counties, MD; Census Vintage 2023 adult totals for Montgomery and Prince George's counties and the Capitol Planning Region, CT). No rule, threshold, capacity or scenario was changed as a result.</li>
-</ul>
-<h3>Amendments</h3>
-<ol>
-<li>2026-10-07, after the primary results were produced: added a descriptive table (outputs/tables/selection_profile.csv) that summarizes each point-estimate selected set by its total estimated burden, share of the frame's total estimated burden, adult population range, prevalence range, number of high-poverty counties and number of states. It was added because the overlap results raised the question of how much estimated burden each rule's selection contains. It does not change any rule, capacity, scenario or classification, and it is reported as descriptive context rather than as a prespecified outcome.</li>
-<li>2026-10-07, after the primary results were produced: the optional comparison with the PLACES 2024 release was extended from the prevalence and burden rules to the high-poverty rule, using the same ACS 2020-2024 poverty criterion as the primary analysis so that the comparison reflects only the change of PLACES release. It is reported as descriptive and does not change any primary result.</li>
-<li>2026-10-07, after the primary results were produced (a correction of wording, not of the analysis): the structure inspection described under Prior exposure was carried out with a script that listed column names, labels, row counts, geography codes, footnotes and line titles, and this plan was fixed at the timestamp given at the top. No rule, threshold, capacity, scenario or classification changed.</li>
-</ol>
+<p>The analysis plan, its exposure log and its three amendments are in the source archive as docs/analysis_plan.md (SHA-256 54908ffa…c141). The plan sets out the rules, capacities, uncertainty scenarios, outputs and robustness checks reported here. It is an internal plan and was not registered. Its header dates it before the first ranked outputs were saved, but the saved file was created after those outputs and no hash of the plan was recorded before them, so that timing rests on the header alone. The exposure log records that a few individual county values were displayed while the file formats were documented, after the plan was written and before any ranking was run, and that no rule changed as a result. That order rests on the log's own text. All three amendments were made after the primary results. The first added a descriptive summary of estimated burden, the second extended the comparison with the PLACES 2024 release to the high-poverty rule, and the third states that the inspection of file structure before the plan was written was done by script.</p>
 <p>Rule codes used in the plan and in the result files: PREV = prevalence, BURDEN = estimated burden and EQUITY = high-poverty prevalence.</p>
 <h2>S2. Exclusions from the analysis frame</h2>
 <p class="tcap" id="table-s1"><strong>Table S1. PLACES 2025 locations not in the analysis frame, by reason.</strong> Source: data/processed/county_all.csv.</p>
@@ -2402,11 +2320,11 @@ ul.files{padding-left:20px}
 </tr>
 </tbody>
 </table></div></div>
-<p>Four further checks were run outside the pipeline on 7 October 2026 with the scripts in the source archive (results in outputs/validation/):</p>
+<p>Four further checks were run outside the pipeline with the scripts in the source archive (results in outputs/validation/):</p>
 <ul>
 <li>ACS adult counts and poverty numerators and denominators derived from the replicate tables equaled the Census Bureau's table-based summary files for all 3,222 counties in the 2020-2024 and 2019-2023 releases.</li>
 <li>The estimate, 95% limits and adult population of all 2,956 frame counties equaled the live PLACES 2025 release on data.cdc.gov (2026-10-07). Estimated burden recalculated from the live values equaled the table for the 12 randomly sampled counties, and a sort of the live file returned the same top-ranked counties.</li>
-<li>References 1 to 35 were checked on 7 October 2026. Scripts checked 21 journal articles against Crossref or PubMed (first author, year, volume, first page and title), the Federal Register notice against the Federal Register record, 1 Census table against the Census Bureau's API metadata (table and title) and the remaining 8 web and dataset addresses by their response; 4 cdc.gov pages that refuse scripted requests were read in a web browser (title, and the update date for the web pages). A further check on 18 October 2026 found that the PLACES FAQ and methodology pages display 11 December and 7 December 2025, one day earlier than the dates recorded on 7 October; references 16 and 21 were corrected to the displayed dates.</li>
+<li>References 1 to 35 were checked. Scripts checked 21 journal articles against Crossref or PubMed (first author, year, volume, first page and title), the Federal Register notice against the Federal Register record, 1 Census table against the Census Bureau's API metadata (table and title) and the remaining 8 web and dataset addresses by their response; 4 cdc.gov pages that refuse scripted requests were read in a web browser (title, and the update date for the web pages). A later check found that the PLACES FAQ and methodology pages display 11 December and 7 December 2025, one day earlier than the dates first recorded; references 16 and 21 were corrected to the displayed dates.</li>
 <li>A pairwise recomputation, written without the analysis package, reproduced every cell of Tables 2 and 3 and all 26,604 county classifications.</li>
 </ul>
 <h2>S10. Planning brief</h2>

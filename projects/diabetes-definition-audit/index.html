@@ -6,7 +6,7 @@
   <title>Diabetes estimates under different definitions, laboratory samples and weights | Animesh Bose</title>
   <meta name="description" content="An analysis of NHANES August 2021 to August 2023 that separates the effect of the diabetes biomarker definition from the effect of the laboratory sample and survey weight, with a checker that refuses invalid comparisons.">
   <link rel="stylesheet" href="assets/site.css">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
@@ -128,12 +128,9 @@ make repro-check</code></pre>
     <section id="files" aria-labelledby="files-h">
       <h2 id="files-h">Report, code and data</h2>
       <ul class="files">
-        <li><a href="downloads/diabetes-definition-audit-source.zip">Source code</a> <span class="meta">(ZIP, 999 KB): code, SQL, R, configuration, tests, fixture, documentation, and result tables. Its manuscript files are an earlier version. The report describes how the results were checked.</span></li>
-        <li><a href="downloads/manuscript.pdf">Manuscript</a> <span class="meta">(PDF, 410 KB)</span></li>
-        <li><a href="downloads/manuscript.docx">Manuscript</a> <span class="meta">(Word, 40 KB)</span></li>
+        <li><a href="downloads/diabetes-definition-audit-source.zip">Source code</a> <span class="meta">(ZIP, 999 KB): code, SQL, R, configuration, tests, fixture, documentation, the analysis plan and its amendments, and result tables. Its manuscript files are an earlier version. The report describes how the results were checked.</span></li>
         <li><a href="downloads/supplementary.html">Supplementary material</a> <span class="meta">(HTML, 1.3 MB): participant flow, validation, group tables and additional analyses</span></li>
-        <li><a href="downloads/supplementary.pdf">Supplementary material</a> <span class="meta">(PDF, 283 KB)</span></li>
-        <li><a href="downloads/strobe_checklist.pdf">STROBE checklist</a> <span class="meta">(PDF, 41 KB): reporting checklist with manuscript locations</span></li>
+        <li><a href="downloads/strobe_checklist.pdf">STROBE checklist</a> <span class="meta">(PDF, 41 KB): reporting checklist with the report section for each item</span></li>
         <li><a href="downloads/diabetes-definition-audit-results.xlsx">Results workbook</a> <span class="meta">(XLSX, 71 KB): aggregate tables, with sheets for definitions, thresholds and units, and domains and weights, with no person-level data</span></li>
         <li><a href="downloads/tableau_estimates.csv">Estimates</a> <span class="meta">(CSV, 6 KB): every configuration in both releases with universe, weight, denominator, interval, and NCHS status</span></li>
         <li><a href="downloads/tableau_contrasts.csv">Contrasts</a> <span class="meta">(CSV, 6 KB): paired, selection and weighting, and naive differences with design-based intervals</span></li>
@@ -143,19 +140,17 @@ make repro-check</code></pre>
         <li><a href="downloads/participant_flow_2017-2020.csv">Participant flow, 2017 to March 2020</a> <span class="meta">(CSV, 2 KB): counts remaining and removed at each step of the replication, with the weight used</span></li>
         <li><a href="downloads/reference_reconciliation.csv">NCHS reconciliation</a> <span class="meta">(CSV, 6 KB): published and reproduced NCHS Data Brief 516 estimates</span></li>
         <li><a href="downloads/validation_summary.csv">Automated checks</a> <span class="meta">(CSV, 5 KB): software checks, source reconciliation, and external reconciliation</span></li>
-        <li><a href="downloads/phenotype_spec.md">Phenotype specification</a> <span class="meta">(MD, 5 KB): version 1.0.0, with measures, codes, thresholds, boundaries, domains, and weights</span></li>
+        <li><a href="downloads/phenotype_spec.md">Phenotype specification</a> <span class="meta">(MD, 4 KB): version 1.0.0, with measures, codes, thresholds, boundaries, domains, and weights</span></li>
         <li><a href="downloads/data_dictionary.csv">Data dictionary</a> <span class="meta">(CSV, 8 KB): source variable, SAS label, universe, analysis column, and rule</span></li>
-        <li><a href="downloads/analysis_plan.md">Analysis plan</a> <span class="meta">(MD, 17 KB): frozen with a SHA-256 hash at 09:33 UTC on 7 October 2026, before any estimate (internally time-stamped, not registered), followed by eight amendments written later that day</span></li>
-        <li><a href="downloads/contribution_decision.md">Contribution decision</a> <span class="meta">(MD, 4 KB): users, estimand, comparator, and what counts as a negative result</span></li>
         <li><a href="downloads/prior_art.csv">Prior work</a> <span class="meta">(CSV, 9 KB): the five closest studies and what this study adds</span></li>
         <li><a href="downloads/claims.json">Claims ledger</a> <span class="meta">(JSON, 28 KB): each headline number with its file, row, numerator, denominator, and source checksums</span></li>
       </ul>
-      <p>Animesh Bose designed the study and directed the work. Claude Code and ChatGPT helped write the code, run the analyses and draft the text, and Codex helped edit it. The report’s Methods give the details.</p>
+      <p>I did the initial design and reviewed the code. AI tools helped with the coding and writing.</p>
     </section>
   </main>
 
   <footer style="padding-left:0;padding-right:0">
-    <p>Data: CDC National Center for Health Statistics, National Health and Nutrition Examination Survey, August 2021 to August 2023 and 2017 to March 2020 public-use files, available at no charge from the <a href="https://wwwn.cdc.gov/nchs/nhanes/">NHANES website</a>. Results on this page come from the analysis run of 7 October 2026.</p>
+    <p>Data: CDC National Center for Health Statistics, National Health and Nutrition Examination Survey, August 2021 to August 2023 and 2017 to March 2020 public-use files, available at no charge from the <a href="https://wwwn.cdc.gov/nchs/nhanes/">NHANES website</a>.</p>
   </footer>
   </div>
 </body>

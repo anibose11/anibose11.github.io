@@ -58,11 +58,6 @@ body.portfolio-page{max-width:none!important;padding:0!important}
 /* A table already inside its own frame does not need the shared frame margin. */
 .portfolio-page :is(.table-wrap,.tablewrap)>.portfolio-table{margin:0}
 
-/* Line under a report title. */
-.portfolio-page .portfolio-byline{font-size:15px!important;line-height:1.5!important;font-weight:400!important;color:#a2a2a2!important;background:none!important;border:0!important;padding:0!important;margin-top:0!important;letter-spacing:0!important;text-transform:none!important;font-style:normal!important}
-.portfolio-report .portfolio-byline{display:none}
-.portfolio-report p.note.portfolio-byline{display:block;margin-top:-1.5em!important;clip-path:inset(1.5em 0 0)}
-
 /* Quarto pages (project 4): the content grid is centred like the other reports, without doubled side padding. */
 @media (min-width:992px){body.portfolio-page #quarto-content{margin-left:auto;margin-right:auto}body.portfolio-page #quarto-content main.content{padding-left:0!important;padding-right:0!important}}
 

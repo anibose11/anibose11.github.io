@@ -412,8 +412,7 @@
       el('strong', { text: 'Pairs: ' }), pairText
     ]));
     lines.push(el('p', { className: 'hc-snapshot' }, [
-      'These views filter a frozen snapshot (run ', el('code', { text: this.index.run_id }),
-      '); nothing is recomputed in the browser.'
+      'These views filter a frozen snapshot of the run recorded in outputs/run_manifest.json of the source archive. Nothing is recomputed in the browser.'
     ]));
     clear(this.status);
     append(this.status, lines);

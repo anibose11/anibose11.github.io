@@ -6,8 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Animesh Bose, Norlowe Research">
-<meta name="dcterms.date" content="2026-10-07">
+<meta name="author" content="Animesh Bose">
 
 <title>Retraction-aware evidence: report | Animesh Bose</title>
 <meta name="description" content="Report: identifier coverage, status sources and notice timing in the reference lists of 1,000 open-access cardiometabolic systematic reviews.">
@@ -553,7 +552,7 @@ figure { margin: 1.25rem 0; }
 .csl-entry { overflow-wrap: anywhere; margin-bottom: 0.5rem; }
 .csl-bib-body { max-width: 680px; }
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=f6e464501896">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 
 <body class="portfolio-page portfolio-report">
@@ -564,9 +563,7 @@ figure { margin: 1.25rem 0; }
 <header id="title-block-header">
 <h1 class="title">Retraction-aware evidence linkage for cardiometabolic reviews</h1>
 <p class="subtitle">Technical report: identifier coverage, status sources and notice timing in 1,000 systematic review reference lists</p>
-<p class="author portfolio-byline">Animesh Bose, Norlowe Research</p>
 
-<p class="date">October 2026</p>
 </header>
 
 <nav id="TOC" role="doc-toc">
@@ -587,7 +584,7 @@ figure { margin: 1.25rem 0; }
 <h2 id="the-question" class="anchored">The question</h2>
 <p>An analyst checking a systematic review’s reference list for retractions, corrections and expressions of concern needs to know how much of the list can be checked, how much the result depends on the status source, and how often a notice can be dated before or after the review appeared. The report measures all three in a fixed cohort of 1,000 open-access systematic reviews and meta-analyses on diabetes, obesity and heart failure, using a frozen Crossref Retraction Watch snapshot (data for 2026-10-06) and PubMed records retrieved on 2026-10-07.</p>
 <p><strong>Summary.</strong> Of 62,740 reference occurrences, 92.2% carried a usable identifier and 88.9% resolved to one PubMed record. Exact DOI matching found every unambiguous Retraction Watch link that a verified identifier crosswalk found. Adding PubMed relations changed which studies were flagged. PubMed alone recorded 7 retraction-flagged and 10 concern-flagged occurrences, Retraction Watch alone recorded 3 and 4, and nearly all corrections appeared only in PubMed. Of 44 retraction-flagged occurrences, 14 had a notice dated before the review went online, 28 after, and 2 could not be placed. Seven of the 44 were retract-and-replace notices, and only 7 occurrences, in 7 reviews, cited a study retracted for another reason at least six months before the review appeared.</p>
-<p><strong>Item-level check.</strong> A post hoc item-level check on 24 October 2026 found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and every count in this report excludes them. Three later post hoc analyses are summarized under <a href="#later-analyses">Later analyses</a>.</p>
+<p><strong>Item-level check.</strong> A post hoc item-level check found two references wrongly linked to retracted studies. Both were removed under post hoc amendment A4, and every count in this report excludes them. Three later post hoc analyses are summarized under <a href="#later-analyses">Later analyses</a>.</p>
 <p>The audit works with metadata. It does not judge any study or review, and it does not show that any review’s conclusions changed.</p>
 <h2 id="data" class="anchored">Data</h2>
 <div id="tbl-flow" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
@@ -683,7 +680,7 @@ Table 1: Cohort flow (reviews unless stated)
 </table></div>
 <p><strong>Ambiguity and notices.</strong> References whose identifiers point to different PubMed records, or whose DOI disagrees with the resolved record, are labeled ambiguous and listed for manual review. A reference that cites a notice (its DOI or PMID is a notice identifier) is never treated as citing the retracted article.</p>
 <p><strong>Chronology.</strong> Dates are intervals at their stated precision. A notice is “before review” only if its interval ends before the review’s first online date interval begins, “after review” only if it begins after that interval ends, and indeterminate otherwise. Under the six-month rule (S3), a notice counts as before the review only if it is at least 183 days before the online date, and the Within lead column of Table 4 counts notices that precede the online date by less than 183 days.</p>
-<p><strong>Statistics.</strong> Occurrence-level proportions use 2,000 review-level cluster bootstrap resamples (seed 20261007) <span class="citation" data-cites="field2007">[5]</span>. Shares among flagged occurrences use Wilson intervals. The internal analysis plan, which records its own writing time, lists five sensitivity analyses. Amendments A1–A3 are dated in <code>docs/analysis_plan.md</code>, and the post hoc amendments A4–A7 are separate files in <code>docs/</code>.</p>
+<p><strong>Statistics.</strong> Occurrence-level proportions use 2,000 review-level cluster bootstrap resamples (seed 20261007) <span class="citation" data-cites="field2007">[5]</span>. Shares among flagged occurrences use Wilson intervals. The internal analysis plan, dated by its own header and not registered, lists five sensitivity analyses. Amendments A1–A3 are in <code>docs/analysis_plan.md</code>, and the post hoc amendments A4–A7 are separate files in <code>docs/</code>.</p>
 <h2 id="results" class="anchored">Results</h2>
 <h3 id="what-could-be-checked" class="anchored">What could be checked</h3>
 <div id="tbl-coverage" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
@@ -848,7 +845,7 @@ Table 3: Flagged reference occurrences by claim type and arm
 </div>
 </figure>
 </div>
-<p>Arm B added 1 occurrence to arm A, a correction in a reference with conflicting identifiers: it cited the article under its Crossref-registered DOI, while Retraction Watch and PubMed list an alias DOI that Crossref redirects to it. No unambiguous link came from a crosswalk. A second link reported on 7 October came from a reference that cites the erratum itself, which amendment A4 treats as a cited notice.</p>
+<p>Arm B added 1 occurrence to arm A, a correction in a reference with conflicting identifiers: it cited the article under its Crossref-registered DOI, while Retraction Watch and PubMed list an alias DOI that Crossref redirects to it. No unambiguous link came from a crosswalk. A second link reported in the original analysis came from a reference that cites the erratum itself, which amendment A4 treats as a cited notice.</p>
 <div id="fig-overlap" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Stacked bar chart by claim type showing whether Retraction Watch, PubMed or both recorded the claim. Retractions are mostly recorded by both. Corrections are recorded almost only by PubMed.">
 <figure class="quarto-float quarto-float-fig">
 <div aria-describedby="fig-overlap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1138,26 +1135,26 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 </div>
 <h3 id="references-that-cite-a-notice-and-the-title-queue" class="anchored">References that cite a notice, and the title queue</h3>
 <p>In 50 occurrence and notice pairs (45 reference occurrences), the reference cited the notice itself (43 published errata and 3 retraction notices in PubMed, and 3 retraction notices and 1 correction notice in Retraction Watch). The title matcher specified in the analysis plan, run against Retraction Watch original-paper titles, produced 1 candidate among references without an identifier link: the reference whose false identifier link was removed under amendment A4. It has the same title as the retracted article. Candidates are listed for review and never counted.</p>
-<h2 id="later-analyses" class="anchored">Later analyses (post hoc, October 2026)</h2>
-<p>Each of the following was written after every result above was known and is filed in <code>docs/</code> as a separate, internally time-stamped amendment.</p>
+<h2 id="later-analyses" class="anchored">Later analyses (post hoc)</h2>
+<p>Each of the following was written after every result above was known and is filed in <code>docs/</code> as a separate amendment.</p>
 <ul>
 <li><p><strong>Notice type (A5).</strong> Seven of the 44 retraction-flagged occurrences were retract-and-replace notices, in which a corrected article replaced the retracted one (PREDIMED twice, a Cochrane review twice, and articles in JAMA Psychiatry, BJPsych Open and The Lancet). Of the 37 other retractions, 10 preceded the review, 3 of them by less than 183 days, which leaves 7 occurrences in 7 reviews that cited a study retracted for another reason at least six months before the review appeared.</p></li>
 <li><p><strong>Crossref publisher deposits (A6).</strong> Crossref was queried on 24 October 2026 for the 47,394 cited works with a DOI, using only relations that publishers had deposited before the PubMed snapshot. Of 46 works with a DOI flagged as retracted by any of the three sources, 26 were flagged by all three. Crossref alone flagged 5, and 7 retractions known to PubMed and Retraction Watch had no publisher retraction deposit.</p></li>
 <li><p><strong>Replication (A7).</strong> The unchanged pipeline was run on the frame’s other 6,993 records (6,991 with references). Identifier coverage and corrections replicated within 0.3 percentage points, but retraction and concern flags were more frequent per reference (0.104% against 0.070% for retractions), and 95 of 6,991 reviews (1.4%) cited a study retracted for a reason other than replacement at least six months earlier. The replication’s flags were not checked item by item.</p></li>
 </ul>
-<p>Recomputing the A5–A7 figures with separately written code found no discrepancy.</p>
+<p>Recomputing the A5–A7 figures with separately written code found no discrepancy. This recheck was automated.</p>
 <h2 id="validation" class="anchored">Validation</h2>
 <p>Five kinds of checks were run and are reported separately.</p>
 <ul>
-<li><p><strong>Software tests.</strong> 55 tests passed in the original code of 7 October 2026 (81 in the current code), on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. Fixtures use the test DOI prefix 10.5555 and never enter study tables.</p></li>
+<li><p><strong>Software tests.</strong> 55 tests passed in the original code (81 in the current code), on synthetic fixtures covering DOI punctuation and prefixes, duplicated notices, notice DOIs cited in place of the article, conflicting PMIDs, incomplete dates and failed requests. Fixtures use the test DOI prefix 10.5555 and never enter study tables.</p></li>
 <li><p><strong>Source reconciliation.</strong> A separate routine re-read every arm C claim from the raw Retraction Watch CSV (Python <code>csv</code>) and the raw cached PubMed XML (<code>xml.etree</code>): 2,514 of 2,514 confirmed after amendment A4. Count reconciliation across stages and MD5 checks of all review XML passed. SQL timing matched a separate Python implementation on every claim.</p></li>
 <li><p><strong>Re-check against fresh records.</strong> The 120 flagged claim rows were checked again against PubMed records retrieved anew and Crossref’s metadata for each cited DOI: 64 of 64 PubMed claims present, notice dates unchanged for 63 of 63, and the record listed by Crossref with the same type and date for 54 of 56 Retraction Watch claims (Crossref does not list one correction and one reinstatement record). The 100 sampled references gave the same identifiers under a separate regular-expression extraction (100 of 100), and every parsed identifier appeared in PMC’s text of the review (100 of 100). The re-check confirms record linkage only. It did not compare titles and did not detect the false links described below.</p></li>
-<li><p><strong>Determinism.</strong> Build and analysis were rerun offline from cached inputs: all 36 output tables identical on 7 October, and all 44 output files identical after amendment A4.</p></li>
-<li><p><strong>Item-level check (post hoc, 24 October 2026).</strong> A worksheet for a manual check was prepared on 7 October 2026, but no result was recorded in it, so no manual result is reported. On 24 October, AI agents (Claude Opus 5.5 via Claude Code) checked all 120 flagged claim rows and the stratified sample of 100 references against the source records, with two verifiers using different methods and a third reconciling them. They confirmed 114 claim rows, judged 5 wrong and left 1 unclear. Two references were wrongly linked to retracted studies: a 2014 conference abstract cited by the DOI of its whole abstract supplement, which Retraction Watch lists for a different, retracted abstract, and a journal article cited under the DOI of a retracted article with the same title in another journal. Both were removed under amendment A4, which now compares every link with the matched record’s title, first author and journal.</p></li>
+<li><p><strong>Determinism.</strong> Build and analysis were rerun offline from cached inputs: all 36 output tables identical before amendment A4, and all 44 output files identical after it.</p></li>
+<li><p><strong>Item-level check (post hoc).</strong> A worksheet for a manual check was prepared, but no result was recorded in it, so no manual result is reported. Language models checked all 120 flagged claim rows and the stratified sample of 100 references against the source records, with two model verifiers using different methods and a third model reconciling them. They confirmed 114 claim rows, judged 5 wrong and left 1 unclear. Two references were wrongly linked to retracted studies: a 2014 conference abstract cited by the DOI of its whole abstract supplement, which Retraction Watch lists for a different, retracted abstract, and a journal article cited under the DOI of a retracted article with the same title in another journal. Both were removed under amendment A4, which compares every link with the matched record’s title, first author and journal.</p></li>
 </ul>
 <p>These checks test the software and its agreement with the sources. They do not validate the sources themselves.</p>
 <h2 id="limitations" class="anchored">Limitations</h2>
-<p>The cohort is a deterministic sample of one indexing-defined frame of PMC open-access reviews and is not a census. Coverage describes agreement with two sources at their snapshot dates, not sensitivity to all real retractions, and a reference with no recorded claim is not shown to be sound. Retraction Watch and PubMed share upstream notices, so their agreement is not independent confirmation. Flagged counts are small, and the replication suggests the main sample’s retraction and concern counts are low. Citation does not show that a review used a study’s data, and no pooled effect was re-analyzed. The item-level check was done by AI agents, not by two human reviewers. Citation sentences are shown only for Creative Commons reviews, and only explicit citation links were used.</p>
+<p>The cohort is a deterministic sample of one indexing-defined frame of PMC open-access reviews and is not a census. Coverage describes agreement with two sources at their snapshot dates, not sensitivity to all real retractions, and a reference with no recorded claim is not shown to be sound. Retraction Watch and PubMed share upstream notices, so their agreement is not independent confirmation. Flagged counts are small, and the replication suggests the main sample’s retraction and concern counts are low. Citation does not show that a review used a study’s data, and no pooled effect was re-analyzed. The item-level check was done by language models, not by human reviewers. Citation sentences are shown only for Creative Commons reviews, and only explicit citation links were used.</p>
 <h2 id="reproduce" class="anchored">Reproduce</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv <span class="kw">&amp;&amp;</span> <span class="ex">.venv/bin/pip</span> install <span class="at">-e</span> <span class="st">&quot;.[test,report]&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/rae</span> acquire     <span class="co"># network, about 15 minutes, cached</span></span>
@@ -1593,4 +1590,4 @@ Figure 4: Identifier coverage by the year the review first appeared online, wit
 
 
 
-<section id="author-and-tools"><h2>Author contribution and tools</h2><p>Animesh Bose conceived and designed the study, directed the analysis and writing, explored the data, and reviewed the analyses and text. Claude Code by Anthropic and ChatGPT by OpenAI helped draft the analysis plan, write and run the code, search the literature, and draft and edit the report, and Codex by OpenAI helped with editing and formatting, and reran the original study’s software tests and reconciliation checks. Claude Code ran Claude Opus 5.5 (claude-opus-5-5), the only Claude model its records show working on the report. ChatGPT ran GPT-5 and GPT-6 series models (exact versions not recorded), and Codex ran GPT-6-Astra (gpt-6-astra).</p><p><strong>Competing interests.</strong> None declared. <strong>Funding.</strong> This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p></section></main></body></html>
+<section id="author-contribution"><h2>Author contribution</h2><p>Animesh Bose did the initial design and reviewed the code. AI tools helped with the coding and writing.</p><h2>Competing interests and funding</h2><p><strong>Competing interests.</strong> None declared. <strong>Funding.</strong> This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p></section></main></body></html>

@@ -6,7 +6,7 @@
 <title>Clinical evidence models: quote validity versus answer correctness | Animesh Bose</title>
 <meta name="description" content="How often small local language models quote the trial report correctly but give the wrong result, measured on every eligible question of the Evidence Inference 2.0 test split.">
 <link rel="stylesheet" href="assets/site.css?v=0d74ad063e">
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
@@ -18,10 +18,10 @@
 <p class="lede">When a language model answers a question about a clinical trial and backs it with a quote that really appears in the article, how often is the answer still wrong? The study measured this for small models that run on a laptop and, in a post hoc comparison below, for three frontier models, on every eligible test question of an expert-annotated benchmark.</p>
 </div>
 
-<div class="measure update" id="update-2026-10-24">
+<div class="measure update" id="post-hoc-comparison">
 <h2>Post hoc comparison: three frontier models</h2>
 <p>The same 1,209 test questions, prompt and scoring were run through three frontier models, Claude Sonnet 5.5, Claude Fable 5.1 and GPT-6.1 Sol, accessed through their vendors' APIs on 24 October 2026. They were far more accurate: with retrieved passages, 6.8% to 8.0% of their answers with a genuine quote had the wrong result, against 45.6% for Qwen3-1.7B. But 99.6% to 100% of their answers carried a genuine quote, and none of their wrong answers failed the quote check, so the check still could not tell right answers from wrong ones. For Claude Fable 5.1 and GPT-6.1 Sol, a correction based on two AI judges from another vendor put an estimated 55% and 63% of the remaining errors down to mistakes in the benchmark labels, which would bring their rates to 3.5% and 3.0%. Those judges are AI models, not expert raters, and the corrected rates depend on how accurate they are on real disagreements. A second model that reread the quoted passage removed most errors of the two small models it checked, but the share of questions answered fell from 81.3% to 44.8%.</p>
-<p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis. Version 1.1.0 of the archive, on Zenodo since 10 November 2026, adds this comparison.</p>
+<p class="muted">This comparison is post hoc: it was specified after the original results were known, in an amendment time-stamped before any frontier output existed. The code archive below covers the original analysis. Version 1.1.0 of the archive on Zenodo adds this comparison.</p>
 </div>
 
 <div class="facts">
@@ -57,7 +57,7 @@
 
 <h2>Two data findings changed how evidence was located</h2>
 <p>The corpus documentation describes evidence offsets as inclusive. On 3,000 training rows, slicing with an exclusive end reproduced the annotated text for about 9 in 10 rows and an inclusive end for none, so offsets were treated as half-open. The repository's folder of abstract files was the other surprise: 2,334 of its 3,285 files contain full articles. The abstract-only condition therefore used the title and abstract section of the same text the offsets refer to, which keeps every quote and every annotated span on one coordinate system.</p>
-<p>The prompt wording, greedy decoding, and the device were chosen on 100 validation articles by rules written into the analysis plan, and the 1,024-token retrieval budget was set from validation recall, all before any language model saw a test question. The written analysis plan, its timestamp, and three dated amendments are in the archive.</p>
+<p>The prompt wording, greedy decoding, and the device were chosen on 100 validation articles by rules written into the analysis plan, and the 1,024-token retrieval budget was set from validation recall, all before any language model saw a test question. The written analysis plan and its three amendments are in the archive.</p>
 
 <h2>Throwing out answers without a valid quote left the error rate where it was</h2>
 <p>A natural safeguard is to keep only answers whose quote checks out and points to the passage it came from. For Qwen3-1.7B with retrieved passages, that rule set aside 325 answers, 178 of them correct, and moved the error among the answers it kept from 45.6% to 45.7%. Setting aside the same number of answers at random, 2,000 times, gave a mean error of 45.6%. The rule cost about a quarter of the answers and did no better than discarding the same number at random. The same held for Qwen3-4B-Instruct-2507 and for the other contexts, with one exception: when Qwen3-0.6B was handed the physicians' evidence sentences, the rule lowered its error from 34.8% to 29.8%, more than random discarding achieved.</p>
@@ -95,11 +95,12 @@
 <li><a href="report.html">Report and supplementary tables</a></li>
 <li><a href="downloads/prediction-viewer.html">Prediction viewer</a>: examples with the quote highlighted and annotated evidence underlined (CC BY and CC0 articles only)</li>
 <li><a href="downloads/evidence-model-audit-source.zip">Source code archive (ZIP, 9.3 MB)</a>. For how the results were checked, see the report (the archived manuscript files predate it)</li>
-<li><a href="https://doi.org/10.5281/zenodo.24067085">Code archive version 1.1.0 on Zenodo</a> (10 November 2026), which adds the frontier-model responses, the judge and verifier replies, the amendment and its addenda, and the code that produced them. The ZIP above is <a href="https://doi.org/10.5281/zenodo.23450167">version 1.0.0</a>, for the original analysis.</li>
+<li><a href="https://doi.org/10.5281/zenodo.24067085">Code archive version 1.1.0 on Zenodo</a>, which adds the frontier-model responses, the judge and verifier replies, the amendment and its addenda, and the code that produced them. The ZIP above is <a href="https://doi.org/10.5281/zenodo.23450167">version 1.0.0</a>, for the original analysis.</li>
 <li><a href="downloads/evidence-model-audit-results.xlsx">Result workbook (XLSX)</a> with a definitions sheet</li>
 <li><a href="downloads/system-metrics.csv">System metrics (CSV)</a>, <a href="downloads/rejection-rule.csv">rejection rule (CSV)</a>, <a href="downloads/paired-comparisons.csv">paired comparisons (CSV)</a>, <a href="downloads/sensitivity-analyses.csv">sensitivity analyses (CSV)</a></li>
 <li><a href="downloads/data-dictionary.html">Data dictionary</a> and <a href="downloads/tableau-spec.html">rules for importing and displaying the metrics</a></li>
 </ul>
+<p>I did the initial design and reviewed the code. AI tools helped with the coding and writing.</p>
 </div>
 </main>
 <footer>Data: Evidence Inference 2.0 (DeYoung et al., BioNLP 2020; Lehman et al., NAACL 2019), used under its authors' terms. Article texts remain under their own licenses. Models: Qwen3, Apache License 2.0. Code: MIT License.</footer>

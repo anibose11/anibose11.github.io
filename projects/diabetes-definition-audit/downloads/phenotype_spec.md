@@ -52,5 +52,5 @@ Each participant carries explicit status codes so that different kinds of absenc
 
 ## Change log
 
-- 1.0.0 (2026-10-07): first version, frozen with the analysis plan.
-- 2026-10-07, after the plan freeze: added the 2017-March 2020 source files and release-specific weights for the planned replication (analysis plan amendment 2); no definition, threshold, or domain rule changed.
+- 1.0.0: first version, frozen with the analysis plan.
+- After the plan freeze: added the 2017-March 2020 source files and release-specific weights for the planned replication (analysis plan amendment 2); no definition, threshold, or domain rule changed.

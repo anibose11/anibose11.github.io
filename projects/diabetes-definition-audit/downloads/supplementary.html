@@ -3063,7 +3063,7 @@ a { overflow-wrap: anywhere; }
 li, p { overflow-wrap: break-word; }
 </style>
 <style>@media (max-width: 767.98px){body.portfolio-page #quarto-document-content{grid-column:screen-start/screen-end}}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=cfaa88764b98">
 </head>
 
 <body class="portfolio-page">
@@ -3108,7 +3108,7 @@ li, p { overflow-wrap: break-word; }
 </header>
 
 
-<p>All tables give the sample universe, weight, and unweighted denominator. Percentages are weighted estimates with 95% Korn-Graubard intervals unless stated otherwise. Estimates that do not meet the NCHS Data Presentation Standards for Proportions are shown as “suppressed”; their values are kept in the aggregate files, marked as suppressed, for audit only. Run identifier: 20261007T212439Z.</p>
+<p>All tables give the sample universe, weight, and unweighted denominator. Percentages are weighted estimates with 95% Korn-Graubard intervals unless stated otherwise. Estimates that do not meet the NCHS Data Presentation Standards for Proportions are shown as “suppressed”; their values are kept in the aggregate files, marked as suppressed, for audit only. The analysis run is recorded in results/run_manifest.json of the source archive.</p>
 <section id="table-s1.-configuration-checker-refusals" class="level2">
 <h2 class="anchored" data-anchor-id="table-s1.-configuration-checker-refusals">Table S1. Configuration checker refusals</h2>
 <p>These requests were submitted to the checker on purpose for each release, and each was refused with the reason shown. The 2017 to March 2020 release has no phlebotomy weight, so its examination weight WTMECPRP is the documented HbA1c weight and is accepted in domain H; the corresponding August 2021 to August 2023 request with WTMEC2YR is refused because WTPH2YR is the documented weight there.</p>
@@ -4395,7 +4395,7 @@ li, p { overflow-wrap: break-word; }
 </section>
 <section id="analysis-plan-amendments" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan-amendments">Analysis plan amendments</h2>
-<p>All amendments were made on 2026-10-07 after the plan was frozen (09:33Z) and after the first estimation run. No amendment changed a phenotype definition, a threshold, a domain, a 2021-2023 weight, or one of the eight configurations; amendment 2 specified the 2017-March 2020 weights, which the plan left to that release’s documentation. The frozen text is preserved unchanged in docs/analysis_plan_frozen_v1.md with its SHA-256 in docs/analysis_plan_frozen_v1.sha256.</p>
+<p>All amendments were made after the plan was frozen and after the first estimation run. No amendment changed a phenotype definition, a threshold, a domain, a 2021-2023 weight, or one of the eight configurations; amendment 2 specified the 2017-March 2020 weights, which the plan left to that release’s documentation. The frozen text is preserved unchanged in docs/analysis_plan_frozen_v1.md with its SHA-256 in docs/analysis_plan_frozen_v1.sha256.</p>
 <ol type="1">
 <li>Contrasts C11 and C12 (HbA1c and glucose each in the narrow fasting domain minus the paired domain) were added to config/analysis_configs.yaml after the first estimation run. They implement the comparison of the narrow and paired domains that sensitivity analysis 1 already describes.</li>
 <li>The weight rules were rewritten so that each release maps its own weight variables to roles. This was needed to run the planned 2017-March 2020 replication, where no phlebotomy weight exists; HbA1c there uses the examination weight WTMECPRP, following the P_GHB documentation’s instruction to use the sample weights in the demographics file.</li>

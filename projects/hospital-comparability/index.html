@@ -12,7 +12,7 @@
 .portfolio-page .page-footer p{margin-left:0}
 .portfolio-page .hc-table-wrap+.hc-sub{margin-top:16px}
 </style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html" aria-current="page">Project</a><a href="report.html">Report</a></div></nav>
@@ -20,7 +20,7 @@
 
 <main id="main" class="page-main">
 <h1>When hospital quality comparisons are not comparable</h1>
-<p class="lede">In Arizona, the hospital ranked first for heart-failure readmission could occupy any rank from 1 to 52 within the published intervals. I designed a check that first establishes whether CMS records can be compared, then shows how much of their apparent ordering those intervals support.</p>
+<p class="lede">In Arizona, the hospital ranked first for heart-failure readmission could occupy any rank from 1 to 52 within the published intervals. This study first establishes whether CMS records can be compared, then shows how much of their apparent ordering those intervals support.</p>
 
 <div class="question">
 <p><strong>Research question.</strong> When hospitals in one state are ranked on heart-failure readmission or mortality from the CMS Provider Data Catalog, how many requested records can enter a valid same-measure comparison, and how many of the resulting orderings do the published intervals separate?</p>
@@ -66,7 +66,7 @@
 <h3>The 2026-09-30 files could not be used for uncertainty</h3>
 <p>In the files released 2026-09-30, CMS shows "Not Available" for the intervals and national categories of 18 outcome measures, following a notice that issues had affected the published intervals and national comparison values. The previous release still carries the intervals the notice describes as affected. The analysis therefore uses the April 2026 refresh, the latest release with intervals not covered by a notice, and runs the two newer releases through the same gates to show what the check does with them: every record fails at the release gate, even though most hospitals still have a rate.</p>
 <h3>VA hospitals were moved to their own comparison after the plan was locked</h3>
-<p>The first version of the population gate excluded no hospital type. An example pair chosen by an early run included a VA medical center. The AI coding agent then re-read the cohort sections of the CMS methodology reports, which state that Medicare enrollment criteria do not apply to VA hospitalizations and that VA data are a separate source, and Amendment 2 was written and hash-locked 88 seconds after that run. VA hospitals are now compared only with other VA hospitals. The headline shares barely moved: readmission stayed at 99.6% and mortality went from 96.3% to 97.0%. The share of hospitals separated from no peer on mortality moved more, from 46.5% to 54.2%. Both runs are kept.</p>
+<p>The first version of the population gate excluded no hospital type. An example pair chosen by an early run included a VA medical center. The cohort sections of the CMS methodology reports were then read again. They state that Medicare enrollment criteria do not apply to VA hospitalizations and that VA data are a separate source. Amendment 2 was written and hash-locked after that run. After Amendment 2, VA hospitals were compared only with other VA hospitals. The headline shares barely moved: readmission stayed at 99.6% and mortality went from 96.3% to 97.0%. The share of hospitals separated from no peer on mortality moved more, from 46.5% to 54.2%. Both runs are kept.</p>
 </section>
 
 <section aria-labelledby="results">
@@ -94,7 +94,7 @@
   <figcaption>Observation windows of the same heart-failure Measure IDs across the three releases.</figcaption>
 </figure>
 <h3>Post hoc checks</h3>
-<p>Three checks added after the results were known ask whether the low separation comes from the strict non-overlap rule, from small hospitals or from the state restriction. An approximate z-test built from the published intervals called 2.13% of the 141,219 heart-failure readmission orderings different before correction, 0.03% after Benjamini–Hochberg control within each state and 0.01% with Holm control. Among same-state pairs in which both hospitals were in the top third by number of eligible cases (320 or more), 1.78% of readmission orderings were separated. Without the state restriction, 0.39% of 4,311,047 national readmission pairs were separated. For mortality the same checks gave 9.78% before correction, 1.37% after Benjamini–Hochberg control, 9.25% in the top third and 3.32% nationally. Their code, output tables and a recomputation of the key values with separate code are in version 1.1.0 of the source archive, on Zenodo.</p>
+<p>Three checks added after the results were known ask whether the low separation comes from the strict non-overlap rule, from small hospitals or from the state restriction. An approximate z-test built from the published intervals called 2.13% of the 141,219 heart-failure readmission orderings different before correction, 0.03% after Benjamini–Hochberg control within each state and 0.01% with Holm control. Among same-state pairs in which both hospitals were in the top third by number of eligible cases (320 or more), 1.78% of readmission orderings were separated. Without the state restriction, 0.39% of 4,311,047 national readmission pairs were separated. For mortality the same checks gave 9.78% before correction, 1.37% after Benjamini–Hochberg control, 9.25% in the top third and 3.32% nationally. Their code, output tables and a recomputation of the key values with separate code are in version 1.1.0 of the source archive, on Zenodo. The recomputation was automated.</p>
 </section>
 
 <section aria-labelledby="explore">
@@ -114,8 +114,8 @@
 <ul>
 <li>The primary release is not the newest. It is the newest whose intervals are not covered by a CMS notice, and its window ends in June 2024.</li>
 <li>Separation is judged from marginal 95% intervals published to one decimal, without covariance. Overlap does not show that two hospitals perform the same, and non-overlap is not a formal test.</li>
-<li>A statistical white paper commissioned for CMS cautions that indirectly standardized rates should not generally be compared directly between hospitals. I describe what the published intervals show for orderings people commonly make.</li>
-<li>The VA exclusion rests on cohort statements identified only after the plan was locked, although the reports had been saved about 2 minutes before the lock. Both runs are reported.</li>
+<li>A statistical white paper commissioned for CMS cautions that indirectly standardized rates should not generally be compared directly between hospitals. This study describes what the published intervals show for orderings people commonly make.</li>
+<li>The VA exclusion rests on cohort statements identified only after the plan was locked, although the reports had been saved shortly before the lock. Both runs are reported.</li>
 <li>CMS national category counts exceed the counts in the hospital file by 137 to 229 hospitals per measure, and the public files do not identify the extra hospitals, so the reconciliation is incomplete.</li>
 <li>The CMS notice does not describe the issues it reports, so earlier releases may also have been affected.</li>
 <li>The results describe heart-failure and acute myocardial infarction outcome measures in the public files and say nothing about other aspects of hospital quality.</li>
@@ -139,16 +139,14 @@
 <li><a href="report.html">Report and references</a><span class="meta">HTML</span></li>
 <li><a href="supplement.html">Supplementary tables S1 to S12</a><span class="meta">HTML</span></li>
 <li><a href="downloads/hospital-comparability-source.zip">Source code archive (SQL, configuration, plan, tests, demo)</a><span class="meta">2.1 MB</span></li>
-<li><a href="https://doi.org/10.5281/zenodo.24117555">Source code archive version 1.1.0, on Zenodo since 10 November 2026 (adds the post hoc checks with their code, output tables and tests)</a><span class="meta">11.5 MB</span></li>
+<li><a href="https://doi.org/10.5281/zenodo.24117555">Source code archive version 1.1.0, on Zenodo (adds the post hoc checks with their code, output tables and tests)</a><span class="meta">11.5 MB</span></li>
 <li><a href="downloads/hospital-comparability-review.xlsx">Review workbook (original fields, gate decisions, source evidence)</a><span class="meta">7.0 MB</span></li>
 <li><a href="downloads/hospital-comparability-tables.zip">Output tables (CSV) and evidence map</a><span class="meta">729.4 KB</span></li>
-<li><a href="downloads/analysis_plan.md">Analysis plan with dated amendments and notes on the record</a><span class="meta">22.8 KB</span></li>
-<li><a href="downloads/note_on_the_record_2026-10-24_ai_provenance.md">Note on the record: how the plan and amendments were produced (24 October 2026)</a><span class="meta">7.4 KB</span></li>
 <li><a href="downloads/source_manifest.json">Source manifest (URLs, release dates, SHA-256)</a><span class="meta">48.5 KB</span></li>
 <li><a href="downloads/strobe_record_checklist.md">STROBE checklist with applicable RECORD items</a><span class="meta">5.1 KB</span></li>
-<li><a href="downloads/hospital-comparability-supplement.docx">Supplementary tables S1 to S12 (Word)</a><span class="meta">49.4 KB</span></li>
 </ul>
-<p>The source archive keeps the code, manuscript source and records as they stood between 7 and 18 October 2026. The note on the record of 24 October 2026 sets out what the project records show about how the plan, its amendments and the checks were produced.</p>
+<p>The analysis plan and its amendments are in the source archive.</p>
+<p>I did the initial design and reviewed the code. AI tools helped with the coding and writing.</p>
 </section>
 </main>
 <footer class="page-footer">

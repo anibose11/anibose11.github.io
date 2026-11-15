@@ -7,7 +7,7 @@
 <meta name="description" content="Report: a disproportionality analysis of how processing choices affect reporting odds ratios for five SGLT2 and DPP-4 inhibitor associations in FDA quarterly adverse event files, 2024 to 2026.">
 <link rel="stylesheet" href="assets/site.css?v=1450c92a">
 <style>.report th:not([style]),.report td:not([style]){text-align:left}@media (min-width:700px){.report thead th{white-space:normal}}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page portfolio-report">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="index.html">Project</a><a href="report.html" aria-current="page">Report</a></div></nav>
@@ -91,7 +91,7 @@ analysis [21, 22], and drug-name dictionaries have been compared by how
 many reports they retrieve [16]. A literature search of PubMed and Europe PMC on 7 October 2026 found no study that measured how much
 the estimate for a fixed drug-event pair moves when deduplication, role,
 and name-matching choices change together in the quarterly files, or
-which units in the table move. I therefore fixed five pairs that FDA has
+which units in the table move. This study therefore fixed five pairs that FDA has
 already communicated, so that the target was robustness rather than
 discovery, and measured how their reporting odds ratios changed across a
 prespecified set of processing configurations in the eight quarterly
@@ -104,12 +104,12 @@ files from 2024Q3 to 2026Q2.</p>
 <p>The study was a prespecified processing-sensitivity study of publicly
 available spontaneous reports. The analysis plan, the event term lists,
 and the configuration set were written and checksummed before any
-association count was computed. Three dated amendments are reported with the plan (Electronic Supplementary Material [ESM] 1). Their times are written in the plan file itself. No separate checksum was kept for each. Two are time-stamped 09:40 and 09:42 UTC on 7 October 2026, before the first association counts: one clarified that FDA’s primary-suspect designation rule applies inside both role definitions, and one handled a new role code found during the compatibility review. The third, time-stamped 09:46 UTC after the first counts, added descriptive profiles of the units that moved between configurations. No configuration file or event term list was changed after results were seen: the files used for every reported estimate are byte-identical to those checksummed before the first association count (ESM 1). The plan was internal and not registered. ESM 2 maps the applicable READUS-PV items to the manuscript and identifies items not addressed.</p>
+association count was computed. Three amendments are reported with the plan (Electronic Supplementary Material [ESM] 1). The plan file records when each was written. No separate checksum was kept for each. Two came before the first association counts: one clarified that FDA’s primary-suspect designation rule applies inside both role definitions, and one handled a new role code found during the compatibility review. The third, written after the first counts, added descriptive profiles of the units that moved between configurations. No configuration file or event term list was changed after results were seen: the files used for every reported estimate are byte-identical to those checksummed before the first association count (ESM 1). The plan was internal and not registered. ESM 2 maps the applicable READUS-PV items to the manuscript and identifies items not addressed.</p>
 </section>
 <section id="data-source-and-study-window" class="level3">
 <h3>2.2 Data source and study window</h3>
-<p>I downloaded the eight most recent quarterly ASCII (plain-text)
-extracts listed on FDA’s extract index on 7 October 2026: 2024Q3 to
+<p>The eight most recent quarterly ASCII (plain-text) extracts listed on
+FDA’s extract index were downloaded on 7 October 2026: 2024Q3 to
 2026Q2. The newest file (April to June 2026) had been posted on 29 July
 2026, and the July to September 2026 file had not yet been posted. The files are noncumulative: each holds the reports FDA received in one
 quarter. The demographic (DEMO), drug (DRUG), reaction (REAC) and
@@ -125,8 +125,8 @@ Parquet tables without extraction, and parsed row counts for all 40 member files
 <h3>2.3 Case construction</h3>
 <p>Each PRIMARYID is one report version. FDA documents it as the
 concatenation of CASEID and the case version number [6]. When the same
-PRIMARYID appeared in two extracts, I kept the record from the later
-extract with that extract’s drug and reaction rows, following FDA’s
+PRIMARYID appeared in two extracts, the record from the later
+extract was kept with that extract’s drug and reaction rows, following FDA’s
 guidance for such duplicates [23]. FDA describes the latest version of a
 case as the most current information about it [4]. A case was
 represented by its latest available version within the acquired files:
@@ -166,7 +166,7 @@ and listed. Same-class ingredients not marketed in the United States
 (for example vildagliptin) were not members.</p>
 <p>Two role rules were defined. Under <strong>primary suspect</strong>,
 a row qualified when its role was primary suspect (PS). FDA advises
-treating the first listed drug as primary suspect when a report has none [23]. I applied this to the lowest drug sequence number that was not
+treating the first listed drug as primary suspect when a report has none [23]. This rule was applied to the lowest drug sequence number that was not
 coded DN. Under <strong>any suspect</strong>, PS (including a designated
 PS) or secondary suspect (SS) qualified. Concomitant, interacting,
 not-administered, and missing roles never counted. A unit was exposed to
@@ -215,7 +215,7 @@ each class with the other (target-class cases against other-class cases,
 excluding cases that listed both classes in any role); and S4 removed
 from the background any unit with an unverified drug string carrying the
 -gliflozin or -gliptin stem.</p>
-<p>For each pair I report the range of RORs over the four case-level
+<p>For each pair, this report gives the range of RORs over the four case-level
 configurations, the ratio of the maximum to the minimum, whether the
 point estimates and lower confidence limits stayed on the same side of
 1, and a decomposition of the units that moved between adjacent
@@ -238,9 +238,9 @@ units in every table. A second implementation in pandas and pyarrow, written alo
 The analysis stage was then rerun from cached inputs and compared with a
 relative tolerance of 10<sup>-12</sup>. These checks establish software and source consistency, not external validation of any association.</p>
 </section>
-<section id="author-verification" class="level3">
+<section id="automated-recheck" class="level3">
 <h3>2.9 Automated recheck of key steps</h3>
-<p>On the evening of 7 October 2026 a script from the same workflow as the pipeline ran seven automated checks against the raw archives and against FDA, NLM and Crossref sources retrieved that evening (source archive, outputs/validation/independent_recheck.json, generated 20:57 UTC). The eight archive URLs were listed on FDA’s extract index, their ETag and Last-Modified headers were unchanged, and the local SHA-256 hashes matched the study manifest. The version, deletion and primary-suspect rules used by the pipeline were found in the README, ASC_NTS and FAQ documents of every release, and the DN role code in every release from 2024Q4. For a seeded random sample of 25 cases with more than one version in the window (53 report versions, read from the raw DEMO files), the pipeline had selected the highest version in all 25. Of the 348 drug strings that qualified only through the expanded rule, RxNav approximate matching returned the stated ingredient for 332. The script accepted the other 16 because they name the ingredient as a whole word. A keyword search of each cited label, FDA page or Crossref record found the key term for every reaction string. RORs and confidence intervals recomputed from the four cells agreed for all 60 estimates, and every ROR and confidence interval and every comma-grouped integer in the 7 October manuscript and project pages appeared in the run outputs. These checks are not a manual or independent review.</p>
+<p>A script from the same workflow as the pipeline ran seven automated checks against the raw archives and against FDA, NLM and Crossref sources retrieved for the check (source archive, outputs/validation/independent_recheck.json). The eight archive URLs were listed on FDA’s extract index, their ETag and Last-Modified headers were unchanged, and the local SHA-256 hashes matched the study manifest. The version, deletion and primary-suspect rules used by the pipeline were found in the README, ASC_NTS and FAQ documents of every release, and the DN role code in every release from 2024Q4. For a seeded random sample of 25 cases with more than one version in the window (53 report versions, read from the raw DEMO files), the pipeline had selected the highest version in all 25. Of the 348 drug strings that qualified only through the expanded rule, RxNav approximate matching returned the stated ingredient for 332. The script accepted the other 16 because they name the ingredient as a whole word. A keyword search of each cited label, FDA page or Crossref record found the key term for every reaction string. RORs and confidence intervals recomputed from the four cells agreed for all 60 estimates, and every ROR and confidence interval and every comma-grouped integer in the original manuscript and project pages appeared in the run outputs. These checks are not a manual or independent review.</p>
 </section>
 <section id="software" class="level3">
 <h3>2.10 Software</h3>
@@ -383,7 +383,7 @@ inflates counts but suggest that, for these pairs, it is not the largest
 source of variation. CASEID collapsing cannot detect duplicates that FDA
 has not linked [12], and the secondary-suspect arthralgia reports, with
 a median of 41 drugs per report, resemble the long multi-drug reports
-described in the extreme-duplication work [8, 9]. I did not test whether they
+described in the extreme-duplication work [8, 9]. This study did not test whether they
 duplicate one another.</p>
 <p>The drug-role result has close precedents. In VigiBase, role restriction was among the
 analytic choices that changed signal status for reference pairs [20]. In FAERS,
@@ -409,7 +409,7 @@ with SGLT2 inhibitors in FAERS [31, 32], Fournier’s gangrene in an FDA
 case series and in FAERS [33, 34], pemphigoid with DPP-4 inhibitors in
 French and FAERS data [35, 36], and pancreatitis with sitagliptin in the
 earlier Adverse Event Reporting System (AERS) [37, 38], an association
-later reviewed by FDA and the European Medicines Agency [39]. I did not
+later reviewed by FDA and the European Medicines Agency [39]. This study did not
 compare magnitudes because periods, case definitions, and backgrounds
 differ. The French study found a much higher ROR for vildagliptin than for sitagliptin [35]. Same-class ingredients not marketed in the United
 States sit in the background of the primary analysis here, and removing
@@ -472,12 +472,12 @@ rule changes. These results concern the processing of reporting data. They do no
 </section>
 <section id="addendum" class="level2">
 <h2>Addendum: post hoc analyses</h2>
-<p>Five analyses were added after the results above were known. They were specified in Amendment 4, whose checksum was entered in the project's decision ledger on 24 October 2026 before its final code ran. Several exploratory reanalyses had been run on 20 October, and the amendment lists them. Everything in this addendum is post hoc.</p>
+<p>Five analyses were added after the results above were known. They were specified in Amendment 4, whose checksum was entered in the project's decision ledger before its final code ran. Several exploratory reanalyses had been run before it, and the amendment lists them. Everything in this addendum is post hoc.</p>
 <p><strong>Cross-case deduplication.</strong> CASEID collapsing cannot merge copies of one patient's report held under different case numbers. Cases were therefore linked when they shared sex, age in whole years, occurrence country and an exact event date (dates of 1 January were treated as placeholders and never used), and their ingredient sets and preferred-term sets each had a Jaccard similarity of at least 0.5. Only 726,496 cases (25.4%) had a complete key. The rule merged 108,293 cases into 36,693 clusters, removing 71,600 units (2.5% of all cases). For DPP-4 inhibitors and arthralgia under V1, cell a fell from 161 to 116 and the ROR from 1.81 (1.55 to 2.12) to 1.44 (1.20 to 1.73). Forty-nine of the 129 cases that counted only through a secondary-suspect listing belonged to six clusters, five of them from the UK with the same event date. The largest held 21 reports of one 71-year-old man, sent by 13 companies. The primary-suspect estimate barely changed (0.67, 0.47 to 0.95). Under V1 and V3 the four strong pairs changed by 2% to 14% and stayed positive.</p>
 <p><strong>Competition bias.</strong> Dupilumab was the primary suspect in 10,249 background arthralgia cases (15.5%). Removing the ten drugs most often reported as primary suspect for arthralgia from the background moved the primary-suspect ROR from 0.66 to 0.93 (0.66 to 1.32) and the any-suspect ROR to 2.56 (2.19 to 3.00). The estimate below 1 under the primary-suspect rule therefore depends on which drugs make up the background.</p>
 <p><strong>Ingredients.</strong> Linagliptin carried most of the any-suspect signal (ROR 5.25, 4.31 to 6.38; as primary suspect 0.60, 0.30 to 1.20). Sitagliptin gave 0.79 (0.59 to 1.05) and 0.76 (0.51 to 1.14).</p>
 <p><strong>The whole database.</strong> For 766,142 ingredient and preferred-term pairs with at least three any-suspect cases, moving to the primary-suspect rule changed signal status (lower 95% limit above 1) for 323,881 pairs (42.3%), mostly because pairs fell below three primary-suspect cases. Among pairs evaluable under both rules, 11.9% changed. If primary-suspect cases were a random subset of suspect cases, 28.5% of all pairs and 4.4% of evaluable pairs would be expected to change (post hoc, added after Amendment 4). Deduplication changed status for 31,966 pairs (4.2%).</p>
-<p><strong>Checks.</strong> Two AI models from different vendors, Claude Opus 5.5 and GPT-5.4 mini, reviewed each sampled cluster, and Claude Opus 5.5 settled their disagreements. Of 44 randomly sampled clusters, 40 were judged to describe one patient (91%, 95% CI 79 to 96%), none to mix patients and 4 were left uncertain. All six arthralgia clusters were judged to be single patients, two only after adjudication: GPT-5.4 mini had put one member of each in a different episode. These are AI judgments, not expert review. Code written only from a specification, without access to the study code, reproduced the key counts, and a second recheck reproduced the other main-text and main-table numbers by a different route. Most supplementary rows rest on the study code alone. An exploratory version of the deduplication run on 20 October gave 1.39 for the any-suspect arthralgia estimate. The rule fixed in the amendment, which also excludes 1 January dates and converts ages to years, gives 1.44.</p>
+<p><strong>Checks.</strong> Two AI models from different vendors, Claude Opus 5.5 and GPT-5.4 mini, reviewed each sampled cluster, and Claude Opus 5.5 settled their disagreements. Of 44 randomly sampled clusters, 40 were judged to describe one patient (91%, 95% CI 79 to 96%), none to mix patients and 4 were left uncertain. All six arthralgia clusters were judged to be single patients, two only after adjudication: GPT-5.4 mini had put one member of each in a different episode. These are AI judgments, not expert review. Code written only from a specification, without access to the study code, reproduced the key counts, and a second recheck reproduced the other main-text and main-table numbers by a different route. Both rechecks were automated, and neither is an external review. Most supplementary rows rest on the study code alone. An exploratory version of the deduplication, run before the amendment, gave 1.39 for the any-suspect arthralgia estimate. The rule fixed in the amendment, which also excludes 1 January dates and converts ages to years, gives 1.44.</p>
 </section>
 <section id="declarations" class="level2">
 <h2>Declarations</h2>
@@ -1452,7 +1452,7 @@ cotransporter-2</p>
 </section>
 <section id="electronic-supplementary-material" class="level2">
 <h2>Electronic Supplementary Material</h2>
-<p><strong>ESM 1</strong> <a href="downloads/analysis_plan.md">Analysis plan with dated amendments</a>. The plan checksums and the issue and decision log are in the <a href="downloads/adverse-event-robustness-source.zip">source archive</a>. The 7 October checksum of the plan covers its text as first written. Amendments 1 to 3 were added to the file later and carry their own times.</p>
+<p><strong>ESM 1</strong> Analysis plan with amendments, docs/analysis_plan.md in the <a href="downloads/adverse-event-robustness-source.zip">source archive</a>, which also holds the plan checksums and the issue and decision log. The first checksum of the plan covers its text as first written. Amendments 1 to 3 were added to the file later, and the file records when each was written.</p>
 <p><strong>ESM 2</strong> <a href="downloads/supplementary_material.html">Supplementary Tables S1 to S8 and
 Supplementary Fig. S1</a>: release compatibility (S1), source reconciliation
 (S2), reaction term provenance and occurrence (S3), verified drug names
@@ -1464,7 +1464,7 @@ SQL), configuration, frozen RxNav responses, tests with synthetic
 fixtures, aggregate outputs, and the results workbook.</p>
 </section>
 </article>
-<section id="author-and-tools"><h2>Author contribution and tools</h2><p>Animesh Bose designed and directed the study, developed the methodology, explored the data, and reviewed the analyses and text. Claude Code by Anthropic and ChatGPT by OpenAI helped write and run the code, search the literature and draft the analysis plan, its amendments and the report, and Codex by OpenAI helped with editing, formatting and package checks. Claude Code’s records show it running only Claude Opus 5.5 (claude-opus-5-5) on the report. ChatGPT ran GPT-5 and GPT-6 series models (exact versions not recorded), and Codex ran GPT-6-Astra (gpt-6-astra). Claude Opus 5.5 and Claude Opus 4.8, used through the Anthropic API, helped write the recomputation code.</p></section></main>
+<section id="author-contribution"><h2>Author contribution</h2><p>Animesh Bose did the initial design and reviewed the code. AI tools helped with the coding and writing.</p></section></main>
 <footer><div class="inner">
 
 <p>Data: FDA quarterly adverse event data extract files (FAERS, now hosted on the FDA Adverse Event Monitoring System pages), 2024Q3 to 2026Q2. Reporting odds ratios describe reporting patterns, not risk.</p>

@@ -4,7 +4,7 @@ main{max-width:760px;margin:0 auto;padding:32px 16px 80px}h1{font-size:1.6rem;li
 table{border-collapse:collapse;font:14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:1em 0;display:block;overflow-x:auto}
 th,td{border-bottom:1px solid #d9d8d3;padding:4px 8px;text-align:left;vertical-align:top}td{font-variant-numeric:tabular-nums}
 img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0 3px}a{color:#1f5fae}</style>
-<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=74019439a28b">
+<link data-portfolio-theme="true" rel="stylesheet" href="../assets/portfolio.css?v=cfaa88764b98">
 </head>
 <body class="portfolio-page">
 <nav class="portfolio-nav" aria-label="Portfolio"><a class="portfolio-home" href="../../../index.html">Animesh Bose</a><div class="portfolio-links"><a href="../index.html">Project</a><a href="../report.html">Report</a></div></nav>
@@ -1550,8 +1550,8 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <li>Deterministic rerun: data, contexts, scores, and analysis rebuilt from cached inputs, and 4,809 reported numbers compared with the stored results at a relative tolerance of 1e-9.</li>
 <li>Recount in base R: the headline numerators and denominators and task success counts were recomputed from the item-level files by a second script in base R (scripts/crosscheck.R), written in the same workflow as the Python code. All 19 comparisons matched the Python results.</li>
 <li>Model rerun: a sample of test calls regenerated with the frozen configuration on the same device, with 40 of 40 responses identical and 40 of 40 with the same label.</li>
-<li>Clean installation: on 18 October 2026, the archive file deposited on Zenodo (evidence-model-audit-source.zip, SHA-256 7580f0b2...f227) was extracted into an empty directory and installed into a new virtual environment from requirements.lock.txt; all 34 tests passed and the cached demonstration rendered the saved outputs for the bundled examples.</li>
-<li>Check against source articles: on 18 October 2026, an AI agent (claude-opus-5-5) checked 20 quote-valid wrong answers from Qwen3-1.7B with retrieved passages, drawn with seed 20261007 (prompt IDs 572, 770, 1461, 2826, 3950, 4353, 4458, 5216, 5362, 7727, 7931, 9354, 11214, 11896, 12175, 12355, 13005, 13492, 13837, 13876), against the full texts of the articles in PubMed Central. A text search found every quote in its article. Read against the reported results, the benchmark label matched for 16 of the 20. For 3 it did not (prompts 7727, 7931 and 13876), and for 7931 and 13876 the model's label was the one the article supports; for 1 the article does not settle the comparison (12175). These are the agent's judgments; no item-level human judgments were recorded.</li>
+<li>Clean installation: the archive file deposited on Zenodo (evidence-model-audit-source.zip, SHA-256 7580f0b2...f227) was extracted into an empty directory and installed into a new virtual environment from requirements.lock.txt; all 34 tests passed and the cached demonstration rendered the saved outputs for the bundled examples.</li>
+<li>Check against source articles: a language model checked 20 quote-valid wrong answers from Qwen3-1.7B with retrieved passages, drawn with seed 20261007 (prompt IDs 572, 770, 1461, 2826, 3950, 4353, 4458, 5216, 5362, 7727, 7931, 9354, 11214, 11896, 12175, 12355, 13005, 13492, 13837, 13876), against the full texts of the articles in PubMed Central. A text search found every quote in its article. Read against the reported results, the benchmark label matched for 16 of the 20. For 3 it did not (prompts 7727, 7931 and 13876), and for 7931 and 13876 the model's label was the one the article supports; for 1 the article does not settle the comparison (12175). These are the checking model's judgments. No item-level human judgments were recorded.</li>
 <li>Claims: every headline number in evidence/claims.json is mapped to its file, key, numerator, denominator, scope, configuration, source hashes, and run identifier, and re-read from the results file.</li>
 </ul>
 <p>These checks test the software and its consistency. They are not external scientific validation.</p>
@@ -1757,7 +1757,7 @@ img{max-width:100%;height:auto}code{font-size:.88em;background:#f0efec;padding:0
 <td>14c</td>
 <td>Methods</td>
 <td>Say where the study protocol is available, or that none was prepared.</td>
-<td>Internal timestamped analysis plan released in the project archive (docs/analysis_plan.md); not a registered protocol</td>
+<td>Internal analysis plan released in the project archive (docs/analysis_plan.md); not a registered protocol</td>
 </tr>
 <tr>
 <td>14d</td>
