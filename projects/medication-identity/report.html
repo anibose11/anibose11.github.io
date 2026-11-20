@@ -385,12 +385,8 @@
 <p>For these labels, FHIR R4 Medication resources kept NDCs, dosage forms, ingredients and exact strengths, and the Provenance resource kept the SPL document ID, but neither kept the set ID, version number or basis of strength. A small, schema-validated companion record closed these gaps in every held-out record. Padding NDCs without their segment pattern, keeping only the latest label version or the first ingredient, and taking strengths from DailyMed's packaging service each changed or dropped identity attributes. The accompanying pipeline, companion schema and medication dictionary record provenance and reasons for review.</p>
 <h2 id="acknowledgments">Acknowledgments</h2>
 <p>This product uses publicly available data from the U.S. National Library of Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or recommend this or any other product.</p>
-<h2 id="conflicts-of-interest">Conflicts of interest</h2>
-<p>None declared.</p>
 <h2 id="funding">Funding</h2>
 <p>This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.</p>
-<h2 id="author-contribution">Author contribution</h2>
-<p>Animesh Bose did the initial design and reviewed the code. AI tools helped with the coding and writing.</p>
 <h2 id="data-availability">Data availability</h2>
 <p>The data underlying this article are publicly available from the US National Library of Medicine: DailyMed Structured Product Labeling documents and the DailyMed SPL-to-RxNorm mapping file (<a href="https://dailymed.nlm.nih.gov/dailymed/">https://dailymed.nlm.nih.gov/dailymed/</a>, retrieved October 7, 2026) and the RxNorm API (<a href="https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html">https://lhncbc.nlm.nih.gov/RxNav/APIs/RxNormAPIs.html</a>, release of October 5, 2026). The supplementary source archive contains the code that retrieves and processes these data, a manifest of every retrieved file with its URL, retrieval time and SHA-256 checksum, the derived analysis tables, the FHIR outputs, and the medication dictionary export. Because DailyMed and RxNorm serve current content, rerunning the retrieval reproduces the workflow on the content current at that time. The manifest identifies the exact files analyzed here.</p>
 <h2 id="software-availability">Software availability</h2>
@@ -586,4 +582,4 @@ delta = 0
 </main><footer><div class="inner" style="padding-left:0;padding-right:0">Drug-label and terminology data from the U.S. National Library of
 Medicine (DailyMed, RxNorm API), retrieved <span style="white-space:nowrap">2026-10-07</span>; no patient records. This product uses publicly available data from the U.S. National Library of
 Medicine (NLM), National Institutes of Health, Department of Health and Human Services; NLM is not responsible for the product and does not endorse or
-recommend this or any other product.</div></footer></body></html>
+recommend this or any other product. AI tools helped with the coding and writing.</div></footer></body></html>

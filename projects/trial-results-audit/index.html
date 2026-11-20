@@ -68,7 +68,7 @@
 
 <h2>Limitations</h2>
 <ul>
-<li>The R reference was written with the same tools and from the same written rules as the warehouse code, and no other person reviewed either implementation, so a shared misreading of the rules would not show up.</li>
+<li>The R reference was written with the same tools and from the same written rules as the warehouse code, and neither implementation was reviewed outside the project, so a shared misreading of the rules would not show up.</li>
 <li>The rules decide which count applies from the record's structure. They do not show that a registry entry is clinically correct, and no external gold standard exists.</li>
 <li>The study covers three condition groups and one snapshot of a registry that changes. The documented API serves only the most recent version of each record. Earlier versions can be retrieved from the registry website, for example with the cthist R package, but were not used. The recall of the registry's condition search was not assessed.</li>
 <li>Only one declared flat design served as the comparator. A flat file with extra columns for row-level and unit counts would not misattach these counts.</li>
@@ -112,9 +112,8 @@
 <li><a href="downloads/claims.json">claims.json</a><span class="size">Main reported numbers mapped to their output files</span></li>
 <li><a href="downloads/source_manifest.json">source_manifest.json</a><span class="size">Retrieval URLs, times, API version and SHA-256 of the raw pages</span></li>
 </ul>
-<p>I did the initial design and reviewed the code. AI tools helped with the coding and writing.</p>
 
 </div></main>
-<footer class="site"><div class="inner"><p>Data: ClinicalTrials.gov, U.S. National Library of Medicine, snapshot of 2026-10-06. Results are a frozen snapshot, not kept current. Modifications are described in the tier rules (docs/rules.md in the source archive) and the data dictionary. Code: MIT License.</p></div></footer>
+<footer class="site"><div class="inner"><p>Data: ClinicalTrials.gov, U.S. National Library of Medicine, snapshot of 2026-10-06. Results are a frozen snapshot, not kept current. Modifications are described in the tier rules (docs/rules.md in the source archive) and the data dictionary. Code: MIT License. AI tools helped with the coding and writing.</p></div></footer>
 </body>
 </html>
